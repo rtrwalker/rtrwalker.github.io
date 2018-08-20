@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.cosenzaandkorosak2014 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.cosenzaandkorosak2014</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Cosenza and Korosak (2014) &quot;Secondary Consolidation of Clay as</span>
+<span class="sd">an Anomalous Diffusion Process&quot;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+
+<span class="kn">import</span> <span class="nn">geotecha.piecewise.piecewise_linear_1d</span> <span class="k">as</span> <span class="nn">pwise</span>
+
+
+<span class="c1">#from geotecha.mathematics.mp_laplace import Talbot</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.laplace</span> <span class="k">import</span> <span class="n">Talbot</span>
+
+<div class="viewcode-block" id="plot_one_dim_consol"><a class="viewcode-back" href="../../../api/geotecha.consolidation.cosenzaandkorosak2014.html#geotecha.consolidation.cosenzaandkorosak2014.plot_one_dim_consol">[docs]</a><span class="k">def</span> <span class="nf">plot_one_dim_consol</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">por</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settle</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">uavg</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rough plotting routine&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">por</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Depth, z&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">doc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time, t&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Degree of consolidation&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">settle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">settle</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time, t&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;settlement&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">uavg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">uavg</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time, t&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Average pore pressure&#39;</span><span class="p">)</span>
+<span class="c1">#        plt.gca().invert_yaxis()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">()</span>
+
+    <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="cosenzaandkorosak2014"><a class="viewcode-back" href="../../../api/geotecha.consolidation.cosenzaandkorosak2014.html#geotecha.consolidation.cosenzaandkorosak2014.cosenzaandkorosak2014">[docs]</a><span class="k">def</span> <span class="nf">cosenzaandkorosak2014</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">tpor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kv</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mv</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">ui</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Secondary consolidation of Clay as an anomalous diffusion process</span>
+
+<span class="sd">    An implementation of [1]_.</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer, soil properties constant over time.</span>
+<span class="sd">     - Instant load uniform with depth.</span>
+<span class="sd">     - Vertical flow.</span>
+<span class="sd">     - Similar to Terzaghi 1d consolidation equation but with additional</span>
+<span class="sd">       fractional time derivative that retards pore pressure dissipation</span>
+<span class="sd">       as a possible creep mechanism.</span>
+<span class="sd">     - Uses Laplace transform in solution.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time.</span>
+<span class="sd">    theta : float or array/list of float</span>
+<span class="sd">        Parameter in [1]_.</span>
+<span class="sd">    v : float or array/list of float</span>
+<span class="sd">        Parameter in [1]_.</span>
+<span class="sd">    tpor : float or 1d array/list of float</span>
+<span class="sd">        Time values for pore pressure vs depth calcs.</span>
+<span class="sd">    L : float, optional</span>
+<span class="sd">        Drainage path length.  Default H = 1.</span>
+<span class="sd">    kv : float, optional</span>
+<span class="sd">        Vertical coefficient of permeability.  Default kv = 1.</span>
+<span class="sd">    mv : float, optional</span>
+<span class="sd">        Volume compressibility.  Default mv = 0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  defaule gamw = 10.</span>
+<span class="sd">    ui : float, optional</span>
+<span class="sd">        Initial uniform pore water pressure.  Default ui = 1.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        Maximum number of series terms.  Default nterms= 100.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    por : 2d array of float</span>
+<span class="sd">        Pore pressure at depth and time.  ppress is an array of size</span>
+<span class="sd">        (len(z), len(t)).</span>
+<span class="sd">    avp : 1d array of float</span>
+<span class="sd">        Average pore pressure between depth H and depth Z.</span>
+<span class="sd">    settlement : 1d array of float</span>
+<span class="sd">        Surface settlement at depth z.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The article [1]_ only has single values of `theta` and `v`.</span>
+<span class="sd">    Here I&#39;ve simply added more.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Code developed based on [1]_</span>
+
+<span class="sd">    .. [1] Cosenza, Philippe, and Dean Korosak. 2014. &#39;Secondary Consolidation</span>
+<span class="sd">           of Clay as an Anomalous Diffusion Process&#39;. International Journal</span>
+<span class="sd">           for Numerical and Analytical Methods in Geomechanics:</span>
+<span class="sd">           doi:10.1002/nag.2256.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<span class="c1">#    def F(s, v, theta, lam):</span>
+<span class="c1">#        return (1+theta*s**(v-1))/(s + theta*s**v+lam)</span>
+
+    <span class="k">def</span> <span class="nf">F</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">lam</span><span class="p">):</span>
+        <span class="n">numer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">denom</span> <span class="o">=</span> <span class="n">s</span><span class="o">+</span><span class="n">lam</span>
+
+        <span class="k">for</span> <span class="n">v_</span><span class="p">,</span> <span class="n">the_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">theta</span><span class="p">):</span>
+            <span class="n">numer</span> <span class="o">+=</span> <span class="n">the_</span><span class="o">*</span><span class="n">s</span><span class="o">**</span><span class="p">(</span><span class="n">v_</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">denom</span> <span class="o">+=</span> <span class="n">the_</span><span class="o">*</span><span class="n">s</span><span class="o">**</span><span class="n">v_</span>
+        <span class="k">return</span>  <span class="p">(</span><span class="n">numer</span><span class="o">/</span><span class="n">denom</span><span class="p">)</span>
+
+<span class="c1">#    def Bn(r, lam, the, v, t):</span>
+<span class="c1">#        numer = lam * the*r**(v-1)*cmath.sin(np.pi*v)</span>
+<span class="c1">#        denom = (lam - r + the*r**v*cmath.exp(1j*np.pi*v))**2</span>
+<span class="c1">#</span>
+<span class="c1">#        return math.exp(-r * t)*numer/denom</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">tpor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">tpor</span><span class="o">=</span><span class="n">t</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">tpor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="c1">#    an = 2 / M</span>
+
+    <span class="n">dTv</span> <span class="o">=</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">L</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+    <span class="n">lamda_n</span> <span class="o">=</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">dTv</span>
+
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+
+<span class="c1">#    por = np.zeros((len(z), len(tpor)))</span>
+
+<span class="c1">#    doc = np.zeros(len(t))</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Talbot</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="n">Bn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">tpor</span><span class="p">),</span> <span class="n">nterms</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">lam</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+        <span class="n">Bn</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">tpor</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">])),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tpor</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span> <span class="c1">#reuse Bn for Doc</span>
+        <span class="n">Bn_</span> <span class="o">=</span> <span class="n">Bn</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">Bn</span> <span class="o">=</span> <span class="n">Bn</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+    <span class="n">An</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">Z</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+    <span class="n">An</span> <span class="o">=</span> <span class="n">An</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">por</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">An</span><span class="o">*</span><span class="n">Bn</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">ui</span>
+
+    <span class="c1">#degree of consolidation</span>
+    <span class="n">An</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">tpor</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="n">Bn</span> <span class="o">=</span> <span class="n">Bn_</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Bn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">nterms</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">lam</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+            <span class="n">Bn</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">])),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="n">doc</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">An</span><span class="o">*</span><span class="n">Bn</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="k">return</span> <span class="n">por</span><span class="p">,</span> <span class="n">doc</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="c1">#    t = np.linspace(0.1,3,5)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">80</span><span class="p">)</span>
+    <span class="n">tpor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]</span>
+<span class="c1">#    theta = 1.5</span>
+<span class="c1">#    v = 0.5</span>
+    <span class="n">por</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">cosenzaandkorosak2014</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+    <span class="n">plot_one_dim_consol</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">por</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

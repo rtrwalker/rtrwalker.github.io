@@ -1,0 +1,725 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fourier &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="mathematics" href="geotecha.mathematics.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">fourier</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.fourier">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+      <li>Previous: <a href="geotecha.mathematics.html" title="previous chapter">mathematics</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.fourier.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fourier">
+<h1>fourier<a class="headerlink" href="#fourier" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform" title="geotecha.mathematics.fourier.FourierTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FourierTransform</span></code></a>(func[,&nbsp;args,&nbsp;inv,&nbsp;…])</td>
+<td>One dimensional Fourier transform using scipy.quad</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.cosine_transform" title="geotecha.mathematics.fourier.cosine_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cosine_transform</span></code></a>(func,&nbsp;w[,&nbsp;args,&nbsp;a,&nbsp;b])</td>
+<td>Fourier cosine transform</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.func_mirror_for_even_weight" title="geotecha.mathematics.fourier.func_mirror_for_even_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_mirror_for_even_weight</span></code></a>(x,&nbsp;*myargs)</td>
+<td>Mirror a function abount the y-axis</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.func_mirror_for_odd_weight" title="geotecha.mathematics.fourier.func_mirror_for_odd_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_mirror_for_odd_weight</span></code></a>(x,&nbsp;*myargs)</td>
+<td>Rotate function by 180 degrees (or mirror about x and y-axis in turn).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.imag_func" title="geotecha.mathematics.fourier.imag_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imag_func</span></code></a>(x,&nbsp;*myargs)</td>
+<td>Imaginary part of a function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.real_func" title="geotecha.mathematics.fourier.real_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_func</span></code></a>(x,&nbsp;*myargs)</td>
+<td>Real part of a function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.sine_transform" title="geotecha.mathematics.fourier.sine_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sine_transform</span></code></a>(func,&nbsp;w[,&nbsp;args,&nbsp;a,&nbsp;b])</td>
+<td>Fourier sine transform</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.v2dcosine_transform" title="geotecha.mathematics.fourier.v2dcosine_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v2dcosine_transform</span></code></a>(f,&nbsp;s1,&nbsp;s2[,&nbsp;args,&nbsp;m,&nbsp;…])</td>
+<td>Cosine transform of f(x, y) at transform variable s1, s2</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.vcosine_transform" title="geotecha.mathematics.fourier.vcosine_transform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vcosine_transform</span></code></a>(f,&nbsp;s[,&nbsp;args,&nbsp;m,&nbsp;ng,&nbsp;…])</td>
+<td>Cosine transform of f(x) at transform variable s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.fourier">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.fourier" title="Permalink to this headline">¶</a></h2>
+<p>Fourier transforms.</p>
+<dl class="class">
+<dt id="geotecha.mathematics.fourier.FourierTransform">
+<em class="property">class </em><code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">FourierTransform</code><span class="sig-paren">(</span><em>func</em>, <em>args=()</em>, <em>inv=False</em>, <em>func_is_real=False</em>, <em>func_is_imag=False</em>, <em>real_part_even=False</em>, <em>real_part_odd=False</em>, <em>imag_part_even=False</em>, <em>imag_part_odd=False</em>, <em>a=0.0</em>, <em>b=inf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>One dimensional Fourier transform using scipy.quad</p>
+<p>Note that any function that can divide by zero may cause problems because
+QUADPACK includes the end points in integration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd><p class="first last">Function to transform. <cite>func</cite> is called by func(x, <a href="#id1"><span class="problematic" id="id2">*</span></a>args)</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">tuple of arguments to pass to func.  Default args=().</p>
+</dd>
+<dt><strong>inv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then the inverse Fourier transform will be performed.
+Default inv=False.</p>
+</dd>
+<dt><strong>func_is_real</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then func is purely real.  It returns a real number.
+default func_is_real=False.</p>
+</dd>
+<dt><strong>func_is_imag</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then func is purely imaginary.  It returns a real number that
+should be multiplied by i. Default func_is_imag=False</p>
+</dd>
+<dt><strong>real_part_even</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then the real part of func is even. Default
+real_part_even=False.</p>
+</dd>
+<dt><strong>real_part_odd</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then the real part of func is odd. Default real_part_odd=False.</p>
+</dd>
+<dt><strong>imag_part_even</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then the imaginary part of func is even. Default
+imag_part_even=False.</p>
+</dd>
+<dt><strong>imag_part_odd</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then the imaginary part of func is odd. Default
+imag_part_odd=False.</p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Integration limits. Defualt a=0.0, b=np.inf</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>inv_sign</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The sign of some expressions change for the inverse fourier transform,
+<cite>inv_sign</cite> accounts for that sign change.  If inv=True, inv_sign=-1;
+If inv=False, inv_sign=+1.</p>
+</dd>
+<dt><strong>inv_const</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">For inverse fourier transform all expressions are multiplied by
+1/(2*pi).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(s)</td>
+<td>Perform 1d Fourier transform at s</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.imag_func" title="geotecha.mathematics.fourier.FourierTransform.imag_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imag_func</span></code></a>(x)</td>
+<td>Imaginary part of func</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfe" title="geotecha.mathematics.fourier.FourierTransform.mfe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfe</span></code></a>(x)</td>
+<td>Mirror func for even weight function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfie" title="geotecha.mathematics.fourier.FourierTransform.mfie"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfie</span></code></a>(x)</td>
+<td>Mirror imag(func) for even weight function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfio" title="geotecha.mathematics.fourier.FourierTransform.mfio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfio</span></code></a>(x)</td>
+<td>Mirror imag(func) for odd weight function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfo" title="geotecha.mathematics.fourier.FourierTransform.mfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfo</span></code></a>(x)</td>
+<td>Mirror func for odd weight function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfre" title="geotecha.mathematics.fourier.FourierTransform.mfre"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfre</span></code></a>(x)</td>
+<td>Mirror real(func) for even weight function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.mfro" title="geotecha.mathematics.fourier.FourierTransform.mfro"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mfro</span></code></a>(x)</td>
+<td>Mirror real(func) for odd weight function</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.fourier.FourierTransform.real_func" title="geotecha.mathematics.fourier.FourierTransform.real_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_func</span></code></a>(x)</td>
+<td>Real part of func</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.imag_func">
+<code class="descname">imag_func</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.imag_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.imag_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imaginary part of func</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfe">
+<code class="descname">mfe</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror func for even weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfie">
+<code class="descname">mfie</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfie"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror imag(func) for even weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfio">
+<code class="descname">mfio</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfio"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfio" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror imag(func) for odd weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfo">
+<code class="descname">mfo</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror func for odd weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfre">
+<code class="descname">mfre</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfre"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfre" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror real(func) for even weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.mfro">
+<code class="descname">mfro</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.mfro"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.mfro" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror real(func) for odd weight function</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.mathematics.fourier.FourierTransform.real_func">
+<code class="descname">real_func</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#FourierTransform.real_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.FourierTransform.real_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Real part of func</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.cosine_transform">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">cosine_transform</code><span class="sig-paren">(</span><em>func</em>, <em>w</em>, <em>args=()</em>, <em>a=0.0</em>, <em>b=inf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#cosine_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.cosine_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fourier cosine transform</p>
+<p>Note that any function that can divide by zero may cause problems because
+QUADPACK includes the end points in integration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function to transform.  <cite>func</cite> will be called func(x, <a href="#id3"><span class="problematic" id="id4">*</span></a>args). <cite>func</cite>
+must return a real.</p>
+</dd>
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Transform variable.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">Arguments to pass to <cite>func</cite></p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Integration limits. Defualt a=0.0, b=np.inf.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of transform at w</p>
+</dd>
+<dt><strong>err</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Error estimate from quadpack</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The fourier cosine transform is given by:</p>
+<div class="math notranslate nohighlight">
+\[F_c=\mathcal{F}_c\{f(x)\}(w) =
+\int_0^{\infty}f(x)\cos(wx)\,\mathrm{d}x\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.func_mirror_for_even_weight">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">func_mirror_for_even_weight</code><span class="sig-paren">(</span><em>x</em>, <em>*myargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#func_mirror_for_even_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.func_mirror_for_even_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mirror a function abount the y-axis</p>
+<p>Given a composite function f(x) * w(x) where w(x) is an even weighting
+function, return g(x) such that g(x)*w(x) gives same value as f(-x)*w(-x).
+This can be useful in transforming a fourier cosine integral
+with negative integation limits to one with positive limits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value to evaluate function at.</p>
+</dd>
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function to mirror. Always the first argument after <cite>x</cite>.</p>
+</dd>
+<dt><strong>myargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Any remaining arguments will be passed to <cite>func</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Value of func(-x, <a href="#id5"><span class="problematic" id="id6">*</span></a>myargs).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.mathematics.fourier.func_mirror_for_odd_weight" title="geotecha.mathematics.fourier.func_mirror_for_odd_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_mirror_for_odd_weight</span></code></a></dt>
+<dd>mirror for an odd weight function</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func_mirror_for_even_weight</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">-9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">j</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func_mirror_for_even_weight</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">real_func</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">-12.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.func_mirror_for_odd_weight">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">func_mirror_for_odd_weight</code><span class="sig-paren">(</span><em>x</em>, <em>*myargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#func_mirror_for_odd_weight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.func_mirror_for_odd_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rotate function by 180 degrees (or mirror about x and y-axis in turn).</p>
+<p>Given a composite function f(x) * w(x) where w(x) is an odd weighting
+function, return g(x) such that g(x)*w(x) gives same value as f(-x)*w(-x).
+This can be useful in transforming a fourier sine integral
+with negative integration limits to one with positive limits.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value to evaluate function at.</p>
+</dd>
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function to mirror. Always the first argument after <cite>x</cite>.</p>
+</dd>
+<dt><strong>myargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Any remaining arguments will be passed to <cite>func</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Value of -func(-x, <a href="#id7"><span class="problematic" id="id8">*</span></a>myargs)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.mathematics.fourier.func_mirror_for_even_weight" title="geotecha.mathematics.fourier.func_mirror_for_even_weight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">func_mirror_for_even_weight</span></code></a></dt>
+<dd>mirror for an even wieght function</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func_mirror_for_odd_weight</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">9</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">ff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mf">1.</span><span class="n">j</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">func_mirror_for_odd_weight</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">real_func</span><span class="p">,</span> <span class="n">ff</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">12.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.imag_func">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">imag_func</code><span class="sig-paren">(</span><em>x</em>, <em>*myargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#imag_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.imag_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Imaginary part of a function</p>
+<p>Basically return np.imag(func(x, <a href="#id9"><span class="problematic" id="id10">*</span></a>myargs[1:])) where func is the first
+argument after x.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value to evaluate function at.</p>
+</dd>
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function from which to return the imaginary part. Always the first
+argument after <cite>x</cite></p>
+</dd>
+<dt><strong>myargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Any remaining arguments will be passed to func(x, <a href="#id11"><span class="problematic" id="id12">*</span></a>myargs[1:]).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Imaginary part of func(x, <a href="#id13"><span class="problematic" id="id14">*</span></a>myargs).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.mathematics.fourier.real_func" title="geotecha.mathematics.fourier.real_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">real_func</span></code></a></dt>
+<dd>real part of function</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="o">*</span><span class="mf">1.</span><span class="n">j</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imag_func</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">4.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imag_func</span><span class="p">(</span><span class="mf">3.</span><span class="n">j</span><span class="p">,</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">imag_func</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="n">j</span><span class="p">,</span> <span class="mf">2.</span><span class="n">j</span><span class="p">]),</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([8., 6.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.real_func">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">real_func</code><span class="sig-paren">(</span><em>x</em>, <em>*myargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#real_func"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.real_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Real part of a function</p>
+<p>Basically return np.real(func(x, <a href="#id15"><span class="problematic" id="id16">*</span></a>myargs[1:])) where func is the first
+argument after x.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value to evaluate function at.</p>
+</dd>
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function from which to return the real part. Always the first
+argument after <cite>x</cite>.</p>
+</dd>
+<dt><strong>myargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Any remaining arguments will be passed to func(x, <a href="#id17"><span class="problematic" id="id18">*</span></a>myargs[1:]).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Real part of func(x, <a href="#id19"><span class="problematic" id="id20">*</span></a>myargs)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.mathematics.fourier.imag_func" title="geotecha.mathematics.fourier.imag_func"><code class="xref py py-obj docutils literal notranslate"><span class="pre">imag_func</span></code></a></dt>
+<dd>imaginary part of function</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+<span class="gp">... </span> <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">a</span><span class="o">*</span><span class="mf">1.</span><span class="n">j</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_func</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_func</span><span class="p">(</span><span class="mf">3.</span><span class="n">j</span><span class="p">,</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">0.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">real_func</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mf">2.</span><span class="n">j</span><span class="p">]),</span><span class="n">f</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">array([0., 2.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.sine_transform">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">sine_transform</code><span class="sig-paren">(</span><em>func</em>, <em>w</em>, <em>args=()</em>, <em>a=0.0</em>, <em>b=inf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#sine_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.sine_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fourier sine transform</p>
+<p>Note that any function that can divide by zero may cause problems because
+QUADPACK includes the end points in integration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function/callable</span></dt>
+<dd><p class="first last">Function to transform.  <cite>func</cite> will be called func(x, <a href="#id21"><span class="problematic" id="id22">*</span></a>args). <cite>func</cite>
+must return a real.</p>
+</dd>
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Transform varibale.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">Arguments to pass to <cite>func</cite></p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Integration limits. Defualt a=0.0, b=np.inf.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of transform at w.</p>
+</dd>
+<dt><strong>err</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Error estimate from quadpack.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The fourier sine transform is given by:</p>
+<div class="math notranslate nohighlight">
+\[F_s=\mathcal{F}_s\{f(x)\}(w) =
+\int_0^{\infty}f(x)\sin(wx)\,\mathrm{d}x\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.v2dcosine_transform">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">v2dcosine_transform</code><span class="sig-paren">(</span><em>f</em>, <em>s1</em>, <em>s2</em>, <em>args=()</em>, <em>m=20</em>, <em>ng=20</em>, <em>shanks_ind=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#v2dcosine_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.v2dcosine_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cosine transform of f(x, y) at transform variable s1, s2</p>
+<p>Vectorised 2d cosine transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function or method</span></dt>
+<dd><p class="first last">Function to apply 2D cosine trasnform to.  f is called with
+f(x, y, <a href="#id23"><span class="problematic" id="id24">*</span></a>args).</p>
+</dd>
+<dt><strong>s1, s2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Transformation variables. A grid of points will be made.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">Arguments to pass to f.</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of segments to break the integration interval into.  Each
+segment will be between the zeros of the cos function, default m=20.</p>
+</dd>
+<dt><strong>ng</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[2-20, 32, 64, 100], optional</span></dt>
+<dd><p class="first last">Number of gauss points to use in integration. Default ng=20.</p>
+</dd>
+<dt><strong>shanks_ind</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Start position of intervals to start shanks extrapolation.
+default=None i.e. no extrapolation.
+Be careful when using shanks extrapolation; make sure you only begin
+to use it after the intgrand is well behaved.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">value of transform at s</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Careful with singularities.  Because there is no way to increase the
+integration points at a particular sport the infinite behaviur may not be
+captured well. For example x**-0.5 should transform to sqrt(pi/2*w) but
+due to the sinularity at x=0 it does not converge well even using ng=100.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.fourier.vcosine_transform">
+<code class="descclassname">geotecha.mathematics.fourier.</code><code class="descname">vcosine_transform</code><span class="sig-paren">(</span><em>f</em>, <em>s</em>, <em>args=()</em>, <em>m=20</em>, <em>ng=20</em>, <em>shanks_ind=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/fourier.html#vcosine_transform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.fourier.vcosine_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cosine transform of f(x) at transform variable s</p>
+<p>This is a vectorized cosine transform.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function or method</span></dt>
+<dd><p class="first last">Function to apply cosine trasnform to.  f is called with
+f(x, <a href="#id25"><span class="problematic" id="id26">*</span></a>args).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Coordinate(s) to evaluate transform at.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">arguments to pass to f</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of segments to break the integration interval into.  Each
+segment will be between the zeros of the cos function, Default m=20.</p>
+</dd>
+<dt><strong>ng</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[2-20, 32, 64, 100], optional</span></dt>
+<dd><p class="first last">Number of gauss points to use in integration., Default ng=20.</p>
+</dd>
+<dt><strong>shanks_ind</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Start position of intervals to start shanks extrapolation.
+Default shanks_ind=None i.e. no extrapolation.
+Be careful when using shanks extrapolation; make sure you only begin
+to use it after the intgrand is well behaved.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Value of transform at s</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Careful with singularities.  Because there is no way to increase the
+integration points at a particular spot the infinite behaviur may not be
+captured well. For example x**-0.5 should transform to sqrt(pi/2*w) but
+due to the sinularity at x=0 it does not converge well even using ng=100.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.fourier.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

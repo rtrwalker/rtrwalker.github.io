@@ -1,0 +1,491 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon example code: speccon1d_vrc_stone_column_luetal2010.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="speccon example code: speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load.py" href="speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load.html" />
+    <link rel="prev" title="speccon example code: speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py" href="speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">speccon Examples</a><ul>
+      <li>Previous: <a href="speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.html" title="previous chapter">speccon example code: speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py</a></li>
+      <li>Next: <a href="speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load.html" title="next chapter">speccon example code: speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/speccon/speccon1d_vrc_stone_column_luetal2010.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon-example-code-speccon1d-vrc-stone-column-luetal2010-py">
+<span id="speccon-speccon1d-vrc-stone-column-luetal2010"></span><h1>speccon example code: speccon1d_vrc_stone_column_luetal2010.py<a class="headerlink" href="#speccon-example-code-speccon1d-vrc-stone-column-luetal2010-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># speccon1d_vrc example (if viewing this in docs, plots are at bottom of page)</span>
+
+<span class="c1"># Stone column with vertical and radial drainage in both the column and soil</span>
+<span class="c1"># Comapre with Lu et al. (2010)</span>
+<span class="c1"># The orignal solution of Lu et al. (2010)</span>
+<span class="c1"># is implemented separately in</span>
+<span class="c1"># geotecha.consolidation.luetal2010.</span>
+
+<span class="c1"># Lu, Meng-Meng, Kang-He Xie, and Biao Guo. 2010. &#39;Consolidation</span>
+<span class="c1"># Theory for a Composite Foundation Considering Radial and Vertical</span>
+<span class="c1"># Flows within the Column and the Variation of Soil Permeability</span>
+<span class="c1"># within the Disturbed Soil Zone&#39;. Canadian Geotechnical</span>
+<span class="c1"># Journal 47 (2): 207-17. doi:10.1139/T09-086.</span>
+
+<span class="c1"># This file should be run with python.  It will not work if run with the</span>
+<span class="c1"># speccon1d_vr.exe script program.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_vrc</span> <span class="kn">import</span> <span class="n">Speccon1dVRC</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Expected values</span>
+<span class="c1">#t = time values</span>
+<span class="c1">#avp = average excess pore pressure</span>
+<span class="c1">#z = depth values</span>
+<span class="c1">#por = excess pore pressure at time t and depth z.</span>
+<span class="c1">#settle = settlement</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[</span>  <span class="mf">0.</span>        <span class="p">,</span>   <span class="mf">0.52631579</span><span class="p">,</span>   <span class="mf">1.05263158</span><span class="p">,</span>   <span class="mf">1.57894737</span><span class="p">,</span>
+         <span class="mf">2.10526316</span><span class="p">,</span>   <span class="mf">2.63157895</span><span class="p">,</span>   <span class="mf">3.15789474</span><span class="p">,</span>   <span class="mf">3.68421053</span><span class="p">,</span>
+         <span class="mf">4.21052632</span><span class="p">,</span>   <span class="mf">4.73684211</span><span class="p">,</span>   <span class="mf">5.26315789</span><span class="p">,</span>   <span class="mf">5.78947368</span><span class="p">,</span>
+         <span class="mf">6.31578947</span><span class="p">,</span>   <span class="mf">6.84210526</span><span class="p">,</span>   <span class="mf">7.36842105</span><span class="p">,</span>   <span class="mf">7.89473684</span><span class="p">,</span>
+         <span class="mf">8.42105263</span><span class="p">,</span>   <span class="mf">8.94736842</span><span class="p">,</span>   <span class="mf">9.47368421</span><span class="p">,</span>  <span class="mf">10.</span>        <span class="p">])</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[</span>  <span class="mf">0.01</span>      <span class="p">,</span>   <span class="mf">0.02682696</span><span class="p">,</span>   <span class="mf">0.07196857</span><span class="p">,</span>   <span class="mf">0.19306977</span><span class="p">,</span>
+         <span class="mf">0.51794747</span><span class="p">,</span>   <span class="mf">1.38949549</span><span class="p">,</span>   <span class="mf">3.72759372</span><span class="p">,</span>  <span class="mf">10.</span>        <span class="p">])</span>
+
+<span class="n">por</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.17485805e-01</span><span class="p">,</span>   <span class="mf">7.01719236e-01</span><span class="p">,</span>   <span class="mf">4.21755393e-01</span><span class="p">,</span>
+          <span class="mf">1.94786515e-01</span><span class="p">,</span>   <span class="mf">6.54056592e-02</span><span class="p">,</span>   <span class="mf">1.33355230e-02</span><span class="p">,</span>
+          <span class="mf">3.89712328e-04</span><span class="p">,</span>   <span class="mf">3.16237477e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.66168183e-01</span><span class="p">,</span>   <span class="mf">8.98486152e-01</span><span class="p">,</span>   <span class="mf">6.80015128e-01</span><span class="p">,</span>
+          <span class="mf">3.60540868e-01</span><span class="p">,</span>   <span class="mf">1.28467752e-01</span><span class="p">,</span>   <span class="mf">2.65620291e-02</span><span class="p">,</span>
+          <span class="mf">7.76761900e-04</span><span class="p">,</span>   <span class="mf">6.30314731e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.69825825e-01</span><span class="p">,</span>   <span class="mf">9.20901559e-01</span><span class="p">,</span>   <span class="mf">7.83513686e-01</span><span class="p">,</span>
+          <span class="mf">4.82747535e-01</span><span class="p">,</span>   <span class="mf">1.87257571e-01</span><span class="p">,</span>   <span class="mf">3.95727628e-02</span><span class="p">,</span>
+          <span class="mf">1.15850419e-03</span><span class="p">,</span>   <span class="mf">9.40086297e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.73001762e-01</span><span class="p">,</span>   <span class="mf">9.29271016e-01</span><span class="p">,</span>   <span class="mf">8.19657575e-01</span><span class="p">,</span>
+          <span class="mf">5.64302374e-01</span><span class="p">,</span>   <span class="mf">2.40538758e-01</span><span class="p">,</span>   <span class="mf">5.22652992e-02</span><span class="p">,</span>
+          <span class="mf">1.53233099e-03</span><span class="p">,</span>   <span class="mf">1.24343612e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.75806088e-01</span><span class="p">,</span>   <span class="mf">9.36464754e-01</span><span class="p">,</span>   <span class="mf">8.38815166e-01</span><span class="p">,</span>
+          <span class="mf">6.17506711e-01</span><span class="p">,</span>   <span class="mf">2.87833953e-01</span><span class="p">,</span>   <span class="mf">6.45432601e-02</span><span class="p">,</span>
+          <span class="mf">1.89568828e-03</span><span class="p">,</span>   <span class="mf">1.53829201e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.78277402e-01</span><span class="p">,</span>   <span class="mf">9.42814343e-01</span><span class="p">,</span>   <span class="mf">8.54129319e-01</span><span class="p">,</span>
+          <span class="mf">6.54605021e-01</span><span class="p">,</span>   <span class="mf">3.29297198e-01</span><span class="p">,</span>   <span class="mf">7.63175703e-02</span><span class="p">,</span>
+          <span class="mf">2.24609368e-03</span><span class="p">,</span>   <span class="mf">1.82263981e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.80449715e-01</span><span class="p">,</span>   <span class="mf">9.48405034e-01</span><span class="p">,</span>   <span class="mf">8.67548553e-01</span><span class="p">,</span>
+          <span class="mf">6.83416142e-01</span><span class="p">,</span>   <span class="mf">3.65476307e-01</span><span class="p">,</span>   <span class="mf">8.75072151e-02</span><span class="p">,</span>
+          <span class="mf">2.58115346e-03</span><span class="p">,</span>   <span class="mf">2.09453713e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.82352927e-01</span><span class="p">,</span>   <span class="mf">9.53310968e-01</span><span class="p">,</span>   <span class="mf">8.79367998e-01</span><span class="p">,</span>
+          <span class="mf">7.07654855e-01</span><span class="p">,</span>   <span class="mf">3.97066262e-01</span><span class="p">,</span>   <span class="mf">9.80395238e-02</span><span class="p">,</span>
+          <span class="mf">2.89857882e-03</span><span class="p">,</span>   <span class="mf">2.35212664e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.84013230e-01</span><span class="p">,</span>   <span class="mf">9.57597206e-01</span><span class="p">,</span>   <span class="mf">8.89734934e-01</span><span class="p">,</span>
+          <span class="mf">7.28756552e-01</span><span class="p">,</span>   <span class="mf">4.24725876e-01</span><span class="p">,</span>   <span class="mf">1.07850060e-01</span><span class="p">,</span>
+          <span class="mf">3.19620163e-03</span><span class="p">,</span>   <span class="mf">2.59364874e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.85453477e-01</span><span class="p">,</span>   <span class="mf">9.61320595e-01</span><span class="p">,</span>   <span class="mf">8.98773593e-01</span><span class="p">,</span>
+          <span class="mf">7.47245201e-01</span><span class="p">,</span>   <span class="mf">4.48982558e-01</span><span class="p">,</span>   <span class="mf">1.16882229e-01</span><span class="p">,</span>
+          <span class="mf">3.47198913e-03</span><span class="p">,</span>   <span class="mf">2.81745359e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.86693490e-01</span><span class="p">,</span>   <span class="mf">9.64530519e-01</span><span class="p">,</span>   <span class="mf">9.06592203e-01</span><span class="p">,</span>
+          <span class="mf">7.63358521e-01</span><span class="p">,</span>   <span class="mf">4.70211358e-01</span><span class="p">,</span>   <span class="mf">1.25086718e-01</span><span class="p">,</span>
+          <span class="mf">3.72405786e-03</span><span class="p">,</span>   <span class="mf">3.02201237e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.87750336e-01</span><span class="p">,</span>   <span class="mf">9.67269553e-01</span><span class="p">,</span>   <span class="mf">9.13284407e-01</span><span class="p">,</span>
+          <span class="mf">7.77252517e-01</span><span class="p">,</span>   <span class="mf">4.88657500e-01</span><span class="p">,</span>   <span class="mf">1.32420888e-01</span><span class="p">,</span>
+          <span class="mf">3.95068649e-03</span><span class="p">,</span>   <span class="mf">3.20592775e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.88638561e-01</span><span class="p">,</span>   <span class="mf">9.69574028e-01</span><span class="p">,</span>   <span class="mf">9.18930380e-01</span><span class="p">,</span>
+          <span class="mf">7.89052617e-01</span><span class="p">,</span>   <span class="mf">5.04473596e-01</span><span class="p">,</span>   <span class="mf">1.38848192e-01</span><span class="p">,</span>
+          <span class="mf">4.15032750e-03</span><span class="p">,</span>   <span class="mf">3.36794338e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.89370390e-01</span><span class="p">,</span>   <span class="mf">9.71474512e-01</span><span class="p">,</span>   <span class="mf">9.23597781e-01</span><span class="p">,</span>
+          <span class="mf">7.98864200e-01</span><span class="p">,</span>   <span class="mf">5.17753731e-01</span><span class="p">,</span>   <span class="mf">1.44337675e-01</span><span class="p">,</span>
+          <span class="mf">4.32161779e-03</span><span class="p">,</span>   <span class="mf">3.50695255e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.89955896e-01</span><span class="p">,</span>   <span class="mf">9.72996216e-01</span><span class="p">,</span>   <span class="mf">9.27342552e-01</span><span class="p">,</span>
+          <span class="mf">8.06774875e-01</span><span class="p">,</span>   <span class="mf">5.28557651e-01</span><span class="p">,</span>   <span class="mf">1.48863591e-01</span><span class="p">,</span>
+          <span class="mf">4.46338787e-03</span><span class="p">,</span>   <span class="mf">3.62200568e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.90403137e-01</span><span class="p">,</span>   <span class="mf">9.74159324e-01</span><span class="p">,</span>   <span class="mf">9.30209586e-01</span><span class="p">,</span>
+          <span class="mf">8.12855360e-01</span><span class="p">,</span>   <span class="mf">5.36925201e-01</span><span class="p">,</span>   <span class="mf">1.52405122e-01</span><span class="p">,</span>
+          <span class="mf">4.57466988e-03</span><span class="p">,</span>   <span class="mf">3.71231683e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.90718270e-01</span><span class="p">,</span>   <span class="mf">9.74979268e-01</span><span class="p">,</span>   <span class="mf">9.32233259e-01</span><span class="p">,</span>
+          <span class="mf">8.17160070e-01</span><span class="p">,</span>   <span class="mf">5.42883792e-01</span><span class="p">,</span>   <span class="mf">1.54946203e-01</span><span class="p">,</span>
+          <span class="mf">4.65470412e-03</span><span class="p">,</span>   <span class="mf">3.77726910e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.90905631e-01</span><span class="p">,</span>   <span class="mf">9.75466923e-01</span><span class="p">,</span>   <span class="mf">9.33437836e-01</span><span class="p">,</span>
+          <span class="mf">8.19727561e-01</span><span class="p">,</span>   <span class="mf">5.46451805e-01</span><span class="p">,</span>   <span class="mf">1.56475410e-01</span><span class="p">,</span>
+          <span class="mf">4.70294426e-03</span><span class="p">,</span>   <span class="mf">3.81641879e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.90967799e-01</span><span class="p">,</span>   <span class="mf">9.75628759e-01</span><span class="p">,</span>   <span class="mf">9.33837762e-01</span><span class="p">,</span>
+          <span class="mf">8.20580842e-01</span><span class="p">,</span>   <span class="mf">5.47639964e-01</span><span class="p">,</span>   <span class="mf">1.56985904e-01</span><span class="p">,</span>
+          <span class="mf">4.71906097e-03</span><span class="p">,</span>   <span class="mf">3.82949847e-07</span><span class="p">]])</span>
+
+<span class="n">pors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.27633737e-01</span><span class="p">,</span>   <span class="mf">7.09244763e-01</span><span class="p">,</span>   <span class="mf">4.25937878e-01</span><span class="p">,</span>
+          <span class="mf">1.96408780e-01</span><span class="p">,</span>   <span class="mf">6.57859407e-02</span><span class="p">,</span>   <span class="mf">1.33918199e-02</span><span class="p">,</span>
+          <span class="mf">3.91305874e-04</span><span class="p">,</span>   <span class="mf">3.17530525e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.75739340e-01</span><span class="p">,</span>   <span class="mf">9.07326067e-01</span><span class="p">,</span>   <span class="mf">6.86393712e-01</span><span class="p">,</span>
+          <span class="mf">3.63445060e-01</span><span class="p">,</span>   <span class="mf">1.29204350e-01</span><span class="p">,</span>   <span class="mf">2.66740512e-02</span><span class="p">,</span>
+          <span class="mf">7.79938099e-04</span><span class="p">,</span>   <span class="mf">6.32891995e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.78392063e-01</span><span class="p">,</span>   <span class="mf">9.28999691e-01</span><span class="p">,</span>   <span class="mf">7.90242233e-01</span><span class="p">,</span>
+          <span class="mf">4.86429783e-01</span><span class="p">,</span>   <span class="mf">1.88307407e-01</span><span class="p">,</span>   <span class="mf">3.97393868e-02</span><span class="p">,</span>
+          <span class="mf">1.16324133e-03</span><span class="p">,</span>   <span class="mf">9.43930170e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.80677548e-01</span><span class="p">,</span>   <span class="mf">9.36565657e-01</span><span class="p">,</span>   <span class="mf">8.25988279e-01</span><span class="p">,</span>
+          <span class="mf">5.68305980e-01</span><span class="p">,</span>   <span class="mf">2.41847694e-01</span><span class="p">,</span>   <span class="mf">5.24848888e-02</span><span class="p">,</span>
+          <span class="mf">1.53859670e-03</span><span class="p">,</span>   <span class="mf">1.24852035e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.82694742e-01</span><span class="p">,</span>   <span class="mf">9.43043805e-01</span><span class="p">,</span>   <span class="mf">8.44624631e-01</span><span class="p">,</span>
+          <span class="mf">6.21533374e-01</span><span class="p">,</span>   <span class="mf">2.89345525e-01</span><span class="p">,</span>   <span class="mf">6.48137183e-02</span><span class="p">,</span>
+          <span class="mf">1.90343973e-03</span><span class="p">,</span>   <span class="mf">1.54458186e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.84471652e-01</span><span class="p">,</span>   <span class="mf">9.48759787e-01</span><span class="p">,</span>   <span class="mf">8.59451193e-01</span><span class="p">,</span>
+          <span class="mf">6.58509924e-01</span><span class="p">,</span>   <span class="mf">3.30959720e-01</span><span class="p">,</span>   <span class="mf">7.66364016e-02</span><span class="p">,</span>
+          <span class="mf">2.25527791e-03</span><span class="p">,</span>   <span class="mf">1.83009232e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.86032950e-01</span><span class="p">,</span>   <span class="mf">9.53791006e-01</span><span class="p">,</span>   <span class="mf">8.72433990e-01</span><span class="p">,</span>
+          <span class="mf">6.87150555e-01</span><span class="p">,</span>   <span class="mf">3.67247069e-01</span><span class="p">,</span>   <span class="mf">8.78715909e-02</span><span class="p">,</span>
+          <span class="mf">2.59170769e-03</span><span class="p">,</span>   <span class="mf">2.10310138e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.87400313e-01</span><span class="p">,</span>   <span class="mf">9.58204661e-01</span><span class="p">,</span>   <span class="mf">8.83865707e-01</span><span class="p">,</span>
+          <span class="mf">7.11214114e-01</span><span class="p">,</span>   <span class="mf">3.98912768e-01</span><span class="p">,</span>   <span class="mf">9.84463472e-02</span><span class="p">,</span>
+          <span class="mf">2.91043094e-03</span><span class="p">,</span>   <span class="mf">2.36174414e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.88592726e-01</span><span class="p">,</span>   <span class="mf">9.62059704e-01</span><span class="p">,</span>   <span class="mf">8.93890009e-01</span><span class="p">,</span>
+          <span class="mf">7.32151484e-01</span><span class="p">,</span>   <span class="mf">4.26624937e-01</span><span class="p">,</span>   <span class="mf">1.08296025e-01</span><span class="p">,</span>
+          <span class="mf">3.20927064e-03</span><span class="p">,</span>   <span class="mf">2.60425378e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.89626745e-01</span><span class="p">,</span>   <span class="mf">9.65407626e-01</span><span class="p">,</span>   <span class="mf">9.02627867e-01</span><span class="p">,</span>
+          <span class="mf">7.50490874e-01</span><span class="p">,</span>   <span class="mf">4.50918321e-01</span><span class="p">,</span>   <span class="mf">1.17363873e-01</span><span class="p">,</span>
+          <span class="mf">3.48618575e-03</span><span class="p">,</span>   <span class="mf">2.82897374e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.90516726e-01</span><span class="p">,</span>   <span class="mf">9.68293148e-01</span><span class="p">,</span>   <span class="mf">9.10184627e-01</span><span class="p">,</span>
+          <span class="mf">7.66470876e-01</span><span class="p">,</span>   <span class="mf">4.72173178e-01</span><span class="p">,</span>   <span class="mf">1.25600462e-01</span><span class="p">,</span>
+          <span class="mf">3.73928509e-03</span><span class="p">,</span>   <span class="mf">3.03436893e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.91275027e-01</span><span class="p">,</span>   <span class="mf">9.70754815e-01</span><span class="p">,</span>   <span class="mf">9.16651423e-01</span><span class="p">,</span>
+          <span class="mf">7.80247573e-01</span><span class="p">,</span>   <span class="mf">4.90638166e-01</span><span class="p">,</span>   <span class="mf">1.32963073e-01</span><span class="p">,</span>
+          <span class="mf">3.96684030e-03</span><span class="p">,</span>   <span class="mf">3.21903631e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.91912175e-01</span><span class="p">,</span>   <span class="mf">9.72825511e-01</span><span class="p">,</span>   <span class="mf">9.22106262e-01</span><span class="p">,</span>
+          <span class="mf">7.91946311e-01</span><span class="p">,</span>   <span class="mf">5.06468070e-01</span><span class="p">,</span>   <span class="mf">1.39415101e-01</span><span class="p">,</span>
+          <span class="mf">4.16729755e-03</span><span class="p">,</span>   <span class="mf">3.38171440e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.92437017e-01</span><span class="p">,</span>   <span class="mf">9.74532898e-01</span><span class="p">,</span>   <span class="mf">9.26614960e-01</span><span class="p">,</span>
+          <span class="mf">8.01672362e-01</span><span class="p">,</span>   <span class="mf">5.19758346e-01</span><span class="p">,</span>   <span class="mf">1.44925551e-01</span><span class="p">,</span>
+          <span class="mf">4.33928815e-03</span><span class="p">,</span>   <span class="mf">3.52129196e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.92856841e-01</span><span class="p">,</span>   <span class="mf">9.75899786e-01</span><span class="p">,</span>   <span class="mf">9.30231927e-01</span><span class="p">,</span>
+          <span class="mf">8.09513227e-01</span><span class="p">,</span>   <span class="mf">5.30569632e-01</span><span class="p">,</span>   <span class="mf">1.49468650e-01</span><span class="p">,</span>
+          <span class="mf">4.48163784e-03</span><span class="p">,</span>   <span class="mf">3.63681552e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.93177475e-01</span><span class="p">,</span>   <span class="mf">9.76944435e-01</span><span class="p">,</span>   <span class="mf">9.33000820e-01</span><span class="p">,</span>
+          <span class="mf">8.15539526e-01</span><span class="p">,</span>   <span class="mf">5.38942373e-01</span><span class="p">,</span>   <span class="mf">1.53023563e-01</span><span class="p">,</span>
+          <span class="mf">4.59337481e-03</span><span class="p">,</span>   <span class="mf">3.72749594e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.93403372e-01</span><span class="p">,</span>   <span class="mf">9.77680801e-01</span><span class="p">,</span>   <span class="mf">9.34955063e-01</span><span class="p">,</span>
+          <span class="mf">8.19805595e-01</span><span class="p">,</span>   <span class="mf">5.44904396e-01</span><span class="p">,</span>   <span class="mf">1.55574210e-01</span><span class="p">,</span>
+          <span class="mf">4.67373627e-03</span><span class="p">,</span>   <span class="mf">3.79271379e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.93537667e-01</span><span class="p">,</span>   <span class="mf">9.78118721e-01</span><span class="p">,</span>   <span class="mf">9.36118251e-01</span><span class="p">,</span>
+          <span class="mf">8.22349926e-01</span><span class="p">,</span>   <span class="mf">5.48474361e-01</span><span class="p">,</span>   <span class="mf">1.57109160e-01</span><span class="p">,</span>
+          <span class="mf">4.72217362e-03</span><span class="p">,</span>   <span class="mf">3.83202356e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">9.93582226e-01</span><span class="p">,</span>   <span class="mf">9.78264048e-01</span><span class="p">,</span>   <span class="mf">9.36504425e-01</span><span class="p">,</span>
+          <span class="mf">8.23195491e-01</span><span class="p">,</span>   <span class="mf">5.49663152e-01</span><span class="p">,</span>   <span class="mf">1.57621569e-01</span><span class="p">,</span>
+          <span class="mf">4.73835623e-03</span><span class="p">,</span>   <span class="mf">3.84515672e-07</span><span class="p">]])</span>
+
+<span class="n">porc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>
+          <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">1.05651237e-01</span><span class="p">,</span>   <span class="mf">9.96770796e-02</span><span class="p">,</span>   <span class="mf">8.71566174e-02</span><span class="p">,</span>
+          <span class="mf">6.50053734e-02</span><span class="p">,</span>   <span class="mf">3.49831418e-02</span><span class="p">,</span>   <span class="mf">8.83176806e-03</span><span class="p">,</span>
+          <span class="mf">2.62228672e-04</span><span class="p">,</span>   <span class="mf">2.12793636e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">2.00475571e-01</span><span class="p">,</span>   <span class="mf">1.91293001e-01</span><span class="p">,</span>   <span class="mf">1.69728466e-01</span><span class="p">,</span>
+          <span class="mf">1.28205500e-01</span><span class="p">,</span>   <span class="mf">6.95399456e-02</span><span class="p">,</span>   <span class="mf">1.76002592e-02</span><span class="p">,</span>
+          <span class="mf">5.22665940e-04</span><span class="p">,</span>   <span class="mf">4.24133677e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">2.84526766e-01</span><span class="p">,</span>   <span class="mf">2.73050992e-01</span><span class="p">,</span>   <span class="mf">2.45229852e-01</span><span class="p">,</span>
+          <span class="mf">1.88167662e-01</span><span class="p">,</span>   <span class="mf">1.03270757e-01</span><span class="p">,</span>   <span class="mf">2.62428385e-02</span><span class="p">,</span>
+          <span class="mf">7.79532644e-04</span><span class="p">,</span>   <span class="mf">6.32576454e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">3.58938854e-01</span><span class="p">,</span>   <span class="mf">3.45699726e-01</span><span class="p">,</span>   <span class="mf">3.13201228e-01</span><span class="p">,</span>
+          <span class="mf">2.44013857e-01</span><span class="p">,</span>   <span class="mf">1.35823923e-01</span><span class="p">,</span>   <span class="mf">3.46981320e-02</span><span class="p">,</span>
+          <span class="mf">1.03107403e-03</span><span class="p">,</span>   <span class="mf">8.36698092e-08</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">4.24713829e-01</span><span class="p">,</span>   <span class="mf">4.10140609e-01</span><span class="p">,</span>   <span class="mf">3.74057906e-01</span><span class="p">,</span>
+          <span class="mf">2.95373688e-01</span><span class="p">,</span>   <span class="mf">1.66908194e-01</span><span class="p">,</span>   <span class="mf">4.29066031e-02</span><span class="p">,</span>
+          <span class="mf">1.27557173e-03</span><span class="p">,</span>   <span class="mf">1.03510423e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">4.82737407e-01</span><span class="p">,</span>   <span class="mf">4.67178819e-01</span><span class="p">,</span>   <span class="mf">4.28379409e-01</span><span class="p">,</span>
+          <span class="mf">3.42212830e-01</span><span class="p">,</span>   <span class="mf">1.96295431e-01</span><span class="p">,</span>   <span class="mf">5.08110698e-02</span><span class="p">,</span>
+          <span class="mf">1.51135554e-03</span><span class="p">,</span>   <span class="mf">1.22643956e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">5.33790958e-01</span><span class="p">,</span>   <span class="mf">5.17527283e-01</span><span class="p">,</span>   <span class="mf">4.76713556e-01</span><span class="p">,</span>
+          <span class="mf">3.84663146e-01</span><span class="p">,</span>   <span class="mf">2.23815396e-01</span><span class="p">,</span>   <span class="mf">5.83571532e-02</span><span class="p">,</span>
+          <span class="mf">1.73681479e-03</span><span class="p">,</span>   <span class="mf">1.40939707e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">5.78562021e-01</span><span class="p">,</span>   <span class="mf">5.61815510e-01</span><span class="p">,</span>   <span class="mf">5.19551308e-01</span><span class="p">,</span>
+          <span class="mf">4.22914138e-01</span><span class="p">,</span>   <span class="mf">2.49345817e-01</span><span class="p">,</span>   <span class="mf">6.54936514e-02</span><span class="p">,</span>
+          <span class="mf">1.95040936e-03</span><span class="p">,</span>   <span class="mf">1.58272696e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">6.17653556e-01</span><span class="p">,</span>   <span class="mf">6.00597404e-01</span><span class="p">,</span>   <span class="mf">5.57328872e-01</span><span class="p">,</span>
+          <span class="mf">4.57162026e-01</span><span class="p">,</span>   <span class="mf">2.72801017e-01</span><span class="p">,</span>   <span class="mf">7.21728422e-02</span><span class="p">,</span>
+          <span class="mf">2.15068022e-03</span><span class="p">,</span>   <span class="mf">1.74524523e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">6.51592052e-01</span><span class="p">,</span>   <span class="mf">6.34358143e-01</span><span class="p">,</span>   <span class="mf">5.90431721e-01</span><span class="p">,</span>
+          <span class="mf">4.87591411e-01</span><span class="p">,</span>   <span class="mf">2.94121507e-01</span><span class="p">,</span>   <span class="mf">7.83507177e-02</span><span class="p">,</span>
+          <span class="mf">2.33625938e-03</span><span class="p">,</span>   <span class="mf">1.89584170e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">6.80834613e-01</span><span class="p">,</span>   <span class="mf">6.63520194e-01</span><span class="p">,</span>   <span class="mf">6.19198268e-01</span><span class="p">,</span>
+          <span class="mf">5.14370101e-01</span><span class="p">,</span>   <span class="mf">3.13265738e-01</span><span class="p">,</span>   <span class="mf">8.39871626e-02</span><span class="p">,</span>
+          <span class="mf">2.50587924e-03</span><span class="p">,</span>   <span class="mf">2.03348764e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.05775110e-01</span><span class="p">,</span>   <span class="mf">6.88448572e-01</span><span class="p">,</span>   <span class="mf">6.43923104e-01</span><span class="p">,</span>
+          <span class="mf">5.37648014e-01</span><span class="p">,</span>   <span class="mf">3.30204229e-01</span><span class="p">,</span>   <span class="mf">8.90460831e-02</span><span class="p">,</span>
+          <span class="mf">2.65838120e-03</span><span class="p">,</span>   <span class="mf">2.15724281e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.26749478e-01</span><span class="p">,</span>   <span class="mf">7.09455365e-01</span><span class="p">,</span>   <span class="mf">6.64859820e-01</span><span class="p">,</span>
+          <span class="mf">5.57557059e-01</span><span class="p">,</span>   <span class="mf">3.44915673e-01</span><span class="p">,</span>   <span class="mf">9.34955001e-02</span><span class="p">,</span>
+          <span class="mf">2.79272365e-03</span><span class="p">,</span>   <span class="mf">2.26626182e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.44040239e-01</span><span class="p">,</span>   <span class="mf">7.26803618e-01</span><span class="p">,</span>   <span class="mf">6.82223449e-01</span><span class="p">,</span>
+          <span class="mf">5.74211227e-01</span><span class="p">,</span>   <span class="mf">3.57384471e-01</span><span class="p">,</span>   <span class="mf">9.73076133e-02</span><span class="p">,</span>
+          <span class="mf">2.90798900e-03</span><span class="p">,</span>   <span class="mf">2.35979996e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.57880303e-01</span><span class="p">,</span>   <span class="mf">7.40710602e-01</span><span class="p">,</span>   <span class="mf">6.96192539e-01</span><span class="p">,</span>
+          <span class="mf">5.87706707e-01</span><span class="p">,</span>   <span class="mf">3.67599173e-01</span><span class="p">,</span>   <span class="mf">1.00458846e-01</span><span class="p">,</span>
+          <span class="mf">3.00339000e-03</span><span class="p">,</span>   <span class="mf">2.43721828e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.68456103e-01</span><span class="p">,</span>   <span class="mf">7.51350513e-01</span><span class="p">,</span>   <span class="mf">7.06910875e-01</span><span class="p">,</span>
+          <span class="mf">5.98122006e-01</span><span class="p">,</span>   <span class="mf">3.75551464e-01</span><span class="p">,</span>   <span class="mf">1.02929876e-01</span><span class="p">,</span>
+          <span class="mf">3.07827505e-03</span><span class="p">,</span>   <span class="mf">2.49798792e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.75910102e-01</span><span class="p">,</span>   <span class="mf">7.58856641e-01</span><span class="p">,</span>   <span class="mf">7.14488869e-01</span><span class="p">,</span>
+          <span class="mf">6.05518064e-01</span><span class="p">,</span>   <span class="mf">3.81235486e-01</span><span class="p">,</span>   <span class="mf">1.04705656e-01</span><span class="p">,</span>
+          <span class="mf">3.13213271e-03</span><span class="p">,</span>   <span class="mf">2.54169378e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.80342711e-01</span><span class="p">,</span>   <span class="mf">7.63323027e-01</span><span class="p">,</span>   <span class="mf">7.19004632e-01</span><span class="p">,</span>
+          <span class="mf">6.09938335e-01</span><span class="p">,</span>   <span class="mf">3.84647364e-01</span><span class="p">,</span>   <span class="mf">1.05775430e-01</span><span class="p">,</span>
+          <span class="mf">3.16459515e-03</span><span class="p">,</span>   <span class="mf">2.56803729e-07</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">7.81813642e-01</span><span class="p">,</span>   <span class="mf">7.64805630e-01</span><span class="p">,</span>   <span class="mf">7.20504729e-01</span><span class="p">,</span>
+          <span class="mf">6.11408866e-01</span><span class="p">,</span>   <span class="mf">3.85784895e-01</span><span class="p">,</span>   <span class="mf">1.06132739e-01</span><span class="p">,</span>
+          <span class="mf">3.17544065e-03</span><span class="p">,</span>   <span class="mf">2.57683850e-07</span><span class="p">]])</span>
+
+<span class="n">avp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span>  <span class="mf">9.61190784e-01</span><span class="p">,</span>   <span class="mf">9.20180000e-01</span><span class="p">,</span>   <span class="mf">8.32864585e-01</span><span class="p">,</span>
+         <span class="mf">6.60717386e-01</span><span class="p">,</span>   <span class="mf">3.83698642e-01</span><span class="p">,</span>   <span class="mf">1.00835010e-01</span><span class="p">,</span>
+         <span class="mf">3.00428723e-03</span><span class="p">,</span>   <span class="mf">2.43793444e-07</span><span class="p">]])</span>
+
+<span class="n">settle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span> <span class="mf">0.01122695</span><span class="p">,</span>  <span class="mf">0.02309079</span><span class="p">,</span>  <span class="mf">0.04834989</span><span class="p">,</span>  <span class="mf">0.09814961</span><span class="p">,</span>  <span class="mf">0.17828718</span><span class="p">,</span>
+        <span class="mf">0.26011559</span><span class="p">,</span>  <span class="mf">0.28841662</span><span class="p">,</span>  <span class="mf">0.28928564</span><span class="p">]])</span>
+
+
+
+
+<span class="c1">########################################################</span>
+<span class="c1">##luetal2010 input to generate expected data</span>
+<span class="c1">#    import numpy as np</span>
+<span class="c1">#    from geotecha.consolidation.luetal2010 import luetal2010</span>
+<span class="c1">#    rc=0.1</span>
+<span class="c1">#    re=0.9</span>
+<span class="c1">#    H=10</span>
+<span class="c1">#    rs=0.15</span>
+<span class="c1">#    ks=0.5</span>
+<span class="c1">#    kv=1.0</span>
+<span class="c1">#    kvc=2000</span>
+<span class="c1">#    kh=1.0</span>
+<span class="c1">#    khc=2</span>
+<span class="c1">#    mvs=0.1</span>
+<span class="c1">#    mvc=0.0005</span>
+<span class="c1">#    gamw=10</span>
+<span class="c1">#    utop=1</span>
+<span class="c1">#    ubot=1</span>
+<span class="c1">#    nterms=100</span>
+<span class="c1">#    z = np.linspace(0,10,20)# np.array([0, 3.0, 6.0, 9.0, 10.0])</span>
+<span class="c1">#    t = np.logspace(np.log10(0.01), np.log10(10), 8)#np.array([0.1, 0.8, 2.0])</span>
+<span class="c1">#</span>
+<span class="c1">#    por, pors, porc, avp, settle = luetal2010(</span>
+<span class="c1">#                z,t, rc, re, H, rs, ks,</span>
+<span class="c1">#                 kv, kvc, kh, khc,</span>
+<span class="c1">#                 mvs, mvc, gamw, utop, ubot, nterms)</span>
+<span class="c1">#    #Note for avp and settle you&#39;ll need to add an extra [] around the existing [].</span>
+<span class="c1">#    for v in [&#39;z&#39;, &#39;t&#39;, &#39;por&#39;, &#39;pors&#39;, &#39;porc&#39;, &#39;avp&#39;, &#39;settle&#39;]:</span>
+<span class="c1">#        print(&#39;{} = np.{}\n&#39;.format(v, repr(eval(v))).replace(&quot;array([&quot;,&quot;array(\n      [&quot;))</span>
+<span class="c1">#########################################################</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">H = 10</span>
+<span class="s2">drn = 1</span>
+<span class="s2">#re=0.9, rc=0.1, rs=0.15, kh/ks=2, n=9, s=1.5, kap=2.0</span>
+<span class="s2">#mu=1.87284145852, eta = 2/re**2/mu=1.3183901879341955</span>
+
+<span class="s2">mvs = 0.1</span>
+<span class="s2">mvc = 0.0005</span>
+<span class="s2">mvref = mvs*9**2/(9**2 - 1 + mvs/mvc)</span>
+<span class="s2">mv = PolyLine([0,1], [1,1])</span>
+
+
+<span class="s2">khref = 1.0</span>
+<span class="s2">etref = 1.3183901879341955</span>
+<span class="s2">n=9</span>
+<span class="s2">dTh = khref * etref/mvref/10 #khref/mvref/gamw * etref</span>
+<span class="s2">kh = khc=PolyLine([0,1], [1,1])</span>
+<span class="s2">et = PolyLine([0,1], [1,1])</span>
+
+<span class="s2">khcref = 2.0</span>
+<span class="s2">dThc = 8*khcref / (mvref * 10) /0.1**2</span>
+<span class="s2">khc = PolyLine([0,1], [1,1])</span>
+
+<span class="s2">kvref = 1.0</span>
+<span class="s2">dTv = kvref/mvref/10/ H**2</span>
+<span class="s2">kv = PolyLine([0,1], [1,1])</span>
+
+<span class="s2">kvcref = 2000</span>
+<span class="s2">kvc = PolyLine([0, 1], [1, 1])</span>
+<span class="s2">dTvc=kvcref/H**2/mvref/10</span>
+
+<span class="s2">neig = 40</span>
+
+<span class="s2">surcharge_vs_depth = [PolyLine([0,1], [1,1])]</span>
+<span class="s2">surcharge_vs_time = [PolyLine([0,0,10], [0,1,1])]</span>
+
+<span class="s2">ppress_z = np.</span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">tvals = np.</span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">avg_ppress_z_pairs = [[0,1]]</span>
+<span class="s2">settlement_z_pairs = [[0,1]]</span>
+
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">z</span><span class="o">/</span><span class="mi">10</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dVRC</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+
+
+<span class="c1"># custom plots</span>
+<span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Lu et al (2010) Stone column, load is uniform with depth&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="c1">#z vs u</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;141&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Excess pore pressure </span><span class="se">\n</span><span class="s1">in soil, kPa&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pors</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">pors</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># avp vs t</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;143&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Average excess pore press </span><span class="se">\n</span><span class="s1">(soil and column), kPa&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># settlement vs t</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;144&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Settlement&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">settle</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;142&quot;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Excess pore pressure </span><span class="se">\n</span><span class="s1">in column, kPa&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">porc</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">porc</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.94</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1">#fig.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrc_stone_column_luetal2010.py">Source code</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrc_stone_column_luetal2010.png">png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrc_stone_column_luetal2010.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrc_stone_column_luetal2010.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../../_images/speccon1d_vrc_stone_column_luetal2010.png" src="../../_images/speccon1d_vrc_stone_column_luetal2010.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/speccon/speccon1d_vrc_stone_column_luetal2010.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

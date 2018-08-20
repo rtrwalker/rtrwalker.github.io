@@ -1,0 +1,488 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>dingetal2012 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="beam_on_foundation" href="geotecha.beam_on_foundation.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">dingetal2012</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.beam_on_foundation.dingetal2012">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.beam_on_foundation.html">beam_on_foundation</a><ul>
+      <li>Previous: <a href="geotecha.beam_on_foundation.html" title="previous chapter">beam_on_foundation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.beam_on_foundation.dingetal2012.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dingetal2012">
+<h1>dingetal2012<a class="headerlink" href="#dingetal2012" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DingEtAl2012</span></code></a>([BC,&nbsp;nterms,&nbsp;E,&nbsp;I,&nbsp;rho,&nbsp;A,&nbsp;L,&nbsp;…])</td>
+<td>Finite elastic Euler-Bernoulli beam resting on non-linear  viscoelastic foundation subjected to a moving load.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.dingetal_figure_8" title="geotecha.beam_on_foundation.dingetal2012.dingetal_figure_8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dingetal_figure_8</span></code></a>()</td>
+<td>Reproduce Ding Et Al 2012 Figure 8 (might take a while).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.beam_on_foundation.dingetal2012">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.beam_on_foundation.dingetal2012" title="Permalink to this headline">¶</a></h2>
+<p>Ding et al (2012) “Convergence of Galerkin truncation for dynamic response 
+of finite beams on nonlinear foundations under a moving load”.</p>
+<dl class="class">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012">
+<em class="property">class </em><code class="descclassname">geotecha.beam_on_foundation.dingetal2012.</code><code class="descname">DingEtAl2012</code><span class="sig-paren">(</span><em>BC='SS'</em>, <em>nterms=50</em>, <em>E=None</em>, <em>I=None</em>, <em>rho=None</em>, <em>A=None</em>, <em>L=None</em>, <em>k1=None</em>, <em>k3=None</em>, <em>mu=None</em>, <em>Fz=None</em>, <em>v=None</em>, <em>v_norm=None</em>, <em>kf=None</em>, <em>Fz_norm=None</em>, <em>mu_norm=None</em>, <em>k1_norm=None</em>, <em>k3_norm=None</em>, <em>nquad=30</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Finite elastic Euler-Bernoulli beam resting on non-linear 
+viscoelastic foundation subjected to a moving load.</p>
+<p>An implementation of Ding et al. (2012) <a class="reference internal" href="#r83d79438b6b3-1" id="id1">[1]</a>.</p>
+<p>You don’t need all the parameters.  Basically if normalised values are
+equal None (i.e. default) then those properties will be calculated from 
+the non normalised quantities.  All calculations are done in normalised
+space.  You only need the non-normalised variables if you want 
+non-normalised output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>BC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[“SS”, “CC”, “FF”], optional</span></dt>
+<dd><p class="first last">Boundary condition. Simply Supported (SS), Clamped Clamped (“CC”), 
+Free Free (FF). Default BC=”SS”.</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">Number of terms for Galerkin truncation. Default nterms=50</p>
+</dd>
+<dt><strong>E</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Young’s modulus of beam.(E in <a class="reference internal" href="#r83d79438b6b3-1" id="id2">[1]</a>).</p>
+</dd>
+<dt><strong>rho</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Mass density of beam.</p>
+</dd>
+<dt><strong>I</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Second moment of area of beam (I in <a class="reference internal" href="#r83d79438b6b3-1" id="id3">[1]</a>).</p>
+</dd>
+<dt><strong>A</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Cross sectional area of beam</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Length of beam. (L in <a class="reference internal" href="#r83d79438b6b3-1" id="id4">[1]</a>).</p>
+</dd>
+<dt><strong>k1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Mean stiffness of foundation.</p>
+</dd>
+<dt><strong>k3</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Non linear stiffness of foundation.</p>
+</dd>
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Viscous damping of foundation.</p>
+</dd>
+<dt><strong>Fz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Load.</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Speed of the moving force.</p>
+</dd>
+<dt><strong>v_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">normalised velocity = V * sqrt(rho / E). An example of a consistent 
+set of units to get the correct v_norm is rho in kg/m^3, L in m, and 
+E in Pa.</p>
+</dd>
+<dt><strong>kf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised modulus of elasticity = 1 / L * sqrt(I / A).</p>
+</dd>
+<dt><strong>Fz_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised load = Fz / (E * A).</p>
+</dd>
+<dt><strong>mu_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised damping = mu / A * sqrt(L**2 / (rho * E)).</p>
+</dd>
+<dt><strong>k1_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised mean stiffness = k1 * L**2 / (E * A).</p>
+</dd>
+<dt><strong>k3_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised non-linear stiffness = k3 * L**4 / (E * A)</p>
+</dd>
+<dt><strong>nquad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">Number of quadrature points for numerical integration of non-linear
+k3*w**3*w_ term.  Default nquad=30.  Note I’ve had errors when n&gt;35.
+For the special case of nquad=None then integration will be performed
+using scipy.integrate.quad; this is slower.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r83d79438b6b3-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id3">3</a>, <a class="fn-backref" href="#id4">4</a>, <a class="fn-backref" href="#id5">5</a>, <a class="fn-backref" href="#id6">6</a>, <a class="fn-backref" href="#id11">7</a>, <a class="fn-backref" href="#id12">8</a>)</em> Ding, H., Chen, L.-Q., and Yang, S.-P. (2012). 
+“Convergence of Galerkin truncation for dynamic response of 
+finite beams on nonlinear foundations under a moving load.” 
+Journal of Sound and Vibration, 331(10), 2426-2442.</td></tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>phi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd><p class="first last">Relevant Galerkin trial function.  Depends on <cite>BC</cite>.  See <a class="reference internal" href="#r83d79438b6b3-1" id="id6">[1]</a> for 
+details.</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nterms</cite> float</span></dt>
+<dd><p class="first last">beta terms in Galerkin trial function.</p>
+</dd>
+<dt><strong>xj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nquad</cite> float</span></dt>
+<dd><p class="first last">Quadrature integration points.</p>
+</dd>
+<dt><strong>Ij</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nquad</cite> float</span></dt>
+<dd><p class="first last">Weighting coefficients for numerical integration.</p>
+</dd>
+<dt><strong>BC_coeff</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Coefficent  to multiply the Fz and k3 terms in the ode.
+For <a href="#id7"><span class="problematic" id="id8">`</span></a>BC`=”SS” BC_coeff=2, for <a href="#id9"><span class="problematic" id="id10">`</span></a>BC`=”CC” or “FF” BC_coeff=2.
+See <a class="reference internal" href="#r83d79438b6b3-1" id="id11">[1]</a> Equation (31) and (32).</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of float</span></dt>
+<dd><p class="first last">Raw time values. Only valid after running calulate_qk.</p>
+</dd>
+<dt><strong>t_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of float</span></dt>
+<dd><p class="first last">Normlised time values = t / L * sqrt(E / rho).
+Only valid after running calulate_qk.</p>
+</dd>
+<dt><strong>qsol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d ndarray of shape(len(<cite>t</cite>), 2* <cite>nterms</cite>) float</span></dt>
+<dd><p class="first last">Values of Galerkin coefficients at each time i.e. qk(t) in <a class="reference internal" href="#r83d79438b6b3-1" id="id12">[1]</a>.
+w(x) = sum(qk * phi_k(x)).
+Only valid after running calulate_qk.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.calulate_qk" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.calulate_qk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calulate_qk</span></code></a>([t,&nbsp;t_norm])</td>
+<td>Calculate the nterm Galerkin  coefficients qk at each time value</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.vectorfield" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.vectorfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectorfield</span></code></a>(vsv,&nbsp;tnow[,&nbsp;p])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w</span></code></a>(qk,&nbsp;x)</td>
+<td>Nomalised vertcal deformation at x</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w_cubed_wi" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w_cubed_wi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_cubed_wi</span></code></a>(x,&nbsp;q,&nbsp;i)</td>
+<td>non-linear cube term for numerical integration</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.wofx" title="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.wofx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wofx</span></code></a>([x,&nbsp;x_norm,&nbsp;tslice,&nbsp;normalise_w])</td>
+<td>Deflection at distance x, and times t[tslice]</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="47%" />
+<col width="53%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>phiCC</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>phiFF</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>phiSS</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.calulate_qk">
+<code class="descname">calulate_qk</code><span class="sig-paren">(</span><em>t=None</em>, <em>t_norm=None</em>, <em>**odeint_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.calulate_qk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.calulate_qk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the nterm Galerkin  coefficients qk at each time value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Raw time values.</p>
+</dd>
+<dt><strong>t_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Normalised time values. If t_norm==None then it will be 
+calculated from raw t values and other params
+t_norm = t / L * sqrt(E / rho).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method determines initializes self.t and self.t_norm and 
+calculates <cite>self.qsol</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiCC">
+<code class="descname">phiCC</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.phiCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiCC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiFF">
+<code class="descname">phiFF</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.phiFF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiFF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiSS">
+<code class="descname">phiSS</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.phiSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.phiSS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.vectorfield">
+<code class="descname">vectorfield</code><span class="sig-paren">(</span><em>vsv</em>, <em>tnow</em>, <em>p=()</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.vectorfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.vectorfield" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>vsv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Vector of the state variables. 
+vsv = [q1, q2, …qk, q1dot, q2dot, …, qkdot]
+where qk is the kth galerkin coefficient and qkdot is the time 
+derivative of the kth Galerkin coefficient.</p>
+</dd>
+<dt><strong>tnow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Current time.</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">various</span></dt>
+<dd><p class="first last">Vector of parameters</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>vsvdot</strong> <span class="classifier-delimiter">:</span> <span class="classifier">vector of state variables first derivatives</span></dt>
+<dd><p class="first last">vsvdot = [q1dot, q2dot, …qkdot, q1dotdot, q2dotdot, …, qkdotdot]</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w">
+<code class="descname">w</code><span class="sig-paren">(</span><em>qk</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.w"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nomalised vertcal deformation at x</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>qk</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of nterm floats</span></dt>
+<dd><p class="first last">Galerkin coefficients.</p>
+</dd>
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">nomalised distances to calculate deflection at.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">vertical deformation at x value.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w_cubed_wi">
+<code class="descname">w_cubed_wi</code><span class="sig-paren">(</span><em>x</em>, <em>q</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.w_cubed_wi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.w_cubed_wi" title="Permalink to this definition">¶</a></dt>
+<dd><p>non-linear cube term for numerical integration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.wofx">
+<code class="descname">wofx</code><span class="sig-paren">(</span><em>x=None</em>, <em>x_norm=None</em>, <em>tslice=slice(None</em>, <em>None</em>, <em>None)</em>, <em>normalise_w=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#DingEtAl2012.wofx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.DingEtAl2012.wofx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection at distance x, and times t[tslice]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float, optional</span></dt>
+<dd><p class="first last">Raw values of x to calculate deflection at. Default x=None.</p>
+</dd>
+<dt><strong>x_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Normalised x values to calc deflection at.  If x_norm==None then
+it will be calculated frm <cite>x</cite> and other properties : x_norm = x / L.
+Default x_norm=None.</p>
+</dd>
+<dt><strong>tslice</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice object, optional</span></dt>
+<dd><p class="first last">slice to select subset of time values.  Default 
+tslice=slice(None, None, None) i.e. all time values.
+Note the array of time values is already in the object (it was
+used to calc the qk galerkin coefficients).</p>
+</dd>
+<dt><strong>normalise_w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then output is normalised deflection.  Default nomalise_w=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array of float</span></dt>
+<dd><p class="first last">Deflections at x and self.t_norm[tslice]</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.dingetal2012.dingetal_figure_8">
+<code class="descclassname">geotecha.beam_on_foundation.dingetal2012.</code><code class="descname">dingetal_figure_8</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/dingetal2012.html#dingetal_figure_8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.dingetal2012.dingetal_figure_8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reproduce Ding Et Al 2012 Figure 8 (might take a while).</p>
+<p>Note that a plot will be be saved to disk in current working directory
+as well as a timing file.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.beam_on_foundation.dingetal2012.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

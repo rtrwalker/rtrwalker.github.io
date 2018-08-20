@@ -1,0 +1,11 @@
+.. _specbeam-specbeam_transition_zone:
+
+specbeam example code: specbeam_transition_zone.py
+==================================================
+
+
+
+.. plot:: geotecha_examples\\specbeam\\specbeam_transition_zone.py
+   :include-source:
+
+

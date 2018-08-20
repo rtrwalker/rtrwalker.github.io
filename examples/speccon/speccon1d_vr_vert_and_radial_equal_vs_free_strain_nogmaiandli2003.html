@@ -1,0 +1,382 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon example code: speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="speccon example code: speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py" href="speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.html" />
+    <link rel="prev" title="speccon example code: speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000.py" href="speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">speccon Examples</a><ul>
+      <li>Previous: <a href="speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000.html" title="previous chapter">speccon example code: speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000.py</a></li>
+      <li>Next: <a href="speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.html" title="next chapter">speccon example code: speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon-example-code-speccon1d-vr-vert-and-radial-equal-vs-free-strain-nogmaiandli2003-py">
+<span id="speccon-speccon1d-vr-vert-and-radial-equal-vs-free-strain-nogmaiandli2003"></span><h1>speccon example code: speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.py<a class="headerlink" href="#speccon-example-code-speccon1d-vr-vert-and-radial-equal-vs-free-strain-nogmaiandli2003-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># speccon1d_vr example (if viewing this in docs, plots are at bottom of page)</span>
+
+<span class="c1"># Vertical and radial consolidation of clay with thin sand layers.</span>
+<span class="c1"># Compare free strain solution of Nogami and Li (2003) with the equal strain</span>
+<span class="c1"># solutin of speccon1d_vr.  This is similar to Figure 10c) from the article.</span>
+<span class="c1"># The orignal solution of Nogami and Li (2003)</span>
+<span class="c1"># is implemented separately in geotecha.consolidation.nogamiandli2003</span>
+
+<span class="c1"># Nogami, Toyoaki, and Maoxin Li. (2003) &#39;Consolidation of Clay with a</span>
+<span class="c1"># System of Vertical and Horizontal Drains&#39;. Journal of</span>
+<span class="c1"># Geotechnical and Geoenvironmental Engineering 129, no. 9</span>
+<span class="c1"># 838-48. doi:10.1061/(ASCE)1090-0241(2003)129:9(838).</span>
+
+
+<span class="c1"># This file should be run with python.  It will not work if run with the</span>
+<span class="c1"># speccon1d_vr.exe script program.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_vr</span> <span class="kn">import</span> <span class="n">Speccon1dVR</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Expected values</span>
+<span class="c1">#t = time values</span>
+<span class="c1">#avp = average excess pore pressure</span>
+<span class="c1">#z = depth values</span>
+<span class="c1">#por = excess pore pressure at time t and depth z.</span>
+<span class="c1">#settle = settlement</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.01</span>      <span class="p">,</span>  <span class="mf">0.01603286</span><span class="p">,</span>  <span class="mf">0.02570525</span><span class="p">,</span>  <span class="mf">0.04121285</span><span class="p">,</span>  <span class="mf">0.06607597</span><span class="p">,</span>
+    <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.10593866</span><span class="p">,</span>  <span class="mf">0.16984993</span><span class="p">,</span>  <span class="mf">0.27231794</span><span class="p">,</span>  <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.43660343</span><span class="p">,</span>  <span class="mf">0.7</span> <span class="p">])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[</span> <span class="mf">0.</span>    <span class="p">,</span>  <span class="mf">0.0625</span><span class="p">,</span>  <span class="mf">0.125</span> <span class="p">,</span>  <span class="mf">0.1875</span><span class="p">,</span>  <span class="mf">0.25</span>  <span class="p">,</span>  <span class="mf">0.3125</span><span class="p">,</span>  <span class="mf">0.375</span> <span class="p">,</span>
+    <span class="mf">0.4375</span><span class="p">,</span>  <span class="mf">0.5</span>   <span class="p">,</span>  <span class="mf">0.5625</span><span class="p">,</span>  <span class="mf">0.625</span> <span class="p">,</span>  <span class="mf">0.6875</span><span class="p">,</span>  <span class="mf">0.75</span>  <span class="p">,</span>  <span class="mf">0.8125</span><span class="p">,</span>
+    <span class="mf">0.875</span> <span class="p">,</span>  <span class="mf">0.9375</span><span class="p">,</span>  <span class="mf">1.</span>    <span class="p">,</span>  <span class="mf">1.025</span> <span class="p">,</span>  <span class="mf">1.05</span>  <span class="p">,</span>  <span class="mf">1.075</span> <span class="p">,</span>  <span class="mf">1.1</span>   <span class="p">,</span>
+    <span class="mf">1.1625</span><span class="p">,</span>  <span class="mf">1.225</span> <span class="p">,</span>  <span class="mf">1.2875</span><span class="p">,</span>  <span class="mf">1.35</span>  <span class="p">,</span>  <span class="mf">1.4125</span><span class="p">,</span>  <span class="mf">1.475</span> <span class="p">,</span>  <span class="mf">1.5375</span><span class="p">,</span>
+    <span class="mf">1.6</span>   <span class="p">,</span>  <span class="mf">1.6625</span><span class="p">,</span>  <span class="mf">1.725</span> <span class="p">,</span>  <span class="mf">1.7875</span><span class="p">,</span>  <span class="mf">1.85</span>  <span class="p">,</span>  <span class="mf">1.9125</span><span class="p">,</span>  <span class="mf">1.975</span> <span class="p">,</span>
+    <span class="mf">2.0375</span><span class="p">,</span>  <span class="mf">2.1</span>   <span class="p">,</span>  <span class="mf">2.125</span> <span class="p">,</span>  <span class="mf">2.15</span>  <span class="p">,</span>  <span class="mf">2.175</span> <span class="p">,</span>  <span class="mf">2.2</span>   <span class="p">,</span>  <span class="mf">2.2625</span><span class="p">,</span>
+    <span class="mf">2.325</span> <span class="p">,</span>  <span class="mf">2.3875</span><span class="p">,</span>  <span class="mf">2.45</span>  <span class="p">,</span>  <span class="mf">2.5125</span><span class="p">,</span>  <span class="mf">2.575</span> <span class="p">,</span>  <span class="mf">2.6375</span><span class="p">,</span>  <span class="mf">2.6999</span>   <span class="p">])</span>
+
+<span class="n">por</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[[</span>  <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">,</span>   <span class="mf">0.00000000e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">3.30085802e+01</span><span class="p">,</span>   <span class="mf">8.39070407e+00</span><span class="p">,</span>   <span class="mf">3.58707855e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.05040116e+01</span><span class="p">,</span>   <span class="mf">1.64657476e+01</span><span class="p">,</span>   <span class="mf">7.03954600e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">7.93733840e+01</span><span class="p">,</span>   <span class="mf">2.39216010e+01</span><span class="p">,</span>   <span class="mf">1.02278441e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">8.98276000e+01</span><span class="p">,</span>   <span class="mf">3.04784367e+01</span><span class="p">,</span>   <span class="mf">1.30323304e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.44368466e+01</span><span class="p">,</span>   <span class="mf">3.58906380e+01</span><span class="p">,</span>   <span class="mf">1.53477694e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.61739263e+01</span><span class="p">,</span>   <span class="mf">3.99558431e+01</span><span class="p">,</span>   <span class="mf">1.70872820e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.69096134e+01</span><span class="p">,</span>   <span class="mf">4.25222425e+01</span><span class="p">,</span>   <span class="mf">1.81856068e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.72060228e+01</span><span class="p">,</span>   <span class="mf">4.34939559e+01</span><span class="p">,</span>   <span class="mf">1.86015483e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.70563632e+01</span><span class="p">,</span>   <span class="mf">4.28344044e+01</span><span class="p">,</span>   <span class="mf">1.83195234e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.64675854e+01</span><span class="p">,</span>   <span class="mf">4.05676349e+01</span><span class="p">,</span>   <span class="mf">1.73501446e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.51338553e+01</span><span class="p">,</span>   <span class="mf">3.67775792e+01</span><span class="p">,</span>   <span class="mf">1.57298210e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.15678072e+01</span><span class="p">,</span>   <span class="mf">3.16052348e+01</span><span class="p">,</span>   <span class="mf">1.35193903e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">8.28664682e+01</span><span class="p">,</span>   <span class="mf">2.52437753e+01</span><span class="p">,</span>   <span class="mf">1.08018340e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59357468e+01</span><span class="p">,</span>   <span class="mf">1.79316479e+01</span><span class="p">,</span>   <span class="mf">7.67916132e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">3.96855349e+01</span><span class="p">,</span>   <span class="mf">9.94380297e+00</span><span class="p">,</span>   <span class="mf">4.26857907e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59655749e+00</span><span class="p">,</span>   <span class="mf">1.58132211e+00</span><span class="p">,</span>   <span class="mf">6.98091328e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59134099e+00</span><span class="p">,</span>   <span class="mf">1.58005846e+00</span><span class="p">,</span>   <span class="mf">6.97557684e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.58961224e+00</span><span class="p">,</span>   <span class="mf">1.57964519e+00</span><span class="p">,</span>   <span class="mf">6.97399004e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59137041e+00</span><span class="p">,</span>   <span class="mf">1.58008208e+00</span><span class="p">,</span>   <span class="mf">6.97615203e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59661708e+00</span><span class="p">,</span>   <span class="mf">1.58136940e+00</span><span class="p">,</span>   <span class="mf">6.98206398e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">3.98547617e+01</span><span class="p">,</span>   <span class="mf">1.00628681e+01</span><span class="p">,</span>   <span class="mf">4.55528866e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.63377268e+01</span><span class="p">,</span>   <span class="mf">1.81728261e+01</span><span class="p">,</span>   <span class="mf">8.24478652e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">8.35306351e+01</span><span class="p">,</span>   <span class="mf">2.56128437e+01</span><span class="p">,</span>   <span class="mf">1.16311926e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.24242085e+01</span><span class="p">,</span>   <span class="mf">3.21098488e+01</span><span class="p">,</span>   <span class="mf">1.45901394e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.60705684e+01</span><span class="p">,</span>   <span class="mf">3.74261238e+01</span><span class="p">,</span>   <span class="mf">1.70129661e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.74392519e+01</span><span class="p">,</span>   <span class="mf">4.13677993e+01</span><span class="p">,</span>   <span class="mf">1.88107072e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.81005003e+01</span><span class="p">,</span>   <span class="mf">4.37915763e+01</span><span class="p">,</span>   <span class="mf">1.99173594e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.83479591e+01</span><span class="p">,</span>   <span class="mf">4.46095565e+01</span><span class="p">,</span>   <span class="mf">2.02923036e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.81079539e+01</span><span class="p">,</span>   <span class="mf">4.37921401e+01</span><span class="p">,</span>   <span class="mf">1.99217957e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.74436874e+01</span><span class="p">,</span>   <span class="mf">4.13689901e+01</span><span class="p">,</span>   <span class="mf">1.88194701e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.60657415e+01</span><span class="p">,</span>   <span class="mf">3.74280676e+01</span><span class="p">,</span>   <span class="mf">1.70258384e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.24170918e+01</span><span class="p">,</span>   <span class="mf">3.21127333e+01</span><span class="p">,</span>   <span class="mf">1.46068005e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">8.35319659e+01</span><span class="p">,</span>   <span class="mf">2.56169153e+01</span><span class="p">,</span>   <span class="mf">1.16512240e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.63469036e+01</span><span class="p">,</span>   <span class="mf">1.81783823e+01</span><span class="p">,</span>   <span class="mf">8.26768047e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">3.98602199e+01</span><span class="p">,</span>   <span class="mf">1.00702443e+01</span><span class="p">,</span>   <span class="mf">4.58045763e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59182174e+00</span><span class="p">,</span>   <span class="mf">1.59091774e+00</span><span class="p">,</span>   <span class="mf">7.24995316e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.58658179e+00</span><span class="p">,</span>   <span class="mf">1.58963382e+00</span><span class="p">,</span>   <span class="mf">7.24411588e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.58484730e+00</span><span class="p">,</span>   <span class="mf">1.58920618e+00</span><span class="p">,</span>   <span class="mf">7.24217283e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.58661723e+00</span><span class="p">,</span>   <span class="mf">1.58963460e+00</span><span class="p">,</span>   <span class="mf">7.24412296e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.59189335e+00</span><span class="p">,</span>   <span class="mf">1.59091932e+00</span><span class="p">,</span>   <span class="mf">7.24996732e-02</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">4.00379871e+01</span><span class="p">,</span>   <span class="mf">1.00742370e+01</span><span class="p">,</span>   <span class="mf">4.58399695e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">6.66669810e+01</span><span class="p">,</span>   <span class="mf">1.81862162e+01</span><span class="p">,</span>   <span class="mf">8.27472042e-01</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">8.39318565e+01</span><span class="p">,</span>   <span class="mf">2.56282977e+01</span><span class="p">,</span>   <span class="mf">1.16616892e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.28276558e+01</span><span class="p">,</span>   <span class="mf">3.21272424e+01</span><span class="p">,</span>   <span class="mf">1.46205756e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.64383871e+01</span><span class="p">,</span>   <span class="mf">3.74451724e+01</span><span class="p">,</span>   <span class="mf">1.70427658e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.77664761e+01</span><span class="p">,</span>   <span class="mf">4.13880757e+01</span><span class="p">,</span>   <span class="mf">1.88393471e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.83983815e+01</span><span class="p">,</span>   <span class="mf">4.38125372e+01</span><span class="p">,</span>   <span class="mf">1.99443713e+00</span><span class="p">],</span>
+   <span class="p">[</span>  <span class="mf">9.86319025e+01</span><span class="p">,</span>   <span class="mf">4.46305720e+01</span><span class="p">,</span>   <span class="mf">2.03172745e+00</span><span class="p">]])</span>
+
+<span class="n">avp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[[</span>  <span class="mf">7.25979052e+01</span><span class="p">,</span>   <span class="mf">6.65166314e+01</span><span class="p">,</span>   <span class="mf">5.89096834e+01</span><span class="p">,</span>
+      <span class="mf">4.94554633e+01</span><span class="p">,</span>   <span class="mf">3.79564622e+01</span><span class="p">,</span>   <span class="mf">2.66323138e+01</span><span class="p">,</span>
+      <span class="mf">2.50358034e+01</span><span class="p">,</span>   <span class="mf">1.28862133e+01</span><span class="p">,</span>   <span class="mf">4.44927613e+00</span><span class="p">,</span>
+      <span class="mf">1.18311566e+00</span><span class="p">,</span>   <span class="mf">8.09339892e-01</span><span class="p">,</span>   <span class="mf">5.26895921e-02</span><span class="p">]])</span>
+<span class="n">settle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[[</span>  <span class="mf">73.98565603</span><span class="p">,</span>   <span class="mf">90.40509513</span><span class="p">,</span>  <span class="mf">110.94385476</span><span class="p">,</span>  <span class="mf">136.47024905</span><span class="p">,</span>
+     <span class="mf">167.51755212</span><span class="p">,</span>  <span class="mf">198.09275262</span><span class="p">,</span>  <span class="mf">202.40333078</span><span class="p">,</span>  <span class="mf">235.20722417</span><span class="p">,</span>
+     <span class="mf">257.98695445</span><span class="p">,</span>  <span class="mf">266.80558772</span><span class="p">,</span>  <span class="mf">267.81478229</span><span class="p">,</span>  <span class="mf">269.8577381</span> <span class="p">]])</span>
+
+<span class="c1">#################################################</span>
+<span class="c1">##nogami and li parameters to generate expected values</span>
+<span class="c1">#surcharge_vs_time = PolyLine([0,0,10], [0,100,100])</span>
+<span class="c1">#hs=0.05</span>
+<span class="c1">#h = np.array([1, hs, hs, 1, hs, hs, 0.5])</span>
+<span class="c1">#lam = 100</span>
+<span class="c1">#kv = np.array([1,lam/hs, lam/hs, 1, lam/hs, lam/hs, 1])</span>
+<span class="c1">#mv = np.array([1.0, 1, 1, 1, 1, 1, 1])</span>
+<span class="c1">#kh = kv</span>
+<span class="c1">#</span>
+<span class="c1">#r0 = 0.05</span>
+<span class="c1">#r1 = 20 * r0</span>
+<span class="c1">##z = layer_coords(h, 45,2)</span>
+<span class="c1">#</span>
+<span class="c1">#bctop = 0</span>
+<span class="c1">#bcbot = 1</span>
+<span class="c1">#nv = 15</span>
+<span class="c1">#nh = 5</span>
+<span class="c1">#</span>
+<span class="c1">#tpor = np.array([0.01,0.1, 0.4])</span>
+<span class="c1">#</span>
+<span class="c1">#z = np.array(</span>
+<span class="c1">#  [ 0.    ,  0.0625,  0.125 ,  0.1875,  0.25  ,  0.3125,  0.375 ,</span>
+<span class="c1">#    0.4375,  0.5   ,  0.5625,  0.625 ,  0.6875,  0.75  ,  0.8125,</span>
+<span class="c1">#    0.875 ,  0.9375,  1.    ,  1.025 ,  1.05  ,  1.075 ,  1.1   ,</span>
+<span class="c1">#    1.1625,  1.225 ,  1.2875,  1.35  ,  1.4125,  1.475 ,  1.5375,</span>
+<span class="c1">#    1.6   ,  1.6625,  1.725 ,  1.7875,  1.85  ,  1.9125,  1.975 ,</span>
+<span class="c1">#    2.0375,  2.1   ,  2.125 ,  2.15  ,  2.175 ,  2.2   ,  2.2625,</span>
+<span class="c1">#    2.325 ,  2.3875,  2.45  ,  2.5125,  2.575 ,  2.6375,  2.6999   ])</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#t = np.array(</span>
+<span class="c1">#   [ 0.01      ,  0.01603286,  0.02570525,  0.04121285,  0.06607597,</span>
+<span class="c1">#    0.1, 0.10593866,  0.16984993,  0.27231794,  0.4, 0.43660343,  0.7 ])</span>
+<span class="c1">#</span>
+<span class="c1">#max_iter=20000</span>
+<span class="c1">#vertical_roots_x0 = 2.2</span>
+<span class="c1">#vertical_roots_dx = 1e-3</span>
+<span class="c1">#vertical_roots_p = 1.01</span>
+<span class="c1">#################################################</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">surcharge_vs_time = PolyLine([0,0,10], [0,100,100])</span>
+<span class="s2">hs=0.05</span>
+<span class="s2">h = np.array([1, hs, hs, 1, hs, hs, 0.5])</span>
+<span class="s2">lam = 100</span>
+<span class="s2">kv = np.array([1,lam/hs, lam/hs, 1, lam/hs, lam/hs, 1])</span>
+<span class="s2">mv = np.array([1.0, 1, 1, 1, 1, 1, 1])</span>
+<span class="s2">kh = kv</span>
+
+<span class="s2">tpor = np.array([0.01,0.1, 0.4])</span>
+
+<span class="s2">z = np.array(</span>
+<span class="s2">  [ 0.    ,  0.0625,  0.125 ,  0.1875,  0.25  ,  0.3125,  0.375 ,</span>
+<span class="s2">    0.4375,  0.5   ,  0.5625,  0.625 ,  0.6875,  0.75  ,  0.8125,</span>
+<span class="s2">    0.875 ,  0.9375,  1.    ,  1.025 ,  1.05  ,  1.075 ,  1.1   ,</span>
+<span class="s2">    1.1625,  1.225 ,  1.2875,  1.35  ,  1.4125,  1.475 ,  1.5375,</span>
+<span class="s2">    1.6   ,  1.6625,  1.725 ,  1.7875,  1.85  ,  1.9125,  1.975 ,</span>
+<span class="s2">    2.0375,  2.1   ,  2.125 ,  2.15  ,  2.175 ,  2.2   ,  2.2625,</span>
+<span class="s2">    2.325 ,  2.3875,  2.45  ,  2.5125,  2.575 ,  2.6375,  2.6999   ])</span>
+
+<span class="s2">t = np.array(</span>
+<span class="s2">   [ 0.01      ,  0.01603286,  0.02570525,  0.04121285,  0.06607597,</span>
+<span class="s2">    0.1, 0.10593866,  0.16984993,  0.27231794,  0.4, 0.43660343,  0.7 ])</span>
+
+
+<span class="s2">z2 = np.cumsum(h)</span>
+<span class="s2">z1 = z2-h</span>
+<span class="s2">H = np.sum(h)</span>
+
+<span class="s2">z1/=H</span>
+<span class="s2">z2/=H</span>
+
+<span class="s2">kv = PolyLine(z1, z2, kv, kv)</span>
+<span class="s2">mv = PolyLine(z1, z2, mv, mv)</span>
+<span class="s2">kh = kv</span>
+
+
+<span class="s2">drn = 1</span>
+<span class="s2">neig=80</span>
+
+<span class="s2">mvref=1.0</span>
+
+<span class="s2">surcharge_vs_depth = mv</span>
+
+<span class="s2">#rw=0.05, re = 20*rw = 1.0, n=20, no smear zone</span>
+<span class="s2">#Therfore muI=2.253865374, eta = 2/mu/re**2 = 0.887364446</span>
+<span class="s2">etref = 0.887364446</span>
+<span class="s2">et = PolyLine(z1, z2, np.ones_like(z1), np.ones_like(z1))</span>
+
+<span class="s2">dTv = 1/H**2</span>
+<span class="s2">dTh = etref</span>
+
+<span class="s2">ppress_z = np.array(</span>
+<span class="s2">   [ 0.    ,  0.0625,  0.125 ,  0.1875,  0.25  ,  0.3125,  0.375 ,</span>
+<span class="s2">    0.4375,  0.5   ,  0.5625,  0.625 ,  0.6875,  0.75  ,  0.8125,</span>
+<span class="s2">    0.875 ,  0.9375,  1.    ,  1.025 ,  1.05  ,  1.075 ,  1.1   ,</span>
+<span class="s2">    1.1625,  1.225 ,  1.2875,  1.35  ,  1.4125,  1.475 ,  1.5375,</span>
+<span class="s2">    1.6   ,  1.6625,  1.725 ,  1.7875,  1.85  ,  1.9125,  1.975 ,</span>
+<span class="s2">    2.0375,  2.1   ,  2.125 ,  2.15  ,  2.175 ,  2.2   ,  2.2625,</span>
+<span class="s2">    2.325 ,  2.3875,  2.45  ,  2.5125,  2.575 ,  2.6375,  2.6999   ])</span>
+
+<span class="s2">ppress_z/=H</span>
+
+<span class="s2">avg_ppress_z_pairs = [[0,1]]</span>
+<span class="s2">settlement_z_pairs = [[0,1]]</span>
+
+<span class="s2">tvals = np.array(</span>
+<span class="s2">  [ 0.01      ,  0.01603286,  0.02570525,  0.04121285,  0.06607597,</span>
+<span class="s2">    0.1, 0.10593866,  0.16984993,  0.27231794,  0.4, 0.43660343,  0.7 ])</span>
+
+<span class="s2">ppress_z_tval_indexes = [0, 5, 9] #0.01, 0.1, 0.4</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dVR</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+
+<span class="c1"># custom plots</span>
+<span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Nogami and li (2003) vertical and radial drainage&quot;</span>
+         <span class="s2">&quot; free strain vs equal strain. Lambda=100&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="c1">#z vs u</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;131&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Excess pore pressure, kPa&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">por</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+<span class="c1"># avp vs t</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;132&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Average excess pore pressure, kPa&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># settlement vs t</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;133&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Settlement&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">settle</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;expected&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.94</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1">#fig.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.py">Source code</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.png">png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../../_images/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.png" src="../../_images/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/speccon/speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1475 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.xieandleo2004 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.xieandleo2004</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Xie and Leo (2004) &quot;Analytical solutions of one-dimensional large strain</span>
+<span class="sd">consolidation of saturated and homogeneous clays&quot;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.integrate</span> <span class="k">as</span> <span class="nn">integrate</span>
+
+
+<div class="viewcode-block" id="XieAndLeo2004"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004">[docs]</a><span class="k">class</span> <span class="nc">XieAndLeo2004</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Large strain analytical one-dimensional consolidation</span>
+
+<span class="sd">    Implementation of Xie and Leo (2004)[1]_.</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer, vertical flow.</span>
+<span class="sd">     - Large strain.</span>
+<span class="sd">     - Instant applied load uniform with depth</span>
+<span class="sd">     - Vert permeability kv = (1+e)**2/(1+e0)**2</span>
+<span class="sd">     - Large strain volume compressibility is constant over time</span>
+<span class="sd">     -</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    qp : float</span>
+<span class="sd">        Existing load.</span>
+<span class="sd">    qp : float</span>
+<span class="sd">        Instant applied load.</span>
+<span class="sd">    H : float</span>
+<span class="sd">        Initial thickness of clay layer.</span>
+<span class="sd">    Hw : float</span>
+<span class="sd">        Height of water surface above initial surface.</span>
+<span class="sd">    kv0 : float</span>
+<span class="sd">        Coefficient of vertical permeability.</span>
+<span class="sd">    mvl : float</span>
+<span class="sd">        Coefficient of volume compressibility.</span>
+<span class="sd">    e00 : float</span>
+<span class="sd">        Initial void ratio at surface.</span>
+<span class="sd">    Gs : float</span>
+<span class="sd">        Specific gravity of solids.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water. Default gamw=10</span>
+<span class="sd">    drn : [0,1]</span>
+<span class="sd">        Drainage condition.  drn=0 is PTPB, drn=1 is PTIB, default=0.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        Number of summation terms. Default nterms=100.</span>
+
+
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Basically initialize the XieAndLeo2004 object, then use individual methods</span>
+<span class="sd">    of the data to extract data at particualr depths and times.</span>
+
+
+<span class="sd">    The most common error is if input data is not numpy arrays.</span>
+
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    xie_and_leo2004_figure_4 : example of use.</span>
+<span class="sd">    xie_and_leo2004_figure_5 : example of use.</span>
+<span class="sd">    xie_and_leo2004_figure_6 : example of use.</span>
+
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Xie, K. H., and C. J. Leo. &quot;Analytical Solutions of</span>
+<span class="sd">           One-Dimensional Large Strain Consolidation of Saturated and</span>
+<span class="sd">           Homogeneous Clays&quot;. Computers and Geotechnics 31,</span>
+<span class="sd">           no. 4 (June 2004): 301-14.</span>
+<span class="sd">           doi:10.1016/j.compgeo.2004.02.006.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">qu</span><span class="p">,</span> <span class="n">qp</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Hw</span><span class="p">,</span> <span class="n">kv0</span><span class="p">,</span> <span class="n">mvl</span><span class="p">,</span> <span class="n">e00</span><span class="p">,</span> <span class="n">Gs</span><span class="p">,</span>
+                 <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">drn</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">qu</span> <span class="o">=</span> <span class="n">qu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qp</span> <span class="o">=</span> <span class="n">qp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">H</span> <span class="o">=</span> <span class="n">H</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Hw</span> <span class="o">=</span> <span class="n">Hw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv0</span> <span class="o">=</span> <span class="n">kv0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span> <span class="o">=</span> <span class="n">mvl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e00</span> <span class="o">=</span> <span class="n">e00</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Gs</span> <span class="o">=</span> <span class="n">Gs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span> <span class="o">=</span> <span class="n">gamw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drn</span> <span class="o">=</span> <span class="n">drn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nterms</span> <span class="o">=</span> <span class="n">nterms</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_derived_parameters</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_derived_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calculate parameters that derive from the input parameters</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1">#        if drn==1:</span>
+<span class="c1">#            self.M = np.pi * (np.arange(self.nterms) + 0.5)</span>
+<span class="c1">#        else:</span>
+<span class="c1">#            self.M = np.pi * np.arange(1, self.nterms + 1.0)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv0</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mvl</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dTv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="o">**</span><span class="mi">2</span>
+
+<div class="viewcode-block" id="XieAndLeo2004.Tv"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.Tv">[docs]</a>    <span class="k">def</span> <span class="nf">Tv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate vertical time factor</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array-like of float</span>
+<span class="sd">            Time(s).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tv : float</span>
+<span class="sd">            Time factor</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dTv</span> <span class="o">*</span> <span class="n">t</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.e0"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.e0">[docs]</a>    <span class="k">def</span> <span class="nf">e0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initial void ratio at depth</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        e0 : float</span>
+<span class="sd">            Initial void ratio at depth a.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">e0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e00</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mvl</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Gs</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span>
+
+        <span class="k">return</span> <span class="n">e0</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.efinal"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.efinal">[docs]</a>    <span class="k">def</span> <span class="nf">efinal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Final void ration ratio at depth</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        efinal : float</span>
+<span class="sd">            Final void ratio at depth a.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+
+        <span class="n">e0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e0</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+        <span class="n">efinal</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">e0</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">efinal</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.settlement_final"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.settlement_final">[docs]</a>    <span class="k">def</span> <span class="nf">settlement_final</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Final settlement of clay layer&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">mvl</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.initial_effective_stress"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.initial_effective_stress">[docs]</a>    <span class="k">def</span> <span class="nf">initial_effective_stress</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initial effective stress</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        eff0 : float</span>
+<span class="sd">            Initial effective stress at depth a</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">qp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qp</span>
+        <span class="n">e00</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e00</span>
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">Gs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Gs</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">qp</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">e00</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">e00</span> <span class="o">-</span> <span class="n">mvl</span> <span class="o">*</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="n">Gs</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="XieAndLeo2004.u_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.u_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">u_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pore pressure for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        u : float of size (len(a), len(t))</span>
+<span class="sd">            Excess pore pressure at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+<span class="c1">#        a = np.atleast_1d(a)</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">/=</span> <span class="n">mvl</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+<div class="viewcode-block" id="XieAndLeo2004.u_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.u_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">u_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pore pressure for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        u : float of size (len(a), len(t))</span>
+<span class="sd">            Excess pore pressure at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">/=</span> <span class="n">mvl</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.settlement_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.settlement_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">settlement_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Settlement for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        settlement : float of size (len(a), len(t))</span>
+<span class="sd">            Settlement at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a_</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a_</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">H</span>
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.settlement_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.settlement_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">settlement_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Settlement for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        settlement : float of size (len(a), len(t))</span>
+<span class="sd">            Settlement at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a_</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a_</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">H</span>
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.Us_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.Us_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">Us_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average degree of consolidation from settlement for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Us : array of float of size len(t)</span>
+<span class="sd">            Settlement degree of consolidation at time t</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">*=-</span><span class="mi">1</span>
+        <span class="n">f</span> <span class="o">+=</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.Us_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.Us_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">Us_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average degree of consolidation from settlement for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Us : array of float of size len(t)</span>
+<span class="sd">            Settlement degree of consolidation at time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">*=-</span><span class="mi">1</span>
+        <span class="n">f</span> <span class="o">+=</span><span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+
+
+<div class="viewcode-block" id="XieAndLeo2004.Up_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.Up_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">Up_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average degree of consolidation from p.press for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Up : array of float of size len(t)</span>
+<span class="sd">            Pore pressure average degree of consolidation at time t/</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;wrapper for self.u_PTIB for scalar args&quot;&quot;&quot;</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1">#TODO: replace call to quad with my own numerical integrations to avoid scipy license</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span> <span class="o">*</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="p">(</span><span class="n">t_</span><span class="p">,))[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="XieAndLeo2004.Up_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.Up_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">Up_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average degree of consolidation from p.press for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Up : array of float of size len(t)</span>
+<span class="sd">            Pore pressure average degree of consolidation at time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+            <span class="sd">&quot;&quot;&quot;wrapper for self.u_PTPB for scalar args&quot;&quot;&quot;</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="c1">#TODO: replace call to quad with my own numerical integrations to avoid scipy license</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">H</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span> <span class="o">*</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="p">(</span><span class="n">t_</span><span class="p">,))[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+
+
+<div class="viewcode-block" id="XieAndLeo2004.effective_stress_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.effective_stress_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">effective_stress_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Effective stress for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        effective_stress : float of size (len(a), len(t))</span>
+<span class="sd">            Effective stress at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">sig_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_effective_stress</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">sig_</span> <span class="o">=</span> <span class="n">sig_0</span> <span class="o">+</span> <span class="n">qu</span> <span class="o">-</span> <span class="n">u</span>
+
+        <span class="k">return</span> <span class="n">sig_</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.effective_stress_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.effective_stress_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">effective_stress_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Effective stress for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        effective_stress : float of size (len(a), len(t))</span>
+<span class="sd">            Effective stress at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">sig_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_effective_stress</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">sig_</span> <span class="o">=</span> <span class="n">sig_0</span> <span class="o">+</span> <span class="n">qu</span> <span class="o">-</span> <span class="n">u</span>
+
+        <span class="k">return</span> <span class="n">sig_</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.total_stress_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.total_stress_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">total_stress_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total stress for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        total_stress : float of size (len(a), len(t))</span>
+<span class="sd">            Total stress at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span>
+        <span class="n">Hw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hw</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">sig_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_effective_stress</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">sig_0</span> <span class="o">+</span> <span class="n">qu</span> <span class="o">+</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="n">Hw</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sig</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.total_stress_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.total_stress_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">total_stress_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total stress for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        total_stress : float of size (len(a), len(t))</span>
+<span class="sd">            Total stress at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span>
+        <span class="n">Hw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hw</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">sig_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_effective_stress</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">sig</span> <span class="o">=</span> <span class="n">sig_0</span> <span class="o">+</span> <span class="n">qu</span> <span class="o">+</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="n">Hw</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">sig</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.total_pore_pressure_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.total_pore_pressure_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">total_pore_pressure_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total pore pressure for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        total_pore_pressure : float of size (len(a), len(t))</span>
+<span class="sd">            Total pore pressure at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">gamw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span>
+        <span class="n">Hw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hw</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="n">Hw</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.total_pore_pressure_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.total_pore_pressure_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">total_pore_pressure_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total pore pressure for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        total_pore_pressure : float of size (len(a), len(t))</span>
+<span class="sd">            Total pore pressure at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">gamw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamw</span>
+        <span class="n">Hw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Hw</span>
+
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">(</span><span class="n">Hw</span> <span class="o">+</span> <span class="n">a</span> <span class="o">+</span> <span class="n">S</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.e_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.e_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">e_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ration for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        e : float of size (len(a), len(t))</span>
+<span class="sd">            Void ration at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">e0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e0</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">efinal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efinal</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">e0</span> <span class="o">-</span> <span class="n">efinal</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="n">efinal</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.e_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.e_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">e_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ration for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        e : float of size (len(a), len(t))</span>
+<span class="sd">            Void ration at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">e0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e0</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">efinal</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">efinal</span><span class="p">(</span><span class="n">a</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="n">e0</span> <span class="o">-</span> <span class="n">efinal</span>
+        <span class="n">f</span> <span class="o">+=</span> <span class="n">efinal</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.vs_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.vs_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">vs_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Velocity of soil particles for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vs : float of size (len(a), len(t))</span>
+<span class="sd">            Velocity of soil particles at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">cv0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cv0</span><span class="o">/</span><span class="n">H</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.vs_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.vs_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">vs_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Velocity of soil particles for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vs : float of size (len(a), len(t))</span>
+<span class="sd">            Velocity of soil particles at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">cv0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">cv0</span><span class="o">/</span><span class="n">H</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.vw_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.vw_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">vw_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Velocity of fluid for PTIB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vw : float of size (len(a), len(t))</span>
+<span class="sd">            Velocity of fluid at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">cv0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cv0</span> <span class="o">/</span> <span class="n">H</span>
+        <span class="n">f</span> <span class="o">/=</span><span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.vw_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.vw_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">vw_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Velocity of fluid for PTPB drainage</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        vw : float of size (len(a), len(t))</span>
+<span class="sd">            Velocity of fluid at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mvl</span>
+        <span class="n">qu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qu</span>
+        <span class="n">cv0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cv0</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span>
+
+        <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f1</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f1</span> <span class="o">*=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">cv0</span> <span class="o">/</span> <span class="n">H</span>
+        <span class="n">f1</span><span class="o">=</span><span class="n">f1</span><span class="o">.</span><span class="n">ravel</span><span class="p">()[</span><span class="kc">None</span><span class="p">,:]</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">e</span><span class="p">)</span><span class="o">/</span><span class="n">e</span>
+<span class="c1">#        f1 *= 1.0 + e</span>
+<span class="c1">#        f1 /= e</span>
+
+
+        <span class="n">f2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">a</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mvl</span> <span class="o">*</span> <span class="n">qu</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">cv0</span><span class="o">/</span><span class="n">H</span>
+        <span class="n">f2</span> <span class="o">/=</span><span class="n">e</span>
+
+        <span class="k">return</span> <span class="n">f1</span><span class="o">-</span><span class="n">f2</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.xi_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.xi_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">xi_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convectove cordinate from Lagrange coordinate</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        xi : float of size (len(a), len(t))</span>
+<span class="sd">            Convective coordinate at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">S</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="XieAndLeo2004.xi_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.xi_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">xi_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convectove cordinate from lagrange coordinate</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        xi : float of size (len(a), len(t))</span>
+<span class="sd">            Convective coordinate at depth a, time t.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">S</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="n">S</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="XieAndLeo2004.plot_all"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.plot_all">[docs]</a>    <span class="k">def</span> <span class="nf">plot_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">)):</span>
+        <span class="sd">&quot;&quot;&quot;produce generic plots of all analysis variables</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        a : array like of float</span>
+<span class="sd">            Depth coord.</span>
+<span class="sd">        t : array like of float</span>
+<span class="sd">            Time coord.</span>
+<span class="sd">        figsize : 2-element tuple, optional</span>
+<span class="sd">            Width and height of figure in inches.  Default figsize=(15, 10)</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fig : matplotlib.Figure</span>
+<span class="sd">            figure with all properties.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">drn</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">u_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTIB</span>
+            <span class="n">settlement_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTIB</span>
+            <span class="n">Us_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Us_PTIB</span>
+            <span class="n">Up_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Up_PTIB</span>
+            <span class="n">effective_stress_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_stress_PTIB</span>
+            <span class="n">total_stress_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_stress_PTIB</span>
+            <span class="n">total_pore_pressure_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_pore_pressure_PTIB</span>
+            <span class="n">e_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_PTIB</span>
+            <span class="n">vs_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vs_PTIB</span>
+            <span class="n">vw_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vw_PTIB</span>
+            <span class="n">xi_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi_PTIB</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">u_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u_PTPB</span>
+            <span class="n">settlement_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_PTPB</span>
+            <span class="n">Us_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Us_PTPB</span>
+            <span class="n">Up_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Up_PTPB</span>
+            <span class="n">effective_stress_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_stress_PTPB</span>
+            <span class="n">total_stress_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_stress_PTPB</span>
+            <span class="n">total_pore_pressure_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_pore_pressure_PTPB</span>
+            <span class="n">e_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_PTPB</span>
+            <span class="n">vs_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vs_PTPB</span>
+            <span class="n">vw_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vw_PTPB</span>
+            <span class="n">xi_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xi_PTPB</span>
+
+
+        <span class="n">t_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">0.0001</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">Us_interp</span> <span class="o">=</span> <span class="n">Us_</span><span class="p">(</span><span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="n">Tv_interp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="c1"># determine times to plot</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">Us_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">)</span>
+            <span class="n">Us_plot</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.99</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">Us_plot</span><span class="p">,</span> <span class="n">Us_interp</span><span class="p">,</span> <span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="n">Tv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Tv</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+
+
+        <span class="n">u</span> <span class="o">=</span> <span class="n">u_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">settlement</span> <span class="o">=</span> <span class="n">settlement_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+        <span class="n">Up_interp</span> <span class="o">=</span> <span class="n">Up_</span><span class="p">(</span><span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="n">effective_stress</span> <span class="o">=</span> <span class="n">effective_stress_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">total_stress</span> <span class="o">=</span> <span class="n">total_stress_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">total_pore_pressure</span> <span class="o">=</span> <span class="n">total_pore_pressure_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">e_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">vs</span> <span class="o">=</span> <span class="n">vs_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">vw</span> <span class="o">=</span> <span class="n">vw_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">xi</span> <span class="o">=</span> <span class="n">xi_</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="n">figsize</span><span class="p">)</span>
+
+        <span class="c1"># Us and Up vs time</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv_interp</span><span class="p">,</span> <span class="n">Us_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_s$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv_interp</span><span class="p">,</span> <span class="n">Up_interp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_p$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$T_v,\, dT_v=$</span><span class="si">{:6.2g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;U&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+        <span class="c1">#u vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$u$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">t_</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span> <span class="n">t</span><span class="p">):</span>
+            <span class="n">Us</span> <span class="o">=</span> <span class="n">Us_</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">t_</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$U_s=</span><span class="si">{Us:6.3g}</span><span class="s1">$</span><span class="se">\n</span><span class="s1">$T_v=</span><span class="si">{Tv:6.3g}</span><span class="s1">$</span><span class="se">\n</span><span class="s1">&#39;</span>
+             <span class="s1">&#39;$t=</span><span class="si">{t:6.3g}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Tv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="o">*</span><span class="n">t_</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_</span><span class="p">,</span> <span class="n">Us</span><span class="o">=</span><span class="n">Us</span><span class="p">))</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;lower center&#39;</span>
+        <span class="n">bbox_transform</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">transFigure</span>
+        <span class="n">bbox_to_anchor</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span>
+                        <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()],</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">bbox_transform</span><span class="o">=</span><span class="n">bbox_transform</span><span class="p">,</span>
+                         <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="n">bbox_to_anchor</span><span class="p">,</span>
+                         <span class="n">ncol</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+
+
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+        <span class="c1">#total pore pressure vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">total_pore_pressure</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$p$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+
+        <span class="c1">#effective stress vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">effective_stress</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\sigma&#39;$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="c1">#total stress vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">total_stress</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\sigma$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="c1">#velocity of solids vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$v_s$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="c1">#velocity of water vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">vw</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$v_w$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+        <span class="c1">#void ratio vs depth</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$e$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1">#        fig.tight_layout()</span>
+
+<span class="c1">#        fig.tight_layout()</span>
+
+<span class="c1">#        bbox = leg.get_frame().get_bbox()</span>
+<span class="c1">#        print(bbox)</span>
+
+<span class="c1">#        plt.Figure.legend()</span>
+<span class="c1">#        a=plt.getp(fig.legend, &#39;bbox&#39;)</span>
+<span class="c1">#        print(a)</span>
+<span class="c1">#        bbox = fig.legend.get_window_extent()</span>
+<span class="c1">#        print(bbox)</span>
+<span class="c1">#        bbox2 = bbox.transformed(fig.transFigure.inverted())</span>
+<span class="c1">#        bbox2.width,bbox2.height</span>
+<span class="c1">#        print(bbox2)</span>
+<span class="c1">#</span>
+
+
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.97</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.97</span><span class="p">)</span>
+
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+
+<div class="viewcode-block" id="XieAndLeo2004.t_from_Us_PTIB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.t_from_Us_PTIB">[docs]</a>    <span class="k">def</span> <span class="nf">t_from_Us_PTIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Us</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Back calc t from specified settlement doc for PTIB</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Us : 1d array</span>
+<span class="sd">            Values of degree of consolidation by settlement to calc the t at.</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        t : 1d array</span>
+<span class="sd">            Times coresponding to Us.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">t_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">0.0001</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="n">Us_interp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Us_PTIB</span><span class="p">(</span><span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">Us</span><span class="p">,</span> <span class="n">Us_interp</span><span class="p">,</span> <span class="n">t_interp</span><span class="p">)</span>
+
+
+
+        <span class="k">return</span> <span class="n">t</span></div>
+<div class="viewcode-block" id="XieAndLeo2004.t_from_Us_PTPB"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.XieAndLeo2004.t_from_Us_PTPB">[docs]</a>    <span class="k">def</span> <span class="nf">t_from_Us_PTPB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Us</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Back calc t from specified settlement doc for PTPB</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        Us : 1d array</span>
+<span class="sd">            Values of degree of consolidation by settlement to calc the t at.</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        t : 1d array</span>
+<span class="sd">            Times coresponding to Us.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">t_interp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mf">0.0001</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">dTv</span><span class="p">),</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="n">Us_interp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Us_PTPB</span><span class="p">(</span><span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">Us</span><span class="p">,</span> <span class="n">Us_interp</span><span class="p">,</span> <span class="n">t_interp</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">t</span></div></div>
+
+
+
+<div class="viewcode-block" id="xie_and_leo_2004_figure_4"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.xie_and_leo_2004_figure_4">[docs]</a><span class="k">def</span> <span class="nf">xie_and_leo_2004_figure_4</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reproduce figure 4 from article by Xie and Leo 2004</span>
+
+<span class="sd">    Pore pressure vs xi plot for various degrees of consolidation PTIB</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax : matplotlib.Axes</span>
+<span class="sd">        Axes object to plot on. If ax=None. plt.gca() will be used.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">qu</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">qp</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">H</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">Hw</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">kv0</span><span class="o">=</span><span class="mf">1e-9</span>
+    <span class="n">mvl</span><span class="o">=</span><span class="mf">4e-3</span>
+    <span class="n">e00</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">Gs</span><span class="o">=</span><span class="mf">2.75</span>
+    <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span> <span class="c1">#N</span>
+    <span class="n">drn</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span>
+
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">XieAndLeo2004</span><span class="p">(</span><span class="n">qu</span><span class="o">=</span><span class="n">qu</span><span class="p">,</span> <span class="n">qp</span><span class="o">=</span><span class="n">qp</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">Hw</span><span class="o">=</span><span class="n">Hw</span><span class="p">,</span>
+                        <span class="n">kv0</span><span class="o">=</span><span class="n">kv0</span><span class="p">,</span> <span class="n">mvl</span><span class="o">=</span><span class="n">mvl</span><span class="p">,</span><span class="n">e00</span><span class="o">=</span><span class="n">e00</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="n">Gs</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="n">gamw</span><span class="p">,</span>
+                        <span class="n">drn</span><span class="o">=</span><span class="n">drn</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="n">nterms</span><span class="p">)</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">H</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">Us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">t_from_Us_PTIB</span><span class="p">(</span><span class="n">Us</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">u_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xi_PTIB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$u$ Pore water pressure, PTPB&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$, depth from initial top surface&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figure 4 from Xie and Leo 2004&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">t_</span><span class="p">,</span> <span class="n">Us_</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span> <span class="n">t</span><span class="p">,</span> <span class="n">Us</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$U_s=</span><span class="si">{Us:6.3g}</span><span class="s1">,\hspace{{0.5}}T_v=</span><span class="si">{Tv:6.3g}</span><span class="s1">,\hspace{{0.5}}&#39;</span>
+         <span class="s1">&#39;t=</span><span class="si">{t:6.3g}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Tv</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">dTv</span><span class="o">*</span><span class="n">t_</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_</span><span class="p">,</span> <span class="n">Us</span><span class="o">=</span><span class="n">Us_</span><span class="p">))</span>
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="xie_and_leo_2004_figure_5"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.xie_and_leo_2004_figure_5">[docs]</a><span class="k">def</span> <span class="nf">xie_and_leo_2004_figure_5</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reproduce fig 5 from article by Xie and Leo 2004</span>
+
+<span class="sd">    Pore pressure vs xi plot for various degrees of consolidation PTPB.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax : matplotlib.Axes</span>
+<span class="sd">        Axes object to plot on. If ax=None. plt.gca() will be used.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">qu</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">qp</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">H</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">Hw</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">kv0</span><span class="o">=</span><span class="mf">1e-9</span>
+    <span class="n">mvl</span><span class="o">=</span><span class="mf">4e-3</span>
+    <span class="n">e00</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">Gs</span><span class="o">=</span><span class="mf">2.75</span>
+    <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span> <span class="c1">#N</span>
+    <span class="n">drn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span>
+
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">XieAndLeo2004</span><span class="p">(</span><span class="n">qu</span><span class="o">=</span><span class="n">qu</span><span class="p">,</span> <span class="n">qp</span><span class="o">=</span><span class="n">qp</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">Hw</span><span class="o">=</span><span class="n">Hw</span><span class="p">,</span>
+                        <span class="n">kv0</span><span class="o">=</span><span class="n">kv0</span><span class="p">,</span> <span class="n">mvl</span><span class="o">=</span><span class="n">mvl</span><span class="p">,</span><span class="n">e00</span><span class="o">=</span><span class="n">e00</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="n">Gs</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="n">gamw</span><span class="p">,</span>
+                        <span class="n">drn</span><span class="o">=</span><span class="n">drn</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="n">nterms</span><span class="p">)</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">H</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+    <span class="n">Us</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">t_from_Us_PTPB</span><span class="p">(</span><span class="n">Us</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">u_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">xi</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">xi_PTPB</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">xi</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$u$ Pore water pressure, PTPB&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\xi$, depth from initial top surface&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figure 5 from Xie and Leo 2004&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">t_</span><span class="p">,</span> <span class="n">Us_</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">(),</span> <span class="n">t</span><span class="p">,</span> <span class="n">Us</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">line</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$U_s=</span><span class="si">{Us:6.3g}</span><span class="s1">,\hspace{{0.5}}T_v=</span><span class="si">{Tv:6.3g}</span><span class="s1">,\hspace{{0.5}}&#39;</span>
+         <span class="s1">&#39;t=</span><span class="si">{t:6.3g}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Tv</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">dTv</span><span class="o">*</span><span class="n">t_</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t_</span><span class="p">,</span> <span class="n">Us</span><span class="o">=</span><span class="n">Us_</span><span class="p">))</span>
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="xie_and_leo_2004_figure_6"><a class="viewcode-back" href="../../../api/geotecha.consolidation.xieandleo2004.html#geotecha.consolidation.xieandleo2004.xie_and_leo_2004_figure_6">[docs]</a><span class="k">def</span> <span class="nf">xie_and_leo_2004_figure_6</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Reproduce fig 6 from article by Xie and Leo 2004</span>
+
+<span class="sd">    Settlement vs time and degree of consolidation vs time.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ax : matplotlib.Axes</span>
+<span class="sd">        Axes object to plot on. If ax=None. plt.gca() will be used.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">qu</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">qp</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">H</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">Hw</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">kv0</span><span class="o">=</span><span class="mf">1e-9</span>
+    <span class="n">mvl</span><span class="o">=</span><span class="mf">4e-3</span>
+    <span class="n">e00</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">Gs</span><span class="o">=</span><span class="mf">2.75</span>
+    <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span> <span class="c1">#N</span>
+    <span class="n">drn</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span>
+
+    <span class="n">obj</span> <span class="o">=</span> <span class="n">XieAndLeo2004</span><span class="p">(</span><span class="n">qu</span><span class="o">=</span><span class="n">qu</span><span class="p">,</span> <span class="n">qp</span><span class="o">=</span><span class="n">qp</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">Hw</span><span class="o">=</span><span class="n">Hw</span><span class="p">,</span>
+                        <span class="n">kv0</span><span class="o">=</span><span class="n">kv0</span><span class="p">,</span> <span class="n">mvl</span><span class="o">=</span><span class="n">mvl</span><span class="p">,</span><span class="n">e00</span><span class="o">=</span><span class="n">e00</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="n">Gs</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="n">gamw</span><span class="p">,</span>
+                        <span class="n">drn</span><span class="o">=</span><span class="n">drn</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="n">nterms</span><span class="p">)</span>
+
+    <span class="n">Tv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span> <span class="mi">200</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Tv</span> <span class="o">/</span> <span class="n">obj</span><span class="o">.</span><span class="n">dTv</span>
+
+    <span class="n">Up_PTPB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Up_PTPB</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">Us_PTPB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Us_PTPB</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">S_PTPB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">settlement_PTPB</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]),</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="n">Up_PTIB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Up_PTIB</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">Us_PTIB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">Us_PTIB</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">S_PTIB</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">settlement_PTIB</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]),</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">Us_PTPB</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_s,\hspace</span><span class="si">{0.5}</span><span class="s2">PTPB$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">Up_PTPB</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_p,\hspace</span><span class="si">{0.5}</span><span class="s2">PTPB$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">Us_PTIB</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_s,\hspace</span><span class="si">{0.5}</span><span class="s2">PTIB$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">Up_PTIB</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$U_p,\hspace</span><span class="si">{0.5}</span><span class="s2">PTIB$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
+
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$T_v$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;degree of consolidation&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figure 6 from Xie and Leo 2004&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+    <span class="n">ticks11a</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">LinearLocator</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticks11a</span><span class="p">)</span>
+<span class="c1">#    ax.locator_params(axis=&#39;y&#39;, nbins=16)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s2">&quot;major&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">which</span><span class="o">=</span><span class="s2">&quot;minor&quot;</span><span class="p">)</span>
+
+
+
+
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">S_PTPB</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$settlement,\hspace</span><span class="si">{0.5}</span><span class="s2">PTPB$&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">dashes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tv</span><span class="p">,</span> <span class="n">S_PTIB</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$settlement,\hspace</span><span class="si">{0.5}</span><span class="s2">PTIB$&quot;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">dashes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Settlement (m)&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+    <span class="n">ticks11b</span> <span class="o">=</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">LinearLocator</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">ticks11b</span><span class="p">)</span>
+
+    <span class="n">lines</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">():</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">())</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_lines</span><span class="p">():</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">get_label</span><span class="p">())</span>
+
+
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+
+
+    <span class="k">return</span></div>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+
+
+
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">xie_and_leo_2004_figure_4</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">xie_and_leo_2004_figure_5</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">xie_and_leo_2004_figure_6</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># plot all</span>
+        <span class="n">qu</span><span class="o">=</span><span class="mi">100</span>
+        <span class="n">qp</span><span class="o">=</span><span class="mi">10</span>
+        <span class="n">H</span><span class="o">=</span><span class="mi">10</span>
+        <span class="n">Hw</span><span class="o">=</span><span class="mf">1.0</span>
+        <span class="n">kv0</span><span class="o">=</span><span class="mf">1e-9</span>
+        <span class="n">mvl</span><span class="o">=</span><span class="mf">4e-3</span>
+        <span class="n">e00</span><span class="o">=</span><span class="mi">3</span>
+        <span class="n">Gs</span><span class="o">=</span><span class="mf">2.75</span>
+        <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span> <span class="c1">#N</span>
+        <span class="n">drn</span><span class="o">=</span><span class="mi">1</span>
+        <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">XieAndLeo2004</span><span class="p">(</span><span class="n">qu</span><span class="o">=</span><span class="n">qu</span><span class="p">,</span> <span class="n">qp</span><span class="o">=</span><span class="n">qp</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="n">H</span><span class="p">,</span> <span class="n">Hw</span><span class="o">=</span><span class="n">Hw</span><span class="p">,</span>
+                            <span class="n">kv0</span><span class="o">=</span><span class="n">kv0</span><span class="p">,</span> <span class="n">mvl</span><span class="o">=</span><span class="n">mvl</span><span class="p">,</span><span class="n">e00</span><span class="o">=</span><span class="n">e00</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="n">Gs</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="n">gamw</span><span class="p">,</span>
+                            <span class="n">drn</span><span class="o">=</span><span class="n">drn</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="n">nterms</span><span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">plot_all</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,645 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.constitutive_models.void_ratio_permeability &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.constitutive_models.void_ratio_permeability</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Relationships between permeability and void-ratio</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<div class="viewcode-block" id="PermeabilityVoidRatioRelationship"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PermeabilityVoidRatioRelationship">[docs]</a><span class="k">class</span> <span class="nc">PermeabilityVoidRatioRelationship</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for defining permeability void ratio relationships&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PermeabilityVoidRatioRelationship.e_from_k"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PermeabilityVoidRatioRelationship.e_from_k">[docs]</a>    <span class="k">def</span> <span class="nf">e_from_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estress</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio from permeability&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;e_from_k must be implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PermeabilityVoidRatioRelationship.k_from_e"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PermeabilityVoidRatioRelationship.k_from_e">[docs]</a>    <span class="k">def</span> <span class="nf">k_from_e</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Permeability from void ratio&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;k_from_e must be implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PermeabilityVoidRatioRelationship.e_and_k_for_plotting"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PermeabilityVoidRatioRelationship.e_and_k_for_plotting">[docs]</a>    <span class="k">def</span> <span class="nf">e_and_k_for_plotting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio and permeability that plot the method&quot;&quot;&quot;</span>
+        <span class="c1"># should return a tuple of x and y values</span>
+        <span class="c1"># x-values are peremability, y-values are void ratio.</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;e_and_k_for_plotting must be implemented&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PermeabilityVoidRatioRelationship.plot_model"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PermeabilityVoidRatioRelationship.plot_model">[docs]</a>    <span class="k">def</span> <span class="nf">plot_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot the void ratio-permeability&quot;&quot;&quot;</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ax&#39;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_and_k_for_plotting</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="CkPermeabilityModel"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.CkPermeabilityModel">[docs]</a><span class="k">class</span> <span class="nc">CkPermeabilityModel</span><span class="p">(</span><span class="n">PermeabilityVoidRatioRelationship</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Semi-log void ratio permeability relationship</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    Ck : float</span>
+<span class="sd">        Slope of void-ratio vs permeability.</span>
+<span class="sd">    ka, ea : float</span>
+<span class="sd">        Permeability and void ratio specifying a point on e-k line.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Ck</span><span class="p">,</span> <span class="n">ka</span><span class="p">,</span> <span class="n">ea</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Ck</span> <span class="o">=</span> <span class="n">Ck</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ka</span> <span class="o">=</span> <span class="n">ka</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ea</span> <span class="o">=</span> <span class="n">ea</span>
+
+<div class="viewcode-block" id="CkPermeabilityModel.e_from_k"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.CkPermeabilityModel.e_from_k">[docs]</a>    <span class="k">def</span> <span class="nf">e_from_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio from permeability</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : float</span>
+<span class="sd">            Current permeability.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        e : float</span>
+<span class="sd">            Void ratio corresponding to current permeability.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; a = CkPermeabilityModel(Ck=1.5, ka=10, ea=4)</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(8.0)</span>
+<span class="sd">        3.854...</span>
+
+<span class="sd">        Array Inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(np.array([8.0, 4.0]))</span>
+<span class="sd">        array([3.854..., 3.403...])</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ea</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ck</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">k</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">ka</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CkPermeabilityModel.k_from_e"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.CkPermeabilityModel.k_from_e">[docs]</a>    <span class="k">def</span> <span class="nf">k_from_e</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Permeability from void ratio</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        e : float</span>
+<span class="sd">            Void ratio.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        k : float</span>
+<span class="sd">            Permeability corresponding to current void ratio.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; a = CkPermeabilityModel(Ck=1.5, ka=10, ea=4)</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(3.855)</span>
+<span class="sd">        8.0...</span>
+
+<span class="sd">        Array Inputs</span>
+
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([3.855, 3.404]))</span>
+<span class="sd">        array([8.0..., 4.0...])</span>
+
+
+
+
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ka</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="p">(</span><span class="n">e</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">ea</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">Ck</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CkPermeabilityModel.e_and_k_for_plotting"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.CkPermeabilityModel.e_and_k_for_plotting">[docs]</a>    <span class="k">def</span> <span class="nf">e_and_k_for_plotting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio and permeability that plot the model</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        npts : int, optional</span>
+<span class="sd">            Number of points to return.  Default npts=100.</span>
+<span class="sd">        xmin, xmax : float, optional</span>
+<span class="sd">            Range of x (i.e. effective stress) values from which</span>
+<span class="sd">            to return points. Default xmin=1, xmax=100.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        x, y : 1d ndarray</span>
+<span class="sd">            `npts` permeability, and void ratio values between</span>
+<span class="sd">            `xmin` and `xmax`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">npts</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;npts&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xmin&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xmax&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_from_k</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span></div></div>
+
+<div class="viewcode-block" id="ConstantPermeabilityModel"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.ConstantPermeabilityModel">[docs]</a><span class="k">class</span> <span class="nc">ConstantPermeabilityModel</span><span class="p">(</span><span class="n">PermeabilityVoidRatioRelationship</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Permeability constant with void ratio</span>
+
+<span class="sd">    Note that the method e_from_k is meaningless because there are multiple</span>
+<span class="sd">    e values for single k value.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ka : float</span>
+<span class="sd">        Permeability.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ka</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ka</span> <span class="o">=</span> <span class="n">ka</span>
+
+<div class="viewcode-block" id="ConstantPermeabilityModel.e_from_k"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.ConstantPermeabilityModel.e_from_k">[docs]</a>    <span class="k">def</span> <span class="nf">e_from_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">**</span><span class="n">kwarks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio from permeability, parameters are irrelevant.&quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;e_from_k is meaningless for a constant permeability model&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ConstantPermeabilityModel.k_from_e"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.ConstantPermeabilityModel.k_from_e">[docs]</a>    <span class="k">def</span> <span class="nf">k_from_e</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Permeability from void ratio</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        e : float</span>
+<span class="sd">            Void ratio.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ka : float</span>
+<span class="sd">            The constant permeability.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; a = ConstantPermeabilityModel(ka=2.5)</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(3.855)</span>
+<span class="sd">        2.5</span>
+
+<span class="sd">        Array Inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([3.855, 3.404]))</span>
+<span class="sd">        array([2.5, 2.5])</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ka</span></div>
+
+
+<div class="viewcode-block" id="ConstantPermeabilityModel.e_and_k_for_plotting"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.ConstantPermeabilityModel.e_and_k_for_plotting">[docs]</a>    <span class="k">def</span> <span class="nf">e_and_k_for_plotting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio and permeability that plot the model</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        npts : int, optional</span>
+<span class="sd">            Number of points to return.  Default npts=100</span>
+<span class="sd">        xmin, xmax : float, optional</span>
+<span class="sd">            Range of x (i.e. effective stress) values from which</span>
+<span class="sd">            to return points. Default xmin=1, xmax=100.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        x, y : 1d ndarray</span>
+<span class="sd">            `npts` permeability, and void ratio values between</span>
+<span class="sd">            `xmin` and `xmax`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">npts</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;npts&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xmin&#39;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;xmax&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_from_k</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span></div></div>
+
+
+<div class="viewcode-block" id="PwiseLinearPermeabilityModel"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PwiseLinearPermeabilityModel">[docs]</a><span class="k">class</span> <span class="nc">PwiseLinearPermeabilityModel</span><span class="p">(</span><span class="n">PermeabilityVoidRatioRelationship</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Piecewise linear ratio permeability relationship</span>
+
+<span class="sd">    x and y data can be interpolated natural-natural, natural-log10,</span>
+<span class="sd">    log10-natural, or log10, log10.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ka, ea : 1d array</span>
+<span class="sd">        Permeability values and void ratio values defining a one-to-one</span>
+<span class="sd">        relationship.</span>
+<span class="sd">    xlog, ylog : True/False, Optional</span>
+<span class="sd">        If True then interpolation on each axis is assumed to be logarithmic</span>
+<span class="sd">        with base 10. x refers to the peremability axis, y to the void ratio</span>
+<span class="sd">        axis.  Default xlog=ylog=False.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ka</span><span class="p">,</span> <span class="n">ea</span><span class="p">,</span> <span class="n">xlog</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ylog</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xbase</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ybase</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ka</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ka</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ea</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xlog</span> <span class="o">=</span> <span class="n">xlog</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ylog</span> <span class="o">=</span> <span class="n">ylog</span>
+
+        <span class="c1">#TODO: adjust for different logarithm bases.</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ka_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ea_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ka</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="c1"># ka is in decreasing order</span>
+            <span class="c1"># reverse the slice for e_from_k interpolation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ka_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#            raise ValueError(&quot;&#39;ka&#39; must be in monotonically increasing order.&quot;)</span>
+
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ea</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="c1"># ea is in decreasing order</span>
+            <span class="c1"># reverse the slice for k_from_e interpolation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ea_slice</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1">#            raise ValueError(&quot;&#39;ea&#39; must be in monotomically increasing order.&quot;)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ka</span><span class="p">)</span><span class="o">!=</span><span class="nb">len</span><span class="p">(</span><span class="n">ea</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;&#39;ka&#39; and &#39;ea&#39; must be the same length.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_ka</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ka</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log_ea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ea</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PwiseLinearPermeabilityModel.e_from_k"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PwiseLinearPermeabilityModel.e_from_k">[docs]</a>    <span class="k">def</span> <span class="nf">e_from_k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio from permeability</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        k : float</span>
+<span class="sd">            Current permeability.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        e : float</span>
+<span class="sd">            Void ratio corresponding to current permeability.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]), ea=np.array([5, 7.0]))</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(1.25)</span>
+<span class="sd">        5.5</span>
+
+<span class="sd">        Array Inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(np.array([1.25, 1.75]))</span>
+<span class="sd">        array([5.5, 6.5])</span>
+
+<span class="sd">        Logarithmic permeability scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), xlog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(1.25)</span>
+<span class="sd">        5.643...</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(np.array([1.25, 1.75]))</span>
+<span class="sd">        array([5.643..., 6.614...])</span>
+
+<span class="sd">        Logarithmic void ratio scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), ylog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(1.25)</span>
+<span class="sd">        5.4387...</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(np.array([1.25, 1.75]))</span>
+<span class="sd">        array([5.4387..., 6.435...])</span>
+
+<span class="sd">        Logarithmic permeability and void ratio scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), xlog=True, ylog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(1.25)</span>
+<span class="sd">        5.572...</span>
+<span class="sd">        &gt;&gt;&gt; a.e_from_k(np.array([1.25, 1.75]))</span>
+<span class="sd">        array([5.572..., 6.560...])</span>
+
+<span class="sd">        Increasing vs decreasing inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; ea = np.arange(1,10)</span>
+<span class="sd">        &gt;&gt;&gt; ka = 3 * ea</span>
+<span class="sd">        &gt;&gt;&gt; np.isclose(PwiseLinearPermeabilityModel(ka, ea).e_from_k(7.2),</span>
+<span class="sd">        ... PwiseLinearPermeabilityModel(ka[::-1], ea[::-1]).e_from_k(7.2))</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlog</span><span class="p">:</span>
+            <span class="n">ka</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_ka</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ka</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ka</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ylog</span><span class="p">:</span>
+            <span class="n">ea</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_ea</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ea</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ea</span>
+
+        <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">ka</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ka_slice</span><span class="p">],</span> <span class="n">ea</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ka_slice</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ylog</span><span class="p">:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">e</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="PwiseLinearPermeabilityModel.k_from_e"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PwiseLinearPermeabilityModel.k_from_e">[docs]</a>    <span class="k">def</span> <span class="nf">k_from_e</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Permeability from void ratio</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        e : float</span>
+<span class="sd">            Void ratio.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        k : float</span>
+<span class="sd">            Permeability corresponding to current void ratio.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]), ea=np.array([5, 7.0]))</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(5.5)</span>
+<span class="sd">        1.25</span>
+
+<span class="sd">        Array Inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([5.5, 6.5]))</span>
+<span class="sd">        array([1.25, 1.75])</span>
+
+<span class="sd">        Logarithmic permeability scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), xlog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(5.644)</span>
+<span class="sd">        1.25...</span>
+
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([5.644, 6.615]))</span>
+<span class="sd">        array([1.25..., 1.75...])</span>
+
+<span class="sd">        Logarithmic void ratio scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), ylog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(5.4388)</span>
+<span class="sd">        1.25...</span>
+
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([5.4388, 6.436]))</span>
+<span class="sd">        array([1.25..., 1.75...])</span>
+
+<span class="sd">        Logarithmic permeability and void ratio scale:</span>
+
+<span class="sd">        &gt;&gt;&gt; a = PwiseLinearPermeabilityModel(ka=np.array([1.0, 2.0]),</span>
+<span class="sd">        ... ea=np.array([5, 7.0]), xlog=True, ylog=True)</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(5.573)</span>
+<span class="sd">        1.25...</span>
+<span class="sd">        &gt;&gt;&gt; a.k_from_e(np.array([5.573, 6.561]))</span>
+<span class="sd">        array([1.25..., 1.75...])</span>
+
+<span class="sd">        Increasing vs decreasing inputs:</span>
+
+<span class="sd">        &gt;&gt;&gt; ea = np.arange(1,10)</span>
+<span class="sd">        &gt;&gt;&gt; ka = 3 * ea</span>
+<span class="sd">        &gt;&gt;&gt; np.isclose(PwiseLinearPermeabilityModel(ka, ea).k_from_e(3.0),</span>
+<span class="sd">        ... PwiseLinearPermeabilityModel(ka[::-1], ea[::-1]).k_from_e(3.0))</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlog</span><span class="p">:</span>
+            <span class="n">ka</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_ka</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ka</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ka</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ylog</span><span class="p">:</span>
+            <span class="n">ea</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_ea</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ea</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ea</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ea</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ea_slice</span><span class="p">],</span> <span class="n">ka</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ea_slice</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlog</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">k</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="PwiseLinearPermeabilityModel.e_and_k_for_plotting"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.PwiseLinearPermeabilityModel.e_and_k_for_plotting">[docs]</a>    <span class="k">def</span> <span class="nf">e_and_k_for_plotting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Void ratio and permeability that plot the model</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        npts : int, optional</span>
+<span class="sd">            Number of points to return.  Default npts=100.</span>
+<span class="sd">        xmin, xmax : float, optional</span>
+<span class="sd">            Range of x (i.e. effective stress) values from which</span>
+<span class="sd">            to return points. Default min and max of model `ka`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        x, y : 1d ndarray</span>
+<span class="sd">            `npts` permeability, and void ratio values between</span>
+<span class="sd">            `xmin` and `xmax`.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">npts</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;npts&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ka</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ka</span><span class="p">)</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_from_k</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span></div></div>
+
+
+
+
+<div class="viewcode-block" id="FunctionPermeabilityModel"><a class="viewcode-back" href="../../../api/geotecha.constitutive_models.void_ratio_permeability.html#geotecha.constitutive_models.void_ratio_permeability.FunctionPermeabilityModel">[docs]</a><span class="k">class</span> <span class="nc">FunctionPermeabilityModel</span><span class="p">(</span><span class="n">PermeabilityVoidRatioRelationship</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Functional definition of permeability void-ratio realationship</span>
+
+<span class="sd">    User provides python functions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fn_e_from_k: callable object</span>
+<span class="sd">        Function to obtain void ratio from permeability.  fn_e_from_k should</span>
+<span class="sd">        be the inverse function of fn_k_from_e.</span>
+<span class="sd">    fn_k_from_e : callable object</span>
+<span class="sd">        Function to obtain peremability from void ratio. fn_k_from_e should</span>
+<span class="sd">        be the inverse function of fn_e_from_k.</span>
+<span class="sd">    *args, **kwargs : anything</span>
+<span class="sd">        Positional and keyword arguments to be passed to the</span>
+<span class="sd">        fn_e_from_k, fn_k_from_efunctions.  Note</span>
+<span class="sd">        that any additional args and kwargs passed to the functions will be</span>
+<span class="sd">        appended to the args, and kwargs.  You may get into a mess for</span>
+<span class="sd">        example with e_from_k because normally the first postional</span>
+<span class="sd">        argument passed to such fucntions is k.  If you add your own</span>
+<span class="sd">        positional arguments, then k will be after you own arguments.</span>
+<span class="sd">        Just be aware that the usual way to call methods of the base object</span>
+<span class="sd">        `PermeabilityVoidRatioRelationship` a single positonal arguement,</span>
+<span class="sd">        e.g. k, e, followed by any required keyword arguments.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Any function should be able to accept additonal keywords.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def efk(k, b=2):</span>
+<span class="sd">    ...     return k * b</span>
+<span class="sd">    &gt;&gt;&gt; def kfe(e, b=2):</span>
+<span class="sd">    ...     return e / b</span>
+<span class="sd">    &gt;&gt;&gt; a = FunctionPermeabilityModel(efk, kfe, b=5)</span>
+<span class="sd">    &gt;&gt;&gt; a.e_from_k(3)</span>
+<span class="sd">    15</span>
+<span class="sd">    &gt;&gt;&gt; a.k_from_e(15)</span>
+<span class="sd">    3.0</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">fn_e_from_k</span><span class="p">,</span>
+                 <span class="n">fn_k_from_e</span><span class="p">,</span>
+                 <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn_e_from_k</span> <span class="o">=</span> <span class="n">fn_e_from_k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn_k_from_e</span> <span class="o">=</span> <span class="n">fn_k_from_e</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_from_k</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">fn_e_from_k</span><span class="p">,</span>
+                                               <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k_from_e</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">fn_k_from_e</span><span class="p">,</span>
+                                               <span class="o">*</span><span class="n">args</span><span class="p">,</span>
+                                               <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nose</span>
+    <span class="n">nose</span><span class="o">.</span><span class="n">runmodule</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nose&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbosity=3&#39;</span><span class="p">,</span> <span class="s1">&#39;--with-doctest&#39;</span><span class="p">,</span> <span class="s1">&#39;--doctest-options=+ELLIPSIS&#39;</span><span class="p">])</span>
+    <span class="k">pass</span>
+<span class="c1">#    a = CkPermeabilityModel(Ck=1.5, ka=10, ea=4)</span>
+<span class="c1">##    b = a.e_from_k(8.0)</span>
+<span class="c1">##    print(b)</span>
+<span class="c1">#    a.plot_model()</span>
+<span class="c1">#    plt.show()</span>
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>integrals_generate_code &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="speccon1d" href="geotecha.speccon.speccon1d.html" />
+    <link rel="prev" title="integrals" href="geotecha.speccon.integrals.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">integrals_generate_code</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.speccon.integrals_generate_code">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.speccon.html">speccon</a><ul>
+      <li>Previous: <a href="geotecha.speccon.integrals.html" title="previous chapter">integrals</a></li>
+      <li>Next: <a href="geotecha.speccon.speccon1d.html" title="next chapter">speccon1d</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.speccon.integrals_generate_code.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="integrals-generate-code">
+<h1>integrals_generate_code<a class="headerlink" href="#integrals-generate-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.SympyVarsFor1DSpectralDerivation" title="geotecha.speccon.integrals_generate_code.SympyVarsFor1DSpectralDerivation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SympyVarsFor1DSpectralDerivation</span></code></a>([…])</td>
+<td>Container for sympy vars, z, zt, zb, at, etc piecewise linear Spectral Galerkin integrations.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_coslinear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of D[cos(omega*tau+phase)*load(tau), tau] * exp(dT * eig * (t-tau)) between [0, t], where load(tau) is piecewise linear.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_linear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of D[load(tau), tau] * exp(dT * eig * (t-tau)) between [0, t], where load(tau) is piecewise linear.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_coslinear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of cos(omega*tau+phase)*load(tau) * exp(dT * eig * (t-tau)) between [0, t], where load(tau) is piecewise linear.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_linear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of load(tau) * exp(dT * eig * (t-tau)) between [0, t], where load(tau) is piecewise linear.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_sinlinear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_sinlinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_sinlinear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(omega*tau+phase)*load(tau) * exp(dT * eig * (t-tau)) between [0, t], where load(tau) is piecewise linear.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1_ab_linear_between" title="geotecha.speccon.integrals_generate_code.dim1_ab_linear_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1_ab_linear_between</span></code></a>()</td>
+<td>Code generation for Integrations of <cite>a(z) * b(z)</cite> between [z1, z2] where a(z) is a piecewise linear functions of z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_DD_abDDf_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_DD_abDDf_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_DD_abDDf_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(mi * z) * D[a(z) * b(z) D[sin(mj * z),z,2],z,2] between ztop and zbot where a(z) and b(z) is piecewise linear functions of z.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_D_aDb_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_D_aDb_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_D_aDb_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integrations of <cite>sin(mi * z) * D[a(z) * D[b(z), z], z]</cite> between ztop and zbot where a(z) is a piecewisepiecewise linear function of z, and b(z) is a linear function of z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_D_aDf_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_D_aDf_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_D_aDf_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(mi * z) * D[a(z) * D[sin(mj * z),z],z] between ztop and zbot where a(z) is piecewise linear functions of z.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_a_linear_between" title="geotecha.speccon.integrals_generate_code.dim1sin_a_linear_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_a_linear_between</span></code></a>()</td>
+<td>Code generation for Integrations of <cite>sin(mi * z) * a(z)</cite> between [z1, z2] where a(z) is a piecewise linear functions of z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_ab_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_ab_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_ab_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(mi * z) * a(z) * b(z) between ztop and zbot where a(z) and b(z) are piecewise linear functions of z.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_abc_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_abc_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_abc_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integrations of sin(mi * z) * a(z) * b(z) * c(z) between ztop and zbot where a(z), b(z), c(z) are piecewise linear functions of z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_abf_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_abf_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_abf_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(mi * z) * a(z) * a(z) * sin(mj * z) between ztop and zbot where a(z) is piecewise linear.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.dim1sin_af_linear_implementations" title="geotecha.speccon.integrals_generate_code.dim1sin_af_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_af_linear_implementations</span></code></a>()</td>
+<td>Code generation for Integration of sin(mi * z) * a(z) * sin(mj * z) between ztop and zbot where a(z) is piecewise linear.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.tw" title="geotecha.speccon.integrals_generate_code.tw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tw</span></code></a>(text[,&nbsp;indents,&nbsp;width,&nbsp;break_long_words])</td>
+<td>Rough text wrapper for long sympy expressions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.speccon.integrals_generate_code">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.speccon.integrals_generate_code" title="Permalink to this headline">¶</a></h2>
+<p>Use sympy to generate code for generating spectral method matrix subroutines</p>
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">EDload_coslinear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#EDload_coslinear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of D[cos(omega*tau+phase)*load(tau), tau] * exp(dT * eig * (t-tau)) between [0, t], where
+load(tau) is piecewise linear.</p>
+<p>Performs integrations involving a piecewise linear load.  A 2d array of
+dimensions A[len(tvals), len(eigs)]
+is produced where the ‘i’th row of A contains the diagonal elements of the
+spectral ‘E’ matrix calculated for the time value tvals[i]. i.e. rows of
+this matrix will be assembled into the diagonal matrix ‘E’ elsewhere.</p>
+<p>Paste the resulting code (at least the loops) into <cite>EDload_coslinear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.EDload_coslinear" title="geotecha.speccon.integrals.EDload_coslinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.EDload_coslinear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pEDload_coslinear" title="geotecha.speccon.integrals.pEDload_coslinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pEDload_coslinear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.edload_coslinear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_linear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_linear_implementations</span></code></a></dt>
+<dd>Similar function with no cosine term.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_coslinear_implementations</span></code></a></dt>
+<dd>Similar function but the time dependent loading function is not differentiated w.r.t. time.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Assuming the load are formulated as the product of separate time and depth
+dependant functions:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(E\)</span> is a time dependent diagonal matrix due to time
+dependant loadings.  The version of <span class="math notranslate nohighlight">\(E\)</span> calculated here in
+<cite>EDload_coslinear</cite> is from loading terms in the governing equation that are NOT
+differentiated wrt <span class="math notranslate nohighlight">\(t\)</span>.
+The diagonal elements of <span class="math notranslate nohighlight">\(E\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{0}^t{\frac{d{{\cos\left(\omega\tau+\textrm{phase}\right)}\sigma\left(\tau\right)}}{d\tau}{\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}\,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,
+<span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,
+<span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the time dependant portion of the loading function.</div></blockquote>
+<p>When the time dependant loading term <span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is
+piecewise in time. The contribution of each load segment is found by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{t_s}^{t_f}{\frac{d{{\cos\left(\omega\tau+\textrm{phase}\right)}\sigma\left(\tau\right)}}{d\tau}\exp\left({dT\left(t-\tau\right)*\lambda_i}\right)\,d\tau}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_s = \min\left(t,t_{increment\:start}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[t_f = \min\left(t,t_{increment\:end}\right)\]</div>
+<p>(note that this function,`EDload_coslinear`, rather than use <span class="math notranslate nohighlight">\(t_s\)</span> and
+<span class="math notranslate nohighlight">\(t_f\)</span>,
+explicitly finds increments that the current time falls in, falls after,
+and falls before and treates each case on it’s own.)</p>
+<p>Each <span class="math notranslate nohighlight">\(t\)</span> value of interest requires a separate diagonal matrix
+<span class="math notranslate nohighlight">\(E\)</span>.  To use space more efficiently and to facilitate numpy
+broadcasting when using the results of the function, the diagonal elements
+of <span class="math notranslate nohighlight">\(E\)</span> for each time value <cite>t</cite> value are stored in the rows of
+array <span class="math notranslate nohighlight">\(A\)</span> returned by <cite>EDload_coslinear</cite>.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=\left(\begin{matrix}E_{0,0}(t_0)&amp;E_{1,1}(t_0)&amp; \cdots &amp; E_{neig-1,neig-1}(t_0)\\ E_{0,0}(t_1)&amp;E_{1,1}(t_1)&amp; \cdots &amp; E_{neig-1,neig-1}(t_1)\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots \\ E_{0,0}(t_m)&amp;E_{1,1}(t_m)&amp; \cdots &amp; E_{neig-1,neig-1}(t_m)\end{matrix}\right)\end{split}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.EDload_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">EDload_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#EDload_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.EDload_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of D[load(tau), tau] * exp(dT * eig * (t-tau)) between
+[0, t], where load(tau) is piecewise linear.</p>
+<p>Performs integrations involving a piecewise linear load.  A 2d array of
+dimensions A[len(tvals), len(eigs)]
+is produced where the ‘i’th row of A contains the diagonal elements of the
+spectral ‘E’ matrix calculated for the time value tvals[i]. i.e. rows of
+this matrix will be assembled into the diagonal matrix ‘E’ elsewhere.</p>
+<p>Paste the resulting code (at least the loops) into <cite>EDload_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  needs to be compiled with f2py</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.EDload_linear" title="geotecha.speccon.integrals.EDload_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.EDload_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pEDload_linear" title="geotecha.speccon.integrals.pEDload_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pEDload_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.edload_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_coslinear_implementations</span></code></a></dt>
+<dd>Similar function with additional cosine term.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_linear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_linear_implementations</span></code></a></dt>
+<dd>Similar function but the time dependent loading function is not differentiated with respect to time.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Assuming the load are formulated as the product of separate time and depth
+dependant functions:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(E\)</span> is a time dependent diagonal matrix due to time
+dependant loadings.  The version of <span class="math notranslate nohighlight">\(E\)</span> calculated here in
+<cite>EDload_linear</cite> is from loading terms in the governing equation that are NOT
+differentiated wrt <span class="math notranslate nohighlight">\(t\)</span>.
+The diagonal elements of <span class="math notranslate nohighlight">\(E\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{0}^t{\frac{d{\sigma\left(\tau\right)}}{d\tau}{\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}\,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,
+<span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,
+<span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the time dependant portion of the loading function.</div></blockquote>
+<p>When the time dependant loading term <span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is
+piecewise in time. The contribution of each load segment is found by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{t_s}^{t_f}{{\sigma\left(\tau\right)}\exp\left({dT\left(t-\tau\right)*\lambda_i}\right)\,d\tau}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_s = \min\left(t,t_{increment\:start}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[t_f = \min\left(t,t_{increment\:end}\right)\]</div>
+<p>(note that this function,`EDload_linear`, rather than use <span class="math notranslate nohighlight">\(t_s\)</span> and
+<span class="math notranslate nohighlight">\(t_f\)</span>,
+explicitly finds increments that the current time falls in, falls after,
+and falls before and treates each case on it’s own.)</p>
+<p>Each <span class="math notranslate nohighlight">\(t\)</span> value of interest requires a separate diagonal matrix
+<span class="math notranslate nohighlight">\(E\)</span>.  To use space more efficiently and to facilitate numpy
+broadcasting when using the results of the function, the diagonal elements
+of <span class="math notranslate nohighlight">\(E\)</span> for each time value <cite>t</cite> value are stored in the rows of
+array <span class="math notranslate nohighlight">\(A\)</span> returned by <cite>EDload_linear</cite>.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=\left(\begin{matrix}E_{0,0}(t_0)&amp;E_{1,1}(t_0)&amp; \cdots &amp; E_{neig-1,neig-1}(t_0)\\ E_{0,0}(t_1)&amp;E_{1,1}(t_1)&amp; \cdots &amp; E_{neig-1,neig-1}(t_1)\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots \\ E_{0,0}(t_m)&amp;E_{1,1}(t_m)&amp; \cdots &amp; E_{neig-1,neig-1}(t_m)\end{matrix}\right)\end{split}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">Eload_coslinear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#Eload_coslinear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of cos(omega*tau+phase)*load(tau) * exp(dT * eig * (t-tau))
+between [0, t], where load(tau) is piecewise linear.</p>
+<p>Performs integrations involving a piecewise linear load.  A 2d array of
+dimensions A[len(tvals), len(eigs)]
+is produced where the ‘i’th row of A contains the diagonal elements of the
+spectral ‘E’ matrix calculated for the time value tvals[i]. i.e. rows of
+this matrix will be assembled into the diagonal matrix ‘E’ elsewhere.</p>
+<p>Paste the resulting code (at least the loops) into <cite>Eload_coslinear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  needs to be compiled with f2py</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.Eload_coslinear" title="geotecha.speccon.integrals.Eload_coslinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.Eload_coslinear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pEload_coslinear" title="geotecha.speccon.integrals.pEload_coslinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pEload_coslinear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.eload_coslinear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_linear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_linear_implementations</span></code></a></dt>
+<dd>Similar function with no cosine term.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_coslinear_implementations</span></code></a></dt>
+<dd>Similar function but the time dependent loading function is differentiated with respect to time.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Assuming the load are formulated as the product of separate time and depth
+dependant functions:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(E\)</span> is a time dependent diagonal matrix due to time
+dependant loadings.  The version of <span class="math notranslate nohighlight">\(E\)</span> calculated here in
+<cite>Eload_coslinear</cite> is from loading terms in the governing equation that are NOT
+differentiated wrt <span class="math notranslate nohighlight">\(t\)</span>.
+The diagonal elements of <span class="math notranslate nohighlight">\(E\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{0}^t{{\cos\left(\omega\tau+\textrm{phase}\right)}{\sigma\left(\tau\right)}{\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}\,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,
+<span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,
+<span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the time dependant portion of the loading function.</div></blockquote>
+<p>When the time dependant loading term <span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is
+piecewise in time. The contribution of each load segment is found by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{t_s}^{t_f}{{\cos\left(\omega\tau+\textrm{phase}\right)}{\sigma\left(\tau\right)}\exp\left({dT\left(t-\tau\right)*\lambda_i}\right)\,d\tau}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_s = \min\left(t,t_{increment\:start}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[t_f = \min\left(t,t_{increment\:end}\right)\]</div>
+<p>(note that this function,`Eload_coslinear`, rather than use <span class="math notranslate nohighlight">\(t_s\)</span> and
+<span class="math notranslate nohighlight">\(t_f\)</span>,
+explicitly finds increments that the current time falls in, falls after,
+and falls before and treates each case on it’s own.)</p>
+<p>Each <span class="math notranslate nohighlight">\(t\)</span> value of interest requires a separate diagonal matrix
+<span class="math notranslate nohighlight">\(E\)</span>.  To use space more efficiently and to facilitate numpy
+broadcasting when using the results of the function, the diagonal elements
+of <span class="math notranslate nohighlight">\(E\)</span> for each time value <cite>t</cite> value are stored in the rows of
+array <span class="math notranslate nohighlight">\(A\)</span> returned by <cite>Eload_coslinear</cite>.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=\left(\begin{matrix}E_{0,0}(t_0)&amp;E_{1,1}(t_0)&amp; \cdots &amp; E_{neig-1,neig-1}(t_0)\\ E_{0,0}(t_1)&amp;E_{1,1}(t_1)&amp; \cdots &amp; E_{neig-1,neig-1}(t_1)\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots \\ E_{0,0}(t_m)&amp;E_{1,1}(t_m)&amp; \cdots &amp; E_{neig-1,neig-1}(t_m)\end{matrix}\right)\end{split}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.Eload_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">Eload_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#Eload_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.Eload_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of load(tau) * exp(dT * eig * (t-tau))
+between [0, t], where load(tau) is piecewise linear.</p>
+<p>Performs integrations involving a piecewise linear load.  A 2d array of
+dimensions A[len(tvals), len(eigs)]
+is produced where the ‘i’th row of A contains the diagonal elements of the
+spectral ‘E’ matrix calculated for the time value tvals[i]. i.e. rows of
+this matrix will be assembled into the diagonal matrix ‘E’ elsewhere.</p>
+<p>Paste the resulting code (at least the loops) into <cite>Eload_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.Eload_linear" title="geotecha.speccon.integrals.Eload_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.Eload_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pEload_linear" title="geotecha.speccon.integrals.pEload_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pEload_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.eload_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_coslinear_implementations</span></code></a></dt>
+<dd>Similar function with additional cosine term.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.EDload_linear_implementations" title="geotecha.speccon.integrals_generate_code.EDload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EDload_linear_implementations</span></code></a></dt>
+<dd>Similar function but the time dependent loading function is differentiated with respect to time.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>This function produces a complex array</p>
+<p>Assuming the load are formulated as the product of separate time and depth
+dependant functions:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(E\)</span> is a time dependent diagonal matrix due to time
+dependant loadings.  The version of <span class="math notranslate nohighlight">\(E\)</span> calculated here in
+<cite>Eload_linear</cite> is from loading terms in the governing equation that are NOT
+differentiated wrt <span class="math notranslate nohighlight">\(t\)</span>.
+The diagonal elements of <span class="math notranslate nohighlight">\(E\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{0}^t{{\sigma\left(\tau\right)}{\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}\,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,
+<span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,
+<span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the time dependant portion of the loading function.</div></blockquote>
+<p>When the time dependant loading term <span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is
+piecewise in time. The contribution of each load segment is found by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{t_s}^{t_f}{{\sigma\left(\tau\right)}\exp\left({dT\left(t-\tau\right)*\lambda_i}\right)\,d\tau}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_s = \min\left(t,t_{increment\:start}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[t_f = \min\left(t,t_{increment\:end}\right)\]</div>
+<p>(note that this function,`Eload_linear`, rather than use <span class="math notranslate nohighlight">\(t_s\)</span> and
+<span class="math notranslate nohighlight">\(t_f\)</span>,
+explicitly finds increments that the current time falls in, falls after,
+and falls before and treates each case on it’s own.)</p>
+<p>Each <span class="math notranslate nohighlight">\(t\)</span> value of interest requires a separate diagonal matrix
+<span class="math notranslate nohighlight">\(E\)</span>.  To use space more efficiently and to facilitate numpy
+broadcasting when using the results of the function, the diagonal elements
+of <span class="math notranslate nohighlight">\(E\)</span> for each time value <cite>t</cite> value are stored in the rows of
+array <span class="math notranslate nohighlight">\(A\)</span> returned by <cite>Eload_linear</cite>.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=\left(\begin{matrix}E_{0,0}(t_0)&amp;E_{1,1}(t_0)&amp; \cdots &amp; E_{neig-1,neig-1}(t_0)\\ E_{0,0}(t_1)&amp;E_{1,1}(t_1)&amp; \cdots &amp; E_{neig-1,neig-1}(t_1)\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots \\ E_{0,0}(t_m)&amp;E_{1,1}(t_m)&amp; \cdots &amp; E_{neig-1,neig-1}(t_m)\end{matrix}\right)\end{split}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.Eload_sinlinear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">Eload_sinlinear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#Eload_sinlinear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.Eload_sinlinear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(omega*tau+phase)*load(tau) * exp(dT * eig * (t-tau))
+between [0, t], where load(tau) is piecewise linear.</p>
+<p>Performs integrations involving a piecewise linear load.  A 2d array of
+dimensions A[len(tvals), len(eigs)]
+is produced where the ‘i’th row of A contains the diagonal elements of the
+spectral ‘E’ matrix calculated for the time value tvals[i]. i.e. rows of
+this matrix will be assembled into the diagonal matrix ‘E’ elsewhere.</p>
+<p>Paste the resulting code (at least the loops) into <cite>Eload_sinlinear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  needs to be compiled with f2py</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.Eload_sinlinear" title="geotecha.speccon.integrals.Eload_sinlinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.Eload_sinlinear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pEload_sinlinear" title="geotecha.speccon.integrals.pEload_sinlinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pEload_sinlinear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.eload_sinlinear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_linear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_linear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_linear_implementations</span></code></a></dt>
+<dd>Similar function with no sine term.</dd>
+<dt><a class="reference internal" href="#geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations" title="geotecha.speccon.integrals_generate_code.Eload_coslinear_implementations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Eload_coslinear_implementations</span></code></a></dt>
+<dd>Similar function but with cosine term.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Note this will make complex arrays a complex array!!!</p>
+<p>Assuming the load are formulated as the product of separate time and depth
+dependant functions:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(E\)</span> is a time dependent diagonal matrix due to time
+dependant loadings.  The version of <span class="math notranslate nohighlight">\(E\)</span> calculated here in
+<cite>Eload_sinlinear</cite> is from loading terms in the governing equation that are NOT
+differentiated wrt <span class="math notranslate nohighlight">\(t\)</span>.
+The diagonal elements of <span class="math notranslate nohighlight">\(E\)</span> are given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{0}^t{{\sin\left(\omega\tau+\textrm{phase}\right)}{\sigma\left(\tau\right)}{\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}\,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,
+<span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,
+<span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the time dependant portion of the loading function.</div></blockquote>
+<p>When the time dependant loading term <span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is
+piecewise in time. The contribution of each load segment is found by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,i}=\int_{t_s}^{t_f}{{\sin\left(\omega\tau+\textrm{phase}\right)}{\sigma\left(\tau\right)}\exp\left({dT\left(t-\tau\right)*\lambda_i}\right)\,d\tau}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[t_s = \min\left(t,t_{increment\:start}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[t_f = \min\left(t,t_{increment\:end}\right)\]</div>
+<p>(note that this function,`Eload_sinlinear`, rather than use <span class="math notranslate nohighlight">\(t_s\)</span> and
+<span class="math notranslate nohighlight">\(t_f\)</span>,
+explicitly finds increments that the current time falls in, falls after,
+and falls before and treates each case on it’s own.)</p>
+<p>Each <span class="math notranslate nohighlight">\(t\)</span> value of interest requires a separate diagonal matrix
+<span class="math notranslate nohighlight">\(E\)</span>.  To use space more efficiently and to facilitate numpy
+broadcasting when using the results of the function, the diagonal elements
+of <span class="math notranslate nohighlight">\(E\)</span> for each time value <cite>t</cite> value are stored in the rows of
+array <span class="math notranslate nohighlight">\(A\)</span> returned by <cite>Eload_sinlinear</cite>.  Thus:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A}=\left(\begin{matrix}E_{0,0}(t_0)&amp;E_{1,1}(t_0)&amp; \cdots &amp; E_{neig-1,neig-1}(t_0)\\ E_{0,0}(t_1)&amp;E_{1,1}(t_1)&amp; \cdots &amp; E_{neig-1,neig-1}(t_1)\\ \vdots&amp;\vdots&amp;\ddots&amp;\vdots \\ E_{0,0}(t_m)&amp;E_{1,1}(t_m)&amp; \cdots &amp; E_{neig-1,neig-1}(t_m)\end{matrix}\right)\end{split}\]</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.speccon.integrals_generate_code.SympyVarsFor1DSpectralDerivation">
+<em class="property">class </em><code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">SympyVarsFor1DSpectralDerivation</code><span class="sig-paren">(</span><em>linear_var='z'</em>, <em>slope=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#SympyVarsFor1DSpectralDerivation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.SympyVarsFor1DSpectralDerivation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for sympy vars, z, zt, zb, at, etc piecewise linear
+Spectral Galerkin integrations.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>linear_var</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[‘z’, ‘x’, ‘y’], optional</span></dt>
+<dd><p class="first last">Independent variable for the linear function specification.
+f(linear_var) = at+a_slope * (linear_var-linear_vart).
+Default linear_var=’z’.</p>
+</dd>
+<dt><strong>slope</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True (default), then the linear functions will be defined with a
+lumped slope term, e.g. a = atop + a_slope * (z - ztop) compared to
+if slope=False, where a = atop + (abot-atop)/(zbot-ztop)*(z-ztop).
+You will have to define a_slope in your code template, e.g.
+Python loops: a_slope = (ab[layer]-at[layer])/(zb[layer]-zt[layer]).
+Fortran loops: a_slope = (ab(layer)-at(layer)/(zb(layer)-zt(layer)).
+Vectorised: a_slope = (ab-at)/(zb-zt).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">SympyVarsFor1DSpectralDerivation</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">a</span>
+<span class="go">a_slope*(z - ztop) + atop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">b</span>
+<span class="go">b_slope*(z - ztop) + btop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">c</span>
+<span class="go">c_slope*(z - ztop) + ctop</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">map_to_add_index</span>
+<span class="go">[(mi, m[i]), (mj, m[j]), (atop, at[layer]), (abot, ab[layer]), (btop, bt[layer]), (bbot, bb[layer]), (ctop, ct[layer]), (cbot, cb[layer]), (ztop, zt[layer]), (zbot, zb[layer])]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">a</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">map_to_add_index</span><span class="p">)</span>
+<span class="go">a_slope*(z - zt[layer]) + at[layer]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">b</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">map_top_to_t_bot_to_b</span><span class="p">)</span>
+<span class="go">b_slope*(z - zt) + bt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">mi</span>
+<span class="go">mi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">mi</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">map_to_add_index</span><span class="p">)</span>
+<span class="go">m[i]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">mi</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">map_top_to_t_bot_to_b</span><span class="p">)</span>
+<span class="go">mi</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">SympyVarsFor1DSpectralDerivation</span><span class="p">(</span><span class="n">linear_var</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">slope</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">a</span>
+<span class="go">atop + (abot - atop)*(x - xtop)/(xbot - xtop)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y, z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.Symbol</span></dt>
+<dd><p class="first last">Independent variables.</p>
+</dd>
+<dt><strong>xtop, xbot, ytop, ybot, ztop, zbot</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.Symbol</span></dt>
+<dd><p class="first last">Symbols used in expressions to be integrated with sympy.integrate.
+After the integration these variables are usually replaced with
+the relevant xt, xb, yt etc. or xt[layer], yb[layer] etc.  These
+substitutions can be made using <cite>map_to_add_index’ or
+`map_top_to_t_bot_to_b</cite>.</p>
+</dd>
+<dt><strong>i, j, k , layer</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.tensor.Idx</span></dt>
+<dd><p class="first last">Index variables.</p>
+</dd>
+<dt><strong>xt, xb, yt, yb, zt, zb</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.tensor.IndexedBase</span></dt>
+<dd><p class="first last">Variables for values at top and bottom of layer.  Used to define
+linear relationships.  These variable usually replace xtop, xbot
+after integrations.  The reason they are not used before integration
+is thatsympy doesn’t seem to like the sympy.tensor.IndexedBase for
+integrations. Substitutions can be made using <cite>map_to_add_index’ or
+`map_top_to_t_bot_to_b</cite>.</p>
+</dd>
+<dt><strong>at, ab, a, a_slope: sympy.Symbol and sympy.Expr</strong></dt>
+<dd><p class="first last">Variables to define linear relationships.
+If <cite>slope`=True, a = atop + a_slope * (z - ztop)
+If `slope`=False, a = atop + (abot - atop)/(zbot - ztop) * (z - ztop).
+Where z and ztop may change according to `linear_var</cite>.</p>
+</dd>
+<dt><strong>bt, bb, b, b_slope: sympy.Symbol and sympy.Expr</strong></dt>
+<dd><p class="first last">Variables to define linear relationships.
+If <cite>slope`=True, b = atop + b_slope * (z - ztop)
+If `slope`=False, b = btop + (bbot - btop)/(zbot - ztop) * (z - ztop).
+Where z and ztop may change according to `linear_var</cite>.</p>
+</dd>
+<dt><strong>ct, cb, c, c_slope: sympy.Symbol and sympy.Expr</strong></dt>
+<dd><p class="first last">Variables to define linear relationships.
+If <cite>slope`=True, c = ctop + c_slope * (z - ztop)
+If `slope`=False, c = ctop + (cbot - ctop)/(zbot - ztop) * (z - ztop).
+Where z and ztop may change according to `linear_var</cite>.</p>
+</dd>
+<dt><strong>map_to_add_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples</span></dt>
+<dd><p class="first last">A list to be used with the subs method of sympy expressions to
+add a index variables to the variables. A typical entries in
+<cite>map_to_add_index</cite> would be [(mi, m[i]), (mj, m[j]), (atop, at[layer]),
+(ztop, zt[layer]), …].  Use this to after an integration invoving
+ztop, atop etc. to format the expression for use in function with
+loops.</p>
+</dd>
+<dt><strong>map_top_to_t_bot_to_b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples</span></dt>
+<dd><p class="first last">A list to be used with the subs method of sympy expressions to
+add change ‘ztop’ to ‘zt’, ‘abot’ to ‘at’ etc. Typical entries in
+<cite>map_top_to_t_bot_to_b</cite> would be [(atop, at), (ztop, zt), …].
+Use this to after an integration invoving ztop, atop etc. to format
+the expression for use in a vectorised function.</p>
+</dd>
+<dt><strong>mi, mj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.Symbol</span></dt>
+<dd><p class="first last">Variable for row and column eigs.</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy.tensor.IndexedBase</span></dt>
+<dd><p class="first last">IndexedBaseVariable of eigs.  used for m[i], and m[j].</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1_ab_linear_between">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1_ab_linear_between</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1_ab_linear_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1_ab_linear_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integrations of <cite>a(z) * b(z)</cite>
+between [z1, z2] where a(z) is a piecewise linear functions of z.</p>
+<p>Calculates array A[len(z)]</p>
+<p>Paste the resulting code (at least the loops) into
+<cite>piecewise_linear_1d.integrate_x1a_x2a_y1a_y2a_multiply_x1b_x2b_y1b_y2b_between</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) implementation.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.piecewise.piecewise_linear_1d.html#geotecha.piecewise.piecewise_linear_1d.integrate_x1a_x2a_y1a_y2a_multiply_x1b_x2b_y1b_y2b_between" title="geotecha.piecewise.piecewise_linear_1d.integrate_x1a_x2a_y1a_y2a_multiply_x1b_x2b_y1b_y2b_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.piecewise.piecewise_linear_1d.integrate_x1a_x2a_y1a_y2a_multiply_x1b_x2b_y1b_y2b_between</span></code></a></dt>
+<dd>Resulting function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_ab_linear_between</cite>, <span class="math notranslate nohighlight">\(A\)</span>, is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\int_{z_1}^{z_2}{{a\left(z\right)}{b\left(z\right)}\,dz}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> are piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_DD_abDDf_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_DD_abDDf_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_DD_abDDf_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_DD_abDDf_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(mi * z) * D[a(z) * b(z) D[sin(mj * z),z,2],z,2]
+between ztop and zbot where a(z) and b(z) is piecewise linear functions of z.</p>
+<p>Code is generated that will produce a square array with the
+appropriate integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_abf_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_DD_abDDf_linear" title="geotecha.speccon.integrals.dim1sin_DD_abDDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_DD_abDDf_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_DD_abDDf_linear" title="geotecha.speccon.integrals.pdim1sin_DD_abDDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_DD_abDDf_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_dd_abDddf_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>the resulting code will produce matrixes of complex values.</p>
+<p>The <cite>dim1sin_DD_abDDf_linear</cite> matrix, <span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}=\int_{0}^1{\frac{d^2}{dz^2}\left({a\left(z\right)}{b\left(z\right)}\frac{d^2\phi_j}{dz^2}\right)\phi_i\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> are piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer is defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+<p>To make the above integration simpler we integate by parts to get:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}= \left.{\frac{d}{dz}\left({a\left(z\right)}{b\left(z\right)}\frac{d^2\phi_j}{dz^2}\right)\phi_i}\right|_{z=0}^{z=1}
+     - \left.{{a\left(z\right)}{b\left(z\right)}\frac{d^2\phi_j}{dz^2}\frac{d\phi_i}{dz}}\right|_{z=0}^{z=1}
++\int_{0}^1{{a\left(z\right)}{b\left(z\right)}\frac{d^2\phi_j}{dz^2}\frac{d^2\phi_i}{dz^2}\,dz}\]</div>
+<p>In this case the sine basis functions means the end point terms in the above
+equation are zero, leaving us with</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}= \int_{0}^1{{a\left(z\right)}{b\left(z\right)}\frac{d^2\phi_j}{dz^2}\frac{d^2\phi_i}{dz^2}\,dz}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_D_aDb_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_D_aDb_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_D_aDb_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_D_aDb_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integrations of <cite>sin(mi * z) * D[a(z) * D[b(z), z], z]</cite>
+between ztop and zbot where a(z) is a piecewisepiecewise linear function of z,
+and b(z) is a linear function of z.</p>
+<p>Code is generated that will produce a 1d array with the appropriate
+integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_D_aDb_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The functions produced are set up to accept the b(z) input as
+piecewise linear, i.e. zt, zb, bt, bb etc. It is up to the user to
+ensure that the bt and bb are such that they define a continuous
+linear function. eg. to define b(z)=z+1 then use
+zt=[0,0.4], zb=[0.4, 1], bt=[1,1.4], bb=[1.4,2].</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_D_aDb_linear" title="geotecha.speccon.integrals.dim1sin_D_aDb_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_D_aDb_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_D_aDb_linear" title="geotecha.speccon.integrals.pdim1sin_D_aDb_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_D_aDb_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_D_aDb_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_D_aDb_linear</cite> which should be treated as a column vector,
+<span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\int_{0}^1{\frac{d}{dz}\left({a\left(z\right)}\frac{d}{dz}{b\left(z\right)}\right)\phi_i\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> is a piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer is defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+<p><span class="math notranslate nohighlight">\(b\left(z\right)\)</span> is a linear function of <span class="math notranslate nohighlight">\(z\)</span> defined by</p>
+<div class="math notranslate nohighlight">
+\[b\left(z\right) = b_t+\left({b_b-b_t}\right)z\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts now representing ‘top’ and
+‘bottom’ of the profile respectively.</p>
+<p>Using the product rule for differentiation the above integral can be split
+into:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\int_{0}^1{\frac{da\left(z\right)}{dz}\frac{db\left(z\right)}{dz}\phi_i\,dz} +
+\int_{0}^1{a\left(z\right)\frac{d^2b\left(z\right)}{dz^2}\phi_i\,dz}\]</div>
+<p>The right hand term is zero because <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> is a
+continuous linear function so it’s second derivative is zero.  The
+first derivative of <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> is a constant so the
+left term can be integrated by parts to give:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\frac{db\left(z\right)}{dz}\left(
+\left.\phi_i{a\left(z\right)}\right|_{z=0}^{z=1} -
+-\int_{0}^1{{a\left(z\right)}\frac{d\phi_i}{dz}\,dz}
+\right)\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_D_aDf_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_D_aDf_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_D_aDf_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_D_aDf_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(mi * z) * D[a(z) * D[sin(mj * z),z],z]
+between ztop and zbot where a(z) is piecewise linear functions of z.</p>
+<p>Code is generated that will produce a square array with the
+appropriate integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_abf_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_D_aDf_linear" title="geotecha.speccon.integrals.dim1sin_D_aDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_D_aDf_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_D_aDf_linear" title="geotecha.speccon.integrals.pdim1sin_D_aDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_D_aDf_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_d_adf_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_D_aDf_linear</cite> matrix, <span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}=\int_{0}^1{\frac{d}{dz}\left({a\left(z\right)}\frac{d\phi_j}{dz}\right)\phi_i\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> is a piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer is defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+<p>To make the above integration simpler we integate by parts to get:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}= \left.\phi_i{a\left(z\right)}\frac{d\phi_j}{dz}\right|_{z=0}^{z=1} -\int_{0}^1{{a\left(z\right)}\frac{d\phi_j}{dz}\frac{d\phi_i}{dz}\,dz}\]</div>
+<p>In this case the sine basis functions means the left term in the above
+equation is zero, leaving us with</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}= -\int_{0}^1{{a\left(z\right)}\frac{d\phi_j}{dz}\frac{d\phi_i}{dz}\,dz}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_a_linear_between">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_a_linear_between</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_a_linear_between"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_a_linear_between" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integrations of <cite>sin(mi * z) * a(z)</cite>
+between [z1, z2] where a(z) is a piecewise linear functions of z.</p>
+<p>Calculates array A[len(z), len(m)].</p>
+<p>Paste the resulting code into <cite>dim1sin_a_linear_between</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) implementation.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_a_linear_between" title="geotecha.speccon.integrals.dim1sin_a_linear_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_a_linear_between</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_a_linear_between" title="geotecha.speccon.integrals.pdim1sin_a_linear_between"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_a_linear_between</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_a_linear_between</cite>, <span class="math notranslate nohighlight">\(A\)</span>, is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}=
+\int_{z_1}^{z_2}{{a\left(z\right)}\phi_j\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_j\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_j\left(z\right)=\sin\left({m_j}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> is a piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_ab_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_ab_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_ab_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_ab_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(mi * z) * a(z) * b(z)
+between ztop and zbot where a(z) and b(z) are piecewise linear functions of z.</p>
+<p>Code is generated that will produce a square array with the
+appropriate integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_ab_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_ab_linear" title="geotecha.speccon.integrals.dim1sin_ab_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_ab_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_ab_linear" title="geotecha.speccon.integrals.pdim1sin_ab_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_ab_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_ab_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_ab_linear</cite> which should be treated as a column vector,
+<span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\int_{0}^1{{a\left(z\right)}{b\left(z\right)}\phi_i\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> are piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_abc_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_abc_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_abc_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_abc_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integrations of sin(mi * z) * a(z) * b(z) * c(z)
+between ztop and zbot where a(z), b(z), c(z) are piecewise linear functions of z.</p>
+<p>Code is generated that will produce a 1d array with the appropriate
+integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_abc_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_abc_linear" title="geotecha.speccon.integrals.dim1sin_abc_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_abc_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_abc_linear" title="geotecha.speccon.integrals.pdim1sin_abc_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_abc_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_abc_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_abc_linear</cite> which should be treated as a column vector,
+<span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i}=\int_{0}^1{{a\left(z\right)}{b\left(z\right)}{c\left(z\right)}\phi_i\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span>, <span class="math notranslate nohighlight">\(b\left(z\right)\)</span>, and
+<span class="math notranslate nohighlight">\(c\left(z\right)\)</span> are piecewise linear functions
+with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_abf_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_abf_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_abf_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_abf_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(mi * z) * a(z) * a(z) * sin(mj * z)
+between ztop and zbot where a(z) is piecewise linear.</p>
+<p>Code is generated that will produce a square array with the
+appropriate integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_abf_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_abf_linear" title="geotecha.speccon.integrals.dim1sin_abf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_abf_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_abf_linear" title="geotecha.speccon.integrals.pdim1sin_abf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_abf_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_abf_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_abf_linear</cite> matrix, <span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}=\int_{0}^1{{a\left(z\right)}{b\left(z\right)}\phi_i\phi_j\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> are piecewise
+linear functions with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.dim1sin_af_linear_implementations">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">dim1sin_af_linear_implementations</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#dim1sin_af_linear_implementations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.dim1sin_af_linear_implementations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Code generation for Integration of sin(mi * z) * a(z) * sin(mj * z)
+between ztop and zbot where a(z) is piecewise linear.</p>
+<p>Code is generated that will produce a square array with the
+appropriate integrals at each location.</p>
+<p>Paste the resulting code (at least the loops) into <cite>dim1sin_af_linear</cite>.</p>
+<p>Creates three implementations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>‘scalar’, python loops (slowest).</li>
+<li>‘vectorized’, numpy (much faster than scalar).</li>
+<li>‘fortran’, fortran loops (fastest).  Needs to be compiled and interfaced
+with f2py.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Python code with scalar (loops) and vectorized (numpy) implementations
+also calls the fortran version.</p>
+</dd>
+<dt><strong>fn2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Fortran code.  Needs to be compiled with f2py.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.dim1sin_af_linear" title="geotecha.speccon.integrals.dim1sin_af_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.dim1sin_af_linear</span></code></a></dt>
+<dd>Resulting function.</dd>
+<dt><a class="reference internal" href="geotecha.speccon.integrals.html#geotecha.speccon.integrals.pdim1sin_af_linear" title="geotecha.speccon.integrals.pdim1sin_af_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.integrals.pdim1sin_af_linear</span></code></a></dt>
+<dd>Resulting function with PolyLine inputs.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.speccon.ext_integrals.dim1sin_af_linear</span></code></dt>
+<dd>Resulting fortran function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The <cite>dim1sin_af_linear</cite> matrix, <span class="math notranslate nohighlight">\(A\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{A}_{i,j}=\int_{0}^1{{a\left(z\right)}\phi_i\phi_j\,dz}\]</div>
+<p>where the basis function <span class="math notranslate nohighlight">\(\phi_i\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\phi_i\left(z\right)=\sin\left({m_i}z\right)\]</div>
+<p>and <span class="math notranslate nohighlight">\(a\left(z\right)\)</span> is a piecewise linear function
+with respect to <span class="math notranslate nohighlight">\(z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right) = a_t+\frac{a_b-a_t}{z_b-z_t}\left(z-z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.integrals_generate_code.tw">
+<code class="descclassname">geotecha.speccon.integrals_generate_code.</code><code class="descname">tw</code><span class="sig-paren">(</span><em>text</em>, <em>indents=3</em>, <em>width=100</em>, <em>break_long_words=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/integrals_generate_code.html#tw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.integrals_generate_code.tw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rough text wrapper for long sympy expressions</p>
+<p>1st line will not be indented.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>text</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Text to wrap</p>
+</dd>
+<dt><strong>width</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int optional</span></dt>
+<dd><p class="first last">Rough width of warpping. Default width=100.</p>
+</dd>
+<dt><strong>indents</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Multiple of 4 spaces that will be used to indent each line.
+Default indents=3.</p>
+</dd>
+<dt><strong>break_long_words</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">Default break_long_words=False.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Multi-line string.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.speccon.integrals_generate_code.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

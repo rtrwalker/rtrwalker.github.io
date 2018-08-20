@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_vr_radial_mimic_hansbo1981_with_vacuum:
+
+speccon example code: speccon1d_vr_radial_mimic_hansbo1981_with_vacuum.py
+=========================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_vr_radial_mimic_hansbo1981_with_vacuum.py
+   :include-source:
+
+

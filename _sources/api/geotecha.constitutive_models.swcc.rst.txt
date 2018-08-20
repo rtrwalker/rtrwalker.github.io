@@ -1,0 +1,39 @@
+swcc
+----
+
+
+Class summary
++++++++++++++
+
+.. currentmodule:: geotecha.constitutive_models.swcc
+
+.. autosummary::
+
+   SWCC
+   SWCC_FredlundAndXing1994
+   SWCC_PhamAndFredlund2008
+
+
+
+Function summary
+++++++++++++++++
+
+.. currentmodule:: geotecha.constitutive_models.swcc
+
+.. autosummary::
+
+   karel_air_from_saturation
+   kwrel_from_discrete_swcc
+
+
+
+Module listing
+++++++++++++++
+
+.. automodule:: geotecha.constitutive_models.swcc
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+

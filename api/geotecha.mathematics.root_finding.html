@@ -1,0 +1,292 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>root_finding &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="transformations" href="geotecha.mathematics.transformations.html" />
+    <link rel="prev" title="quadrature" href="geotecha.mathematics.quadrature.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">root_finding</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.root_finding">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+      <li>Previous: <a href="geotecha.mathematics.quadrature.html" title="previous chapter">quadrature</a></li>
+      <li>Next: <a href="geotecha.mathematics.transformations.html" title="next chapter">transformations</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.root_finding.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="root-finding">
+<h1>root_finding<a class="headerlink" href="#root-finding" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.root_finding.find_n_roots" title="geotecha.mathematics.root_finding.find_n_roots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_n_roots</span></code></a>(func[,&nbsp;args,&nbsp;n,&nbsp;x0,&nbsp;dx,&nbsp;p,&nbsp;…])</td>
+<td>Find the first n zeros/roots of a function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.root_finding.fixed_point_no_accel" title="geotecha.mathematics.root_finding.fixed_point_no_accel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fixed_point_no_accel</span></code></a>(func,&nbsp;x0[,&nbsp;args,&nbsp;xtol,&nbsp;…])</td>
+<td>Find a fixed point of the function (NO CONVEGENCE ACCELERATION!!!).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.root_finding">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.root_finding" title="Permalink to this headline">¶</a></h2>
+<p>Routines for finding zeros/roots of equations.</p>
+<dl class="function">
+<dt id="geotecha.mathematics.root_finding.find_n_roots">
+<code class="descclassname">geotecha.mathematics.root_finding.</code><code class="descname">find_n_roots</code><span class="sig-paren">(</span><em>func</em>, <em>args=()</em>, <em>n=1</em>, <em>x0=0.001</em>, <em>dx=0.001</em>, <em>p=1.0</em>, <em>max_iter=2000</em>, <em>atol=1e-08</em>, <em>rtol=1e-05</em>, <em>debug=False</em>, <em>fsolve_kwargs={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/root_finding.html#find_n_roots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.root_finding.find_n_roots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the first n zeros/roots of a function</p>
+<p>Root/zero finding can be tempramental.  Small <cite>dx</cite>, <cite>p`=1,  and large
+`max_iter</cite> will probably find the roots/zeros but it may take some time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">callable f(x, <a href="#id1"><span class="problematic" id="id2">*</span></a>args)</span></dt>
+<dd><p class="first last">A function that takes at least one argument.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">Any extra arguments to <cite>func</cite>. Default args=().</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Number of roots to find, Default n=1.</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">An x value less than the first root. This is NOT the initial guess of
+fsolve! Default x0=0.001.</p>
+</dd>
+<dt><strong>dx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial interval length to check for root in. Default dx=0.001.</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Factor to increase dx by up untill first root is found. Default p=1.0.</p>
+</dd>
+<dt><strong>max_iter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Maximum iterations when searching for an interval containing a root.
+Default max_iter=2000.  Note this is not the same as fsolve
+maxfev keword argument.</p>
+</dd>
+<dt><strong>atol, rtol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">numpy.allclose parameters.  Used for checking if found the
+same root. Default atol=1e-8, rtol=1e-5.</p>
+</dd>
+<dt><strong>debug</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">Print calculations to stdout. Default debug=False</p>
+</dd>
+<dt><strong>fsolve_kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">dict of kwargs to pass to scipy.optimize.fsolve.
+Default fsolve_kwargs={}.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>roots</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last">Array of len n containing the first n roots of <cite>func</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Here is approximately what happens:</p>
+<blockquote>
+<div><ul class="simple">
+<li><cite>func</cite> is evaluated with <cite>x0</cite> and <cite>args</cite> to give y0</li>
+<li>x is incremented by dx to give x1</li>
+<li><cite>func</cite> is evaluated with <cite>x1</cite> and <cite>args</cite> to give y1</li>
+<li>If y0 and y1 have the same sign then there is no root between x0 and x1.</li>
+<li><cite>dx</cite> is multiplied by <cite>p</cite> and the x is incremented again.</li>
+<li>successive intevals are checked until y0 and y1 are of different sign
+indicating that there is a root somewhere between x0 and x1.</li>
+<li><cite>scipy.optimize.fsolve</cite> is used to find the root. If it is the first
+root then the the left end of the interval, the current x0, is used as
+the initial guess for fsolve.  If it is a later root then the guess
+for fsolve is the x-axis intercept of the straight line joining
+(x0, y0) and (x1, y1).</li>
+<li>Once a root is found, the search begins for the next root which starts
+between the root and the current x1. The
+current dx value, the one that contained the root is reduced by a fifth
+and off we go again.</li>
+</ul>
+</div></blockquote>
+<p>There are a few checks:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>At least five intervals must be checked before a possible root</dt>
+<dd>interval is found.  If less than five occur then we go back to the
+starting point of that roots search and use a reduced dx.</dd>
+</dl>
+</li>
+<li>There is a maximum limit to the number of iterations used for each root</li>
+<li>It is possible that the algorithm will, when searching for succesive
+roots, find identical roots.  This is wrong.  The current interval size
+along with the current dx will be reduced and the search will continue.
+If the same root is found five times then the root finding parameters
+are inappropriate and an error message will be raised.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.root_finding.fixed_point_no_accel">
+<code class="descclassname">geotecha.mathematics.root_finding.</code><code class="descname">fixed_point_no_accel</code><span class="sig-paren">(</span><em>func</em>, <em>x0</em>, <em>args=()</em>, <em>xtol=1e-08</em>, <em>maxiter=500</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/root_finding.html#fixed_point_no_accel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.root_finding.fixed_point_no_accel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a fixed point of the function (NO CONVEGENCE ACCELERATION!!!).</p>
+<p>Based on scipy.optimize.fixed_point but no convergence acelleration (RTRW)</p>
+<p>Given a function of one or more variables and a starting point, find a
+fixed-point of the function: i.e. where <code class="docutils literal notranslate"><span class="pre">func(x0)</span> <span class="pre">==</span> <span class="pre">x0</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd><p class="first last">Function to evaluate.</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Fixed point of function.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">Extra arguments to <cite>func</cite>.</p>
+</dd>
+<dt><strong>xtol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Convergence tolerance, defaults to 1e-08.</p>
+</dd>
+<dt><strong>maxiter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Maximum number of iterations, defaults to 500.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Does NOT use Steffensen’s Method using Aitken’s <code class="docutils literal notranslate"><span class="pre">Del^2</span></code> convergence
+Acceleration. See Burden, Faires, “Numerical Analysis”, 5th edition, pg. 80</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">optimize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+<span class="gp">... </span>   <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c1</span><span class="o">/</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">c2</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span><span class="mf">12.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mf">5.</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">optimize</span><span class="o">.</span><span class="n">fixed_point</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">))</span>
+<span class="go">array([1.4920333 , 1.37228132])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed_point_no_accel</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">],</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">))</span>
+<span class="go">array([1.4920333 , 1.37228132])</span>
+</pre></div>
+</div>
+<p>Sometimes iterations should converge but fail when acceleration
+convergence is used:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">kl</span><span class="p">,</span> <span class="n">ks</span><span class="p">,</span> <span class="n">i0</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">kl</span><span class="o">/</span><span class="n">ks</span><span class="o">/</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">((</span><span class="n">i0</span> <span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fixed_point_no_accel</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="mf">1.001</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.7477525683</span><span class="p">])</span>
+<span class="go">1.300...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">optimize</span><span class="o">.</span><span class="n">fixed_point</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="mf">1.001</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.7477525683</span><span class="p">])</span>
+<span class="gt">Traceback (most recent call last):</span>
+<span class="gr">RuntimeError</span>: <span class="n">Failed to converge after 500 iterations, value is nan</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.root_finding.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

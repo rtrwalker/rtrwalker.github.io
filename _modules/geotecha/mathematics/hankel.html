@@ -1,0 +1,506 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.mathematics.hankel &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.mathematics.hankel</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+<span class="sd">&quot;&quot;&quot;Hankel transforms.&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">integrate</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">jn_zeros</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">jn</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_allclose</span>
+<span class="kn">from</span> <span class="nn">numpy.polynomial.polynomial</span> <span class="k">import</span> <span class="n">Polynomial</span>
+
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gl_quad</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gk_quad</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gauss_kronrod_abscissae_and_weights</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gauss_legendre_abscissae_and_weights</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">shanks_table</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">shanks</span>
+
+<div class="viewcode-block" id="HankelTransform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.HankelTransform">[docs]</a><span class="k">class</span> <span class="nc">HankelTransform</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Hankel transform of integer order</span>
+
+<span class="sd">    Applies Gauss-Kronrod quadrature between zeros of the integrand. Then uses</span>
+<span class="sd">    shanks extrapolation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function or method</span>
+<span class="sd">        Function to apply hankel trasnform to.  `func` is called with</span>
+<span class="sd">        func(r, *args). `func` should be vectorised in r.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Arguments to pass to f.  Default args=().</span>
+<span class="sd">    order : integer, optional</span>
+<span class="sd">        Order of Hankel transform. Default order=0.</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Number of segments to break the integration interval into.  Each</span>
+<span class="sd">        segment will be between the zeros of the bessel function or order=</span>
+<span class="sd">        `order&#39; divide by r Default ,=20.</span>
+<span class="sd">    points : list/array of float, optional</span>
+<span class="sd">        Points in addition to those defined by m at which to split the</span>
+<span class="sd">        integral.  Use this if `f` itself oscillates or there are</span>
+<span class="sd">        discontinuities.  Points will only be included that are less than</span>
+<span class="sd">        the `m` zeros mentined above. Default points=None i.e. no extra points.</span>
+<span class="sd">        Basically the function is never evaluated at any ofthe points, rather</span>
+<span class="sd">        they form the boundary four gauss quadrature.</span>
+<span class="sd">    ng : [7,10,15,20,25,30], optional</span>
+<span class="sd">        Number of gauss points to use in integration after first zero.</span>
+<span class="sd">        Default ng=10. Number of Kronrod points will automatically</span>
+<span class="sd">        by 2 * ng + 1.</span>
+<span class="sd">    ng0 : [7,10,15,20,25,30], optional</span>
+<span class="sd">        Number of gauss points to use in integrating between 0 and first zero.</span>
+<span class="sd">        Default ng0=20.</span>
+<span class="sd">    shanks_ind : int, optional</span>
+<span class="sd">        Start position of intervals (not including the first interval) from</span>
+<span class="sd">        which to begin shanks transformation.  Default shanks_ind=None</span>
+<span class="sd">        i.e. no extrapolation.  The first interval will never be included.</span>
+<span class="sd">        Be careful when using shanks extrapolation; make sure you only begin</span>
+<span class="sd">        to use it after the intgrand is well behaved.  Use the plot_integrand</span>
+<span class="sd">        method to check your integrand.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    f : float</span>
+<span class="sd">        Value of transform at r.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Hankel Transform of order :math:`\\nu` is given by:</span>
+
+<span class="sd">    .. math:: F_\\nu(s)=\mathcal{H}_\\nu\\{f(r)\\} =</span>
+<span class="sd">                \\int_0^{\\infty}rf(r)J_\\nu(sr)\\,\\mathrm{d}r</span>
+
+<span class="sd">    Provided :math:`\\nu\\gt1/2` the inverse hankel transform is the same as</span>
+<span class="sd">    the normal transform:</span>
+
+<span class="sd">    .. math:: f(r)=\mathcal{H}_{\\nu}^{-1}\\{F_{\\nu}(s)\\} =</span>
+<span class="sd">                \\int_0^{\\infty}sF_\\nu(s)J_\\nu(sr)\\,\\mathrm{d}s</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Piessens, Robert. 2000. &#39;Chapter 9 The Hankel Transform&#39;. In The</span>
+<span class="sd">           Transforms and Applications Handbook, edited by Alexander</span>
+<span class="sd">           D. Poularikas, 2nd edition. Boca Raton, USA: CRC Press.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ng0</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                 <span class="n">shanks_ind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="k">if</span> <span class="n">points</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ng</span> <span class="o">=</span> <span class="n">ng</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ng0</span> <span class="o">=</span> <span class="n">ng0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shanks_ind</span> <span class="o">=</span> <span class="n">shanks_ind</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">zeros_of_jn</span><span class="p">()</span>
+
+<div class="viewcode-block" id="HankelTransform.zeros_of_jn"><a class="viewcode-back" href="../../../api/geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.HankelTransform.zeros_of_jn">[docs]</a>    <span class="k">def</span> <span class="nf">zeros_of_jn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Roots of Jn for determining integration intervals (0 prepended)&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">jn_0s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">jn_0s</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">jn_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">return</span></div>
+    <span class="k">def</span> <span class="nf">_integrand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s : float</span>
+<span class="sd">            transform variable.</span>
+<span class="sd">        r : float</span>
+<span class="sd">            independent variable. i.e. integrate w.r.t. to r</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">jn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span> <span class="n">s</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;transform f(r, *args) at s</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s : scalar</span>
+<span class="sd">            transform variable, i.e. coordinate to evaluate transform at</span>
+<span class="sd">        a, b : float, optional</span>
+<span class="sd">            limits of integration.  default a=0, b=np.inf.  A hankel transform</span>
+<span class="sd">            is usually from 0 to infinity.  However, if you have a function</span>
+<span class="sd">            that is defined on [a,b] and zero elsewhere then you can restrict</span>
+<span class="sd">            integration to that interval (shanks_ind will be ignored if</span>
+<span class="sd">            b!=np.inf).</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        F : float</span>
+<span class="sd">            Transformed functin evaluated at s.</span>
+<span class="sd">        err_est : float</span>
+<span class="sd">            Error estimate.  For each interval (i.e. between bessel zeros</span>
+<span class="sd">            and any specified points) sum up 200*abs(G-K)**1.5.  The error is</span>
+<span class="sd">            calculated before any shanks extrapolation so the error is just a</span>
+<span class="sd">            measure of the difference between the coarse Gauss quadrature and</span>
+<span class="sd">            the finer Kronrod quadrature.</span>
+
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">integrand</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_integrand</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="n">zeros</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">jn_0s</span> <span class="o">/</span> <span class="n">s</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1">#zeros becomes both zeros and interesting points/singularities</span>
+            <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span> <span class="o">+</span>
+                    <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">&lt;</span> <span class="n">zeros</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                                     <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)]))</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">b</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+            <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">zeros</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+        <span class="c1">#1st segment</span>
+        <span class="n">igral0</span><span class="p">,</span> <span class="n">err_est0</span> <span class="o">=</span> <span class="n">gk_quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ng0</span><span class="p">)</span>
+        <span class="c1">#remaining segments</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
+            <span class="n">igralm</span><span class="p">,</span> <span class="n">err_estm</span> <span class="o">=</span> <span class="n">gk_quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span>
+                                       <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ng</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">igral0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">err_est0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shanks_ind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">b</span><span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+            <span class="n">igral</span> <span class="o">=</span> <span class="n">igral0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">igralm</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">igralm</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">out</span><span class="o">=</span><span class="n">igralm</span><span class="p">)</span>
+            <span class="n">igral</span> <span class="o">=</span> <span class="n">igral0</span> <span class="o">+</span> <span class="n">shanks</span><span class="p">(</span><span class="n">igralm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shanks_ind</span><span class="p">)</span>
+
+        <span class="n">err_est</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">err_est0</span><span class="p">))</span><span class="o">**</span><span class="mf">1.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="mi">200</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">err_estm</span><span class="p">))</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">igral</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">err_est</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+
+<div class="viewcode-block" id="HankelTransform.plot_integrand"><a class="viewcode-back" href="../../../api/geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.HankelTransform.plot_integrand">[docs]</a>    <span class="k">def</span> <span class="nf">plot_integrand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">npts</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot the integrand</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s : float</span>
+<span class="sd">            Transform variable, i.e. point to evaluate transform at</span>
+<span class="sd">        npts : int, optional</span>
+<span class="sd">            Number of points to plot. Default npts=1000.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        fig : matplotlib.Figure</span>
+<span class="sd">            Use plt.show to plot</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Use this to check if your parameters are appropriate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">integrand</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_integrand</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+        <span class="n">zeros</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">jn_0s</span> <span class="o">/</span> <span class="n">s</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">zeros</span><span class="p">)</span> <span class="o">+</span>
+                    <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span> <span class="o">&lt;</span> <span class="n">zeros</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                                     <span class="o">&amp;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">points</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)]))</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">zeros</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">npts</span><span class="p">)</span>
+<span class="c1">#        y = self.f(x, *self.args) * x * jn(self.order, x * r)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">integrand</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;111&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zeros</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">zeros</span><span class="p">),</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1">#        ax.plot(x, x*jn(self.order, r*x), label=&#39;rJn(r*s)&#39;)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;$rf(r)J_</span><span class="se">\\</span><span class="s1">nu(sr)</span><span class="se">\\</span><span class="s1">,dr)$ at s=</span><span class="si">{:.3g}</span><span class="s1">, f(r) is </span><span class="si">{}</span><span class="s1">(r, *</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fig</span></div></div>
+
+
+<div class="viewcode-block" id="vhankel_transform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.vhankel_transform">[docs]</a><span class="k">def</span> <span class="nf">vhankel_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Hankel transform of f(r)</span>
+
+<span class="sd">    This is a vectorised Hankel transform</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : function or method</span>
+<span class="sd">        Function to apply hankel trasnform to.  f is called with</span>
+<span class="sd">        f(s, *args).</span>
+<span class="sd">    r : 1d array</span>
+<span class="sd">        Coordinate(s) to evaluate transform at.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Arguments to pass to f, default args=().</span>
+<span class="sd">    order : integer, optional</span>
+<span class="sd">        Order of hankel transform. Default order=0.</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Number of segments to break the integration interval into.  Each</span>
+<span class="sd">        segment will be between the zeros of the bessel function.</span>
+<span class="sd">        Default m=20.</span>
+<span class="sd">    ng : [2-20, 32, 64, 100], optional</span>
+<span class="sd">        Number of gauss points to use in integration. Default ng=20.</span>
+<span class="sd">    shanks_ind : int, optional</span>
+<span class="sd">        Start position of intervals to start shanks extrapolation.</span>
+<span class="sd">        Default shanks_ind=None i.e. no extrapolation.</span>
+<span class="sd">        Be careful when using shanks extrapolation; make sure you only begin</span>
+<span class="sd">        to use it after the intgrand is well behaved.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    f : 1d array of float</span>
+<span class="sd">        Value of transform at r.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Hankel Transform of order :math:`\\nu` is given by:</span>
+
+<span class="sd">    .. math:: F_\\nu(s)=\mathcal{H}_\\nu\\{f(r)\\} =</span>
+<span class="sd">                \\int_0^{\\infty}rf(r)J_\\nu(sr)\\,\\mathrm{d}r</span>
+
+<span class="sd">    Provided :math:`\\nu\\gt1/2` the inverse hankel transform is the same as</span>
+<span class="sd">    the normal transform:</span>
+
+<span class="sd">    .. math:: f(r)=\mathcal{H}_{\\nu}^{-1}\\{F_{\\nu}(s)\\} =</span>
+<span class="sd">                \\int_0^{\\infty}sF_\\nu(s)J_\\nu(sr)\\,\\mathrm{d}s</span>
+
+
+<span class="sd">    Note that because this implementation does not allow for input of</span>
+<span class="sd">    extra point to break up the integration inteval, there is no way to</span>
+<span class="sd">    account for singularities and other oscillations.  If you need this control</span>
+<span class="sd">    then see the HankelTransform class which is not vectorized but provides a</span>
+<span class="sd">    few more options.</span>
+
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    HankelTransform : Non vectorised Hankel transform.</span>
+
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Piessens, Robert. 2000. &#39;Chapter 9 The Hankel Transform&#39;. In The</span>
+<span class="sd">           Transforms and Applications Handbook, edited by Alexander</span>
+<span class="sd">           D. Poularikas, 2nd edition. Boca Raton, USA: CRC Press.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">ri</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="n">xk_</span><span class="p">,</span> <span class="n">wk</span> <span class="o">=</span> <span class="n">gauss_legendre_abscissae_and_weights</span><span class="p">(</span><span class="n">ng</span><span class="p">)</span>
+
+    <span class="c1"># integration intervals</span>
+    <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">jn_zeros</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+
+    <span class="n">ri</span> <span class="o">=</span> <span class="n">ri</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">aj</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">bj</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">xk_</span> <span class="o">=</span> <span class="n">xk_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">wk</span> <span class="o">=</span> <span class="n">wk</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+
+    <span class="n">aij</span> <span class="o">=</span> <span class="n">aj</span> <span class="o">/</span> <span class="n">ri</span>
+    <span class="n">bij</span> <span class="o">=</span> <span class="n">bj</span> <span class="o">/</span> <span class="n">ri</span>
+
+    <span class="n">bma</span> <span class="o">=</span> <span class="p">(</span><span class="n">bij</span> <span class="o">-</span> <span class="n">aij</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># b minus a</span>
+    <span class="n">bpa</span> <span class="o">=</span> <span class="p">(</span><span class="n">aij</span> <span class="o">+</span> <span class="n">bij</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span> <span class="c1"># b plus a</span>
+
+
+    <span class="n">xijk</span> <span class="o">=</span> <span class="n">bma</span> <span class="o">*</span> <span class="n">xk_</span> <span class="o">+</span> <span class="n">bpa</span> <span class="c1"># xj_ are in [-1, 1] so need to transform to [a, b]</span>
+
+    <span class="n">fijk</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xijk</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">fijk</span> <span class="o">*=</span> <span class="n">jn</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">ri</span> <span class="o">*</span> <span class="n">xijk</span><span class="p">)</span>
+    <span class="n">fijk</span> <span class="o">*=</span> <span class="n">xijk</span>
+
+    <span class="n">igral</span> <span class="o">=</span> <span class="n">bma</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">fijk</span> <span class="o">*</span> <span class="n">wk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+    <span class="k">if</span> <span class="n">shanks_ind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">igral</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#extrapolate</span>
+        <span class="n">igral</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">igral</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">shanks</span><span class="p">(</span><span class="n">igral</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="p">)</span></div>
+
+
+<span class="c1">##Hankel transform pairs</span>
+<span class="c1">##zero order</span>
+<span class="c1">#def hankel1(s, a):</span>
+<span class="c1">#    &quot;&quot;&quot;a/(s**2 + a**2)**1.5&quot;&quot;&quot;</span>
+<span class="c1">#    #H(hankel1)=exp(-a* r)</span>
+<span class="c1">#    return a/(s**2 + a**2)**1.5</span>
+<span class="c1">#def hankel1_(r, a):</span>
+<span class="c1">#    &quot;&quot;&quot;exp(-a*r)&quot;&quot;&quot;</span>
+<span class="c1">#    return np.exp(-a*r)</span>
+<span class="c1">#</span>
+<span class="c1">#def hankel2(s, *args):</span>
+<span class="c1">#    &quot;1/s&quot;</span>
+<span class="c1">#    #H(hankel2)=1/r</span>
+<span class="c1">#    return 1/s</span>
+<span class="c1">#def hankel2_(r, *args):</span>
+<span class="c1">#    &quot;1/r&quot;</span>
+<span class="c1">#    return 1/r</span>
+<span class="c1">#</span>
+<span class="c1">#def hankel3(s,a):</span>
+<span class="c1">#    &quot;1/s*jn(0,a/s)&quot;</span>
+<span class="c1">#    #H(hankel3)=1/rJ0(2*(a*r)**0.5)</span>
+<span class="c1">#    return 1/s*jn(0,a/s)</span>
+<span class="c1">#def hankel3_(r, a):</span>
+<span class="c1">#    &quot;1/rJ0(2*(a*r)**0.5)&quot;</span>
+<span class="c1">#    return 1/r*jn(0,(2*(a*r)**0.5))</span>
+<span class="c1">#</span>
+<span class="c1">##integer order</span>
+<span class="c1">#def hankel4(s, a, v=0):</span>
+<span class="c1">#    &quot;&quot;&quot;(sqrt(s**2+a**2)-a)**v/(s**v*sqrt(s**2+a**2))&quot;&quot;&quot;</span>
+<span class="c1">#    #H(hankel4)=exp(-a*r)/r</span>
+<span class="c1">#    return (np.sqrt(s**2 + a**2) - a)**v/(s**v*np.sqrt(s**2+a**2))</span>
+<span class="c1">#</span>
+<span class="c1">#def hankel4_(r, a, *args):</span>
+<span class="c1">#    &quot;&quot;&quot;exp(-a*r)/r&quot;&quot;&quot;</span>
+<span class="c1">#    return np.exp(-a*r)/r</span>
+<span class="c1">#</span>
+<span class="c1">#def hankel5(s, a, v=0):</span>
+<span class="c1">#    &quot;&quot;&quot;s**v/(2*a**2)**(v+1)*exp(-s**2/(4*a**2))&quot;&quot;&quot;</span>
+<span class="c1">#    #H(hankel5)=exp(-a**2*r**2)*r**v</span>
+<span class="c1">#    return s**v/(2*a**2)**(v+1)*np.exp(-s**2/(4*a**2))</span>
+<span class="c1">#def hankel5_(r, a, v=0):</span>
+<span class="c1">#    &quot;&quot;&quot;exp(-a**2*r**2)*r**v&quot;&quot;&quot;</span>
+<span class="c1">#    return np.exp(-a**2*r**2)*r**v</span>
+
+
+
+<div class="viewcode-block" id="scratch"><a class="viewcode-back" href="../../../api/geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.scratch">[docs]</a><span class="k">def</span> <span class="nf">scratch</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nose</span>
+    <span class="n">nose</span><span class="o">.</span><span class="n">runmodule</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nose&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbosity=3&#39;</span><span class="p">,</span> <span class="s1">&#39;--with-doctest&#39;</span><span class="p">])</span>
+<span class="c1">#    nose.runmodule(argv=[&#39;nose&#39;, &#39;--verbosity=3&#39;])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

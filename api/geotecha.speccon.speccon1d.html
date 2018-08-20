@@ -1,0 +1,1803 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon1d &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="integrals_generate_code" href="geotecha.speccon.integrals_generate_code.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">speccon1d</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.speccon.speccon1d">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.speccon.html">speccon</a><ul>
+      <li>Previous: <a href="geotecha.speccon.integrals_generate_code.html" title="previous chapter">integrals_generate_code</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.speccon.speccon1d.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon1d">
+<h1>speccon1d<a class="headerlink" href="#speccon1d" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d" title="geotecha.speccon.speccon1d.Speccon1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Speccon1d</span></code></a>([reader,&nbsp;pkg_for_version])</td>
+<td>Solve 1D parabolic partial differential equation using spectral method.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_D_aDf_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_D_aDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_BC_D_aDf_linear</span></code></a>(drn,&nbsp;m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix that arises from homogenising D[a(Z)*D[u(Z, t),Z],Z] for non_zero top and bottom boundary conditions.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_aDfDt_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_aDfDt_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_BC_aDfDt_linear</span></code></a>(drn,&nbsp;m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix that arises from homogenising a(Z)*D[u(Z, t), t] for non_zero top and bottom boundary conditions.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abDfDt_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abDfDt_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_BC_abDfDt_linear</span></code></a>(drn,&nbsp;m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix that arises from homogenising a(Z)*b(Z)*D[u(Z, t), t] for non_zero top and bottom boundary conditions.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abf_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_BC_abf_linear</span></code></a>(drn,&nbsp;m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix that arises from homogenising a(Z)*b(Z)*u(Z,t) for non_zero top and bottom boundary conditions.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_deltaf_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_deltaf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_BC_deltaf_linear</span></code></a>(drn,&nbsp;m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix that arises from homogenising delta(Z-zd)*u(Z,t) for non_zero top and bottom boundary conditions.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_aDmagDt_bilinear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_aDmagDt_bilinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_aDmagDt_bilinear</span></code></a>(m,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix for loading terms of the form a(Z) * D[mag(t, Z),t] where mag is piecewise linear in depth and time and multiplied by cos(omega * t + phase).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_abmag_bilinear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_abmag_bilinear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_abmag_bilinear</span></code></a>(m,&nbsp;eigs,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix for loading terms of the form a(Z)*b(Z)*mag(t, Z) where mag is piecewise linear in depth and time and multiplied by cos(omega * t + phase).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_deltamag_linear" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_deltamag_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_deltamag_linear</span></code></a>(m,&nbsp;eigs,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix for loading terms of the form delta(Z-Zd)*mag(t) where mag is piecewise linear in time multiplied by cos(omega * t + phase).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_mvpl" title="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_mvpl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_E_Igamv_the_mvpl</span></code></a>(m,&nbsp;eigs,&nbsp;tvals,&nbsp;…)</td>
+<td>Calculate E and theta parts and assemble E_Igamv_the matrix for loading terms of the form a(Z) * delta(Z-Zd)*mag(t) where mag is piecewise linear in time multiplied by cos(omega * t + phase).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_avgf" title="geotecha.speccon.speccon1d.dim1sin_avgf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_avgf</span></code></a>(m,&nbsp;z,&nbsp;tvals,&nbsp;v_E_Igamv_the,&nbsp;drn)</td>
+<td>Average u(Z,t) between Z1 and Z2 where u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_f" title="geotecha.speccon.speccon1d.dim1sin_f"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_f</span></code></a>(m,&nbsp;outz,&nbsp;tvals,&nbsp;v_E_Igamv_the,&nbsp;drn)</td>
+<td>Assemble output u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_foft_Ipsiw_the_BC_D_aDf_linear" title="geotecha.speccon.speccon1d.dim1sin_foft_Ipsiw_the_BC_D_aDf_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_foft_Ipsiw_the_BC_D_aDf_linear</span></code></a>(drn,&nbsp;…)</td>
+<td>Calculate the f(t) and theta parts and assemble the foft_Ipsiw_the matrix that arises from homgenising D[a(Z)*D[u(Z, t),Z],Z] terms with non_zero top and bottom boundary conditions when modelling drains/wells/columns with finite permeability.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.dim1sin_integrate_af" title="geotecha.speccon.speccon1d.dim1sin_integrate_af"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dim1sin_integrate_af</span></code></a>(m,&nbsp;z,&nbsp;tvals,&nbsp;…[,&nbsp;…])</td>
+<td>Integrate u(Z,t) between Z1 and Z2 where u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.speccon.speccon1d">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.speccon.speccon1d" title="Permalink to this headline">¶</a></h2>
+<p>This module has functions classes and common functionality for one dimensinal
+Spectral Galerkin methods.</p>
+<dl class="class">
+<dt id="geotecha.speccon.speccon1d.Speccon1d">
+<em class="property">class </em><code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">Speccon1d</code><span class="sig-paren">(</span><em>reader=None</em>, <em>pkg_for_version='geotecha'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#Speccon1d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.Speccon1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="geotecha.inputoutput.inputoutput.html#geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver" title="geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver</span></code></a></p>
+<p>Solve 1D parabolic partial differential equation using spectral method.</p>
+<p>Basically a base class to provide a broad template for one dimensional
+spectral method consolidation problems.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.inputoutput.InputFileLoaderCheckerSaver</span></code></dt>
+<dd>Details on how to initialize the object and attribute checks.</dd>
+</dl>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_attributes</span></code>()</td>
+<td>Perform checks on attributes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_all" title="geotecha.speccon.speccon1d.Speccon1d.make_all"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_all</span></code></a>()</td>
+<td>Run checks, make all arrays, make output</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_output" title="geotecha.speccon.speccon1d.Speccon1d.make_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_output</span></code></a>()</td>
+<td>Make all output i.e.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays" title="geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_dependent_arrays</span></code></a>()</td>
+<td>Make all time-independent arrays; To be overridden in subclasses.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays" title="geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_independent_arrays</span></code></a>()</td>
+<td>Make all time-independent arrays; To be overridden in subclasses.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d.Speccon1d.make_all">
+<code class="descname">make_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#Speccon1d.make_all"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.Speccon1d.make_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run checks, make all arrays, make output</p>
+<p>Generally run this after attributes have been entered</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_attributes</span></code>, <a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays" title="geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_independent_arrays</span></code></a>, <a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays" title="geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_dependent_arrays</span></code></a>, <a class="reference internal" href="#geotecha.speccon.speccon1d.Speccon1d.make_output" title="geotecha.speccon.speccon1d.Speccon1d.make_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_output</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d.Speccon1d.make_output">
+<code class="descname">make_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#Speccon1d.make_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.Speccon1d.make_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all output i.e. data tables; To be overridden in subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays">
+<code class="descname">make_time_dependent_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#Speccon1d.make_time_dependent_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_dependent_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all time-independent arrays; To be overridden in subclasses.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays">
+<code class="descname">make_time_independent_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#Speccon1d.make_time_independent_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.Speccon1d.make_time_independent_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all time-independent arrays; To be overridden in subclasses.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_D_aDf_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_BC_D_aDf_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>top_vs_time</em>, <em>bot_vs_time</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_BC_D_aDf_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_D_aDf_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix that arises
+from homogenising D[a(Z)*D[u(Z, t),Z],Z] for non_zero top and bottom
+boundary conditions.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  This function calculates the time dependent
+E part, the depth dependent theta part, and then assembles
+E*inverse(gam*v)*theta which forms part of solution
+v(Z,t)=phi*v*E*inverse(gam*v)*theta.  The E and theta parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form D[a(Z)*D[u(Z, t),Z],Z].</p>
+<p>The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing
+are superposed.    The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do v(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+radial draiange term is D[kv(z)*D[u(Z,t), Z],Z] so <cite>a</cite> would be kv.
+be et.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi} \mathbf{v} \mathbf{E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>Two additional loading terms are created with each substitution, one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial Z}
+\left(
+  {a\left({Z}\right)
+  \frac{\partial u\left({Z,t}\right)}{\partial Z}}
+\right)\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span>
+is a piecewise linear function with respect to <span class="math notranslate nohighlight">\(Z\)</span></p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  \frac{\partial}{\partial Z}
+  \left(
+    {a\left({Z}\right)
+    \frac{\partial \sigma\left({Z}\right)}{\partial Z}}
+  \right)
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  {\cos\left(\omega\tau+\textrm{phase}\right)}
+  {\sigma\left(\tau\right)}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_aDfDt_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_BC_aDfDt_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>top_vs_time</em>, <em>bot_vs_time</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_BC_aDfDt_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_aDfDt_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix that arises
+from homogenising a(Z)*D[u(Z, t), t] for non_zero top and bottom boundary
+conditions.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  This function calculates the time dependent
+E part, the depth dependent theta part, and then assembles
+E*inverse(gam*v)*theta which forms part of solution
+v(Z,t)=phi*v*E*inverse(gam*v)*theta.  The E and theta parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form a(z)*D[u(Z,t), t].</p>
+<p>The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing
+are superposed.    The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do v(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+loading term is mv*D[sigma(z, t), t] so <cite>a</cite> would be mv.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>Two additional loading terms are created with each substitution, one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[a\left({Z}\right)\frac{\partial u}{\partial t}\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span>
+is a piecewise linear function w.r.t. <span class="math notranslate nohighlight">\(Z\)</span></p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  {a\left(Z\right)}
+  {\sigma\left(Z\right)}
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  \frac{d{
+    {\cos\left(\omega\tau+\textrm{phase}\right)}
+    \sigma\left(\tau\right)}}
+    {d\tau}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abDfDt_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_BC_abDfDt_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>b</em>, <em>top_vs_time=None</em>, <em>bot_vs_time=None</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_BC_abDfDt_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abDfDt_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix that arises
+from homogenising a(Z)*b(Z)*D[u(Z, t), t] for non_zero top and bottom
+boundary conditions.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  This function calculates the time dependent
+E part, the depth dependent theta part, and then assembles
+E*inverse(gam*v)*theta which forms part of solution
+v(Z,t)=phi*v*E*inverse(gam*v)*theta.  The E and theta parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form a(Z)*b(Z)*D[u(Z,t), t].</p>
+<p>The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing
+are superposed.    The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do v(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*Z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+radial draiange term is dTh*kh*et*u(Z,t) <cite>a</cite> would be kh, <cite>b</cite> would
+be et.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>Two additional loading terms are created with each substitution, one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[a\left({Z}\right)
+b\left({Z}\right)
+\frac{\partial u}{\partial t}\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(Z\right)\)</span>
+are piecewise linear functions w.r.t. <span class="math notranslate nohighlight">\(Z\)</span></p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  {a\left(Z\right)}
+  {b\left(Z\right)}
+  {\sigma\left(Z\right)}
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  \frac{d{
+    {\cos\left(\omega\tau+\textrm{phase}\right)}
+    \sigma\left(\tau\right)}}
+    {d\tau}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abf_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_BC_abf_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>b</em>, <em>top_vs_time=None</em>, <em>bot_vs_time=None</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_BC_abf_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_abf_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix that arises
+from homogenising a(Z)*b(Z)*u(Z,t) for non_zero top and bottom boundary
+conditions.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  This function calculates the time dependent
+E part, the depth dependent theta part, and then assembles
+E*inverse(gam*v)*theta which forms part of solution
+v(Z,t)=phi*v*E*inverse(gam*v)*theta.  The E and theta parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form a(z)*b(z)*u(Z,t)</p>
+<p>The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing
+are superposed.    The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do v(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+radial draiange term is dTh*kh*et*u(Z,t) <cite>a</cite> would be kh, <cite>b</cite> would
+be et.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>Two additional loading terms are created with each substitution, one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[a\left({Z}\right)
+b\left({Z}\right)
+u\left({Z,t}\right)\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span> and <span class="math notranslate nohighlight">\(b\left(Z\right)\)</span>
+are piecewise linear functions with respect to <span class="math notranslate nohighlight">\(Z\)</span></p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  {a\left(Z\right)}
+  {b\left(Z\right)}
+  {\sigma\left(Z\right)}
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  {\cos\left(\omega\tau+\textrm{phase}\right)}
+  {\sigma\left(\tau\right)}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_deltaf_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_BC_deltaf_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>zvals</em>, <em>pseudo_k</em>, <em>top_vs_time</em>, <em>bot_vs_time</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_BC_deltaf_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_BC_deltaf_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix that arises
+from homogenising delta(Z-zd)*u(Z,t) for non_zero top and bottom
+boundary conditions.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  This function calculates the time dependent
+E part, the depth dependent theta part, and then assembles
+E*inverse(gam*v)*theta which forms part of solution
+v(Z,t)=phi*v*E*inverse(gam*v)*theta.  The E and theta parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form delta(Z-zd)*u(Z,t).</p>
+<p>The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing
+are superposed.    The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do v(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>zvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">z values defining each delta function, zd.</p>
+</dd>
+<dt><strong>pseudo_k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">Coefficients to multiply each delta function by.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>Two additional loading terms are created with each substitution, one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[k_{\textrm{pseudo}}
+\delta\left({Z-Z_d}\right)
+u\left({Z,t}\right)\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.</p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  k_{\textrm{pseudo}}
+  \delta\left({Z-Z_d}\right)
+  {\sigma\left(Z\right)}
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  {\cos\left(\omega\tau+\textrm{phase}\right)}
+  {\sigma\left(\tau\right)}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that this function, unlike many similar functions in this module,
+has only been formulated for Normalised depths between [0,1]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_aDmagDt_bilinear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_aDmagDt_bilinear</code><span class="sig-paren">(</span><em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>mag_vs_depth</em>, <em>mag_vs_time</em>, <em>omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_aDmagDt_bilinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_aDmagDt_bilinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix
+for loading terms of the form a(Z) * D[mag(t, Z),t] where mag is
+piecewise linear in depth and time and multiplied by cos(omega * t + phase).</p>
+<p>Make the E*inverse(gam*v)*theta part of solution
+u(Z,t)=phi*v*E*inverse(gam*v)*theta for terms of the form
+a(Z) * D[mag(t, Z),t].
+The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing and
+are superposed. The result is an array
+of size (neig, len(tvals)). So each column is the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do u(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+loading term is mv*D[sigma(z, t), t] so <cite>a</cite> would be mv.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+for terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[a\left({Z}\right)\frac{\partial \sigma}{\partial t}\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(\sigma\left({t}\right)\)</span> is piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span>
+is a piecewise linear function with respect to <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  {a\left(Z\right)}
+  {\sigma\left(Z\right)}
+  \phi_i\,dZ}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  \frac{d{
+    {\cos\left(\omega\tau+\textrm{phase}\right)}
+    \sigma\left(\tau\right)}}
+    {d\tau}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_abmag_bilinear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_abmag_bilinear</code><span class="sig-paren">(</span><em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>a</em>, <em>b</em>, <em>mag_vs_depth</em>, <em>mag_vs_time</em>, <em>omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_abmag_bilinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_abmag_bilinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix
+for loading terms of the form a(Z)*b(Z)*mag(t, Z) where mag is
+piecewise linear in depth and time and multiplied by cos(omega * t + phase).</p>
+<p>Make the E*inverse(gam*v)*theta part of solution u=phi*v*E*inverse(gam*v)*theta.
+The contribution of each <cite>mag_vs_time</cite>-<cite>mag_vs_depth</cite>-<cite>omega_phase</cite> pair are superposed.
+The result is an array
+of size (neig, len(tvals)). So the columns are the column array
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do u = phi*v*E_Igamv_the</p>
+<p>Uses sin(m*z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">eigenvlaues of BVP. generate with geoteca.speccon.m_from_sin_mx</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">list of eigenvalues</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">list of time values to calculate integral at</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">speccon matrix</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation vacuum term is
+kh*et*w(z,t) so a would be <cite>kh</cite>, <cite>b</cite> would be <cite>et</cite></p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation vacuum term is
+kh*et*w(z,t) so a would be <cite>kh</cite>, <cite>b</cite> would be <cite>et</cite></p>
+</dd>
+<dt><strong>mag_vs_depth</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude  vs depth.</p>
+</dd>
+<dt><strong>mag_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time</p>
+</dd>
+<dt><strong>omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">time factor multiple (default = 1.0)</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional=None</span></dt>
+<dd><p class="first last">a slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+default=None i.e. no elements of theta will be set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the: ndarray</strong></dt>
+<dd><p class="first last">loading matrix</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=\sigma\left({Z}\right)\sigma\left({t}\right)\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=\mathbf{\Phi v E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\]</div>
+<p>In this instance <span class="math notranslate nohighlight">\(\sigma\left({Z}\right)\)</span>
+and <span class="math notranslate nohighlight">\(\sigma\left({t}\right)\)</span> are piecewise linear in depth and
+time (hence the ‘bilinear’ in the function name) there is also a cyclic
+component.</p>
+<p><cite>dim1sin_E_Igamv_the_abmag_bilinear</cite> will calculate
+<span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+for terms with the form:</p>
+<div class="math notranslate nohighlight">
+\[a\left({z}\right)b\left({z}\right)\frac{\partial\sigma\left({Z,t}\right)}{\partial t}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\left(z\right)\)</span>, <span class="math notranslate nohighlight">\(b\left(z\right)\)</span> are
+piecewise linear functions w.r.t. <span class="math notranslate nohighlight">\(z\)</span>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_deltamag_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_deltamag_linear</code><span class="sig-paren">(</span><em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>zvals</em>, <em>pseudo_k</em>, <em>mag_vs_time</em>, <em>omega_phase=None</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_deltamag_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_deltamag_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix
+for loading terms of the form delta(Z-Zd)*mag(t) where mag is
+piecewise linear in time multiplied by cos(omega * t + phase).</p>
+<p>Make the E*inverse(gam*v)*theta part of solution
+u(Z,t)=phi*v*E*inverse(gam*v)*theta for terms of the form
+k*delta(Z-Zd)*mag(t).
+The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing and each zval
+are superposed. The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do u(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*Z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>zvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">z values defining each delta function, zd.</p>
+</dd>
+<dt><strong>pseudo_k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">Coefficients to multiply each delta function by.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to the consolidation equation using the spectral method has
+the form:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi v E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>This function calculates <span class="math notranslate nohighlight">\(\mathbf{E}\left(\mathbf{\Gamma v}\right)^{-1}\mathbf{\theta}\)</span>
+for terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[k_{\textrm{pseudo}}
+\delta\left({Z-Z_d}\right)
+\sigma\left({t}\right)\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(\sigma\left({t}\right)\)</span> is piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.</p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  k_{\textrm{pseudo}}
+  \delta\left({Z-Z_d}\right)
+  \phi_i\,dZ}\]</div>
+<p>The <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> matrix for each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{i,j}=
+\int_{0}^{t_j}{
+  {\cos\left(\omega\tau+\textrm{phase}\right)}
+  {\sigma\left(\tau\right)}
+  {\exp\left({(dT\left(t-\tau\right)\lambda_i}\right)}
+  \,d\tau}\]</div>
+<p>where</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\lambda_i\)</span> is the <cite>ith</cite> eigenvalue of the problem,</li>
+<li><span class="math notranslate nohighlight">\(dT\)</span> is a time factor for numerical convienience,</li>
+<li><span class="math notranslate nohighlight">\(\sigma\left(\tau\right)\)</span> is the piecewise linear time
+dependant load.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_mvpl">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_E_Igamv_the_mvpl</code><span class="sig-paren">(</span><em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Igamv</em>, <em>moving_loads</em>, <em>dT=1.0</em>, <em>theta_zero_indexes=None</em>, <em>implementation='vectorized'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_E_Igamv_the_mvpl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_E_Igamv_the_mvpl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate E and theta parts and assemble E_Igamv_the matrix
+for loading terms of the form a(Z) * delta(Z-Zd)*mag(t) where mag is
+piecewise linear in time multiplied by cos(omega * t + phase).</p>
+<p>Make the E*inverse(gam*v)*theta part of solution
+u(Z,t)=phi*v*E*inverse(gam*v)*theta for terms of the form
+a(Z) * delta(Z-Zd)*mag(t).
+The contribution of each <cite>mag_vs_time</cite>-<cite>omega_phase</cite> pairing and each zval
+are superposed. The result is an array
+of size (neig, len(tvals)). So each column is the are the column vector
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do u(Z,t) = phi*v*E_Igamv_the.</p>
+<p>Uses sin(m*Z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Igamv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Speccon matrix.  Igamv = inverse of [gam * v])</p>
+</dd>
+<dt><strong>moving_loads</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of MovingPointLoads objects</span></dt>
+<dd><p class="first last">List of loads to apply .</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray, dtype=complex</span></dt>
+<dd><p class="first last">Loading matrix of size (neig, len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>returns a complex array!!!</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_avgf">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_avgf</code><span class="sig-paren">(</span><em>m</em>, <em>z</em>, <em>tvals</em>, <em>v_E_Igamv_the</em>, <em>drn</em>, <em>top_vs_time=None</em>, <em>bot_vs_time=None</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_avgf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_avgf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average u(Z,t) between Z1 and Z2 where
+u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</p>
+<p>Basically calculates the average phi part for each z pair value, then dot product
+with v_E_Igamv_the (which has elsewhere been calculated at each tvals
+value).  Then account for non-zero boundary conditions by
+adding average of utop(t)*(1-Z) and ubot(t)*Z parts for each z, tvals pair.</p>
+<p>Use sin(m*Z) for the phi part.</p>
+<dl class="docutils">
+<dt>m <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd>Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</dd>
+<dt>z <span class="classifier-delimiter">:</span> <span class="classifier">size (n, 2) 2d numpy.ndarray</span></dt>
+<dd>Depths to evaluate average between.</dd>
+<dt>tvals <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd>Time values to evaluate at.</dd>
+<dt>eigs <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd>List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</dd>
+<dt>tvals <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd>List of time values to evaluate E matrix at.</dd>
+<dt>v_E_Igamv_the <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of size (neig, len(tvals))</span></dt>
+<dd>Speccon matrix.</dd>
+<dt>drn <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd>Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</dd>
+<dt>top_vs_time, bot_vs_time <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd>Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</dd>
+<dt>top_omega_phase, bot_omega_phase <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd>(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">np.ndarray</span></dt>
+<dd><p class="first last">Average pore pressure between depths at each time.
+Array of size (len(z), len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The average of the <span class="math notranslate nohighlight">\(\phi\)</span> term is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\phi}_{i\textrm{average}}=
+\frac{1}{Z_2-Z_1}
+\int_{z_1}^{z_2}{\sin\left({m_i Z}\right)\,dZ}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_f">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_f</code><span class="sig-paren">(</span><em>m</em>, <em>outz</em>, <em>tvals</em>, <em>v_E_Igamv_the</em>, <em>drn</em>, <em>top_vs_time=None</em>, <em>bot_vs_time=None</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_f"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_f" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble output u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</p>
+<p>Basically calculates the phi part for each outz value, then dot product
+with v_E_Igamv_the (which has elsewhere been calculated at each tvals
+value).  Then account for non-zero boundary conditions by
+adding utop(t)*(1-Z) and ubot(t)*Z parts for each outz, tvals pair.</p>
+<p>Use sin(m*Z) for the phi part.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>outz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">Depths to evaluate at.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">Time values to evaluate at</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>v_E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of size (neig, len(tvals))</span></dt>
+<dd><p class="first last">Speccon matrix.</p>
+</dd>
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">np.ndarray</span></dt>
+<dd><p class="first last">Pore pressure at depth and time. Array of size (len(outz), len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The <span class="math notranslate nohighlight">\(\phi\)</span> term is simply: <span class="math notranslate nohighlight">\(\sin\left({m Z}\right)\)</span>
+evaluated at each required depth.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_foft_Ipsiw_the_BC_D_aDf_linear">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_foft_Ipsiw_the_BC_D_aDf_linear</code><span class="sig-paren">(</span><em>drn</em>, <em>m</em>, <em>eigs</em>, <em>tvals</em>, <em>Ipsiw</em>, <em>a</em>, <em>top_vs_time</em>, <em>bot_vs_time</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em>, <em>theta_zero_indexes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_foft_Ipsiw_the_BC_D_aDf_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_foft_Ipsiw_the_BC_D_aDf_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the f(t) and theta parts and assemble the foft_Ipsiw_the
+matrix that arises from homgenising D[a(Z)*D[u(Z, t),Z],Z] terms with
+non_zero top and bottom boundary conditions when modelling
+drains/wells/columns with finite permeability.</p>
+<p>When accounting for non-zero boundary conditions we homogenise the
+governing equation by letting u(Z,t) = v(Z,t) + utop(t)*(1-Z) + ubot(t)*Z
+and solving for v(Z, t).  For some problems the homogenisation process
+produces an additional term that has t be added to the usual solution of
+v(Z,t)=phi*v*E*inverse(gam*v)*theta
+i.e. v(Z,t)=phi*v*E*inverse(gam*v)*theta + f(t)*Ipsiw*theta
+This function calculates the f(t) and theta parts of the second term and
+then assembles the foft_Ipsiw_the matrix. These parts arise
+by subbing the boundary conditions into into governing equation terms of
+the form D[a(Z)*D[u(Z, t),Z],Z].</p>
+<p>Uses sin(m*Z) in the calculation of theta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>Ipsiw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray, square matrix</span></dt>
+<dd><p class="first last">Speccon matrix.  Ipsiw was originally
+formulated/denoted for vertical peremability term in the well
+resistance flow equation for vertical drain consolidatoin with
+well resistance.  It is different, but still a square matrix, for
+the stone column consolidation problem.  As long as you know what you
+are doing Ipsiw can be any appropriate square matrix.</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Piewcewise linear function.  e.g. for 1d consolidation surcharge
+radial draiange term is D[kv(z)*D[u(Z,t), Z],Z] so <cite>a</cite> would be kv.
+be et.</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">float</span></code>, optional</span></dt>
+<dd><p class="first last">Time factor multiple for numerical convieniece. Default dT=1.0.</p>
+</dd>
+<dt><strong>theta_zero_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice/list etc., optional</span></dt>
+<dd><p class="first last">A slice object, list, etc that can be used for numpy fancy indexing.
+Any specified index of the theta vector will be set to zero.  This is
+useful when using the spectral method with block matrices and the
+loading term only refers to a subset of the equations.  When using
+block matrices m should be the same size as the block matrix.
+Default theta_zero_indexes=None i.e. no elements of theta will be
+set to zero.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>foft_Ipsiw_the: ndarray</strong></dt>
+<dd><p class="first last">Additional homgenising term of size (neig, len(t)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Assuming the loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p>the solution to consolidation equation using the spectral method has a
+similar form to the following:</p>
+<div class="math notranslate nohighlight">
+\[u\left(Z,t\right)=
+\mathbf{\phi} \mathbf{v} \mathbf{E}
+\left(\mathbf{\Gamma v}\right)^{-1}
+\mathbf{\theta}\]</div>
+<p>When we consider non-zero boundary conditions, additional loading terms are
+created when we sub in the following into the original governing equation.</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)=
+v\left({Z,t}\right) +
+u_{top}\left({t}\right)\left({1-Z}\right) +
+u_{bot}\left({b}\right)Z\]</div>
+<p>As well as loading terms the process may produce an extra term to be
+added to the final solution of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\phi}
+\sigma\left({t}\right)
+\mathbf{\psi}_{w}^{1}
+\mathbf{\theta}_w\]</div>
+<p>There are actually two of these terms one
+for the top boundary condition and one for the bottom boundary condition.</p>
+<p>This function calculates <span class="math notranslate nohighlight">\(\sigma\left({t}\right)\mathbf{\psi}_{w}^{-1}\mathbf{\theta}_w\)</span></p>
+<p>when substitutions are made in terms of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial}{\partial Z}
+\left(
+  {a\left({Z}\right)
+  \frac{\partial u\left({Z,t}\right)}{\partial Z}}
+\right)\]</div>
+<p>It is assumed that <span class="math notranslate nohighlight">\(u_{top}\left({t}\right)\)</span> and
+<span class="math notranslate nohighlight">\(u_{bot}\left({t}\right)\)</span> are piecewise linear
+in time with a cyclic component, and that multiple functions are
+superposed.  Also <span class="math notranslate nohighlight">\(a\left(Z\right)\)</span>
+is a piecewise linear function with respect to <span class="math notranslate nohighlight">\(Z\)</span></p>
+<p>For this particular function the <span class="math notranslate nohighlight">\(\mathbf{\theta}\)</span> vector for
+each load is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\theta}_{i}=
+\int_{0}^1{
+  \frac{\partial}{\partial Z}
+  \left(
+    {a\left({Z}\right)
+    \frac{\partial \sigma\left({Z}\right)}{\partial Z}}
+  \right)
+  f\left({Z}\right)
+  \phi_i\,dZ}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(f\left({Z}\right)\)</span> is the appropriate z-dependent term
+corresponding to either <span class="math notranslate nohighlight">\(u_{top}\)</span> or <span class="math notranslate nohighlight">\(u_{bot}\)</span> homogenisations.</p>
+<p>The time dependent function evaluated at each time produces a matrix
+that we will call <span class="math notranslate nohighlight">\(\mathbf{E}\)</span> (not to be confused with other E
+matrices) which is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{E}_{j}=
+{\sigma\left(t_j\right)}
+{\cos\left(\omega t_j+\textrm{phase}\right)}\]</div>
+<p>Note that the listed equations above are in terms of normalised depth Z,
+with depth integrations between [0, 1].  However, IF YOU KNOW WHAT YOU
+ARE DOING the integrations can be done using non-normalised depths.
+The first z value in the piecewise definition a(z) must still be 0
+however the end point for integration will be the final z value in the
+definition of a(z).  If you are doing this then your <cite>m</cite> values will
+include the normalising Factor. e.g. m = [pi/2/H, 3*pi/2/H] and a(z) is
+defined in two layers [0, z1], [z1, zend] as opposed to
+m = [pi/2, 3*pi/2] and a(Z) is two layers [0, z1/H], [z1/H, zend/H].</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d.dim1sin_integrate_af">
+<code class="descclassname">geotecha.speccon.speccon1d.</code><code class="descname">dim1sin_integrate_af</code><span class="sig-paren">(</span><em>m</em>, <em>z</em>, <em>tvals</em>, <em>v_E_Igamv_the</em>, <em>drn</em>, <em>a</em>, <em>top_vs_time=None</em>, <em>bot_vs_time=None</em>, <em>top_omega_phase=None</em>, <em>bot_omega_phase=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d.html#dim1sin_integrate_af"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d.dim1sin_integrate_af" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integrate u(Z,t) between Z1 and Z2 where
+u(Z,t) = phi * v_E_Igam_v_the + utop(t) * (1-Z) + ubot(t)*Z.</p>
+<p>Basically calculates the integral phi part for each z pair value, then dot product
+with v_E_Igamv_the (which has elsewhere been calculated at each tvals
+value).  Then account for non-zero boundary conditions by
+adding average of utop(t)*(1-Z) and ubot(t)*Z parts for each z, tvals pair.</p>
+<p>Use sin(m*Z) for the phi part.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier"><code class="docutils literal notranslate"><span class="pre">list</span></code> of <code class="docutils literal notranslate"><span class="pre">float</span></code></span></dt>
+<dd><p class="first last">Eigenvalues of BVP, the m in sin(m*Z). Generate with
+geotecha.speccon.m_from_sin_mx.</p>
+</dd>
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">size (n, 2) 2d numpy.ndarray</span></dt>
+<dd><p class="first last">Depths to evaluate integral between.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">Time values to evaluate at.</p>
+</dd>
+<dt><strong>eigs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray</span></dt>
+<dd><p class="first last">List of eigenvalues of the spectral matrix i.e. Eigenvalues of the
+square Igam_psi matrix.</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d numpy.ndarray`</span></dt>
+<dd><p class="first last">List of time values to evaluate E matrix at.</p>
+</dd>
+<dt><strong>v_E_Igamv_the</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of size (neig, len(tvals))</span></dt>
+<dd><p class="first last">Speccon matrix.</p>
+</dd>
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[0,1]</span></dt>
+<dd><p class="first last">Drainage condition,
+drn=0 for Pervious top pervious bottom (PTPB).
+drn=1 for Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>top_vs_time, bot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">Piecewise linear magnitude vs time for the top and bottom boundary.
+Use <code class="docutils literal notranslate"><span class="pre">None</span></code> if there is no variation.</p>
+</dd>
+<dt><strong>top_omega_phase, bot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) for use in cos(omega * t + phase) * mag_vs_time
+if omega_phase is None then mag_vs_time will not be multiplied by a
+cosine.  If any element of omega_phase is None then in that particular
+loading combo, mag_vs_time will not be multiplied by a cosine.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>uintegral</strong> <span class="classifier-delimiter">:</span> <span class="classifier">np.ndarray</span></dt>
+<dd><p class="first last">Integral of pore pressure between depths at each time.
+Array of size (len(z), len(tvals)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The integral of the <span class="math notranslate nohighlight">\(\phi\)</span> term is:</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{\phi}_{i\textrm{integral}}=
+\int_{z_1}^{z_2}{\sin\left({m_i Z}\right)\,dZ}\]</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.speccon.speccon1d.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

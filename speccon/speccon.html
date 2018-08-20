@@ -1,0 +1,506 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Geotecha Examples" href="../examples/index.html" />
+    <link rel="prev" title="specbeam" href="../specbeam/specbeam.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">speccon</a><ul>
+<li><a class="reference internal" href="#what-is-speccon">What is speccon?</a></li>
+<li><a class="reference internal" href="#how-to-use-speccon-programs">How to use speccon programs?</a><ul>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../specbeam/specbeam.html" title="previous chapter">specbeam</a></li>
+      <li>Next: <a href="../examples/index.html" title="next chapter">Geotecha Examples</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/speccon/speccon.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon">
+<h1>speccon<a class="headerlink" href="#speccon" title="Permalink to this headline">¶</a></h1>
+<p>Contents</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="what-is-speccon">
+<h2>What is speccon?<a class="headerlink" href="#what-is-speccon" title="Permalink to this headline">¶</a></h2>
+<p>‘speccon’ is the common name for a number of programs that use the
+spectral Galerkin method to solve multilayer consolidation problems.</p>
+<p>Speccon programs currently available in <em>geotecha</em> are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>speccon1d_vr</strong> - Multilayer consolidation with vertical drains.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>See <a class="reference internal" href="../api/geotecha.speccon.speccon1d_vr.html#geotecha.speccon.speccon1d_vr.Speccon1dVR" title="geotecha.speccon.speccon1d_vr.Speccon1dVR"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.speccon.speccon1d_vr.Speccon1dVR</span></code></a> for details and
+input variables.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>speccon1d_vrw</strong> - Multilayer consolidation with vertical drains
+including well resistance.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>See <a class="reference internal" href="../api/geotecha.speccon.speccon1d_vrw.html#geotecha.speccon.speccon1d_vrw.Speccon1dVRW" title="geotecha.speccon.speccon1d_vrw.Speccon1dVRW"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.speccon.speccon1d_vrw.Speccon1dVRW</span></code></a> for details and
+input variables.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>speccon1d_vrc</strong> - Multilayer consolidation with stone columns
+including vertical and radial drainage in the column.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>See <a class="reference internal" href="../api/geotecha.speccon.speccon1d_vrc.html#geotecha.speccon.speccon1d_vrc.Speccon1dVRC" title="geotecha.speccon.speccon1d_vrc.Speccon1dVRC"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.speccon.speccon1d_vrc.Speccon1dVRC</span></code></a> for details and
+input variables.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><strong>speccon1d_unsat</strong> - Multilayer consolidation of unsaturated soil.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>See <a class="reference internal" href="../api/geotecha.speccon.speccon1d_unsat.html#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.speccon.speccon1d_unsat.Speccon1dUnsat</span></code></a> for details and
+input variables.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="how-to-use-speccon-programs">
+<h2>How to use speccon programs?<a class="headerlink" href="#how-to-use-speccon-programs" title="Permalink to this headline">¶</a></h2>
+<p>There are two main ways to use speccon programs:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Use a speccon.exe script</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Create an input file containing python syntax initializing relevant
+variables.  Only a subset of python syntax is allowed.</li>
+<li>Run the relevant speccon.exe script with the input file.</li>
+<li>Output such as csv data files, parsed input files, and plots
+are controlled by various input variables.</li>
+<li>This is the best option for working with one set of input at a time.</li>
+<li>The speccon.exe scripts should have been installed with geotecha.
+They can usually be found in the /python27/Scripts/ or similar
+folder.
+Alternately run them directly from a command prompt (assuming their
+location is in your path environment variable).</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>Use the Speccon classes in your own python programs/scripts.</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Instead of passing an input file to a script you can initialize a
+speccon object with a multi-line string.</li>
+<li>Create a multi-line string containing python syntax to initialize
+relevant variables.  Remember that the string itself cannot contain
+all python syntax.  This is not as restrictive as it first appears
+as you can easily pass calculated values into the string using
+the format method essentially giving you access to all python
+functionality.</li>
+<li>After initializing a speccon object perform the analysis with the
+make_all method.
+a subset of teh python language</li>
+<li>This is the most flexible approach especially for parametric studies
+and custom plots.</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p>The relevant variables for use in each speccon program can be found in
+the docstring of the relevant file which can be found in the api section
+of the docs.</p>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Specific Examples can be found in the <a class="reference internal" href="../examples/index.html#examples-index"><span class="std std-ref">Geotecha Examples</span></a> section.
+Further examples can be found by digging around in the testing
+routines in the source code.</p>
+<p>Using speccon1d_vr below are three different ways to run a speccon
+analysis.</p>
+<p><strong>Script</strong></p>
+<p>Create a text file containing the text below.  Locate and run the
+speccon1d_vr.exe file.  Choose the just created input file.  A folder of
+output should be created in the same directory as the input file.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example input file for speccon1d_vr.  Use speccon1d_vr.exe to run.</span>
+
+<span class="c1"># Vertical consolidation of four soil layers</span>
+<span class="c1"># Figure 2 from:</span>
+<span class="c1"># Schiffman, R. L, and J. R Stein. (1970) &#39;One-Dimensional Consolidation of</span>
+<span class="c1"># Layered Systems&#39;. Journal of the Soil Mechanics and Foundations</span>
+<span class="c1"># Division 96, no. 4 (1970): 1499-1504.</span>
+
+
+<span class="c1"># Parameters from Schiffman and Stein 1970</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">])</span> <span class="c1"># feet</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0411</span><span class="p">,</span> <span class="mf">0.1918</span><span class="p">,</span> <span class="mf">0.0548</span><span class="p">,</span> <span class="mf">0.0686</span><span class="p">])</span> <span class="c1"># square feet per day</span>
+<span class="n">mv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3.07e-3</span><span class="p">,</span> <span class="mf">1.95e-3</span><span class="p">,</span> <span class="mf">9.74e-4</span><span class="p">,</span> <span class="mf">1.95e-3</span><span class="p">])</span> <span class="c1"># square feet per kip</span>
+<span class="c1">#kv = np.array([7.89e-6, 2.34e-5, 3.33e-6, 8.35e-6]) # feet per day</span>
+<span class="n">kv</span> <span class="o">=</span> <span class="n">cv</span><span class="o">*</span><span class="n">mv</span> <span class="c1"># assume kv values are actually kv/gamw</span>
+
+
+<span class="c1"># speccon1d_vr parameters</span>
+<span class="n">drn</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">neig</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">H</span> <span class="c1"># Normalized Z at bottom of each layer</span>
+<span class="n">z1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">H</span> <span class="c1"># Normalized Z at top of each layer</span>
+
+<span class="n">mvref</span> <span class="o">=</span> <span class="n">mv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Choosing 1st layer as reference value</span>
+<span class="n">kvref</span> <span class="o">=</span> <span class="n">kv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Choosing 1st layer as reference value</span>
+
+<span class="n">dTv</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">kvref</span> <span class="o">/</span> <span class="n">mvref</span>
+
+<span class="n">mv</span> <span class="o">=</span> <span class="n">PolyLine</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">mv</span><span class="o">/</span><span class="n">mvref</span><span class="p">,</span> <span class="n">mv</span><span class="o">/</span><span class="n">mvref</span><span class="p">)</span>
+<span class="n">kv</span> <span class="o">=</span> <span class="n">PolyLine</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">kv</span><span class="o">/</span><span class="n">kvref</span><span class="p">,</span> <span class="n">kv</span><span class="o">/</span><span class="n">kvref</span><span class="p">)</span>
+
+<span class="n">surcharge_vs_time</span> <span class="o">=</span> <span class="n">PolyLine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">30000</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="n">surcharge_vs_depth</span> <span class="o">=</span> <span class="n">PolyLine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># Load is uniform with depth</span>
+
+
+
+<span class="n">ppress_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[</span>  <span class="mf">0.</span>        <span class="p">,</span>   <span class="mf">1.</span>        <span class="p">,</span>   <span class="mf">2.</span>        <span class="p">,</span>   <span class="mf">3.</span>        <span class="p">,</span>
+     <span class="mf">4.</span>        <span class="p">,</span>   <span class="mf">5.</span>        <span class="p">,</span>   <span class="mf">6.</span>        <span class="p">,</span>   <span class="mf">7.</span>        <span class="p">,</span>
+     <span class="mf">8.</span>        <span class="p">,</span>   <span class="mf">9.</span>        <span class="p">,</span>  <span class="mf">10.</span>        <span class="p">,</span>  <span class="mf">12.</span>        <span class="p">,</span>
+    <span class="mf">14.</span>        <span class="p">,</span>  <span class="mf">16.</span>        <span class="p">,</span>  <span class="mf">18.</span>        <span class="p">,</span>  <span class="mf">20.</span>        <span class="p">,</span>
+    <span class="mf">22.</span>        <span class="p">,</span>  <span class="mf">24.</span>        <span class="p">,</span>  <span class="mf">26.</span>        <span class="p">,</span>  <span class="mf">28.</span>        <span class="p">,</span>
+    <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">33.</span>        <span class="p">,</span>  <span class="mf">36.</span>        <span class="p">,</span>  <span class="mf">39.</span>        <span class="p">,</span>
+    <span class="mf">42.</span>        <span class="p">,</span>  <span class="mf">45.</span>        <span class="p">,</span>  <span class="mf">48.</span>        <span class="p">,</span>  <span class="mf">51.</span>        <span class="p">,</span>
+    <span class="mf">54.</span>        <span class="p">,</span>  <span class="mf">57.</span>        <span class="p">,</span>  <span class="mf">60.</span>        <span class="p">,</span>  <span class="mf">62.22222222</span><span class="p">,</span>
+    <span class="mf">64.44444444</span><span class="p">,</span>  <span class="mf">66.66666667</span><span class="p">,</span>  <span class="mf">68.88888889</span><span class="p">,</span>  <span class="mf">71.11111111</span><span class="p">,</span>
+    <span class="mf">73.33333333</span><span class="p">,</span>  <span class="mf">75.55555556</span><span class="p">,</span>  <span class="mf">77.77777778</span><span class="p">,</span>  <span class="mf">80.</span>        <span class="p">])</span><span class="o">/</span><span class="n">H</span>
+
+<span class="n">tvals</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span><span class="mf">1.21957046e+02</span><span class="p">,</span>   <span class="mf">1.61026203e+02</span><span class="p">,</span>   <span class="mf">2.12611233e+02</span><span class="p">,</span>
+     <span class="mf">2.80721620e+02</span><span class="p">,</span>   <span class="mf">3.70651291e+02</span><span class="p">,</span>   <span class="mf">4.89390092e+02</span><span class="p">,</span>
+     <span class="mf">740.0</span><span class="p">,</span>   <span class="mf">8.53167852e+02</span><span class="p">,</span>   <span class="mf">1.12648169e+03</span><span class="p">,</span>
+     <span class="mf">1.48735211e+03</span><span class="p">,</span>   <span class="mf">1.96382800e+03</span><span class="p">,</span>   <span class="mf">2930.0</span><span class="p">,</span>
+     <span class="mf">3.42359796e+03</span><span class="p">,</span>   <span class="mf">4.52035366e+03</span><span class="p">,</span>   <span class="mf">5.96845700e+03</span><span class="p">,</span>
+     <span class="mf">7195.0</span><span class="p">,</span>   <span class="mf">1.04049831e+04</span><span class="p">,</span>   <span class="mf">1.37382380e+04</span><span class="p">,</span>
+     <span class="mf">1.81393069e+04</span><span class="p">,</span>   <span class="mf">2.39502662e+04</span><span class="p">,</span>   <span class="mf">3.16227766e+04</span><span class="p">])</span>
+
+<span class="n">ppress_z_tval_indexes</span><span class="o">=</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+
+<span class="n">avg_ppress_z_pairs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">settlement_z_pairs</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">implementation</span><span class="o">=</span><span class="s1">&#39;vectorized&#39;</span> <span class="c1">#[&#39;scalar&#39;, &#39;vectorized&#39;,&#39;fortran&#39;]</span>
+<span class="c1"># Output options</span>
+<span class="n">save_data_to_file</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">save_figures_to_file</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="c1">#show_figures = True</span>
+<span class="c1">#directory</span>
+<span class="n">overwrite</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;example_1d_vr_001_schiffmanandstein1970_&quot;</span>
+<span class="n">create_directory</span><span class="o">=</span><span class="bp">True</span>
+<span class="c1">#data_ext</span>
+<span class="c1">#input_ext</span>
+<span class="n">figure_ext</span> <span class="o">=</span> <span class="s1">&#39;.png&#39;</span>
+<span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Speccon1d_vr example Schiffman and Stein 1970&quot;</span>
+<span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;Dr. Rohan Walker&quot;</span>
+</pre></div>
+</div>
+<p>The speccon.exe scripts accept different arguments when run from
+a command line.  To view the command line options use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">speccon1d_vr</span><span class="o">.</span><span class="n">exe</span> <span class="o">-</span><span class="n">h</span>
+</pre></div>
+</div>
+<p><strong>Input file as template</strong></p>
+<p>Put the following in a .py file and run it with python.  A figure with
+three subplots should appear.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of using an existing file as a template for speccon1d_vr.</span>
+<span class="c1"># Run in a python interpreter.</span>
+
+<span class="c1"># Examine the effect of number of series terms on pore pressure profiles</span>
+<span class="c1"># on example_1d_vr_001_schiffmanandstein1970.py</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_vr</span> <span class="kn">import</span> <span class="n">Speccon1dVR</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+
+
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;example_1d_vr_001_schiffmanandstein1970.py&quot;</span>
+<span class="n">tindex</span> <span class="o">=</span> <span class="mi">11</span> <span class="c1"># time index of pore pressure profile to plot.</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;131&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;ppress&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;132&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;average pore pressure&#39;</span><span class="p">)</span>
+
+
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;133&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;settlement&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+
+
+<span class="k">for</span> <span class="n">neig</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># Values in an input file can be overridden by appending the new values.</span>
+    <span class="c1"># More complicated find and replace may be needed if variables depend</span>
+    <span class="c1"># on each other.</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="p">(</span><span class="n">template</span>
+              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;neig={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neig</span><span class="p">)</span>
+              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;ppress_z_tval_indexes=[{}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tindex</span><span class="p">)</span>
+              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;save_data_to_file = False&#39;</span>
+              <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;save_figures_to_file = False&#39;</span><span class="p">)</span>
+
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dVR</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">por</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="o">.</span><span class="n">ppress_z</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neig</span><span class="p">))</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">tvals</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neig</span><span class="p">))</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">tvals</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">neig</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;ppress at t={:g} days&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">tvals</span><span class="p">[</span><span class="n">tindex</span><span class="p">]))</span>
+<span class="n">leg1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;neig&#39;</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">leg1</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">leg2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;neig&#39;</span><span class="p">)</span>
+<span class="n">leg2</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">leg3</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;neig&#39;</span><span class="p">)</span>
+<span class="n">leg3</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001a_schiffmanandstein1970.py">Source code</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001a_schiffmanandstein1970.png">png</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001a_schiffmanandstein1970.hires.png">hires.png</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001a_schiffmanandstein1970.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/example_1d_vr_001a_schiffmanandstein1970.png" src="../_images/example_1d_vr_001a_schiffmanandstein1970.png" />
+</div>
+<p><strong>Multi-line string</strong></p>
+<p>Put the following in a .py file and run it with python.  A figure with
+three subplots should appear.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of using a multi-line string to initialize a Speccon1dVR object</span>
+<span class="c1"># This is the most flexible approach especially for paramteric studies</span>
+<span class="c1"># and custom plots.</span>
+<span class="c1"># Only issues are a) no syntax highlighting because text is with a string,</span>
+<span class="c1"># b) difficult to debug the code within a string.</span>
+<span class="c1"># Within the string limited calculations are available, outside the string</span>
+<span class="c1"># in a normal python environment you can do whatever calculations you want</span>
+<span class="c1"># and place the results in the string.</span>
+
+<span class="c1"># Vertical consolidation of four soil layers</span>
+<span class="c1"># Schiffman, R. L, and J. R Stein. (1970) &#39;One-Dimensional Consolidation of</span>
+<span class="c1"># Layered Systems&#39;. Journal of the Soil Mechanics and Foundations</span>
+<span class="c1"># Division 96, no. 4 (1970): 1499-1504.</span>
+
+<span class="c1"># Examine the effect of different layer thicknesses</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_vr</span> <span class="kn">import</span> <span class="n">Speccon1dVR</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1"># changing parameters</span>
+<span class="n">h_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">20</span><span class="p">]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])]</span> <span class="c1"># layer ticknesses</span>
+<span class="n">tprofile</span> <span class="o">=</span> <span class="mi">3500</span> <span class="c1"># time to calc pore ressure profiles</span>
+
+
+<span class="c1"># the reader string is a template with {} indicating where parameters will be</span>
+<span class="c1"># inserted.  Use double curly braces {{}} if you need curly braces in your</span>
+<span class="c1"># string.</span>
+<span class="n">reader</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2"># Parameters from Schiffman and Stein 1970</span>
+<span class="s2">h = np.{h} # article has np.array([10, 20, 30, 20]) # feet</span>
+<span class="s2">cv = np.array([0.0411, 0.1918, 0.0548, 0.0686]) # square feet per day</span>
+<span class="s2">mv = np.array([3.07e-3, 1.95e-3, 9.74e-4, 1.95e-3]) # square feet per kip</span>
+<span class="s2">#kv = np.array([7.89e-6, 2.34e-5, 3.33e-6, 8.35e-6]) # feet per day</span>
+<span class="s2">kv = cv*mv # assume kv values are actually kv/gamw</span>
+
+
+<span class="s2"># speccon1d_vr parameters</span>
+<span class="s2">drn = 0</span>
+<span class="s2">neig = 60</span>
+
+<span class="s2">H = np.sum(h)</span>
+<span class="s2">z2 = np.cumsum(h) / H # Normalized Z at bottom of each layer</span>
+<span class="s2">z1 = (np.cumsum(h) - h) / H # Normalized Z at top of each layer</span>
+
+<span class="s2">mvref = mv[0] # Choosing 1st layer as reference value</span>
+<span class="s2">kvref = kv[0] # Choosing 1st layer as reference value</span>
+
+<span class="s2">dTv = 1 / H**2 * kvref / mvref</span>
+
+<span class="s2">mv = PolyLine(z1, z2, mv/mvref, mv/mvref)</span>
+<span class="s2">kv = PolyLine(z1, z2, kv/kvref, kv/kvref)</span>
+
+<span class="s2">surcharge_vs_time = PolyLine([0,0,30000], [0,100,100])</span>
+<span class="s2">surcharge_vs_depth = PolyLine([0,1], [1,1]) # Load is uniform with depth</span>
+
+
+
+<span class="s2">ppress_z = np.linspace(0,1,200)</span>
+
+<span class="s2">tvals = np.linspace(0.01, 3.2e4, 100)</span>
+<span class="s2">i = np.searchsorted(tvals,{tprofile})</span>
+<span class="s2">tvals = np.insert(tvals, i, {tprofile})</span>
+<span class="s2">ppress_z_tval_indexes=[i]</span>
+
+<span class="s2">avg_ppress_z_pairs = [[0,1]]</span>
+<span class="s2">settlement_z_pairs = [[0,1]]</span>
+
+<span class="s2">author = &quot;Dr. Rohan Walker&quot;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+
+
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;131&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;ppress&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;depth&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;132&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;average pore pressure&#39;</span><span class="p">)</span>
+
+
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;133&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;settlement&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+
+
+<span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">h_values</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dVR</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">h</span><span class="p">),</span>
+                                  <span class="n">tprofile</span><span class="o">=</span><span class="n">tprofile</span><span class="p">))</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">h</span><span class="p">)))</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">por</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">a</span><span class="o">.</span><span class="n">ppress_z</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">H</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">tvals</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">tvals</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+
+<span class="n">leg_title</span><span class="o">=</span><span class="s1">&#39;layer thickness&#39;</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;ppress at t={:g} days&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tprofile</span><span class="p">))</span>
+<span class="n">leg1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">leg_title</span><span class="p">,</span><span class="n">loc</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">leg1</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">leg2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">leg_title</span><span class="p">)</span>
+<span class="n">leg2</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">leg3</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">leg_title</span><span class="p">)</span>
+<span class="n">leg3</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001b_schiffmanandstein1970.py">Source code</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001b_schiffmanandstein1970.png">png</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001b_schiffmanandstein1970.hires.png">hires.png</a>, <a class="reference external" href="../geotecha_examples/speccon/example_1d_vr_001b_schiffmanandstein1970.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../_images/example_1d_vr_001b_schiffmanandstein1970.png" src="../_images/example_1d_vr_001b_schiffmanandstein1970.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/speccon/speccon.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

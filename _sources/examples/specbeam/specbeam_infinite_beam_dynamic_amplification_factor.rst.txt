@@ -1,0 +1,11 @@
+.. _specbeam-specbeam_infinite_beam_dynamic_amplification_factor:
+
+specbeam example code: specbeam_infinite_beam_dynamic_amplification_factor.py
+=============================================================================
+
+
+
+.. plot:: geotecha_examples\\specbeam\\specbeam_infinite_beam_dynamic_amplification_factor.py
+   :include-source:
+
+

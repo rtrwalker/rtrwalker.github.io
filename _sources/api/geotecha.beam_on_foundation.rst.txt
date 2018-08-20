@@ -1,0 +1,21 @@
+beam_on_foundation
+==================
+
+.. automodule:: geotecha.beam_on_foundation
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Modules:
+
+.. currentmodule:: geotecha.beam_on_foundation
+
+.. autosummary::
+   :toctree:
+
+      dingetal2012
+   specbeam
+
+
+

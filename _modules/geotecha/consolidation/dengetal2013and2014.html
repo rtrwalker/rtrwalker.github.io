@@ -1,0 +1,766 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.dengetal2013and2014 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.dengetal2013and2014</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Deng et al (2013) and (2014), &quot;Consolidation by vertical drains when</span>
+<span class="sd">the discharge capacity varies with depth and time&quot;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="kn">import</span> <span class="nn">geotecha.consolidation.smear_zones</span> <span class="k">as</span> <span class="nn">smear_zones</span>
+
+<div class="viewcode-block" id="dengetal2013"><a class="viewcode-back" href="../../../api/geotecha.consolidation.dengetal2013and2014.html#geotecha.consolidation.dengetal2013and2014.dengetal2013">[docs]</a><span class="k">def</span> <span class="nf">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">kw0</span><span class="o">=</span><span class="mf">1e10</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Radial consolidation with depth and time dependent well resistance</span>
+
+<span class="sd">    Implementation of [1]_.</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Radial flow to drain (no vertical flow in soil)</span>
+<span class="sd">     - Vertical flow in drain.</span>
+<span class="sd">     - Linear depth variation of drain permeability in time.</span>
+<span class="sd">     - Exponential decrease in drain peremability with time.</span>
+<span class="sd">     - Uses approximate (like Hansbo) method to solve pore pressure in drain.</span>
+<span class="sd">     - Radially averaged pore pressure at depth and time in soil.</span>
+
+
+
+<span class="sd">    Drain pereability is kw = kw0 * (A1 - A2 * z / H) * exp(-A3 * t)</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time.</span>
+<span class="sd">    rw : float</span>
+<span class="sd">        Drain radius.</span>
+<span class="sd">    re : float</span>
+<span class="sd">        Drain influence radius.</span>
+<span class="sd">    A1 : float, optional</span>
+<span class="sd">        Parameter controlling depth dependance of well resistance.</span>
+<span class="sd">        Default A1=1.</span>
+<span class="sd">    A2 : float, optional</span>
+<span class="sd">        Parameter controlling depth dependance of well resistance.</span>
+<span class="sd">        Default A2=0.</span>
+<span class="sd">    A3 : float, optional</span>
+<span class="sd">        Parameter controlling time dependance of well resistance.</span>
+<span class="sd">        Default A3=0.</span>
+<span class="sd">    H : float, optional</span>
+<span class="sd">        Drainage path length.  Default H=1.</span>
+<span class="sd">    rs : float, optional</span>
+<span class="sd">        Drain influence radius. Default rs=None i.e. no smear zone.</span>
+<span class="sd">    ks : float, optional</span>
+<span class="sd">        Smear zone permeability. Default ks=None, i.e. no smear zone.</span>
+<span class="sd">    kw0 : float, optional</span>
+<span class="sd">        Initial well permeability.  Default kw0=1e10 i.e. ideal drain.</span>
+<span class="sd">    kh : float, optional</span>
+<span class="sd">        Horizontal coefficient of permeability.  Default kh=1.</span>
+<span class="sd">    mv : float, optional</span>
+<span class="sd">        Volume compressibility.  Default mv=0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  Default gamw=10.</span>
+<span class="sd">    ui : float, optional</span>
+<span class="sd">        Initial uniform pore water pressure.  Default ui=1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    por : 2d array of float</span>
+<span class="sd">        Pore pressure at depth and time.  `por` is an array of size</span>
+<span class="sd">        (len(z), len(t)).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Deng, Yue-Bao, Kang-He Xie, and Meng-Meng Lu. 2013. &#39;Consolidation</span>
+<span class="sd">           by Vertical Drains When the Discharge Capacity Varies</span>
+<span class="sd">           with Depth and Time&#39;. Computers and Geotechnics 48 (March): 1-8.</span>
+<span class="sd">           doi:10.1016/j.compgeo.2012.09.012.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">if</span> <span class="n">A1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A1 must be greater than 0.  &quot;</span>
+                         <span class="s2">&quot;You have A1=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">A2</span> <span class="o">&gt;</span> <span class="n">A1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A2 must be less than A1.  &quot;</span>
+                         <span class="s2">&quot;You have A1=</span><span class="si">{}</span><span class="s2">, A2=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A3 must be greater than or equal to 0.  &quot;</span>
+                         <span class="s2">&quot;You have A3=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A3</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">re</span> <span class="o">/</span> <span class="n">rw</span>
+
+    <span class="n">qw0</span> <span class="o">=</span> <span class="n">kw0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rw</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">ch</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="k">if</span> <span class="n">ks</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">rs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_ideal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">rs</span> <span class="o">/</span> <span class="n">rw</span>
+        <span class="n">kap</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">ks</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">kap</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">A2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># qw is constant</span>
+        <span class="n">mus</span> <span class="o">=</span> <span class="n">mu0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kh</span> <span class="o">/</span> <span class="p">(</span><span class="n">qw0</span> <span class="o">*</span> <span class="n">A1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">H</span> <span class="o">*</span> <span class="n">z</span> <span class="o">-</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">por</span> <span class="o">=</span> <span class="n">ui</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span> <span class="o">*</span> <span class="n">Th</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">mus</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">por</span>
+
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">A2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># qw varies with depth</span>
+        <span class="n">mu1</span> <span class="o">=</span> <span class="n">A2</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">H</span> <span class="o">+</span> <span class="p">(</span><span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A2</span> <span class="o">/</span> <span class="n">A1</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">H</span><span class="p">)</span>
+        <span class="n">mu1</span> <span class="o">*=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kh</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">qw0</span> <span class="o">*</span> <span class="n">A2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">mu1</span> <span class="o">+=</span> <span class="n">mu0</span>
+        <span class="n">por</span> <span class="o">=</span> <span class="n">ui</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span> <span class="o">*</span> <span class="n">Th</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="n">mu1</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">por</span>
+
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">A2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># qw varies with time</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">A3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+        <span class="n">alp0</span> <span class="o">=</span> <span class="n">qw0</span> <span class="o">*</span> <span class="n">A1</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kh</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">por</span> <span class="o">=</span> <span class="p">(</span><span class="n">ui</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">alp0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a3</span> <span class="o">*</span> <span class="n">Th</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]))</span> <span class="o">/</span>
+              <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">alp0</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="p">(</span><span class="n">a3</span> <span class="o">*</span> <span class="n">mu0</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">por</span>
+
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">A2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># qw varies with depth and time:</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">A3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+        <span class="n">alp</span> <span class="o">=</span> <span class="n">mu0</span> <span class="o">*</span> <span class="n">qw0</span> <span class="o">*</span> <span class="n">A2</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">kh</span><span class="p">)</span>
+        <span class="n">alp</span> <span class="o">/=</span> <span class="n">A2</span><span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">H</span> <span class="o">+</span> <span class="p">(</span><span class="n">A1</span> <span class="o">-</span> <span class="n">A2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A2</span> <span class="o">/</span> <span class="n">A1</span> <span class="o">*</span> <span class="n">z</span> <span class="o">/</span> <span class="n">H</span><span class="p">)</span>
+        <span class="n">por</span> <span class="o">=</span> <span class="p">(</span><span class="n">ui</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">alp</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a3</span> <span class="o">*</span> <span class="n">Th</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]))</span> <span class="o">/</span>
+              <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">alp</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]))</span> <span class="o">**</span> <span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="p">(</span><span class="n">a3</span> <span class="o">*</span> <span class="n">mu0</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">por</span></div>
+
+
+<div class="viewcode-block" id="dengetal2014"><a class="viewcode-back" href="../../../api/geotecha.consolidation.dengetal2013and2014.html#geotecha.consolidation.dengetal2013and2014.dengetal2014">[docs]</a><span class="k">def</span> <span class="nf">dengetal2014</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">kw0</span><span class="o">=</span><span class="mf">1e10</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Radial consolidation with time dependent well resistance</span>
+
+<span class="sd">    An implementation of [1]_</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer, soil properties constant over time.</span>
+<span class="sd">     - Instant load uniform with depth.</span>
+<span class="sd">     - Radial flow to drain (no vertical flow in soil)</span>
+<span class="sd">     - Vertical flow in drain.</span>
+<span class="sd">     - Exponential decrease in drain peremability with time.</span>
+<span class="sd">     - Uses rigorous (infintite sum ) method to solve pore pressure in drain.</span>
+<span class="sd">     - Radially averaged pore pressure at depth and time in soil.</span>
+
+
+<span class="sd">    Drain permeability is kw = kw0 * exp(-A3 * t)</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time.</span>
+<span class="sd">    rw : float</span>
+<span class="sd">        Drain radius.</span>
+<span class="sd">    re : float</span>
+<span class="sd">        Drain influence radius.</span>
+<span class="sd">    A3 : float, optional</span>
+<span class="sd">        Parameter controlling time dependance of well resistance.</span>
+<span class="sd">        Default A3=0.</span>
+<span class="sd">    H : float, optional</span>
+<span class="sd">        Drainage path length.  Default H=1.</span>
+<span class="sd">    rs : float, optional</span>
+<span class="sd">        Drain influence radius. Default rs=None i.e. no smear zone.</span>
+<span class="sd">    ks : float, optional</span>
+<span class="sd">        Smear zone permeability. Default ks=None, i.e. no smear zone.</span>
+<span class="sd">    kw0 : float, optional</span>
+<span class="sd">        Initial well permeability.  Default kw0=1e10 i.e. ideal drain.</span>
+<span class="sd">    kh : float, optional</span>
+<span class="sd">        Horizontal coefficient of permeability.  Default kh=1.</span>
+<span class="sd">    mv : float, optional</span>
+<span class="sd">        Volume compressibility.  Default mv=0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  Default gamw=10.</span>
+<span class="sd">    ui : float, optional</span>
+<span class="sd">        Initial uniform pore water pressure.  Default ui=1.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        number of summation terms, default = 100.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    por : 2d array of float</span>
+<span class="sd">        Pore pressure at depth and time.  `por` is an array of size</span>
+<span class="sd">        (len(z), len(t)).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Deng, Yue-Bao, Gan-Bin Liu, Meng-Meng Lu,</span>
+<span class="sd">           and Kang-he Xie. &#39;Consolidation Behavior of Soft Deposits</span>
+<span class="sd">           Considering the Variation of Prefabricated Vertical Drain</span>
+<span class="sd">           Discharge Capacity&#39;. Computers and Geotechnics 62</span>
+<span class="sd">           (October 2014): 310-16. doi:10.1016/j.compgeo.2014.08.006.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">if</span> <span class="n">A3</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A3 must be greater than or equal to 0.  &quot;</span>
+                         <span class="s2">&quot;You have A3=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">A3</span><span class="p">))</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">re</span> <span class="o">/</span> <span class="n">rw</span>
+
+    <span class="n">qw0</span> <span class="o">=</span> <span class="n">kw0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rw</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">ch</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span>
+
+
+
+    <span class="k">if</span> <span class="n">ks</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">rs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_ideal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">rs</span> <span class="o">/</span> <span class="n">rw</span>
+        <span class="n">kap</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">ks</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">kap</span><span class="p">)</span>
+
+
+    <span class="n">a3</span> <span class="o">=</span> <span class="n">A3</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+
+    <span class="n">G0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kh</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">qw0</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">C0</span> <span class="o">=</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">mu0</span><span class="o">/</span><span class="mi">8</span><span class="o">/</span><span class="n">G0</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">alp0</span> <span class="o">=</span> <span class="n">qw0</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">kh</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">H</span><span class="o">*</span><span class="n">z</span> <span class="o">-</span> <span class="n">z</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+    <span class="n">Th</span> <span class="o">=</span> <span class="n">Th</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">C0</span> <span class="o">=</span> <span class="n">C0</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">H</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">por</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">Z</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span><span class="o">+</span><span class="n">C0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a3</span> <span class="o">*</span> <span class="n">Th</span><span class="p">))</span><span class="o">/</span>
+          <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">C0</span><span class="p">))</span><span class="o">**</span><span class="p">(</span><span class="mi">8</span> <span class="o">/</span> <span class="p">(</span><span class="n">a3</span> <span class="o">*</span> <span class="n">mu0</span><span class="p">)))</span>
+    <span class="n">por</span> <span class="o">=</span> <span class="n">ui</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">por</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">por</span></div>
+
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span>
+                             <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mf">11025.</span><span class="p">,</span>  <span class="mf">110250.</span><span class="p">],</span>
+                             <span class="n">rw</span><span class="o">=</span><span class="mf">0.035</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="mf">0.525</span><span class="p">,</span>
+                             <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                             <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                             <span class="n">rs</span><span class="o">=</span><span class="mf">0.175</span><span class="p">,</span>
+                             <span class="n">ks</span><span class="o">=</span><span class="mf">2e-8</span><span class="o">/</span><span class="mf">1.8</span><span class="p">,</span>
+                             <span class="n">kw0</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
+                             <span class="n">kh</span><span class="o">=</span><span class="mf">2e-8</span><span class="p">,</span>
+                             <span class="n">mv</span><span class="o">=</span><span class="mf">0.2e-3</span><span class="p">,</span>
+                             <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                             <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+
+    <span class="c1"># Reproduce figure 3, from Deng et al 2013</span>
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#reproduce deng et al 2013 fig 3a.</span>
+        <span class="c1"># Note deng has kh/ks=5, but I can only get a match with kh/ks=1.8</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=0.1 A2=0.1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.777489</span><span class="p">,</span> <span class="mf">0.00142817</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.811606</span><span class="p">,</span> <span class="mf">0.0504537</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.836125</span><span class="p">,</span> <span class="mf">0.0994905</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.864221</span><span class="p">,</span> <span class="mf">0.198757</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.884466</span><span class="p">,</span> <span class="mf">0.2992</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.896856</span><span class="p">,</span> <span class="mf">0.398485</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.905755</span><span class="p">,</span> <span class="mf">0.497774</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.912911</span><span class="p">,</span> <span class="mf">0.598233</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.917452</span><span class="p">,</span> <span class="mf">0.699863</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.920243</span><span class="p">,</span> <span class="mf">0.799159</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.921291</span><span class="p">,</span> <span class="mf">0.899625</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.92146</span><span class="p">,</span> <span class="mf">0.996587</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=1.0 A2=0.1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0820304</span><span class="p">,</span> <span class="mf">0.00340884</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.124869</span><span class="p">,</span> <span class="mf">0.0500878</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.165101</span><span class="p">,</span> <span class="mf">0.102611</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.23857</span><span class="p">,</span> <span class="mf">0.200656</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.295462</span><span class="p">,</span> <span class="mf">0.299888</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.341883</span><span class="p">,</span> <span class="mf">0.399133</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.377835</span><span class="p">,</span> <span class="mf">0.499559</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.405057</span><span class="p">,</span> <span class="mf">0.597658</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.424434</span><span class="p">,</span> <span class="mf">0.700439</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.437696</span><span class="p">,</span> <span class="mf">0.799722</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.445723</span><span class="p">,</span> <span class="mf">0.899012</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.449386</span><span class="p">,</span> <span class="mf">0.998307</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=0.1 A2=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.778362</span><span class="p">,</span> <span class="mf">0.00142715</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.811602</span><span class="p">,</span> <span class="mf">0.0481173</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.837872</span><span class="p">,</span> <span class="mf">0.100657</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.871204</span><span class="p">,</span> <span class="mf">0.199917</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.894067</span><span class="p">,</span> <span class="mf">0.300357</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.909074</span><span class="p">,</span> <span class="mf">0.399639</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.919719</span><span class="p">,</span> <span class="mf">0.498926</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.930365</span><span class="p">,</span> <span class="mf">0.59938</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.936649</span><span class="p">,</span> <span class="mf">0.69984</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.943803</span><span class="p">,</span> <span class="mf">0.799131</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.948341</span><span class="p">,</span> <span class="mf">0.899593</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.952005</span><span class="p">,</span> <span class="mf">0.998888</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=1 A2=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0829009</span><span class="p">,</span> <span class="mf">0.0022396</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.123995</span><span class="p">,</span> <span class="mf">0.0489206</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.168587</span><span class="p">,</span> <span class="mf">0.10027</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.252532</span><span class="p">,</span> <span class="mf">0.20064</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.326005</span><span class="p">,</span> <span class="mf">0.301021</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.387258</span><span class="p">,</span> <span class="mf">0.39908</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.438917</span><span class="p">,</span> <span class="mf">0.499487</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.48534</span><span class="p">,</span> <span class="mf">0.5999</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.523035</span><span class="p">,</span> <span class="mf">0.699155</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.55724</span><span class="p">,</span> <span class="mf">0.798414</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.586213</span><span class="p">,</span> <span class="mf">0.900016</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.610813</span><span class="p">,</span> <span class="mf">0.995782</span><span class="p">]])</span>
+
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">rw</span><span class="o">=</span><span class="mf">0.035</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="mf">0.175</span>
+
+        <span class="n">re</span><span class="o">=</span><span class="mf">0.525</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">mv</span><span class="o">=</span><span class="mf">0.2e-3</span>
+        <span class="n">kh</span><span class="o">=</span><span class="mf">2e-8</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="n">kh</span><span class="o">/</span><span class="mf">1.8</span>
+        <span class="n">kw0</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Th</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+
+
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">re</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">rs</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">kh</span><span class="o">/</span><span class="n">ks</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mu0&#39;</span><span class="p">,</span> <span class="n">mu0</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;et&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="o">/</span><span class="n">mu0</span><span class="o">/</span><span class="n">re</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">A2</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.0</span><span class="p">]:</span>
+            <span class="n">por</span> <span class="o">=</span> <span class="n">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="o">=</span><span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="n">A2</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">rs</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="n">ks</span><span class="p">,</span> <span class="n">kw0</span><span class="o">=</span><span class="n">kw0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="n">kh</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="n">mv</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+                <span class="n">uz0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="o">*</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">mu0</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;m Th=</span><span class="si">{0:.3g}</span><span class="s2">, A2=</span><span class="si">{1:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">A2</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uz0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Deng et al. 2013, figure 3a, depth variation&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#reproduce deng et al 2013 fig 3b.</span>
+        <span class="c1"># Note deng has kh/ks=5, but I can only get a match with kh/ks=1.8</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=1.0 a3=0.1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0835118</span><span class="p">,</span> <span class="mf">0.00577201</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.127409</span><span class="p">,</span> <span class="mf">0.0519481</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.170236</span><span class="p">,</span> <span class="mf">0.0995671</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.245182</span><span class="p">,</span> <span class="mf">0.20202</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.301927</span><span class="p">,</span> <span class="mf">0.300144</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.349036</span><span class="p">,</span> <span class="mf">0.399711</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.383298</span><span class="p">,</span> <span class="mf">0.499278</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.411135</span><span class="p">,</span> <span class="mf">0.598846</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.430407</span><span class="p">,</span> <span class="mf">0.702742</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.442184</span><span class="p">,</span> <span class="mf">0.800866</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.448608</span><span class="p">,</span> <span class="mf">0.89899</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.452891</span><span class="p">,</span> <span class="mf">0.994228</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=1.0 a3=0.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0856531</span><span class="p">,</span> <span class="mf">0.00577201</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.139186</span><span class="p">,</span> <span class="mf">0.0505051</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.191649</span><span class="p">,</span> <span class="mf">0.10101</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.278373</span><span class="p">,</span> <span class="mf">0.199134</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.343683</span><span class="p">,</span> <span class="mf">0.301587</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.391863</span><span class="p">,</span> <span class="mf">0.401154</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.429336</span><span class="p">,</span> <span class="mf">0.499278</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.458244</span><span class="p">,</span> <span class="mf">0.601732</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.478587</span><span class="p">,</span> <span class="mf">0.699856</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.491435</span><span class="p">,</span> <span class="mf">0.800866</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.497859</span><span class="p">,</span> <span class="mf">0.900433</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.501071</span><span class="p">,</span> <span class="mf">0.992785</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;Th=1.0 a3=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.155246</span><span class="p">,</span> <span class="mf">0.049062</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.219486</span><span class="p">,</span> <span class="mf">0.0995671</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.324411</span><span class="p">,</span> <span class="mf">0.200577</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.398287</span><span class="p">,</span> <span class="mf">0.301587</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.448608</span><span class="p">,</span> <span class="mf">0.399711</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.489293</span><span class="p">,</span> <span class="mf">0.497835</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.514989</span><span class="p">,</span> <span class="mf">0.598846</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.537473</span><span class="p">,</span> <span class="mf">0.702742</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.54818</span><span class="p">,</span> <span class="mf">0.800866</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.557816</span><span class="p">,</span> <span class="mf">0.901876</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.559957</span><span class="p">,</span> <span class="mf">0.992785</span><span class="p">]])</span>
+
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">rw</span><span class="o">=</span><span class="mf">0.035</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="mf">0.175</span>
+
+        <span class="n">re</span><span class="o">=</span><span class="mf">0.525</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">mv</span><span class="o">=</span><span class="mf">0.2e-3</span>
+        <span class="n">kh</span><span class="o">=</span><span class="mf">2e-8</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="n">kh</span><span class="o">/</span><span class="mf">1.8</span>
+        <span class="n">kw0</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Th</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+
+
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">re</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">rs</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">kh</span><span class="o">/</span><span class="n">ks</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">A3</span> <span class="o">=</span> <span class="n">a3</span> <span class="o">*</span> <span class="n">ch</span> <span class="o">/</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="mi">4</span>
+
+        <span class="k">for</span> <span class="n">a3_</span><span class="p">,</span> <span class="n">A3_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span> <span class="n">A3</span><span class="p">):</span>
+            <span class="n">por</span> <span class="o">=</span> <span class="n">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="o">=</span><span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="n">A3_</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">rs</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="n">ks</span><span class="p">,</span> <span class="n">kw0</span><span class="o">=</span><span class="n">kw0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="n">kh</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="n">mv</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+
+                <span class="n">uz0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="o">*</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">mu0</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;m Th=</span><span class="si">{0:.3g}</span><span class="s2">, a3=</span><span class="si">{1:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a3_</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uz0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Deng et al. 2013, figure 3b, time variation&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+    <span class="k">if</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#reproduce deng et al 2013 fig 3c.</span>
+        <span class="c1"># Note deng has kh/ks=5, but I can only get a match with kh/ks=1.8</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;A2=1.0 a3=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0847639</span><span class="p">,</span> <span class="mf">0.00168277</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.157725</span><span class="p">,</span> <span class="mf">0.0522524</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.228541</span><span class="p">,</span> <span class="mf">0.101377</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.344421</span><span class="p">,</span> <span class="mf">0.203869</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.435622</span><span class="p">,</span> <span class="mf">0.300534</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.504292</span><span class="p">,</span> <span class="mf">0.401451</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.55794</span><span class="p">,</span> <span class="mf">0.500886</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.600858</span><span class="p">,</span> <span class="mf">0.60029</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.639485</span><span class="p">,</span> <span class="mf">0.699682</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.670601</span><span class="p">,</span> <span class="mf">0.800491</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.696352</span><span class="p">,</span> <span class="mf">0.899846</span><span class="p">],</span>
+                    <span class="p">[</span><span class="mf">0.716738</span><span class="p">,</span> <span class="mf">0.994868</span><span class="p">]])</span>
+
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">rw</span><span class="o">=</span><span class="mf">0.035</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="mf">0.175</span>
+
+        <span class="n">re</span><span class="o">=</span><span class="mf">0.525</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">mv</span><span class="o">=</span><span class="mf">0.2e-3</span>
+        <span class="n">kh</span><span class="o">=</span><span class="mf">2e-8</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="n">kh</span><span class="o">/</span><span class="mf">1.8</span>
+        <span class="n">kw0</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Th</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+
+
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">re</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">rs</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">kh</span><span class="o">/</span><span class="n">ks</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">A3</span> <span class="o">=</span> <span class="n">a3</span> <span class="o">*</span> <span class="n">ch</span> <span class="o">/</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="mi">4</span>
+
+        <span class="k">for</span> <span class="n">a3_</span><span class="p">,</span> <span class="n">A3_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span> <span class="n">A3</span><span class="p">):</span>
+            <span class="n">por</span> <span class="o">=</span> <span class="n">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="o">=</span><span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="n">A3_</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">rs</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="n">ks</span><span class="p">,</span> <span class="n">kw0</span><span class="o">=</span><span class="n">kw0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="n">kh</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="n">mv</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+
+                <span class="n">uz0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="o">*</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">mu0</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;m Th=</span><span class="si">{0:.3g}</span><span class="s2">, a3=</span><span class="si">{1:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a3_</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uz0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Deng et al. 2013, figure 3c, depth and time variation&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+
+    <span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1">#reproduce deng et al 2014 fig 3a.</span>
+        <span class="c1"># this is to show that the eq5 should initially have higher pore pressure</span>
+        <span class="c1"># but as depth increases it shuld have lower excess pore pressure than</span>
+        <span class="c1"># equation 8 method.</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq5 Th=2.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0834123</span><span class="p">,</span> <span class="mf">0.00510204</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.108057</span><span class="p">,</span> <span class="mf">0.0229592</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.127014</span><span class="p">,</span> <span class="mf">0.0433673</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.145972</span><span class="p">,</span> <span class="mf">0.067602</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.165877</span><span class="p">,</span> <span class="mf">0.0854592</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.175355</span><span class="p">,</span> <span class="mf">0.0994898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.224645</span><span class="p">,</span> <span class="mf">0.16199</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.254028</span><span class="p">,</span> <span class="mf">0.19898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.29763</span><span class="p">,</span> <span class="mf">0.265306</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.323223</span><span class="p">,</span> <span class="mf">0.298469</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.377251</span><span class="p">,</span> <span class="mf">0.397959</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.390521</span><span class="p">,</span> <span class="mf">0.429847</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.408531</span><span class="p">,</span> <span class="mf">0.469388</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.423697</span><span class="p">,</span> <span class="mf">0.501276</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.43981</span><span class="p">,</span> <span class="mf">0.544643</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.454028</span><span class="p">,</span> <span class="mf">0.580357</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.474882</span><span class="p">,</span> <span class="mf">0.646684</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.488152</span><span class="p">,</span> <span class="mf">0.700255</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.500474</span><span class="p">,</span> <span class="mf">0.756378</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.508057</span><span class="p">,</span> <span class="mf">0.799745</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.520379</span><span class="p">,</span> <span class="mf">0.90051</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.525118</span><span class="p">,</span> <span class="mf">0.996173</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq5, Th=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.363033</span><span class="p">,</span> <span class="mf">0.00127551</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.375355</span><span class="p">,</span> <span class="mf">0.00892857</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.384834</span><span class="p">,</span> <span class="mf">0.0242347</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.393365</span><span class="p">,</span> <span class="mf">0.0369898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.406635</span><span class="p">,</span> <span class="mf">0.057398</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.419905</span><span class="p">,</span> <span class="mf">0.0739796</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.430332</span><span class="p">,</span> <span class="mf">0.0918367</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.441706</span><span class="p">,</span> <span class="mf">0.112245</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.487204</span><span class="p">,</span> <span class="mf">0.19898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.50237</span><span class="p">,</span> <span class="mf">0.232143</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.534597</span><span class="p">,</span> <span class="mf">0.298469</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.561137</span><span class="p">,</span> <span class="mf">0.371173</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.570616</span><span class="p">,</span> <span class="mf">0.399235</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.588626</span><span class="p">,</span> <span class="mf">0.456633</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.603791</span><span class="p">,</span> <span class="mf">0.501276</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.62654</span><span class="p">,</span> <span class="mf">0.596939</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.646445</span><span class="p">,</span> <span class="mf">0.683673</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.655924</span><span class="p">,</span> <span class="mf">0.753827</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.664455</span><span class="p">,</span> <span class="mf">0.830357</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.668246</span><span class="p">,</span> <span class="mf">0.90051</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.672038</span><span class="p">,</span> <span class="mf">0.993622</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq5 Th=0.25&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.776303</span><span class="p">,</span> <span class="mf">0.00127551</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.788626</span><span class="p">,</span> <span class="mf">0.0446429</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.796209</span><span class="p">,</span> <span class="mf">0.0688776</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.800948</span><span class="p">,</span> <span class="mf">0.0956633</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.806635</span><span class="p">,</span> <span class="mf">0.128827</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.817062</span><span class="p">,</span> <span class="mf">0.179847</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.823697</span><span class="p">,</span> <span class="mf">0.220663</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.834123</span><span class="p">,</span> <span class="mf">0.299745</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.843602</span><span class="p">,</span> <span class="mf">0.354592</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.847393</span><span class="p">,</span> <span class="mf">0.399235</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.858768</span><span class="p">,</span> <span class="mf">0.489796</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.865403</span><span class="p">,</span> <span class="mf">0.543367</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.872038</span><span class="p">,</span> <span class="mf">0.630102</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.878673</span><span class="p">,</span> <span class="mf">0.728316</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.883412</span><span class="p">,</span> <span class="mf">0.809949</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.88436</span><span class="p">,</span> <span class="mf">0.908163</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.885308</span><span class="p">,</span> <span class="mf">0.97449</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.886256</span><span class="p">,</span> <span class="mf">0.998724</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq8, Th=0.25&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.785782</span><span class="p">,</span> <span class="mf">0.00382653</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.806635</span><span class="p">,</span> <span class="mf">0.0561224</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.834123</span><span class="p">,</span> <span class="mf">0.19898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.849289</span><span class="p">,</span> <span class="mf">0.302296</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.85782</span><span class="p">,</span> <span class="mf">0.401786</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.865403</span><span class="p">,</span> <span class="mf">0.502551</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.87109</span><span class="p">,</span> <span class="mf">0.600765</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.876777</span><span class="p">,</span> <span class="mf">0.69898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.878673</span><span class="p">,</span> <span class="mf">0.80102</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.880569</span><span class="p">,</span> <span class="mf">0.90051</span><span class="p">],])</span>
+
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq8, Th=1.0&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.383886</span><span class="p">,</span> <span class="mf">0.00127551</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.429384</span><span class="p">,</span> <span class="mf">0.0471939</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.466351</span><span class="p">,</span> <span class="mf">0.100765</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.522275</span><span class="p">,</span> <span class="mf">0.19898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.563981</span><span class="p">,</span> <span class="mf">0.298469</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.592417</span><span class="p">,</span> <span class="mf">0.40051</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.616114</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.633175</span><span class="p">,</span> <span class="mf">0.600765</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.642654</span><span class="p">,</span> <span class="mf">0.69898</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.652133</span><span class="p">,</span> <span class="mf">0.799745</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.65782</span><span class="p">,</span> <span class="mf">0.90051</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.658768</span><span class="p">,</span> <span class="mf">0.998724</span><span class="p">]])</span>
+        <span class="n">res</span><span class="p">[</span><span class="s1">&#39;digitized Eq8, Th=2.5&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.092891</span><span class="p">,</span> <span class="mf">0.00127551</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.136493</span><span class="p">,</span> <span class="mf">0.0280612</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.216114</span><span class="p">,</span> <span class="mf">0.0982143</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.299526</span><span class="p">,</span> <span class="mf">0.19898</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.361137</span><span class="p">,</span> <span class="mf">0.299745</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.404739</span><span class="p">,</span> <span class="mf">0.40051</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.43981</span><span class="p">,</span> <span class="mf">0.501276</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.461611</span><span class="p">,</span> <span class="mf">0.598214</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.478673</span><span class="p">,</span> <span class="mf">0.701531</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.491943</span><span class="p">,</span> <span class="mf">0.799745</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.498578</span><span class="p">,</span> <span class="mf">0.903061</span><span class="p">],</span>
+                <span class="p">[</span><span class="mf">0.500474</span><span class="p">,</span> <span class="mf">0.992347</span><span class="p">]])</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+        <span class="n">Th</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+        <span class="n">rw</span><span class="o">=</span><span class="mf">0.035</span>
+        <span class="n">rs</span> <span class="o">=</span> <span class="mf">0.175</span>
+
+        <span class="n">re</span><span class="o">=</span><span class="mf">0.525</span>
+        <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">mv</span><span class="o">=</span><span class="mf">0.2e-3</span>
+        <span class="n">kh</span><span class="o">=</span><span class="mf">2e-8</span>
+        <span class="n">ks</span> <span class="o">=</span> <span class="n">kh</span><span class="o">/</span><span class="mi">5</span><span class="c1">#1.8</span>
+        <span class="n">kw0</span> <span class="o">=</span> <span class="mf">1e-3</span>
+        <span class="n">ch</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Th</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">ch</span>
+
+
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">re</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">rs</span><span class="o">/</span><span class="n">rw</span><span class="p">,</span> <span class="n">kh</span><span class="o">/</span><span class="n">ks</span><span class="p">)</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">])</span>
+        <span class="n">A3</span> <span class="o">=</span> <span class="n">a3</span> <span class="o">*</span> <span class="n">ch</span> <span class="o">/</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span><span class="mi">4</span>
+
+        <span class="k">for</span> <span class="n">a3_</span><span class="p">,</span> <span class="n">A3_</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a3</span><span class="p">,</span> <span class="n">A3</span><span class="p">):</span>
+            <span class="n">por5</span> <span class="o">=</span> <span class="n">dengetal2013</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="o">=</span><span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">A2</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="n">A3_</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">rs</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="n">ks</span><span class="p">,</span> <span class="n">kw0</span><span class="o">=</span><span class="n">kw0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="n">kh</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="n">mv</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">por8</span> <span class="o">=</span> <span class="n">dengetal2014</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rw</span><span class="o">=</span><span class="n">rw</span><span class="p">,</span> <span class="n">re</span><span class="o">=</span><span class="n">re</span><span class="p">,</span> <span class="n">A3</span><span class="o">=</span><span class="n">A3_</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+                          <span class="n">rs</span><span class="o">=</span><span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="n">ks</span><span class="p">,</span> <span class="n">kw0</span><span class="o">=</span><span class="n">kw0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="n">kh</span><span class="p">,</span> <span class="n">mv</span><span class="o">=</span><span class="n">mv</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">ui</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+                <span class="n">uz0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="o">*</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">/</span><span class="n">mu0</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por5</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;eq5 Th=</span><span class="si">{0:.3g}</span><span class="s2">, a3=</span><span class="si">{1:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a3_</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por8</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;eq8 Th=</span><span class="si">{0:.3g}</span><span class="s2">, a3=</span><span class="si">{1:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Th</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">a3_</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">uz0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">val</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="mi">20</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">key</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Deng et al. 2014, figure 3a, time variation 2 methods&#39;</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

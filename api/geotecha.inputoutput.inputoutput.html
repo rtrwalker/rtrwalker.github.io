@@ -1,0 +1,1633 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>inputoutput &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="inputoutput" href="geotecha.inputoutput.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">inputoutput</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.inputoutput.inputoutput">Module listing</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.inputoutput.html">inputoutput</a><ul>
+      <li>Previous: <a href="geotecha.inputoutput.html" title="previous chapter">inputoutput</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.inputoutput.inputoutput.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="inputoutput">
+<h1>inputoutput<a class="headerlink" href="#inputoutput" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser" title="geotecha.inputoutput.inputoutput.GenericInputFileArgParser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GenericInputFileArgParser</span></code></a>(obj[,&nbsp;…])</td>
+<td>Pass input files to a class/function, then call methods on the object</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver" title="geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver"><code class="xref py py-obj docutils literal notranslate"><span class="pre">InputFileLoaderCheckerSaver</span></code></a>([reader,&nbsp;…])</td>
+<td>A class for accepting an input file, running checks, saveing data/plots.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString" title="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PrefixNumpyArrayString</span></code></a>([prefix])</td>
+<td>When printing a numpy array string prefix ‘array’</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SimpleTimer" title="geotecha.inputoutput.inputoutput.SimpleTimer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SimpleTimer</span></code></a>()</td>
+<td>Simple timer to display start, end, and elapsed wall clock time of code execution.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker" title="geotecha.inputoutput.inputoutput.SyntaxChecker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SyntaxChecker</span></code></a>([allow])</td>
+<td>Check if a string contains only allowabel python syntax</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.print_all_nodes" title="geotecha.inputoutput.inputoutput.print_all_nodes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_all_nodes</span></code></a></td>
+<td>Simple ast.NodeVisitor sub class that prints each node when visited</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits" title="geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_PolyLines_have_same_x_limits</span></code></a>(obj)</td>
+<td>Check if attributes of object that are PolyLine have the same x values</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_combinations" title="geotecha.inputoutput.inputoutput.check_attribute_combinations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_combinations</span></code></a>(obj[,&nbsp;…])</td>
+<td>Check for incomplete combinations of attributes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_is_list" title="geotecha.inputoutput.inputoutput.check_attribute_is_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_is_list</span></code></a>(obj[,&nbsp;attributes,&nbsp;…])</td>
+<td>Check if attributes of an object are lists</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length" title="geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_pairs_have_equal_length</span></code></a>(obj)</td>
+<td>Check if attribute pairs have the same length</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization" title="geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">code_for_explicit_attribute_initialization</span></code></a>([…])</td>
+<td>Generate code to initialize an objects attributes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.copy_attributes_between_objects" title="geotecha.inputoutput.inputoutput.copy_attributes_between_objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_attributes_between_objects</span></code></a>(from_object,&nbsp;…)</td>
+<td>Copy attributes from one object to another</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.copy_attributes_from_text_to_object" title="geotecha.inputoutput.inputoutput.copy_attributes_from_text_to_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_attributes_from_text_to_object</span></code></a>(reader,&nbsp;…)</td>
+<td>Wrapper for <cite>copy_attributes_between_objects</cite> where <cite>from_object</cite> is fileobject, StringIO, text</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.fcode_one_large_expr" title="geotecha.inputoutput.inputoutput.fcode_one_large_expr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fcode_one_large_expr</span></code></a>(expr[,&nbsp;prepend])</td>
+<td>Fortran friendly printing of sympy expression ignoring any loops/indexed</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none" title="geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none"><code class="xref py py-obj docutils literal notranslate"><span class="pre">force_attribute_same_len_if_none</span></code></a>(obj[,&nbsp;…])</td>
+<td>Make list of None with len the same as an existing attribute</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.get_filepaths" title="geotecha.inputoutput.inputoutput.get_filepaths"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_filepaths</span></code></a>([wildcard])</td>
+<td>dialog box to select files</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.hms_string" title="geotecha.inputoutput.inputoutput.hms_string"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hms_string</span></code></a>(sec_elapsed)</td>
+<td>Convert seconds to human readable h:min:seconds</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.initialize_objects_attributes" title="geotecha.inputoutput.inputoutput.initialize_objects_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_objects_attributes</span></code></a>(obj[,&nbsp;…])</td>
+<td>Initialize an objects attributes</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.make_array_into_dataframe" title="geotecha.inputoutput.inputoutput.make_array_into_dataframe"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_array_into_dataframe</span></code></a>(data[,&nbsp;…])</td>
+<td>Make an array into a pandas dataframe</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.make_module_from_text" title="geotecha.inputoutput.inputoutput.make_module_from_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_module_from_text</span></code></a>(reader[,&nbsp;syntax_checker])</td>
+<td>Make a module from file, StringIO, text etc.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.modules_in_package" title="geotecha.inputoutput.inputoutput.modules_in_package"><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules_in_package</span></code></a>(package_name[,&nbsp;exclude])</td>
+<td>List of modules in a package</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.next_output_stem" title="geotecha.inputoutput.inputoutput.next_output_stem"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_output_stem</span></code></a>(prefix[,&nbsp;path,&nbsp;start,&nbsp;inc,&nbsp;…])</td>
+<td>Find next unique prefix-number in sequence of numbered files/folders</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.object_members" title="geotecha.inputoutput.inputoutput.object_members"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object_members</span></code></a>(obj[,&nbsp;info,&nbsp;join])</td>
+<td>Get a list of object members.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.save_grid_data_to_file" title="geotecha.inputoutput.inputoutput.save_grid_data_to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_grid_data_to_file</span></code></a>(data_dicts[,&nbsp;…])</td>
+<td>Save grid data to files using a common filename stem</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.string_of_object_attributes" title="geotecha.inputoutput.inputoutput.string_of_object_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">string_of_object_attributes</span></code></a>(obj[,&nbsp;…])</td>
+<td>Put repr of objects attributes into one string</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.working_directory" title="geotecha.inputoutput.inputoutput.working_directory"><code class="xref py py-obj docutils literal notranslate"><span class="pre">working_directory</span></code></a>(path)</td>
+<td>Change working directory for duration of with statement</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.inputoutput.inputoutput">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.inputoutput.inputoutput" title="Permalink to this headline">¶</a></h2>
+<p>Input/output operations,attribute checking, proccess input files that
+have python syntax.</p>
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.GenericInputFileArgParser">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">GenericInputFileArgParser</code><span class="sig-paren">(</span><em>obj</em>, <em>pass_open_file=True</em>, <em>methods=[]</em>, <em>prog=None</em>, <em>description='Process some input files'</em>, <em>epilog='If no options are specifyied then the user will be prompted to select files.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#GenericInputFileArgParser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Pass input files to a class/function, then call methods on the object</p>
+<p>see self.main for use in scripts.</p>
+<p>The working directory will be changed to the location of each input file</p>
+<p>Basically the path of each input file is passed to the method self.process.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object/callable</span></dt>
+<dd><p class="first last">Object to call with input file as argument.</p>
+</dd>
+<dt><strong>methods</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence of 3 element tuples, optional</span></dt>
+<dd><p class="first last">Each element of methods is a 3 element tuple (method_name, args,
+kwargs). After <cite>obj</cite> has been initialized the obj’s method called
+‘method_name’ will be called with unpacked args and kwargs. i.e.
+obj(filename).method_name(<a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs). Default methods=[] i.e.
+no methods called.</p>
+</dd>
+<dt><strong>pass_open_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then input files will be passed to obj as open file objects.
+If False then paths of the input files will be passed to obj.
+Default pass_open_file=True</p>
+</dd>
+<dt><strong>prog</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Part of usage method for argparse, the name of the program.
+Default prog=None which uses sys.argv[0] i.e. the first command line
+paramter.</p>
+</dd>
+<dt><strong>description</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Part of usage method for argparse.
+Default description=”Process some input files”.</p>
+</dd>
+<dt><strong>epilog</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Part of usage method for argparse. Default epilog=’If no options are
+specifyied then the user will be prompted to select files.’</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">argparse</span></code></dt>
+<dd>better description of some of the variables.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>For basic usage, in a file to be used as a script put:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span><span class="o">==</span><span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">GenericInputFileArgParser</span><span class="p">(</span><span class="n">obj_to_call</span><span class="p">)</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser.main" title="geotecha.inputoutput.inputoutput.GenericInputFileArgParser.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>([argv])</td>
+<td>Accept command line arguments and pass files/paths to self.obj</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser.process" title="geotecha.inputoutput.inputoutput.GenericInputFileArgParser.process"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process</span></code></a>(path)</td>
+<td>Process the input file path</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.GenericInputFileArgParser.main">
+<code class="descname">main</code><span class="sig-paren">(</span><em>argv=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#GenericInputFileArgParser.main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accept command line arguments and pass files/paths to self.obj</p>
+<p>Allows users to specify files via the command line in various ways:</p>
+<p>1. If no options are specifyied a dialog box will open for the user
+to select files.
+2. A list of file paths can be specified with the –filename option
+3. The –directory and –pattern options can be used together to
+search a particular directory for files matching a certain pattern.
+If no actual directory is specified then the current working directory
+will be used.  The default pattern to look for is “<a href="#id5"><span class="problematic" id="id6">*</span></a>.py”.  The
+script file itself will not be processed if it matches the pattern
+itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>argv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str, optional</span></dt>
+<dd><p class="first last">List of command line arguments. Default argv=None which will grab
+arguments from sys.argv.  Used mainly for testing or bypassing
+script based command line arguments.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.GenericInputFileArgParser.process">
+<code class="descname">process</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#GenericInputFileArgParser.process"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.GenericInputFileArgParser.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process the input file path</p>
+<p>The default behaviour of self.process depends on <cite>self.pass_open_file</cite>.
+If True then <cite>path</cite> will be opened and then self.obj will be called
+with the opened file as the argument. If False then then <cite>self.obj</cite>
+will be called with the path itself as argument.</p>
+<p>If you need more complicated behaviour to process your input file
+(e.g. initalize self.obj with a path and then call one of it’s methods)
+then over write this method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Absolute path to input file.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">InputFileLoaderCheckerSaver</code><span class="sig-paren">(</span><em>reader=None</em>, <em>pkg_for_version='geotecha'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#InputFileLoaderCheckerSaver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class for accepting an input file, running checks, saveing data/plots.</p>
+<p>Options to:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Accept an inputfile with python syntax</li>
+<li>Copy attribute value from a text file (i.e. text such as ‘b = 34’ in
+the input file will be result in self.b=34)</li>
+<li>Run checks on the attributes.</li>
+<li>Save data to file</li>
+<li>Save figures to file.</li>
+<li>Common attributes along with their defaults are available to all
+classes that sub-class InputFileLoaderCheckerSaver.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>reader</strong> <span class="classifier-delimiter">:</span> <span class="classifier">file_like object</span></dt>
+<dd><p class="first last">Object to get text from. file, StringIO, text etc.</p>
+</dd>
+<dt><strong>pkg_for_version</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">The version attribute will be determined by the version number of
+the <cite>pkg_for_version</cite> package.  Default pkg_for_version=’geotecha’.
+If for some reason pkg_for_version has not been set, or the package
+cannot be found, then version will be ‘unknown’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>For the _attributes and _attribute_defaults  attribute the common
+attributes and their defualts are:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>_attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string</span></dt>
+<dd><p class="first last">User defined list of attributes. Must be defined in the sub-class.
+A number of common attributes will be added to the user defined list.
+See the Notes section for the common attributes and their default
+values.</p>
+</dd>
+<dt><strong>_attribute_defaults</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict, optional</span></dt>
+<dd><p class="first last">User defined dict of attribute defaults. May be defined in the
+sub-class. Defaults for the common attributes will will be added
+to the user defined list.
+When no default value is given , None will be used.
+Default _attribute_defaults=dict() i.e. all user defaults are None.
+See the Notes section for the common attributes and their default
+values.</p>
+</dd>
+<dt><strong>_attributes_that_should_be_lists</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">list of attributes that should be of type <code class="docutils literal notranslate"><span class="pre">list</span></code>. Those attributes
+that are not None and not lists will be put in a list.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_attributes_that_should_have_same_x_limits</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of str, optional</span></dt>
+<dd><p class="first last">Each sublist is a list of attribute names to check.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_attributes_that_should_have_same_len_pairs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of two string</span></dt>
+<dd><p class="first last">List of attribute names to check. Each sub-list should have two
+elements.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_zero_or_all</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>zero_or_all</cite> is a list of attribute names that should
+either all be None or all be not None.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_at_least_one</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>at_least_one</cite> is a list of attribute names of which at
+least one should not be None.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_one_implies_others</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>one_implies_others</cite> is a list of attribute names.  If
+the first attribute in the list is not None then all other members of
+the list should also not be None.
+May be defined in the sub-class.</p>
+</dd>
+<dt><strong>_input_text</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">str of the input file.  Will be None if no reader is passed to the
+__init__ method</p>
+</dd>
+<dt><strong>_debug</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False</span></dt>
+<dd><p class="first last">For use with debugging. Default _debug=False</p>
+</dd>
+<dt><strong>_figures</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of matplotlib figures</span></dt>
+<dd><p class="first last">Define in sub-class. Each figure should have a label which
+will be used to save figures.</p>
+</dd>
+<dt><strong>_grid_data_dicts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
+<dd><p class="first last">Define in sub-class. For saving grid_data to file
+using <cite>save_grid_data_to_file</cite>.</p>
+</dd>
+<dt><strong>_file_stem: string</strong></dt>
+<dd><p class="first last">path including file name prefix with number for all output files.
+default=’out_000’.  If
+create_directory=True then files will be put in a folder named
+<cite>file_stem</cite></p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver.check_input_attributes" title="geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver.check_input_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_attributes</span></code></a>()</td>
+<td>Perform checks on attributes</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver.check_input_attributes">
+<code class="descname">check_input_attributes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#InputFileLoaderCheckerSaver.check_input_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.InputFileLoaderCheckerSaver.check_input_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform checks on attributes</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_combinations" title="geotecha.inputoutput.inputoutput.check_attribute_combinations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_combinations</span></code></a>, <a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_is_list" title="geotecha.inputoutput.inputoutput.check_attribute_is_list"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_is_list</span></code></a>, <a class="reference internal" href="#geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none" title="geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none"><code class="xref py py-obj docutils literal notranslate"><span class="pre">force_attribute_same_len_if_none</span></code></a>, <a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits" title="geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_PolyLines_have_same_x_limits</span></code></a>, <a class="reference internal" href="#geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length" title="geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_attribute_pairs_have_equal_length</span></code></a></p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">PrefixNumpyArrayString</code><span class="sig-paren">(</span><em>prefix='np.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#PrefixNumpyArrayString"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>When printing a numpy array string prefix ‘array’</p>
+<p>If you use <cite>repr</cite> to print a numpy array it will print as ‘array([…])’.
+If you have imported numpy with ‘import numpy.array as array’ or some such
+import then you can paste the printed output straight back into Python.
+However, I use ‘import numpy as np’ so I have to manually put in the ‘np.’
+before I can use the printed output in my code.  Using
+PrefixNumpyArrayString can put in the ‘np.’ automatically when using the
+__str__ of the numpy array. i.e. __repr__ remains unchanged but __str__
+will have the prefix</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">[0 1 2]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">PrefixNumpyArrayString</span><span class="p">(</span><span class="s1">&#39;numpy.&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">turn_on</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">numpy.array([0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">turn_off</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="go">[0 1 2]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>prefix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">string to prefix with. Default prefix=’np.’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_off" title="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_off"><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn_off</span></code></a>()</td>
+<td>Turn_on printing numpy array with prefix</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_on" title="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_on"><code class="xref py py-obj docutils literal notranslate"><span class="pre">turn_on</span></code></a>()</td>
+<td>Turn_on printing numpy array with prefix</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_off">
+<code class="descname">turn_off</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#PrefixNumpyArrayString.turn_off"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_off" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn_on printing numpy array with prefix</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_on">
+<code class="descname">turn_on</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#PrefixNumpyArrayString.turn_on"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.PrefixNumpyArrayString.turn_on" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn_on printing numpy array with prefix</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.SimpleTimer">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">SimpleTimer</code><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SimpleTimer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SimpleTimer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Simple timer to display start, end, and elapsed wall clock time of
+code execution.</p>
+<p>Messages displayed when start and finish methods called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>start_times</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Start times corresponding to each timing level.</p>
+</dd>
+<dt><strong>messages</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Message/title corresponding to each timeing level.</p>
+</dd>
+<dt><strong>end_times</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">end times corresponding to each timing level.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SimpleTimer.finish" title="geotecha.inputoutput.inputoutput.SimpleTimer.finish"><code class="xref py py-obj docutils literal notranslate"><span class="pre">finish</span></code></a>(i)</td>
+<td>Print message saying timing level i has finished along with the elapsed time.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SimpleTimer.start" title="geotecha.inputoutput.inputoutput.SimpleTimer.start"><code class="xref py py-obj docutils literal notranslate"><span class="pre">start</span></code></a>(i[,&nbsp;msg])</td>
+<td>Print message saying timing level i has started.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SimpleTimer.finish">
+<code class="descname">finish</code><span class="sig-paren">(</span><em>i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SimpleTimer.finish"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SimpleTimer.finish" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print message saying timing level i has finished along with the
+elapsed time.</p>
+<dl class="docutils">
+<dt>i <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>index of timed process.  Numerical value of i will detemine
+indent of printed message. If i==0 then row of astericks will be
+printed after finish message.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SimpleTimer.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>i</em>, <em>msg=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SimpleTimer.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SimpleTimer.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print message saying timing level i has started.</p>
+<dl class="docutils">
+<dt>i <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>index of timed process.  Numerical value of i will detemine
+indent of printed message. If i==0 then row of astericks will be
+printed before message.</dd>
+<dt>msg <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd>title of timing process.  printed message will be “Started ” + msg.
+Default msg=None which will make “Started Level i” appear.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">SyntaxChecker</code><span class="sig-paren">(</span><em>allow=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NodeVisitor</span></code></p>
+<p>Check if a string contains only allowabel python syntax</p>
+<p><cite>SyntaxChecker</cite> provides functionality to check syntax of string using the
+ast module.  Basically white-list allowable functions and attributes.  A
+SyntaxError will be raised if any code is found that is not allowed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>allow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
+<dd><p class="first last">List of SyntaxChecker ‘allow’ methods to call. Default = [].
+e.g. allow=[‘ast’, ‘numpy’] will call SyntaxChecker.allow_ast(),
+SyntaxChecker.allow_numpy()</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">ast.NodeVisitor</span></code></dt>
+<dd>Parent class.  Descriptions of python syntax grammar.</dd>
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.object_members" title="geotecha.inputoutput.inputoutput.object_members"><code class="xref py py-obj docutils literal notranslate"><span class="pre">object_members</span></code></a></dt>
+<dd>Easily print a string of an objects routines for use in a ‘allow_&lt;some_name&gt;’ method.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>If subclassing new ‘allow_&lt;some_name&gt;’ methods can be written to bulk add
+allowable functions and attributes.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">syntax_checker</span> <span class="o">=</span> <span class="n">SyntaxChecker</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ast&#39;</span><span class="p">,</span> <span class="s1">&#39;builtin&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a=np.cos(0.5)&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;exec&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">syntax_checker</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">syntax_checker</span> <span class="o">=</span> <span class="n">SyntaxChecker</span><span class="p">(</span><span class="n">allow</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ast&#39;</span><span class="p">,</span> <span class="s1">&#39;builtin&#39;</span><span class="p">,</span> <span class="s1">&#39;numpy&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;a=cos(0.5)&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;exec&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">syntax_checker</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="gt">Traceback (most recent call last):</span>
+    <span class="o">...</span>
+<span class="gr">SyntaxError</span>: <span class="n">cos is not an allowed function!</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>allowed_functions</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">A dictionary of allowable functions. e.g. allowed_functions[‘cos’] =
+math.cos would permit the use of ‘cos’ from the math module.
+allowed_functions[‘math’] = math would allow use of the math
+module (note to allow things like ‘math.sin’ you would also have to
+add ‘sin’ to the allowable_attributes).  Adding functions one by one
+can be cumbersome; see the ‘allow_&lt;some_name&gt;’ methods for bulk adding
+of common functionality.</p>
+</dd>
+<dt><strong>allowed_node_types</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary of allowable ast node names.
+e.g. allowed_node_types[‘Name’] = ast.Name would allow ast.Name nodes.
+typically use SytaxChecker.allow_ast to allow a reasonable set of ast
+nodes</p>
+</dd>
+<dt><strong>allowed_attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">set of string</span></dt>
+<dd><p class="first last">set of allowable attributes.  e.g. you have already allowed the math
+module with allowed_functions[‘math’] = math.
+allowable_attributes.add(‘tan’) will allow use of math.tan(34) etc.
+Note that the attribute ‘tan’ could now be used as an attribute for
+any of the functions in allowed_functions even though this may not
+make any logical sense.  i.e. it will pass the SyntaxChecker but would
+fail if the code was executed. Adding attributes one by one
+can be cumbersome; see the ‘allow_&lt;some_name&gt;’ methods for bulk adding
+of common functionality.</p>
+</dd>
+<dt><strong>safe_names</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary of safe names.
+Default safe_names={‘True’: True, ‘False’: False, ‘None’: None}.</p>
+</dd>
+<dt><strong>print_each_node</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Print out each node when they are visited.
+Default print_each_node=False. Note that
+nodes may be printed twice, once for a generic visit and once for a
+specific visit such as visit_Name, visit_Attribute etc.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_ast" title="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_ast"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allow_ast</span></code></a>()</td>
+<td>Allow subset of ast node types</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_builtin" title="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_builtin"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allow_builtin</span></code></a>()</td>
+<td>Allow subset of __builtins__ functions</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_numpy" title="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_numpy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allow_numpy</span></code></a>()</td>
+<td>Allow a subset of numpy functionality via np.attribute syntax</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_PolyLine" title="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_PolyLine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">allow_PolyLine</span></code></a>()</td>
+<td>Allow PolyLine class from geotecha.piecewise.piecewise_linear_1d</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_PolyLine">
+<code class="descname">allow_PolyLine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.allow_PolyLine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_PolyLine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow PolyLine class from geotecha.piecewise.piecewise_linear_1d</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_ast">
+<code class="descname">allow_ast</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.allow_ast"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_ast" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow subset of ast node types</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_builtin">
+<code class="descname">allow_builtin</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.allow_builtin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_builtin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow subset of __builtins__ functions</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.allow_numpy">
+<code class="descname">allow_numpy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.allow_numpy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.allow_numpy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allow a subset of numpy functionality via np.attribute syntax</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.generic_visit">
+<code class="descname">generic_visit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.generic_visit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.generic_visit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom visit a generic node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Attribute">
+<code class="descname">visit_Attribute</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.visit_Attribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom visit an ‘Attribute’ node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Call">
+<code class="descname">visit_Call</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.visit_Call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom visit a ‘Call’ node</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Name">
+<code class="descname">visit_Name</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#SyntaxChecker.visit_Name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.SyntaxChecker.visit_Name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Custom visit a ‘Name’ node</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">check_attribute_PolyLines_have_same_x_limits</code><span class="sig-paren">(</span><em>obj</em>, <em>attributes=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#check_attribute_PolyLines_have_same_x_limits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.check_attribute_PolyLines_have_same_x_limits" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if attributes of object that are PolyLine have the same x values</p>
+<p>Each attribute can be a single instance of PolyLine or a list of PolyLines.
+An error is raised if x-values are different.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object with attributes to check.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of strings</span></dt>
+<dd><p class="first last">Each sublist is a list of attribute names to check.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.piecewise.piecewise_linear_1d.html#geotecha.piecewise.piecewise_linear_1d.PolyLine" title="geotecha.piecewise.piecewise_linear_1d.PolyLine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.piecewise.piecewise_linear_1d.PolyLine</span></code></a></dt>
+<dd>PolyLine class</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.check_attribute_combinations">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">check_attribute_combinations</code><span class="sig-paren">(</span><em>obj</em>, <em>zero_or_all=[]</em>, <em>at_least_one=[]</em>, <em>one_implies_others=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#check_attribute_combinations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.check_attribute_combinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check for incomplete combinations of attributes</p>
+<p>Raises ValueError if any combination fails.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>zero_or_all</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>zero_or_all</cite> is a list of attribute names that should
+either all be None or all be not None.</p>
+</dd>
+<dt><strong>at_least_one</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>at_least_one</cite> is a list of attribute names of which at
+least one should not be None.</p>
+</dd>
+<dt><strong>one_implies_others</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">Each element of <cite>one_implies_others</cite> is a list of attribute names.  If
+the first attribute in the list is not None then all other members of
+the list should also not be None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>None</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.check_attribute_is_list">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">check_attribute_is_list</code><span class="sig-paren">(</span><em>obj</em>, <em>attributes=[]</em>, <em>force_list=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#check_attribute_is_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.check_attribute_is_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if attributes of an object are lists</p>
+<p>If attribute is not a list and <a href="#id7"><span class="problematic" id="id8">`</span></a>force_list`=True then attribute will be
+placed in list.  e.g. say obj.a = 6, 6 is not a list so obj.a will be
+changed to obj.a = [6].  An error is raised if attribute is not a list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object with attributes to check.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd><p class="first last">A list of attribute names to check.</p>
+</dd>
+<dt><strong>force_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If True not-list attributes will be put in a list. If False then
+non-list attributes will raise an error. Default force_list=False.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>None</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">check_attribute_pairs_have_equal_length</code><span class="sig-paren">(</span><em>obj</em>, <em>attributes=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#check_attribute_pairs_have_equal_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.check_attribute_pairs_have_equal_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if attribute pairs have the same length</p>
+<p>Compares pairs only if both pairs are not None.  Raises error if pair items
+have unequal lenghth.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object with attributes to check.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of two string</span></dt>
+<dd><p class="first last">List of attribute names to check. Each sub-list should have two
+elements.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">code_for_explicit_attribute_initialization</code><span class="sig-paren">(</span><em>attributes=[]</em>, <em>defaults={}</em>, <em>defaults_name='_attribute_defaults'</em>, <em>object_name='self'</em>, <em>not_found_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#code_for_explicit_attribute_initialization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate code to initialize an objects attributes</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>object_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string , optional</span></dt>
+<dd><p class="first last">Name of object to set attributes. default=’self’.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd><p class="first last">A list of attribute names to set.</p>
+</dd>
+<dt><strong>defaults</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of string-value pairs</span></dt>
+<dd><p class="first last">Dictionary specifying the default value of each attribute.</p>
+</dd>
+<dt><strong>defaults_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">If <code class="docutils literal notranslate"><span class="pre">None</span></code> then the actual values in <cite>defaults</cite> will be used
+to set attributes.  If not <code class="docutils literal notranslate"><span class="pre">None</span></code> then those attributes with
+defaults will be initialized by pointing to a dictionary called
+<cite>defaults_name</cite>.  Default defaults_name=’_attribute_defaults’,</p>
+</dd>
+<dt><strong>not_found_value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Default value to set attribute to if not found in <cite>defaults</cite>.
+default not_found_value=``None``</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Code that can be pasted into an object (usually in the __init__
+methos) to explicitly initialize attributes, so the attributes appear
+in autocomplete.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.initialize_objects_attributes" title="geotecha.inputoutput.inputoutput.initialize_objects_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initialize_objects_attributes</span></code></a></dt>
+<dd>Similar functionality with no copy paste.</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.copy_attributes_between_objects">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">copy_attributes_between_objects</code><span class="sig-paren">(</span><em>from_object</em>, <em>to_object</em>, <em>attributes=[]</em>, <em>defaults={}</em>, <em>not_found_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#copy_attributes_between_objects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.copy_attributes_between_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy attributes from one object to another</p>
+<p>Looks up <cite>attributes</cite> in <cite>from_obj</cite> and copies them to <cite>to_object</cite>.  If
+not present in <cite>from_object</cite> the corresponding attribute in <cite>to_object</cite>
+will be set to <cite>defaults</cite> or <cite>not_found_value</cite> if not in <cite>defaults</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>from_object</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object or module</span></dt>
+<dd><p class="first last">Object to copy attributes from.</p>
+</dd>
+<dt><strong>to_object</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object or module</span></dt>
+<dd><p class="first last">Object to copy attributes to.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd><p class="first last">A list of attribute names to copy from <cite>from_object</cite> to <cite>object_to</cite>.</p>
+</dd>
+<dt><strong>defaults</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of string-value pairs</span></dt>
+<dd><p class="first last">Dictionary specifying the default value of each attribute that is not
+found in <cite>from_object</cite>.</p>
+</dd>
+<dt><strong>not_found_value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Default value to set attribute to if not found in <cite>from_object</cite> or in
+<cite>defaults</cite>.  Default not_found_value=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>None</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.copy_attributes_from_text_to_object">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">copy_attributes_from_text_to_object</code><span class="sig-paren">(</span><em>reader</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#copy_attributes_from_text_to_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.copy_attributes_from_text_to_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for <cite>copy_attributes_between_objects</cite> where <cite>from_object</cite>
+is fileobject, StringIO, text</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>reader</strong> <span class="classifier-delimiter">:</span> <span class="classifier">fileobject, StringIO, text</span></dt>
+<dd><p class="first last">text to turn into a module and pass as from_object</p>
+</dd>
+<dt><strong>*args :</strong></dt>
+<dd><p class="first last">Positional arguments that will be passed to
+<cite>copy_attributes_between_objects</cite>.</p>
+</dd>
+<dt><strong>**kwargs :</strong></dt>
+<dd><p class="first last">Keyword arguments that will be passed to
+<cite>copy_attributes_between_objects</cite>. You can use a SyntaxChecker
+object to interpret the <cite>reader</cite> by using the keyword argument
+‘syntax_checker’=&lt;some SyntaxChecker object&gt;.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.copy_attributes_between_objects" title="geotecha.inputoutput.inputoutput.copy_attributes_between_objects"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_attributes_between_objects</span></code></a></dt>
+<dd>See for args and kwargs input.</dd>
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker" title="geotecha.inputoutput.inputoutput.SyntaxChecker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SyntaxChecker</span></code></a></dt>
+<dd>Restrict the allowable syntax in the <cite>reader</cite>.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Put ‘syntax_checker= ‘ in the kwargs to add a SyntaxChecker</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.fcode_one_large_expr">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">fcode_one_large_expr</code><span class="sig-paren">(</span><em>expr</em>, <em>prepend=None</em>, <em>**settings</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#fcode_one_large_expr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.fcode_one_large_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fortran friendly printing of sympy expression ignoring any loops/indexed</p>
+<p>The normal FcodePrinter.doprint method will try to figure out what fortran
+loops you need by looking for indexed expressions.  Sometimes you just want
+to change square brackets [] to parenteses () and wrap/indent the code for
+Fortran with appropriate line continuations. <cite>fcode_one_large_expr</cite>
+can do that for you. You will have to write your own fortran do loops.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>expr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy expression</span></dt>
+<dd><p class="first last">A single large sympy expression.</p>
+</dd>
+<dt><strong>prepend</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">A string to prepend to your fortran code.  Assuming you are
+going to cut and paste into a fortran routine <cite>prepend</cite> should be
+correct fortran format.  (note you do not need an initial indent
+for your prepend it will be put in for you). e.g.
+prepend = ‘a(i, i) = a(i, i) + ‘. Defualt prepend=None i.e. nothing
+prepended.</p>
+</dd>
+<dt><strong>settings</strong> <span class="classifier-delimiter">:</span> <span class="classifier">keyword arguments</span></dt>
+<dd><p class="first last">See <cite>sympy.printing.fcode</cite> docs, specifically FCodePrinter.__init__ .
+Note that ‘assign_to will not work’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Fortran ready code that can be copy and pasted into a Fortran routine.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.printing.fcode</span></code></dt>
+<dd>contains all the functionality.</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">force_attribute_same_len_if_none</code><span class="sig-paren">(</span><em>obj</em>, <em>same_len_attributes=[]</em>, <em>value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#force_attribute_same_len_if_none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.force_attribute_same_len_if_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make list of None with len the same as an existing attribute</p>
+<p>If attributes after the first are None then make those attributes a list
+of len(first_attribute) filled with value.  This is useful when you want
+to zip each member of two attributes. If the second attribute is None,
+then any zipping is impossible.  However, if the second attribute
+is set to a list of None then zipping is possible.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object that has the attributes.</p>
+</dd>
+<dt><strong>same_len_attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of string</span></dt>
+<dd><p class="first last">For each group of attribute names, if attributes after the first are
+None then those attributes will be made a list of len(first_attribute)
+filled with <cite>value</cite>.</p>
+</dd>
+<dt><strong>value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">obj, optional</span></dt>
+<dd><p class="first last">Value to fill each list.  Default value=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.get_filepaths">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">get_filepaths</code><span class="sig-paren">(</span><em>wildcard=''</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#get_filepaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.get_filepaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>dialog box to select files</p>
+<p>Opens a dialog box from which the user can select files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>wildcard</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Only show file types of this kind. Default wildcard=”” which means
+no file type filtering.
+e.g. “BMP files (<em>.bmp)|</em>.bmp|GIF files (<em>.gif)|</em>.gif”</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>filepaths: list of paths</strong></dt>
+<dd><p class="first last">List of user selected file paths.  Will return None if the cancel
+button was selected.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.hms_string">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">hms_string</code><span class="sig-paren">(</span><em>sec_elapsed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#hms_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.hms_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert seconds to human readable h:min:seconds</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>sec_elapsed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Elapsed seconds</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p>Copied verbatim from <a class="reference external" href="http://arcpy.wordpress.com/2012/04/20/146/">http://arcpy.wordpress.com/2012/04/20/146/</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.initialize_objects_attributes">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">initialize_objects_attributes</code><span class="sig-paren">(</span><em>obj</em>, <em>attributes=[]</em>, <em>defaults={}</em>, <em>not_found_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#initialize_objects_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.initialize_objects_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize an objects attributes</p>
+<p>For each attribute, set it to the value found in <cite>defaults</cite> dictionary
+or, if the attribute is not found, set it to <cite>not_found_value</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object to set attributes in.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd><p class="first last">A list of attribute names to set.</p>
+</dd>
+<dt><strong>defaults</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of string-value pairs, optional</span></dt>
+<dd><p class="first last">Dictionary specifying the default value of each attribute.
+Default defautls=dict() i.e. no explicit default value.</p>
+</dd>
+<dt><strong>not_found_value</strong> <span class="classifier-delimiter">:</span> <span class="classifier">optional</span></dt>
+<dd><p class="first last">Default value to set attribute to if not found in <cite>defaults</cite> dict.
+Default not_found_value=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization" title="geotecha.inputoutput.inputoutput.code_for_explicit_attribute_initialization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">code_for_explicit_attribute_initialization</span></code></a></dt>
+<dd>Use for temporary explicit attribute initialization to facilitate auto-complete, then comment out when done.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>If using this function to initialize attributes in a class then just
+be aware that the attributes will not be available for auto-complete
+until an instance of the class is created.  This can be annoying when
+coding the class itself because typing ‘self.’ will not have any
+autocomplete options.  To work around this use a temporary explicit
+assignment e.g. ‘self.a = 6’ and then later comment it out when coding of
+the class is finsihed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.make_array_into_dataframe">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">make_array_into_dataframe</code><span class="sig-paren">(</span><em>data</em>, <em>column_labels=None</em>, <em>row_labels=None</em>, <em>row_labels_label='item'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#make_array_into_dataframe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.make_array_into_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an array into a pandas dataframe</p>
+<p>The data frame will have no index. Use df.set_index().</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array</span></dt>
+<dd><p class="first last">Data to be put int</p>
+</dd>
+<dt><strong>column_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d array, optional</span></dt>
+<dd><p class="first last">Column lables for data. Default column_labels=None which will give
+column numbers 0,1,2, etc.</p>
+</dd>
+<dt><strong>row_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d array, optional</span></dt>
+<dd><p class="first last">Default row_labels=None which will use row numbers, 0,1,2,etc.</p>
+</dd>
+<dt><strong>row_labels_label</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Column label for the row_labels column.  Default
+row_labels_label=’item’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>df</strong> <span class="classifier-delimiter">:</span> <span class="classifier">pandas dataframe</span></dt>
+<dd><p class="first last">dDtaframe of data with column and row labels added</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.make_module_from_text">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">make_module_from_text</code><span class="sig-paren">(</span><em>reader</em>, <em>syntax_checker=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#make_module_from_text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.make_module_from_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a module from file, StringIO, text etc.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>reader</strong> <span class="classifier-delimiter">:</span> <span class="classifier">file_like object</span></dt>
+<dd><p class="first last">Object to get text from.</p>
+</dd>
+<dt><strong>syntax_checker</strong> <span class="classifier-delimiter">:</span> <span class="classifier">SyntaxChecker object, optional</span></dt>
+<dd><p class="first last">Specifies what syntax is allowed when executing the text
+within <cite>reader</cite>.  Default = None, which means that text will be
+executed with the all powerful all dangerous exec function.  Only use
+this option if you trust the input.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">module</span></dt>
+<dd><p class="first last">text as module</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.inputoutput.inputoutput.SyntaxChecker" title="geotecha.inputoutput.inputoutput.SyntaxChecker"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SyntaxChecker</span></code></a></dt>
+<dd>allow certain syntax</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>I suspect it is best if <cite>reader</cite> is a string. i.e reader can be pickled.
+fileobjects may be cause issues if used with multiprocessing.process</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.modules_in_package">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">modules_in_package</code><span class="sig-paren">(</span><em>package_name, exclude=['test']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#modules_in_package"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.modules_in_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of modules in a package</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>package_name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Name of package to import and get modules from.</p>
+</dd>
+<dt><strong>exclude</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">Module names to exclude.  Default exclude=[‘test’]</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>module_list</strong> <span class="classifier-delimiter">:</span> <span class="classifier">lsit of string</span></dt>
+<dd><p class="first last">List of modules in package_name ommiting any names in the
+exclude list.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.next_output_stem">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">next_output_stem</code><span class="sig-paren">(</span><em>prefix</em>, <em>path=None</em>, <em>start=1</em>, <em>inc=1</em>, <em>zfill=3</em>, <em>overwrite=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#next_output_stem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.next_output_stem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find next unique prefix-number in sequence of numbered files/folders</p>
+<p>Looks in folder of <cite>path</cite> for files/folders with prefix-number combos
+of the form ‘prefixdddxyz.ext’.  If found
+then the ddd is incremented by <cite>inc</cite> and the new ‘prefixddd’ is returned.
+E.g. if file ‘prefix004_exact.out’ exists you will get ‘prefix_005’ as
+the next output stem.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>prefix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Start of file/folder name to search for.</p>
+</dd>
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Folder to seach in.  Default path=None i.e. search in current working
+directory.</p>
+</dd>
+<dt><strong>start</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">If no existing files/folders match the numbering will start at <cite>start</cite>.
+Default start=1.</p>
+</dd>
+<dt><strong>inc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">If matching files/folders are found then the number will increment
+by inc. Default inc=1.</p>
+</dd>
+<dt><strong>zfill</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Fill number with zeros to the left. eg. if <cite>zfill</cite> is 3 and the number
+is 8, then the number will be output as ‘008’.</p>
+</dd>
+<dt><strong>overwrite</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False</span></dt>
+<dd><p class="first last">When True the prefix-number combo will not be incremented and the
+highest exisiting prefix-number combo will be returned.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>stem</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Next output stem.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.object_members">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">object_members</code><span class="sig-paren">(</span><em>obj</em>, <em>info='function'</em>, <em>join=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#object_members"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.object_members" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of object members.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object to get members of.</p>
+</dd>
+<dt><strong>info</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Type of members to gather.  Members will be gathered according to
+inspect.is&lt;member_type&gt;. e.g. info=’function’ will check in object for
+inspect.isfunction. Other values include ‘method’ ‘function’
+‘routine’. Default info=’function’. NOTE that it is safer to use
+‘routine’ when getting functions.  There is a custom check for
+info=’ufunc’ to give ufunc members of numpy.</p>
+</dd>
+<dt><strong>join</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool, optional</span></dt>
+<dd><p class="first last">If join==True then list will be joined together into one large
+space separated string.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>members</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str, or str</span></dt>
+<dd><p class="first last">List of member names of specified types, or space separated names
+i single string.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.inputoutput.inputoutput.print_all_nodes">
+<em class="property">class </em><code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">print_all_nodes</code><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#print_all_nodes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.print_all_nodes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NodeVisitor</span></code></p>
+<p>Simple ast.NodeVisitor sub class that prints each node when visited</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">text</span><span class="o">=</span><span class="s2">&quot;a=[3,2]*2&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">print_all_nodes</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span><span class="o">=</span><span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="go">     Module : Module(body=[Assign(targets=[Name(id=&#39;a&#39;, ctx=Store())], value=BinOp(left=List(elts=[Num(n=3), Num(n=2)], ctx=Load()), op=Mult(), right=Num(n=2)))])</span>
+<span class="go">     Assign : Assign(targets=[Name(id=&#39;a&#39;, ctx=Store())], value=BinOp(left=List(elts=[Num(n=3), Num(n=2)], ctx=Load()), op=Mult(), right=Num(n=2)))</span>
+<span class="go">     Name : Name(id=&#39;a&#39;, ctx=Store())</span>
+<span class="go">     Store : Store()</span>
+<span class="go">     BinOp : BinOp(left=List(elts=[Num(n=3), Num(n=2)], ctx=Load()), op=Mult(), right=Num(n=2))</span>
+<span class="go">     List : List(elts=[Num(n=3), Num(n=2)], ctx=Load())</span>
+<span class="go">     Num : Num(n=3)</span>
+<span class="go">     Num : Num(n=2)</span>
+<span class="go">     Load : Load()</span>
+<span class="go">     Mult : Mult()</span>
+<span class="go">     Num : Num(n=2)</span>
+</pre></div>
+</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.inputoutput.inputoutput.print_all_nodes.generic_visit" title="geotecha.inputoutput.inputoutput.print_all_nodes.generic_visit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">generic_visit</span></code></a>(node)</td>
+<td>Called if no explicit visitor function exists for a node.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">visit</span></code>(node)</td>
+<td>Visit a node.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.inputoutput.inputoutput.print_all_nodes.generic_visit">
+<code class="descname">generic_visit</code><span class="sig-paren">(</span><em>node</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#print_all_nodes.generic_visit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.print_all_nodes.generic_visit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called if no explicit visitor function exists for a node.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.save_grid_data_to_file">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">save_grid_data_to_file</code><span class="sig-paren">(</span><em>data_dicts</em>, <em>directory=None</em>, <em>file_stem='out_000'</em>, <em>create_directory=True</em>, <em>ext='.csv'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#save_grid_data_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.save_grid_data_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save grid data to files using a common filename stem</p>
+<p>Saves grid data in <cite>directory</cite>.  Each data filename will begin with
+<cite>file_stem</cite>.  Grid data is basically 2d data with rows and columns.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>data_dicts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict or single dict</span></dt>
+<dd><p class="first">Each data_dict contains info for outputing a piece of data to a file.
+Although the data_dicts parameter is listed last, each data_dict
+should appear at the start of the argument list when calling the
+function.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">data_dict key</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>name</td>
+<td>String to be added to end of stem to create
+file_name.</td>
+</tr>
+<tr class="row-odd"><td>data</td>
+<td>array of data to save to file.  If data
+is a pandas dataframe then row_labels and
+column labels will be ignored (i.e. it will
+be assumed that the dataframe already has
+row labels and column labels).</td>
+</tr>
+<tr class="row-even"><td>row_labels</td>
+<td>List of row labels for data. default = None
+which will give no row labels.</td>
+</tr>
+<tr class="row-odd"><td>row_labels_label</td>
+<td>If there are row_labels then the column
+label for the row_label column.
+Default = None which will give ‘item’.</td>
+</tr>
+<tr class="row-even"><td>column_labels</td>
+<td>Column lables for data.
+Default = None which will give nothing.</td>
+</tr>
+<tr class="row-odd"><td>header</td>
+<td>String to appear before data.
+Default = None.</td>
+</tr>
+<tr class="row-even"><td>df_kwargs</td>
+<td>dict of kwargs to pass to
+pandas.DataFrame.to_csv(). Default ={}.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><strong>directory</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Path of directory to save data in.  Default directory=None which will
+save to the current working directory.</p>
+</dd>
+<dt><strong>file_stem</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">beginning of file name, Default file_stem=’out_000’. Filename will be
+made from <cite>file_stem</cite> + [<cite>data_dict`[‘name’]] + `ext</cite>.</p>
+</dd>
+<dt><strong>ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">File extension.  Default ext=”.csv”.</p>
+</dd>
+<dt><strong>create_directory</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True, all data files will be placed in a directory named file_stem.
+So you might get files
+path_to_directoryout_000out_000_cow.csv etc.
+If False, all data files will be placed in <cite>directory</cite>.  So you would
+get files path_to_directoryout_000_cow.csv etc. Default
+create_directory=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.string_of_object_attributes">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">string_of_object_attributes</code><span class="sig-paren">(</span><em>obj</em>, <em>attributes=[]</em>, <em>none_at_bottom=True</em>, <em>numpy_array_prefix='np.'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#string_of_object_attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.string_of_object_attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put repr of objects attributes into one string</p>
+<p>The repr of each attribute will be put in a line within the output string.
+If the attribute is not found then None will be given.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">object</span></dt>
+<dd><p class="first last">Object containing attributes.</p>
+</dd>
+<dt><strong>attributes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">List of attribute names.</p>
+</dd>
+<dt><strong>none_at_bottom</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False</span></dt>
+<dd><p class="first last">If True then any attribute that is None will be placed at the end
+of the output string.</p>
+</dd>
+<dt><strong>numpy_array_prefix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">repr of numpy arrays by default do not print with anything in front of
+‘array’.  with <cite>numpy_array_prefix</cite> wou can add a ‘np.’ etc.  default=
+‘np.’ Use <cite>None</cite> for no prefix.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">String</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.inputoutput.inputoutput.working_directory">
+<code class="descclassname">geotecha.inputoutput.inputoutput.</code><code class="descname">working_directory</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/inputoutput/inputoutput.html#working_directory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.inputoutput.inputoutput.working_directory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change working directory for duration of with statement</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>path</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Path to new current working directory</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>e.g. with working_directory(datastuff):</p>
+<p class="rubric">References</p>
+<p>Taken straight from <a class="reference external" href="http://stackoverflow.com/a/3012921/2530083">http://stackoverflow.com/a/3012921/2530083</a></p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.inputoutput.inputoutput.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

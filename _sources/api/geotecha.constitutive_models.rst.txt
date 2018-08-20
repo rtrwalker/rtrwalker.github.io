@@ -1,0 +1,24 @@
+constitutive_models
+===================
+
+.. automodule:: geotecha.constitutive_models
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Modules:
+
+.. currentmodule:: geotecha.constitutive_models
+
+.. autosummary::
+   :toctree:
+
+      epus
+   swcc
+   velocity_hydraulic_gradient
+   void_ratio_permeability
+   void_ratio_stress
+
+
+

@@ -1,0 +1,1286 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>one_d &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="plotting" href="geotecha.plotting.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">one_d</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.plotting.one_d">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.plotting.html">plotting</a><ul>
+      <li>Previous: <a href="geotecha.plotting.html" title="previous chapter">plotting</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.plotting.one_d.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="one-d">
+<h1>one_d<a class="headerlink" href="#one-d" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors" title="geotecha.plotting.one_d.MarkersDashesColors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MarkersDashesColors</span></code></a>(**kwargs)</td>
+<td>Nice looking markers, dashed lines, and colors for matplotlib line plots</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.apply_dict_to_object" title="geotecha.plotting.one_d.apply_dict_to_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_dict_to_object</span></code></a>(obj,&nbsp;dic)</td>
+<td>Apply a dict of properties to a matplotlib object.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.apply_markevery_to_sequence_of_lines" title="geotecha.plotting.one_d.apply_markevery_to_sequence_of_lines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_markevery_to_sequence_of_lines</span></code></a>(lines)</td>
+<td>Apply <cite>markevery</cite> property to sequence of matplotlib lines</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.copy_dict" title="geotecha.plotting.one_d.copy_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy_dict</span></code></a>(source_dict,&nbsp;diffs)</td>
+<td>Returns a copy of source_dict, updated with the new key-value    pairs in diffs dict.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.figure_from_source_code" title="geotecha.plotting.one_d.figure_from_source_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">figure_from_source_code</span></code></a>(obj[,&nbsp;figsize,&nbsp;font])</td>
+<td>Put source code of object into a matplotlib figure</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.iterable_method_call" title="geotecha.plotting.one_d.iterable_method_call"><code class="xref py py-obj docutils literal notranslate"><span class="pre">iterable_method_call</span></code></a>(iterable,&nbsp;method,&nbsp;…)</td>
+<td>Call a method on each element of an iterable</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.pleasing_defaults" title="geotecha.plotting.one_d.pleasing_defaults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pleasing_defaults</span></code></a>()</td>
+<td>Alter some matplotlib rcparams defaults to be visually more appealing</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.plot_data_in_grid" title="geotecha.plotting.one_d.plot_data_in_grid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_data_in_grid</span></code></a>(fig,&nbsp;data,&nbsp;gs[,&nbsp;gs_index,&nbsp;…])</td>
+<td>Make a subplot for each set of data</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.plot_generic_loads" title="geotecha.plotting.one_d.plot_generic_loads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_generic_loads</span></code></a>(load_triples,&nbsp;load_names)</td>
+<td>Plot loads that come in load_vs_time-load_vs_depth-omega_phase form</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.plot_single_material_vs_depth" title="geotecha.plotting.one_d.plot_single_material_vs_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_single_material_vs_depth</span></code></a>(z_x,&nbsp;xlabels)</td>
+<td>Plot side by side property vs depth graphs</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.plot_vs_depth" title="geotecha.plotting.one_d.plot_vs_depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vs_depth</span></code></a>(x,&nbsp;z[,&nbsp;line_labels,&nbsp;H,&nbsp;…])</td>
+<td>Plot z vs x for various t values</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.plot_vs_time" title="geotecha.plotting.one_d.plot_vs_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_vs_time</span></code></a>(t,&nbsp;y[,&nbsp;line_labels,&nbsp;prop_dict])</td>
+<td>Plot y vs t with some options</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.rgb_shade" title="geotecha.plotting.one_d.rgb_shade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_shade</span></code></a>(rgb[,&nbsp;factor,&nbsp;scaled])</td>
+<td>Apply shade (darken) to a red, green, blue (rgb) triplet</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.rgb_tint" title="geotecha.plotting.one_d.rgb_tint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_tint</span></code></a>(rgb[,&nbsp;factor,&nbsp;scaled])</td>
+<td>Apply tint (lighten) to a red, green, blue (rgb) triplet</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.row_major_order_reverse_map" title="geotecha.plotting.one_d.row_major_order_reverse_map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">row_major_order_reverse_map</span></code></a>(shape[,&nbsp;…])</td>
+<td>Map an index to a position in a row-major ordered array by reversing dims</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.save_figure" title="geotecha.plotting.one_d.save_figure"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_figure</span></code></a>(fig[,&nbsp;fname,&nbsp;ext,&nbsp;dpi])</td>
+<td>Save a figure to a file in multiple formats</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.split_sequence_into_dict_and_nondicts" title="geotecha.plotting.one_d.split_sequence_into_dict_and_nondicts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">split_sequence_into_dict_and_nondicts</span></code></a>(*args)</td>
+<td>Separate dict and non-dict items.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.xylabel_subplots" title="geotecha.plotting.one_d.xylabel_subplots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xylabel_subplots</span></code></a>(fig[,&nbsp;y_axis_labels,&nbsp;…])</td>
+<td>Set x-axis label and y-axis label for each sub plot in figure</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.plotting.one_d">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.plotting.one_d" title="Permalink to this headline">¶</a></h2>
+<p>Routines to produce some matplotlib plots for one dimesional data.</p>
+<p>One dimensional data is basically x-y data. (i.e. no contour plot needed)</p>
+<dl class="class">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors">
+<em class="property">class </em><code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">MarkersDashesColors</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Nice looking markers, dashed lines, and colors for matplotlib line plots</p>
+<p>Use this object to create a list of style dictionaries.  Each style dict
+can be unpacked when passed to the matplotlib.plot command.  Each dict
+contains the appropriate keywords to set the marker, dashes, and color
+properties.  You can turn the list into a cycle using itertools.cycle
+To see the marker, dashes, and color options run the <cite>demo_options’ method.
+To choose a subset of styles see the `__call__</cite> method.  To view what the
+chosen styles actually look like run the <cite>construct_styles’ and the
+`demo_styles</cite> method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">keyword arguments</span></dt>
+<dd><p class="first">key value pairs to override the default_marker. e.g. color=(1.0,0,0)
+would change the default line and marker color to red. markersize=8
+would change all marker sizes to 8. Most likely value to change are
+color, markersize, alpha.  Defult values of the default_marker are:</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">key</th>
+<th class="head">value</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>markersize</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>markeredgecolor</td>
+<td><cite>almost_black</cite>, ‘#262626’</td>
+</tr>
+<tr class="row-even"><td>markeredgewidth</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>markerfacecolor</td>
+<td><cite>almost_black</cite>, ‘#262626’</td>
+</tr>
+<tr class="row-even"><td>alpha</td>
+<td>0.9</td>
+</tr>
+<tr class="row-odd"><td>color</td>
+<td><cite>almost_black</cite>, ‘#262626’</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>almost_black</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">hex string representing the default color, almost black ‘#262626’.</p>
+</dd>
+<dt><strong>color</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib color</span></dt>
+<dd><p class="first last">Default color of markers and lines.  Default color=`almost_black`.</p>
+</dd>
+<dt><strong>dashes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd><p class="first last">List of on, off tuples for use with matplotlib dashes.
+See <cite>construct_dashes</cite> method.</p>
+</dd>
+<dt><strong>colors</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of tuples</span></dt>
+<dd><p class="first last">List of rgb tuples describing colors.  See <cite>construct_dashes</cite>.</p>
+</dd>
+<dt><strong>markers</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
+<dd><p class="first last">List of dict describing marker properties to pass to matplotlib.plot
+command.  See <cite>construct_markers</cite> method.</p>
+</dd>
+<dt><strong>default_marker</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Default properties for markers.  These defaults will be overridden by
+the values in <cite>markers</cite>. Before initialization <cite>default_marker</cite> has
+the following keys.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>([markers,&nbsp;dashes,&nbsp;marker_colors,&nbsp;…])</td>
+<td>List of styles to unpack in matplotlib.plot for pleasing lines/markers</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_colors" title="geotecha.plotting.one_d.MarkersDashesColors.construct_colors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_colors</span></code></a>()</td>
+<td>Populate self.colors: a list of rgb colors</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_dashes" title="geotecha.plotting.one_d.MarkersDashesColors.construct_dashes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_dashes</span></code></a>()</td>
+<td>List of on, off tuples for use with matplotlib dashes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_markers" title="geotecha.plotting.one_d.MarkersDashesColors.construct_markers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_markers</span></code></a>()</td>
+<td>Populate self.markers: a list of dict that define a matplotlib marker</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_styles" title="geotecha.plotting.one_d.MarkersDashesColors.construct_styles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">construct_styles</span></code></a>([markers,&nbsp;dashes,&nbsp;…])</td>
+<td>Calls self.__call__ and assigns results to self.styles</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.demo_options" title="geotecha.plotting.one_d.MarkersDashesColors.demo_options"><code class="xref py py-obj docutils literal notranslate"><span class="pre">demo_options</span></code></a>()</td>
+<td>Show a figure with all the marker, dashes, color options available</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.demo_styles" title="geotecha.plotting.one_d.MarkersDashesColors.demo_styles"><code class="xref py py-obj docutils literal notranslate"><span class="pre">demo_styles</span></code></a>()</td>
+<td>Show a figure of all the styles in self.styles</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.merge_default_markers" title="geotecha.plotting.one_d.MarkersDashesColors.merge_default_markers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">merge_default_markers</span></code></a>()</td>
+<td>Merge self.default_marker dict with each dict in self.markers</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.shade_colors" title="geotecha.plotting.one_d.MarkersDashesColors.shade_colors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shade_colors</span></code></a>([factor])</td>
+<td>Darken all colors by factor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.plotting.one_d.MarkersDashesColors.tint_colors" title="geotecha.plotting.one_d.MarkersDashesColors.tint_colors"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tint_colors</span></code></a>([factor])</td>
+<td>Lighten all colors by factor</td>
+</tr>
+</tbody>
+</table>
+<dl class="attribute">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.almost_black">
+<code class="descname">almost_black</code><em class="property"> = '#262626'</em><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.almost_black" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.construct_colors">
+<code class="descname">construct_colors</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.construct_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate self.colors: a list of rgb colors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.construct_dashes">
+<code class="descname">construct_dashes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.construct_dashes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_dashes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of on, off tuples for use with matplotlib dashes</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.construct_markers">
+<code class="descname">construct_markers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.construct_markers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_markers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populate self.markers: a list of dict that define a matplotlib marker</p>
+<p>run <cite>self.merge_default_markers</cite> after running
+<cite>self.construct_markers</cite> so that default properties are applied
+properly.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.construct_styles">
+<code class="descname">construct_styles</code><span class="sig-paren">(</span><em>markers=None</em>, <em>dashes=None</em>, <em>marker_colors=None</em>, <em>line_colors=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.construct_styles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.construct_styles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls self.__call__ and assigns results to self.styles</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.demo_options">
+<code class="descname">demo_options</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.demo_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.demo_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a figure with all the marker, dashes, color options available</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.demo_styles">
+<code class="descname">demo_styles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.demo_styles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.demo_styles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a figure of all the styles in self.styles</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.merge_default_markers">
+<code class="descname">merge_default_markers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.merge_default_markers"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.merge_default_markers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge self.default_marker dict with each dict in self.markers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.shade_colors">
+<code class="descname">shade_colors</code><span class="sig-paren">(</span><em>factor=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.shade_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.shade_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Darken all colors by factor</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.plotting.one_d.MarkersDashesColors.tint_colors">
+<code class="descname">tint_colors</code><span class="sig-paren">(</span><em>factor=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#MarkersDashesColors.tint_colors"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.MarkersDashesColors.tint_colors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lighten all colors by factor</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.apply_dict_to_object">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">apply_dict_to_object</code><span class="sig-paren">(</span><em>obj</em>, <em>dic</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#apply_dict_to_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.apply_dict_to_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a dict of properties to a matplotlib object.</p>
+<p>Note the object must support set_&lt;property_name&gt; methods
+If obj and d are lists then the each <cite>dic</cite> will be applied to the
+corresponding <cite>obj</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>obj</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib object or list of</span></dt>
+<dd><p class="first last">Object to set properties in.  Typically a matplotlib.lines.Line2D
+instance.</p>
+</dd>
+<dt><strong>dic</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict or list of dict</span></dt>
+<dd><p class="first last">A dictionary or properties to apply to the object. e.g for a
+matplotlib.lines.Line2D dict keys might be ‘marker’, or
+‘linestyle’ etc.  i.e any kwarg you would pass to plt.plot.
+Note that if a key in dic does not correspond to a obj.set_key
+method then it will be ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.apply_markevery_to_sequence_of_lines">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">apply_markevery_to_sequence_of_lines</code><span class="sig-paren">(</span><em>lines</em>, <em>markevery=None</em>, <em>random_start=True</em>, <em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#apply_markevery_to_sequence_of_lines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.apply_markevery_to_sequence_of_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply <cite>markevery</cite> property to sequence of matplotlib lines</p>
+<p>Allows for a random start so that marker on different lines do not
+line up.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>lines</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence of matplotlib lines</span></dt>
+<dd><p class="first last">Lines to apply markevery to.</p>
+</dd>
+<dt><strong>markevery</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int or float, optional</span></dt>
+<dd><p class="first last">Value of markevery property. Default markevery=None, i.e.
+markevery will be turned off and all points will have markers.</p>
+</dd>
+<dt><strong>random_start</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False</span></dt>
+<dd><p class="first last">If True then first marker shown will be random between start marker
+and the markevery property. Default random_start=True.</p>
+</dd>
+<dt><strong>seed</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Random seed.  Default seed=None which does not specify the random seed.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.copy_dict">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">copy_dict</code><span class="sig-paren">(</span><em>source_dict</em>, <em>diffs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#copy_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.copy_dict" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Returns a copy of source_dict, updated with the new key-value</dt>
+<dd>pairs in diffs dict.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>source_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Source dictionary.</p>
+</dd>
+<dt><strong>diffs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Dictionary with which to update <cite>source_dict</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Shallow copy of <cite>source_dict</cite> updated with <cite>diffs</cite> dict.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<p><a class="reference external" href="http://stackoverflow.com/a/5551706/2530083">http://stackoverflow.com/a/5551706/2530083</a></p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">copy_dict</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">13</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">];</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">];</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="go">7</span>
+<span class="go">12</span>
+<span class="go">13</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">copy_dict</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span><span class="mi">13</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">];</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">];</span> <span class="n">d</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="go">21</span>
+<span class="go">12</span>
+<span class="go">13</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.figure_from_source_code">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">figure_from_source_code</code><span class="sig-paren">(</span><em>obj</em>, <em>figsize=None</em>, <em>font=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#figure_from_source_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.figure_from_source_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put source code of object into a matplotlib figure</p>
+<dl class="docutils">
+<dt>obj <span class="classifier-delimiter">:</span> <span class="classifier">python object</span></dt>
+<dd>object to display source code of</dd>
+<dt>figsize <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd>figsize in inches, default = None i.e. use matplotlib default</dd>
+<dt>font <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib .fontmanager optional</span></dt>
+<dd>font to be applied to the annotation object
+default=None</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Figure</span></dt>
+<dd><p class="first last">figure of text</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.iterable_method_call">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">iterable_method_call</code><span class="sig-paren">(</span><em>iterable</em>, <em>method</em>, <em>unpack</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#iterable_method_call"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.iterable_method_call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call a method on each element of an iterable</p>
+<p>iterable[i].method(arg)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>iterable</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence etc.</span></dt>
+<dd><p class="first last">Iterable whos members will have thier attribute changed.</p>
+</dd>
+<dt><strong>method</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">Method to call.</p>
+</dd>
+<dt><strong>unpack</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True then each member of <cite>*args</cite> will be unpacked before passing to
+method.</p>
+</dd>
+<dt><strong>*args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">positional arguments</span></dt>
+<dd><p class="first last">If a single positional argument then all members of <cite>iterable</cite>
+will have their method called with the same single argument.
+If more that one positional argument then
+iterable[0].method will be called with args[0],
+iterable[1].method will be set to args[1] etc.
+Skip elements by having corresponding value of <a href="#id1"><span class="problematic" id="id2">*</span></a>args=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.pleasing_defaults">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">pleasing_defaults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#pleasing_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.pleasing_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alter some matplotlib rcparams defaults to be visually more appealing</p>
+<p class="rubric">References</p>
+<p>Many of the ideas/defaults/code come from Olga Botvinnik <a class="reference internal" href="#rd99f2a423242-1" id="id3">[1]</a>, and her
+<cite>prettyplot</cite> package <a class="reference internal" href="#rd99f2a423242-2" id="id4">[2]</a>.</p>
+<table class="docutils citation" frame="void" id="rd99f2a423242-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> <a class="reference external" href="http://blog.olgabotvinnik.com/post/58941062205/prettyplotlib-painlessly-create-beautiful-matplotlib">http://blog.olgabotvinnik.com/post/58941062205/prettyplotlib-painlessly-create-beautiful-matplotlib</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="rd99f2a423242-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> <a class="reference external" href="http://olgabot.github.io/prettyplotlib/">http://olgabot.github.io/prettyplotlib/</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.plot_data_in_grid">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">plot_data_in_grid</code><span class="sig-paren">(</span><em>fig</em>, <em>data</em>, <em>gs</em>, <em>gs_index=None</em>, <em>sharex=None</em>, <em>sharey=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#plot_data_in_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.plot_data_in_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a subplot for each set of data</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Figure</span></dt>
+<dd><p class="first last">Figure to create subplots in.</p>
+</dd>
+<dt><strong>data</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence of sequence of 2 element sequence</span></dt>
+<dd><p class="first last">data[i] = Data for the ith subplot.
+data[i][j] = jth (x, y) data set for the ith subplot.
+Each set of (x, y) data will be plotted using matplotlib.plot fn
+e.g. data=[([x0, y0],), ([x1, y1],), ([x2a, y2a], [x2b, x2b])]
+Note that data[i][j] will be split into list of all the non-dict items
+and a merged dict of all the dict items.  Both the list and the merged
+dict will be unpacked and passed to the <cite>plot_type</cite> function.  This
+allows passing of keyword arguments. If one of the dict keys is
+‘plot_type’ it’s value should be a string indicating a method of
+matplotlib.Axes that can be used to create the subplot.  If
+‘plot_type’ is not found then the default matplotlib.Axes.plot will
+be used. Be careful when using () to group data if there is only
+one item in the (item) then they are just parentheses and you are
+just saying ‘item’; put a comma after the item to make it a tuple
+which is usually what you want when specifying data in this function.</p>
+</dd>
+<dt><strong>gs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.gridspec.GridSpec instance</span></dt>
+<dd><p class="first last">Defines the grid in which subplots will be created.</p>
+</dd>
+<dt><strong>gs_index</strong> <span class="classifier-delimiter">:</span> <span class="classifier">List of int or list of slice, optional</span></dt>
+<dd><p class="first last">Specifies the position within gs that each data set will be plotted
+Positions can be specified by 1) an integer which will correspond to
+row-major ordering in the grid (e.g. for a 3x3 grid, index 3 will be
+second row, first column), or 2) a tuple of (row,column), or 3) a slice
+(e.g. index of np.s_[:1,:1] will span from first row, first column to
+second row, second column).  Another slice method is slice(3,7) which
+will span from position 3 to position 7.
+Default gs_index=None subplots are added in row-major ordering.</p>
+</dd>
+<dt><strong>sharex</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence of int</span></dt>
+<dd><p class="first last">Subplot index to share x-axis with.
+Default sharex=None i.e. no sharing.
+To skip a  subplot put None as the corresponding element of sharex.
+If only one value is given and ther is more than one data set then
+all subplots will share the given axis.  Note that the axis to share
+must already have been created.</p>
+</dd>
+<dt><strong>sharey</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence of int</span></dt>
+<dd><p class="first last">Subplot index to share y-axis with.
+Default sharey=None i.e. no sharing.
+To skip a  subplot put None as the corresponding element of sharey.
+If only one value is given and ther is more than one data set then
+all subplots will share the given axis.  Note that the axis to share
+must already have been created.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">List of <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.pyplot.Axes</span></code> instances. Don’t be</span></dt>
+<dd><p class="first last">confused with normal meaning of ‘ax’, this <cite>ax</cite> is a list of Axes, not
+just one.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>You may be wondering how to apply axes labels and such.  Do something like
+[a.set_xlabel(v) for a, v in zip(fig.get_axes(), [xlabel1, xlabel2, …])]</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.plot_generic_loads">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">plot_generic_loads</code><span class="sig-paren">(</span><em>load_triples</em>, <em>load_names</em>, <em>ylabels=None</em>, <em>trange=None</em>, <em>H=1.0</em>, <em>RLzero=None</em>, <em>prop_dict={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#plot_generic_loads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.plot_generic_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot loads that come in load_vs_time-load_vs_depth-omega_phase form</p>
+<p>For each load_triple (i.e. each load type) two plots will be made
+side by side: a load_vs_time plot; and a load_vs_depth plot. the
+different load types will appear one under the other.</p>
+<dl class="docutils">
+<dt>::</dt>
+<dd>Load Magnitude                 Depth
+^                              ^
+|           …..               |     *
+|          .                    |    *
+|   … .                     |   *
+|  .                            |   *
+| .                             |    *
+———————&gt;Time     ———&gt;Load factor</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>load_triples</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of list of 3 element tuples</span></dt>
+<dd><p class="first last">(load_vs_time, load_vs_depth, load_omega_phase) PolyLines.
+load_triples[i] will be a list of load triples for the ith plot
+load_triples[i][j] will be the jth load triple for the ith plot.
+The load_vs_depth can also be a two element tuple containing a
+list/array of depth values and a list/array of load values.
+The load_vs_time can also be a two element tuple containing a
+list/array of time values and a list/array of load values.</p>
+</dd>
+<dt><strong>load_names</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string</span></dt>
+<dd><p class="first last">string to prepend to legend entries for each load</p>
+</dd>
+<dt><strong>ylabels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">y labels for each of the axes, Default ylabels=None
+i.e. y0, y1, y2 etc.</p>
+</dd>
+<dt><strong>trange</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2 element tuple, optional</span></dt>
+<dd><p class="first last">(tmin, tmax) max and min times to plot loads for. Default trange=None
+i.e. t limits will be worked out from data.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Height of soil profile.  Default H=1.0.  Used to transform
+normalised depth to actual depth.</p>
+</dd>
+<dt><strong>RLzero</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reduced level of the top of the soil layer.  If RLzero is not None
+then all depths (in plots and results) will be transformed to an
+RL by RL = RLzero - z*H.  If RLzero is None (i.e. the default)
+then all actual depths will be reported z*H (i.e. positive numbers).</p>
+</dd>
+<dt><strong>prop_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dict, optional</span></dt>
+<dd><p class="first">Dictionary containing certain properties used to set various plot
+options.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">prop_dict option</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fig_prop</td>
+<td>dict of prop to pass to plt.figure.
+Defaults include:
+figsize=(7.05, 1.57 * no.of.loads)</td>
+</tr>
+<tr class="row-odd"><td>styles</td>
+<td>List of dict.  Each dict is for one line.
+Each dict contains kwargs for plt.plot.
+SeeMarkersDashesColors. Defaults give black
+and white markersize 5.</td>
+</tr>
+<tr class="row-even"><td>time_axis_label</td>
+<td>Label for x axis in load_vs_time plots.
+Default=’Time’</td>
+</tr>
+<tr class="row-odd"><td>depth_axis_label</td>
+<td>Label for y axis in load_vs_depth plot
+Default=”Depth, z” or “RL” depending on
+RLzero.</td>
+</tr>
+<tr class="row-even"><td>has_legend</td>
+<td>True or False. Default = True.</td>
+</tr>
+<tr class="row-odd"><td>legend_prop</td>
+<td>dict of prop to pass to ax.legend.
+Defaults include:
+title=’Load’
+fontsize=9</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplolib.Figure</span></dt>
+<dd><p class="first last">Figure with plots.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.plot_single_material_vs_depth">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">plot_single_material_vs_depth</code><span class="sig-paren">(</span><em>z_x</em>, <em>xlabels</em>, <em>H=1.0</em>, <em>RLzero=None</em>, <em>prop_dict={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#plot_single_material_vs_depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.plot_single_material_vs_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot side by side property vs depth graphs</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span>           <span class="n">x2</span>           <span class="n">x3</span>
+<span class="o">-----------&gt;</span> <span class="o">-----------&gt;</span> <span class="o">------------&gt;</span>
+<span class="o">|</span>     <span class="o">.</span>      <span class="o">|</span>   <span class="o">.</span>        <span class="o">|</span>   <span class="o">.</span>        <span class="o">|</span>
+<span class="o">|</span>     <span class="o">.</span>      <span class="o">|</span>    <span class="o">.</span>       <span class="o">|</span>  <span class="o">.</span>         <span class="o">|</span>
+<span class="o">|</span>     <span class="o">.</span>      <span class="o">|</span>     <span class="o">.</span>      <span class="o">|</span>  <span class="o">.</span>         <span class="o">|</span>
+<span class="o">|</span>    <span class="o">.</span>       <span class="o">|</span>      <span class="o">.</span>     <span class="o">|</span>    <span class="o">.</span>       <span class="o">|</span>
+<span class="o">|</span>   <span class="o">.</span>        <span class="o">|</span>      <span class="o">.</span>     <span class="o">|</span>      <span class="o">.</span>     <span class="o">|</span>
+<span class="o">|</span>  <span class="o">.</span>         <span class="o">|</span>      <span class="o">.</span>     <span class="o">|</span>        <span class="o">.</span>   <span class="o">|</span>
+<span class="n">v</span>            <span class="n">v</span>            <span class="n">v</span>
+<span class="n">depth</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>z_x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd><p class="first last">List of value_vs_depth PolyLines.</p>
+</dd>
+<dt><strong>xlabels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string</span></dt>
+<dd><p class="first last">List of x-axis labels.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Height of soil profile.  Default H=1.0.  Used to transform
+normalised depth to actual depth.</p>
+</dd>
+<dt><strong>RLzero</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reduced level of the top of the soil layer.  If RLzero is not None
+then all depths (in plots and results) will be transformed to an
+RL by RL = RLzero - z*H.  If RLzero is None (i.e. the default)
+then all depths will be reported  z*H (i.e. positive numbers).</p>
+</dd>
+<dt><strong>prop_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dict, optional</span></dt>
+<dd><p class="first">Dictionary containing certain properties used to set various plot
+options:</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">prop_dict option</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fig_prop</td>
+<td>dict of prop to pass to plt.figure.
+defaults include:
+figsize=(7.05, 4.4)</td>
+</tr>
+<tr class="row-odd"><td>styles</td>
+<td>List of dict.  Each dict is for one line.
+Each dict contains kwargs for plt.plot
+See
+MarkersDashesColors
+defaults give black and white markersize 5</td>
+</tr>
+<tr class="row-even"><td>xlabel</td>
+<td>x-axis label. default = ‘Time’</td>
+</tr>
+<tr class="row-odd"><td>ylabel</td>
+<td>y-axis label. default = ‘Depth, z’ or ‘RL’
+depending on RLzero.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.plot_vs_depth">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">plot_vs_depth</code><span class="sig-paren">(</span><em>x</em>, <em>z</em>, <em>line_labels=None</em>, <em>H=1.0</em>, <em>RLzero=None</em>, <em>prop_dict={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#plot_vs_depth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.plot_vs_depth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot z vs x for various t values</p>
+<p>Originally used for plotting things like excess pore pressure vs depth</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--------------------&gt;</span> <span class="n">value</span>
+<span class="o">|.*</span>
+<span class="o">|</span> <span class="o">.</span>  <span class="o">*</span>
+<span class="o">|</span>  <span class="o">.</span>    <span class="o">*</span>
+<span class="o">|</span>   <span class="o">.</span>     <span class="o">*</span>
+<span class="o">|</span>  <span class="o">.</span>    <span class="o">*</span>
+<span class="o">|</span> <span class="o">.</span>  <span class="o">*</span>
+<span class="n">v</span>
+<span class="n">depth</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">one or two dimensional ndarray</span></dt>
+<dd><p class="first last">y values to plot.  Basically plt.plot(t, y) will be used</p>
+</dd>
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">one d array of float</span></dt>
+<dd><p class="first last">Depth values.</p>
+</dd>
+<dt><strong>line_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">Label for each line in y.  Default line_labels=None, i.e. no
+line labels.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Height of soil profile.  Default H=1.0.  Used to transform
+normalised depth to actual depth.</p>
+</dd>
+<dt><strong>RLzero</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reduced level of the top of the soil layer.  If RLzero is not None
+then all depths (in plots and results) will be transformed to an
+RL by RL = RLzero - z*H.  If RLzero is None (i.e. the default)
+then actual depths will be reported  z*H (i.e. positive numbers).</p>
+</dd>
+<dt><strong>prop_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dict, optional</span></dt>
+<dd><p class="first">Dictionary containing certain properties used to set various plot
+options.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">prop_dict option</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fig_prop</td>
+<td>dict of prop to pass to plt.figure.
+defaults include:
+figsize=(7.05, 4.4)</td>
+</tr>
+<tr class="row-odd"><td>styles</td>
+<td>List of dict.  Each dict is for one line.
+Each dict contains kwargs for plt.plot
+See
+MarkersDashesColors
+defaults give black and white markersize 5</td>
+</tr>
+<tr class="row-even"><td>xlabel</td>
+<td>x-axis label. Default = ‘x’.</td>
+</tr>
+<tr class="row-odd"><td>ylabel</td>
+<td>y-axis label. Default = ‘Depth, z’ or ‘RL’.
+depending on RLzero.</td>
+</tr>
+<tr class="row-even"><td>has_legend</td>
+<td>True or False. default is True</td>
+</tr>
+<tr class="row-odd"><td>legend_prop</td>
+<td>dict of prop to pass to ax.legend
+defaults include:
+title=’Depth interval’
+fontsize=9</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplolib.Figure</span></dt>
+<dd><p class="first last">Figure with plots.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.plot_vs_time">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">plot_vs_time</code><span class="sig-paren">(</span><em>t</em>, <em>y</em>, <em>line_labels=None</em>, <em>prop_dict={}</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#plot_vs_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.plot_vs_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot y vs t with some options</p>
+<p>Originally used for plotting things like average excess pore pressure
+vs time.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+<span class="o">^</span>
+<span class="o">|</span>           <span class="o">.......</span>
+<span class="o">|</span>          <span class="o">.</span>
+<span class="o">|</span>   <span class="o">.</span> <span class="o">.</span> <span class="o">.</span> <span class="o">.</span>  <span class="o">***</span>
+<span class="o">|</span>  <span class="o">.</span> <span class="o">*</span>      <span class="o">*</span>   <span class="o">*</span>
+<span class="o">|</span> <span class="o">.*</span>   <span class="o">*****</span>
+<span class="o">---------------------&gt;</span><span class="n">Time</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">np.array</span></dt>
+<dd><p class="first last">Time values.</p>
+</dd>
+<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">one or two dimensional ndarray</span></dt>
+<dd><p class="first last">y values to plot.  basically plt.plot(t,y) will be used.</p>
+</dd>
+<dt><strong>line_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of string, optional</span></dt>
+<dd><p class="first last">Label for each line in y.  Defaultline_labels=None, i.e. no labels.</p>
+</dd>
+<dt><strong>prop_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dict, optional</span></dt>
+<dd><p class="first">Dictionary containing certain properties used to set various plot
+options.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">prop_dict option</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>fig_prop</td>
+<td>dict of prop to pass to plt.figure.
+Defaults include:
+figsize=(7.05, 4.4)</td>
+</tr>
+<tr class="row-odd"><td>styles</td>
+<td>List of dict.  Each dict is for one line.
+Each dict contains kwargs for plt.plot
+See
+MarkersDashesColors
+defaults give black and white markersize 5</td>
+</tr>
+<tr class="row-even"><td>xlabel</td>
+<td>x-axis label. default=’Time’.</td>
+</tr>
+<tr class="row-odd"><td>ylabel</td>
+<td>y-axis label. default = ‘y’.</td>
+</tr>
+<tr class="row-even"><td>has_legend</td>
+<td>True or False. default = True.</td>
+</tr>
+<tr class="row-odd"><td>legend_prop</td>
+<td>dict of prop to pass to ax.legend
+Defaults include:
+title=’Depth interval’
+fontsize=9</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplolib.Figure</span></dt>
+<dd><p class="first last">Figure with plots.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.rgb_shade">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">rgb_shade</code><span class="sig-paren">(</span><em>rgb</em>, <em>factor=1</em>, <em>scaled=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#rgb_shade"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.rgb_shade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply shade (darken) to a red, green, blue (rgb) triplet</p>
+<p>If rgba tuple is given the ‘a’ value is not altered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>rgb</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">Triplet of rgb values.  Note can be an rgba value.</p>
+</dd>
+<dt><strong>factor</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Between 0 and 1. Factor by which to shade.  Default factor=1.</p>
+</dd>
+<dt><strong>scaled</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True then assumes RGB values aare scaled between 0, 1. If False
+rgb values are between 0 and 255.  Default scaled=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rgb_new</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">New tuple of rgb (or rgba) values.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.plotting.one_d.rgb_tint" title="geotecha.plotting.one_d.rgb_tint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_tint</span></code></a></dt>
+<dd>Lighten an rgb triplet.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">rgb_shade</span><span class="p">((</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&#39;0.20, 0.40, 0.10&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.rgb_tint">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">rgb_tint</code><span class="sig-paren">(</span><em>rgb</em>, <em>factor=0</em>, <em>scaled=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#rgb_tint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.rgb_tint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply tint (lighten) to a red, green, blue (rgb) triplet</p>
+<p>If rgba tuple is given the ‘a’ value is not altered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>rgb</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">Triplet of rgb values.  Note can be an rgba value.</p>
+</dd>
+<dt><strong>factor</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Between 0 and 1. Factor by which to tint. Default factor=0.</p>
+</dd>
+<dt><strong>scaled</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">If True then assumes RGB values aare scaled between 0, 1. If False
+rgb values are between 0 and 255.  Default scaled=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>rgb_new</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">New tuple of rgb ( or rgba).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.plotting.one_d.rgb_shade" title="geotecha.plotting.one_d.rgb_shade"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rgb_shade</span></code></a></dt>
+<dd>Darken an rgb triplet.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">rgb_tint</span><span class="p">((</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&#39;0.70, 0.90, 0.60&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="o">=</span><span class="n">rgb_tint</span><span class="p">((</span><span class="mi">155</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">55</span><span class="p">),</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">scaled</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">, </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="go">&#39;205.00, 230.00, 155.00&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.row_major_order_reverse_map">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">row_major_order_reverse_map</code><span class="sig-paren">(</span><em>shape</em>, <em>index_steps=None</em>, <em>transpose=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#row_major_order_reverse_map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.row_major_order_reverse_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map an index to a position in a row-major ordered array by reversing dims</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="o">|</span><span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span><span class="o">|</span>      <span class="o">|</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">2</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">5</span> <span class="mi">4</span> <span class="mi">3</span><span class="o">|</span> <span class="o">--&gt;</span>  <span class="o">|</span><span class="mi">3</span> <span class="mi">4</span> <span class="mi">5</span><span class="o">|</span>
+<span class="o">|</span><span class="mi">8</span> <span class="mi">7</span> <span class="mi">6</span><span class="o">|</span>      <span class="o">|</span><span class="mi">6</span> <span class="mi">7</span> <span class="mi">8</span><span class="o">|</span>
+<span class="n">need</span> <span class="mi">0</span><span class="o">--&gt;</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">--&gt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">--&gt;</span><span class="mf">0.</span> <span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span> <span class="mi">0</span> <span class="mi">5</span> <span class="mi">4</span> <span class="mi">3</span> <span class="mi">8</span> <span class="mi">7</span> <span class="mi">6</span><span class="p">]</span><span class="o">.</span>
+<span class="n">Use</span> <span class="n">row_major_order_reverse_map</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Use this to essentially change the subplot ordering in a matplotlib figure.
+Say I wanted sub_plot ordering as in the left arrangement of the above
+example. use mymap = row_major_order_reverse_map((3,3), (1,-1)).  If I
+wanted to plot in my position 5 I would pass mymap[5] to the figure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>shape</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple</span></dt>
+<dd><p class="first last">Shape of array, e.g. (rows, columns)</p>
+</dd>
+<dt><strong>index_steps</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 1 or -1, optional</span></dt>
+<dd><p class="first last">Traverse each array dimension in steps f <cite>index_steps</cite>.
+Default index_steps=None i.e. all dims traversed in normal
+order. e.g. for 3 d array, index_steps=(1,-1, 1) would mean
+2nd dimension would be reversed.</p>
+</dd>
+<dt><strong>transpose</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">When True, transposes indexes (final operation).
+Default transpose=False.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>pos</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last">Array that maps index to position in row-major ordered array</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>A use for this is positioning subplots in a matplotlib gridspec</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">row_major_order_reverse_map</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_major_order_reverse_map</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index_steps</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([6, 7, 8, 3, 4, 5, 0, 1, 2])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_major_order_reverse_map</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index_steps</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([2, 1, 0, 5, 4, 3, 8, 7, 6])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_major_order_reverse_map</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index_steps</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([8, 7, 6, 5, 4, 3, 2, 1, 0])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">row_major_order_reverse_map</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">index_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">transpose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([0, 3, 6, 1, 4, 7, 2, 5, 8])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.save_figure">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">save_figure</code><span class="sig-paren">(</span><em>fig, fname='fig', ext=['pdf', 'eps', 'png'], dpi=1200</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#save_figure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.save_figure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a figure to a file in multiple formats</p>
+<p>Figure will be saved in as fname.ext where ext is each of the extenstions
+in the ext parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Figure object</span></dt>
+<dd><p class="first last">Figure to save</p>
+</dd>
+<dt><strong>fname</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">filepath to save to WITHOUT extension, default fname=’fig’.</p>
+</dd>
+<dt><strong>ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str, optional</span></dt>
+<dd><p class="first last">List of file extensions to save.  Must be one of the matplolib
+save as file types.  default ext=[[‘pdf’,’eps’,’png’].</p>
+</dd>
+<dt><strong>dpi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">dpi setting to save png etc figures as. Default dpi=1200.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.split_sequence_into_dict_and_nondicts">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">split_sequence_into_dict_and_nondicts</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#split_sequence_into_dict_and_nondicts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.split_sequence_into_dict_and_nondicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Separate dict and non-dict items. Merge dicts and merge non-dicts</p>
+<p>Elements are combined in the order that they appear.  i.e. non-dict items
+will be appended to a combined list as they are encounterd.  Repeated dict
+keys will be overridded by the latest value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>*args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">one or more positional items</span></dt>
+<dd><p class="first last">Mixture of dict and non-dict.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>merged_non_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">List of non dictionary items.</p>
+</dd>
+<dt><strong>merged_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict</span></dt>
+<dd><p class="first last">Merged dictionary.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.plotting.one_d.xylabel_subplots">
+<code class="descclassname">geotecha.plotting.one_d.</code><code class="descname">xylabel_subplots</code><span class="sig-paren">(</span><em>fig</em>, <em>y_axis_labels=None</em>, <em>x_axis_labels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/plotting/one_d.html#xylabel_subplots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.plotting.one_d.xylabel_subplots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set x-axis label and y-axis label for each sub plot in figure</p>
+<p>Note: labels are applied to axes in the order they were created, which
+is not always the way they appear in the figure.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Figure</span></dt>
+<dd><p class="first last">Figure to apply labels to.</p>
+</dd>
+<dt><strong>y_axis_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span></dt>
+<dd><p class="first last">Label to place on y-axis of each subplot.  Use None to skip a subplot.
+Default y_axis_label=None</p>
+</dd>
+<dt><strong>x_axis_labels</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sequence</span></dt>
+<dd><p class="first last">Label to place on x-axis of each subplot.  Use None to skip a subplot.
+Default x_axis_label=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.plotting.one_d.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

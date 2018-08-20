@@ -1,0 +1,832 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>velocity_hydraulic_gradient &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">velocity_hydraulic_gradient</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.constitutive_models.velocity_hydraulic_gradient">Module listing</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.constitutive_models.html">constitutive_models</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.constitutive_models.velocity_hydraulic_gradient.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="velocity-hydraulic-gradient">
+<h1>velocity_hydraulic_gradient<a class="headerlink" href="#velocity-hydraulic-gradient" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DarcyFlowModel</span></code></a>([k])</td>
+<td>Darcian flow model</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HansboNonDarcianFlowModel</span></code></a>([klinear,&nbsp;kstar,&nbsp;…])</td>
+<td>Hansbo non-darcian flow model</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OneDimensionalFlowRelationship</span></code></a></td>
+<td>Base class for defining velocity vs hydraulic gradient relationships</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.constitutive_models.velocity_hydraulic_gradient">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.constitutive_models.velocity_hydraulic_gradient" title="Permalink to this headline">¶</a></h2>
+<p>Relationships between velocity and hydraulic gradient</p>
+<dl class="class">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.velocity_hydraulic_gradient.</code><code class="descname">DarcyFlowModel</code><span class="sig-paren">(</span><em>k=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship</span></code></a></p>
+<p>Darcian flow model</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Darcian permeability. Default k=1.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Darcian flow is described by:</p>
+<div class="math notranslate nohighlight">
+\[v = ki\]</div>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.dv_di" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.dv_di"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dv_di</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Slope of velocity vs hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.i_from_v" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.i_from_v"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i_from_v</span></code></a>(velocity,&nbsp;**kwargs)</td>
+<td>Hydraulic gradient from velocity</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code>(**kwargs)</td>
+<td>Plot the velocity-hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_and_i_for_plotting" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_and_i_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_and_i_for_plotting</span></code></a>(**kwargs)</td>
+<td>Velocity and hydraulic gradient that plot the relationship</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_from_i" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_from_i"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_from_i</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Velocity from hydraulic gradient</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.vdrain_strain_rate" title="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.vdrain_strain_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdrain_strain_rate</span></code></a>(eta,&nbsp;head,&nbsp;**kwargs)</td>
+<td>Vertical drain strain rate as based on the eta method”“</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.dv_di">
+<code class="descname">dv_di</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel.dv_di"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.dv_di" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of velocity vs hydraulic gradient relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>hyd_grad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic gradient.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>slope</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">slope of velocity-hydraulic gradient relationship at <cite>hyd_grad</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">DarcyFlowModel</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="o">-</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">-3.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]))</span>
+<span class="go">array([3., 3.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.i_from_v">
+<code class="descname">i_from_v</code><span class="sig-paren">(</span><em>velocity</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel.i_from_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.i_from_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hydraulic gradient from velocity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Flow velocity.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>hyd_grad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic gradient.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">DarcyFlowModel</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="mf">24.0</span><span class="p">)</span>
+<span class="go">8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="o">-</span><span class="mf">24.0</span><span class="p">)</span>
+<span class="go">-8.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15</span><span class="p">,</span> <span class="mi">24</span><span class="p">]))</span>
+<span class="go">array([5., 8.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.non_Darcy">
+<code class="descname">non_Darcy</code><em class="property"> = False</em><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.non_Darcy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_and_i_for_plotting">
+<code class="descname">v_and_i_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel.v_and_i_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_and_i_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity and hydraulic gradient that plot the relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points to return.  Default npts=100.</p>
+</dd>
+<dt><strong>xmin, xmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Range of x (i.e. hydraulic gradient) values from which
+to return points. Default xmin=0, xmax=50.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last"><cite>npts</cite> permeability, and void ratio values between
+<cite>xmin</cite> and <cite>xmax</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_from_i">
+<code class="descname">v_from_i</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel.v_from_i"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.v_from_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity from hydraulic gradient</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>hyd_grad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic gradient.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Flow velocity.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">DarcyFlowModel</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">24.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="o">-</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">-24.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">8.0</span><span class="p">]))</span>
+<span class="go">array([15., 24.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.vdrain_strain_rate">
+<code class="descname">vdrain_strain_rate</code><span class="sig-paren">(</span><em>eta</em>, <em>head</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#DarcyFlowModel.vdrain_strain_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.DarcyFlowModel.vdrain_strain_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertical drain strain rate as based on the eta method”“</p>
+<p>[strain rate] = head * self.k * eta</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>eta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of vertical drain geometry, peremability parameter. This
+value should be calculated based on Darcy’s law (see
+geotecha.consolidation.smearzones.drain_eta)</p>
+</dd>
+<dt><strong>head</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic head driving the flow.  For vertical drains this is
+usually the difference between the average head in the soil and
+the head in the drain.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any additional keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>strain_rate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Strain rate based on eta method.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.consolidation.smearzones</span></code></dt>
+<dd>Functions to determine eta.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">DarcyFlowModel</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">vdrain_strain_rate</span><span class="p">(</span><span class="n">eta</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">head</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">30.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.velocity_hydraulic_gradient.</code><code class="descname">HansboNonDarcianFlowModel</code><span class="sig-paren">(</span><em>klinear=None</em>, <em>kstar=None</em>, <em>n=None</em>, <em>i0=None</em>, <em>iL=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship</span></code></a></p>
+<p>Hansbo non-darcian flow model</p>
+<p>Various combinations of parameters can be used to specify the model.
+Basically three parameters are required, one of which must be kstar
+or klinear.  If n==1 or i0=0, or iL=0 then the model will reduce to Darcy
+flow model with peremability equal to klinear (or kstar if klinear is not
+defined).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>klinear</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">This is the slope of the linear portion of the v-i relationship
+for i&gt;iL. klinear = kstar * n * iL**(n-1).  Default klinear=None.
+<cite>klinear</cite> and <cite>kstar</cite> cannot both be None, you
+must use one or the other.</p>
+</dd>
+<dt><strong>kstar</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Permability coefficient in the power law, v=kstar*i**n, flow section,
+i&lt;iL. Default kstar=None. <cite>klinear</cite> and <cite>kstar</cite> cannot both be None.</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Exponent for non-Darcian portion of flow. n must be  greater than or
+equal to 1.  Default n=None.</p>
+</dd>
+<dt><strong>i0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">x-axis intercept of the linear portion of the flow law.
+Default i0=None. i0 must be greater or equal to zero.</p>
+</dd>
+<dt><strong>iL</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Limiting hydraulic gradient, beyond which v-i relationship is linear.
+iL = i0 * n / (n -1).  Default iL=None.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Hansbo’s Non-darcian flow relationship is defined by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}v=\left\{\begin{array}{lr}
+ k^{\ast}i^{n} &amp; i&lt;i_{L} \\
+ k_{\rm{linear}} \left({i-i_0}\right)
+     &amp; i\geq i_{L} \end{array}\right.\end{split}\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[k_{\rm{linear}} = k^{\ast}ni_L^\left(n-1\right)\]</div>
+<div class="math notranslate nohighlight">
+\[i_L=\frac{i_0 n}{\left(n-1\right)}\]</div>
+<p class="rubric">Examples</p>
+<p>These examples show the various ways to define the model:
+&gt;&gt;&gt; p = dict(kstar=2, n=1.3, iL=16.2402611294, i0=3.7477525683, klinear=6)
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(kstar=p[‘kstar’], n=p[‘n’], iL=p[‘iL’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(kstar=p[‘kstar’], n=p[‘n’], i0=p[‘i0’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(kstar=p[‘kstar’], iL=p[‘iL’], i0=p[‘i0’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(kstar=p[‘kstar’], iL=p[‘iL’], klinear=p[‘klinear’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(kstar=p[‘kstar’], i0=p[‘i0’], klinear=p[‘klinear’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(n=p[‘n’], iL=p[‘iL’], klinear=p[‘klinear’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(n=p[‘n’], i0=p[‘i0’], klinear=p[‘klinear’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6
+&gt;&gt;&gt; a = HansboNonDarcianFlowModel(iL=p[‘iL’], i0=p[‘i0’], klinear=p[‘klinear’])
+&gt;&gt;&gt; print(a)
+kstar = 2
+n = 1.3
+iL = 16.240…
+i0 = 3.747…
+klinear = 6</p>
+<p>If the behaviour is not as you expect when i0=0, iL=0, n==1 then use very
+small values of i0 or iL, n just greater than 1.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.dv_di" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.dv_di"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dv_di</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Slope of velocity vs hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.i_from_v" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.i_from_v"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i_from_v</span></code></a>(velocity,&nbsp;**kwargs)</td>
+<td>Hydraulic gradient from velocity</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code>(**kwargs)</td>
+<td>Plot the velocity-hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_and_i_for_plotting" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_and_i_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_and_i_for_plotting</span></code></a>(**kwargs)</td>
+<td>Velocity and hydraulic gradient that plot the relationship</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_from_i" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_from_i"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_from_i</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Velocity from hydraulic gradient</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.vdrain_strain_rate" title="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.vdrain_strain_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdrain_strain_rate</span></code></a>(eta,&nbsp;head,&nbsp;**kwargs)</td>
+<td>Vertical drain strain rate as based on the eta method”“</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.dv_di">
+<code class="descname">dv_di</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel.dv_di"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.dv_di" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of velocity vs hydraulic gradient relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>hyd_grad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic gradient.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>slope</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">slope of velocity-hydraulic gradient relationship at <cite>hyd_grad</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">HansboNonDarcianFlowModel</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mf">16.2402611294</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">4.851...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="o">-</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">-4.851...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dv_di</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]))</span>
+<span class="go">array([4.851..., 6...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.i_from_v">
+<code class="descname">i_from_v</code><span class="sig-paren">(</span><em>velocity</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel.i_from_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.i_from_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hydraulic gradient from velocity</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Flow velocity.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>velocity</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Flow velocity.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">HansboNonDarcianFlowModel</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mf">16.2402611294</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="mf">29.858</span><span class="p">)</span>
+<span class="go">8.0...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="o">-</span><span class="mf">29.858</span><span class="p">)</span>
+<span class="go">-8.0...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">i_from_v</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">29.858</span><span class="p">,</span> <span class="mf">97.514</span><span class="p">]))</span>
+<span class="go">array([ 8.0..., 20.0...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.non_Darcy">
+<code class="descname">non_Darcy</code><em class="property"> = True</em><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.non_Darcy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_and_i_for_plotting">
+<code class="descname">v_and_i_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel.v_and_i_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_and_i_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity and hydraulic gradient that plot the relationship</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points to return.  Default npts=100.</p>
+</dd>
+<dt><strong>xmin, xmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Range of x (i.e. hydraulic gradient) values from which
+to return points. Default xmin=0, xmax=50.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last"><cite>npts</cite> permeability, and void ratio values between
+<cite>xmin</cite> and <cite>xmax</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_from_i">
+<code class="descname">v_from_i</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel.v_from_i"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.v_from_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity from hydraulic gradient</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>hyd_grad</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic gradient.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any keyword arguments are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Flow velocity.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">HansboNonDarcianFlowModel</span><span class="p">(</span><span class="n">kstar</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mf">16.2402611294</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">29.857...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="o">-</span><span class="mf">8.0</span><span class="p">)</span>
+<span class="go">-29.857...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">v_from_i</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">8.0</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">]))</span>
+<span class="go">array([29.857..., 97.513...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.vdrain_strain_rate">
+<code class="descname">vdrain_strain_rate</code><span class="sig-paren">(</span><em>eta</em>, <em>head</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#HansboNonDarcianFlowModel.vdrain_strain_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.HansboNonDarcianFlowModel.vdrain_strain_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertical drain strain rate as based on the eta method”“</p>
+<p>[strain rate] = head**self.nflow * self.klinear * gamw**(nflow - 1) * eta</p>
+<p>Note that <cite>vdrain_strain_rate</cite> only uses the exponential portion of
+the Non-Darcian flow relationship.  If hydraulic gradients are
+greater than the limiting value iL then the flow rates will be
+overestimated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>eta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of vertical drain geometry, peremability parameter. This
+value should be calculated based on Hansbo’s non-Darcian flow
+model (see geotecha.consolidation.smearzones.non_darcy_drain_eta)</p>
+</dd>
+<dt><strong>head</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Hydraulic head driving the flow.  For vertical drains this is
+usually the difference between the average head in the soil and
+the head in the drain.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Unit weight of water. Note that this gamw must be consistent with
+the value used to determine eta.  Default gamw=10.</p>
+</dd>
+<dt><strong>**kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">any</span></dt>
+<dd><p class="first last">Any additional keyword arguments, other than ‘gamw’, are ignored.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>strain_rate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Strain rate based on eta method.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.consolidation.smearzones</span></code></dt>
+<dd>Functions to determine eta.</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">HansboNonDarcianFlowModel</span><span class="p">(</span><span class="n">klinear</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mf">16.2402611294</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">vdrain_strain_rate</span><span class="p">(</span><span class="n">eta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">head</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">2.419...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.velocity_hydraulic_gradient.</code><code class="descname">OneDimensionalFlowRelationship</code><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for defining velocity vs hydraulic gradient relationships</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>non_Darcy: True</strong></dt>
+<dd><p class="first last">A class variable indicating if model has a non-Darcian flow
+relationship.  Can be overridden in subclasses.  Basically
+the Darcian flow equations are simple and it might be simpler to
+bypass the use of a OneDimensionalFlowRelationship.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.dv_di" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.dv_di"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dv_di</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Slope of velocity vs hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.i_from_v" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.i_from_v"><code class="xref py py-obj docutils literal notranslate"><span class="pre">i_from_v</span></code></a>(velocity,&nbsp;**kwargs)</td>
+<td>Hydraulic gradient from velocity</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.plot_model" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.plot_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code></a>(**kwargs)</td>
+<td>Plot the velocity-hydraulic gradient relationship</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_and_i_for_plotting" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_and_i_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_and_i_for_plotting</span></code></a>(**kwargs)</td>
+<td>Velocity and hydraulic gradient that that plot the relationship</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_from_i" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_from_i"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_from_i</span></code></a>(hyd_grad,&nbsp;**kwargs)</td>
+<td>Velocity from hydraulic gradient</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.vdrain_strain_rate" title="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.vdrain_strain_rate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vdrain_strain_rate</span></code></a>(eta,&nbsp;head,&nbsp;**kwargs)</td>
+<td>Vertical drain strain rate as based on the eta method</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.dv_di">
+<code class="descname">dv_di</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.dv_di"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.dv_di" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of velocity vs hydraulic gradient relationship</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.i_from_v">
+<code class="descname">i_from_v</code><span class="sig-paren">(</span><em>velocity</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.i_from_v"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.i_from_v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hydraulic gradient from velocity</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.non_Darcy">
+<code class="descname">non_Darcy</code><em class="property"> = True</em><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.non_Darcy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.plot_model">
+<code class="descname">plot_model</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.plot_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.plot_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the velocity-hydraulic gradient relationship</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_and_i_for_plotting">
+<code class="descname">v_and_i_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.v_and_i_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_and_i_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity and hydraulic gradient that that plot the relationship</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_from_i">
+<code class="descname">v_from_i</code><span class="sig-paren">(</span><em>hyd_grad</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.v_from_i"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.v_from_i" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity from hydraulic gradient</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.vdrain_strain_rate">
+<code class="descname">vdrain_strain_rate</code><span class="sig-paren">(</span><em>eta</em>, <em>head</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/velocity_hydraulic_gradient.html#OneDimensionalFlowRelationship.vdrain_strain_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.velocity_hydraulic_gradient.OneDimensionalFlowRelationship.vdrain_strain_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Vertical drain strain rate as based on the eta method</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.constitutive_models.velocity_hydraulic_gradient.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

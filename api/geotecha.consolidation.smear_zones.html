@@ -1,0 +1,2477 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>smear_zones &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tangandonitsuka2000" href="geotecha.consolidation.tangandonitsuka2000.html" />
+    <link rel="prev" title="shanetal2012" href="geotecha.consolidation.shanetal2012.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">smear_zones</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.consolidation.smear_zones">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.consolidation.html">consolidation</a><ul>
+      <li>Previous: <a href="geotecha.consolidation.shanetal2012.html" title="previous chapter">shanetal2012</a></li>
+      <li>Next: <a href="geotecha.consolidation.tangandonitsuka2000.html" title="next chapter">tangandonitsuka2000</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.consolidation.smear_zones.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="smear-zones">
+<h1>smear_zones<a class="headerlink" href="#smear-zones" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_g</span></code>(r_rw,&nbsp;re_rw[,&nbsp;nflow,&nbsp;nterms])</td>
+<td>Non-darcian equal strain radial consolidation term</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_gbar</span></code>(r_rw,&nbsp;re_rw[,&nbsp;nflow,&nbsp;nterms])</td>
+<td>Non-darcian equal strain radial consolidation term</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_kapx</span></code>(n,&nbsp;s,&nbsp;kap)</td>
+<td>Value of kap=kh/ks for overlap part of intersecting linear smear zones</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_sx</span></code>(n,&nbsp;s)</td>
+<td>Value of s=r/rw marking the start of overlapping linear smear zones</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.back_calc_drain_spacing_from_eta" title="geotecha.consolidation.smear_zones.back_calc_drain_spacing_from_eta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">back_calc_drain_spacing_from_eta</span></code></a>(eta,&nbsp;…[,&nbsp;muw])</td>
+<td>Back calculate the required drain spacing to achieve a given eta</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.drain_eta" title="geotecha.consolidation.smear_zones.drain_eta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drain_eta</span></code></a>(re,&nbsp;mu_function,&nbsp;*args,&nbsp;**kwargs)</td>
+<td>Calculate the vertical drain eta parameter for a specific smear zone</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.k_linear" title="geotecha.consolidation.smear_zones.k_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_linear</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si)</td>
+<td>Permeability distribution for smear zone with linear permeability</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.k_overlapping_linear" title="geotecha.consolidation.smear_zones.k_overlapping_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_overlapping_linear</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si)</td>
+<td>Permeability smear zone with overlapping linear permeability</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.k_parabolic" title="geotecha.consolidation.smear_zones.k_parabolic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_parabolic</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si)</td>
+<td>Permeability distribution for smear zone with parabolic permeability</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_constant" title="geotecha.consolidation.smear_zones.mu_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_constant</span></code></a>(n,&nbsp;s,&nbsp;kap)</td>
+<td>Smear zone parameter for smear zone with constant permeability</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_ideal" title="geotecha.consolidation.smear_zones.mu_ideal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_ideal</span></code></a>(n,&nbsp;*args)</td>
+<td>Smear zone permeability/geometry parameter for ideal drain (no smear)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_linear" title="geotecha.consolidation.smear_zones.mu_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_linear</span></code></a>(n,&nbsp;s,&nbsp;kap)</td>
+<td>Smear zone parameter for smear zone linear variation of permeability</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_overlapping_linear" title="geotecha.consolidation.smear_zones.mu_overlapping_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_overlapping_linear</span></code></a>(n,&nbsp;s,&nbsp;kap)</td>
+<td>Smear zone parameter for smear zone with overlapping linear permeability</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_parabolic" title="geotecha.consolidation.smear_zones.mu_parabolic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_parabolic</span></code></a>(n,&nbsp;s,&nbsp;kap)</td>
+<td>Smear zone parameter for parabolic variation of permeability</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_piecewise_constant" title="geotecha.consolidation.smear_zones.mu_piecewise_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_piecewise_constant</span></code></a>(s,&nbsp;kap[,&nbsp;n,&nbsp;kap_m])</td>
+<td>Smear zone parameter for piecewise constant permeability distribution</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_piecewise_linear" title="geotecha.consolidation.smear_zones.mu_piecewise_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_piecewise_linear</span></code></a>(s,&nbsp;kap[,&nbsp;n,&nbsp;kap_m])</td>
+<td>Smear zone parameter for piecewise linear permeability distribution</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_well_resistance" title="geotecha.consolidation.smear_zones.mu_well_resistance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_well_resistance</span></code></a>(kh,&nbsp;qw,&nbsp;n,&nbsp;H[,&nbsp;z])</td>
+<td>Additional smear zone parameter for well resistance</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.non_darcy_beta_constant" title="geotecha.consolidation.smear_zones.non_darcy_beta_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_darcy_beta_constant</span></code></a>(n,&nbsp;s,&nbsp;kap[,&nbsp;nflow,&nbsp;…])</td>
+<td>Non-darcian flow smear zone permeability/geometry parameter for smear zone with constant permeability.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.non_darcy_beta_ideal" title="geotecha.consolidation.smear_zones.non_darcy_beta_ideal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_darcy_beta_ideal</span></code></a>(n[,&nbsp;nflow,&nbsp;nterms])</td>
+<td>Non-darcian flow smear zone permeability/geometry parameter for ideal drain (no smear).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.non_darcy_beta_piecewise_constant" title="geotecha.consolidation.smear_zones.non_darcy_beta_piecewise_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_darcy_beta_piecewise_constant</span></code></a>(s,&nbsp;kap[,&nbsp;…])</td>
+<td>Non-darcian flow smear zone permeability/geometry parameter for smear zone with piecewise constant permeability.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.non_darcy_drain_eta" title="geotecha.consolidation.smear_zones.non_darcy_drain_eta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_darcy_drain_eta</span></code></a>(re,&nbsp;iL,&nbsp;gamw,&nbsp;…)</td>
+<td>For non-Darcy flow calculate the vertical drain eta parameter</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.non_darcy_u_piecewise_constant" title="geotecha.consolidation.smear_zones.non_darcy_u_piecewise_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">non_darcy_u_piecewise_constant</span></code></a>(s,&nbsp;kap,&nbsp;si[,&nbsp;…])</td>
+<td>Pore pressure at radius for piecewise constant permeability distribution</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.re_from_drain_spacing" title="geotecha.consolidation.smear_zones.re_from_drain_spacing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">re_from_drain_spacing</span></code></a>(sp[,&nbsp;pattern])</td>
+<td>Calculate drain influence radius from drain spacing</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.scratch" title="geotecha.consolidation.smear_zones.scratch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scratch</span></code></a>()</td>
+<td>scratch pad for testing latex markup for docstrings</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_constant" title="geotecha.consolidation.smear_zones.u_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_constant</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;muw])</td>
+<td>Pore pressure at radius for constant permeability smear zone</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_ideal" title="geotecha.consolidation.smear_zones.u_ideal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_ideal</span></code></a>(n,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;muw])</td>
+<td>Pore pressure at radius for ideal drain with no smear zone</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_linear" title="geotecha.consolidation.smear_zones.u_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_linear</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;muw])</td>
+<td>Pore pressure at radius for linear smear zone</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_parabolic" title="geotecha.consolidation.smear_zones.u_parabolic"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_parabolic</span></code></a>(n,&nbsp;s,&nbsp;kap,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;muw])</td>
+<td>Pore pressure at radius for parabolic smear zone</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_piecewise_constant" title="geotecha.consolidation.smear_zones.u_piecewise_constant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_piecewise_constant</span></code></a>(s,&nbsp;kap,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;…])</td>
+<td>Pore pressure at radius for piecewise constant permeability distribution</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.smear_zones.u_piecewise_linear" title="geotecha.consolidation.smear_zones.u_piecewise_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">u_piecewise_linear</span></code></a>(s,&nbsp;kap,&nbsp;si[,&nbsp;uavg,&nbsp;uw,&nbsp;…])</td>
+<td>Pore pressure at radius for piecewise constant permeability distribution</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.consolidation.smear_zones">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.consolidation.smear_zones" title="Permalink to this headline">¶</a></h2>
+<p>Smear zones associated with vertical drain installation.</p>
+<p>Smear zone permeability distributions etc.</p>
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.back_calc_drain_spacing_from_eta">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">back_calc_drain_spacing_from_eta</code><span class="sig-paren">(</span><em>eta</em>, <em>pattern</em>, <em>mu_function</em>, <em>rw</em>, <em>s</em>, <em>kap</em>, <em>muw=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#back_calc_drain_spacing_from_eta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.back_calc_drain_spacing_from_eta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Back calculate the required drain spacing to achieve a given eta</p>
+<p>eta = 2 / re**2 / (mu + muw)</p>
+<p>eta is used in radial consolidation equations u= u0 * exp(-eta*kh/gamw*t)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>eta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">eta value.</p>
+</dd>
+<dt><strong>pattern</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[‘Triangle’, ‘Square’]</span></dt>
+<dd><p class="first last">Drain installation pattern.</p>
+</dd>
+<dt><strong>mu_function</strong> <span class="classifier-delimiter">:</span> <span class="classifier">obj</span></dt>
+<dd><p class="first last">The mu_funtion to use. e.g. mu_ideal, mu_constant, mu_linear,
+mu_overlapping_linear, mu_parabolic, mu_piecewise_constant,
+mu_piecewise_linear.</p>
+</dd>
+<dt><strong>rw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain/well radius.</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array_like of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to drain radius (rs/rw).  s can only be
+a 1d array is using a mu_piecewise function</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array_like of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+in smear zone (kh / ks) (often at the drain-soil interface).  Be
+careful when defining s and kap for mu_piecewise_constant, and
+mu_piecewise_linear because the last value of kap will be used at
+the influence drain periphery.  In general the last value of kap
+should be one, representing the start of the undisturbed zone.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu term, default=0.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>sp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain spacing to get the required eta value</p>
+</dd>
+<dt><strong>re</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain influence radius</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius to drain radius, re/rw</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>When using mu_piecewise_linear or mu_piecewise_constant only define s and
+kap up to the start of the undisturbed zone.  re will be varied.</p>
+<p>For anyting other than mu_overlapping_linear do not trust any returned
+spacing that gives an n value less than the extent of the smear zone.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.drain_eta">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">drain_eta</code><span class="sig-paren">(</span><em>re</em>, <em>mu_function</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#drain_eta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.drain_eta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the vertical drain eta parameter for a specific smear zone</p>
+<p>eta = 2 / re**2 / (mu+muw)</p>
+<p>eta is used in radial consolidation equations u= u0 * exp(-eta*kh/gamw*t)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>re</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain influence radius.</p>
+</dd>
+<dt><strong>mu_function</strong> <span class="classifier-delimiter">:</span> <span class="classifier">obj or string</span></dt>
+<dd><p class="first last">The mu_funtion to use. e.g. mu_ideal, mu_constant, mu_linear,
+mu_overlapping_linear, mu_parabolic, mu_piecewise_constant,
+mu_piecewise_linear. This can either be the function object itself
+or the name of the function e.g. ‘mu_ideal’.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu term, default=0.</p>
+</dd>
+<dt><strong>*args, **kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">various</span></dt>
+<dd><p class="first last">The arguments to pass to the mu_function.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>eta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of eta parameter</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">drain_eta</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">mu_ideal</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.563178340433...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drain_eta</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;mu_ideal&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">0.5631783404334...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">drain_eta</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">mu_constant</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">muw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">0.4115837724144...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.k_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">k_linear</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#k_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.k_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permeability distribution for smear zone with linear permeability</p>
+<p>Normalised with respect to undisturbed permeability.  i.e. if you want the
+actual permeability then multiply by whatever you used to determine kap.</p>
+<p>Permeability is linear with value 1/kap at the drain soil interface
+i.e. at s=1 k=k0=1/kap.  for si&gt;s, permeability=1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the permeability
+i.e. si=ri/rw.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>permeability</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Normalised permeability (i.e. ki/kh) at the si values.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Linear distribution of permeability in smear zone is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{k_h^\prime\left({r}\right)}{k_h}=
+ \left\{\begin{array}{lr}
+ \frac{1}{\kappa}
+             \left({A\frac{r}{r_w}+B}\right)
+             &amp; s\neq\kappa \\
+             \frac{r}{\kappa r_w}
+             &amp; s=\kappa \end{array}\right.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[A=\frac{\kappa-1}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s-\kappa}{s-1}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r4ae546e5acac-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.k_overlapping_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">k_overlapping_linear</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#k_overlapping_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.k_overlapping_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permeability smear zone with overlapping linear permeability</p>
+<p>Normalised with respect to undisturbed permeability.  i.e. if you want the
+actual permeability then multiply by whatever you used to determine kap.</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the permeability
+i.e. si=ri/rw</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>permeability</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Normalised permeability (i.e. ki/kh) at the si values.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>When <span class="math notranslate nohighlight">\(n&gt;s\)</span> the permeability is no different from the linear case.</p>
+<p>When <span class="math notranslate nohighlight">\(n\leq (s+1)/2\)</span> then all the soil is disturbed
+and the permeability everywhere is equal to <span class="math notranslate nohighlight">\(1/\kappa\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\((s+1)/2&lt;n&lt;s\)</span> then the smear zones overlap.
+the permeability for <span class="math notranslate nohighlight">\(r/r_w&lt;s_X\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{k_h^\prime\left({r}\right)}{k_h}=
+\left\{\begin{array}{lr}
+\frac{1}{\kappa}
+            \left({A\frac{r}{r_w}+B}\right)
+            &amp; s\neq\kappa \\
+            \frac{r}{\kappa r_w}
+            &amp; s=\kappa \end{array}\right.\end{split}\]</div>
+<p>In the overlapping part, <span class="math notranslate nohighlight">\(r/r_w&gt;s_X\)</span>, the permeability is given by:</p>
+<div class="math notranslate nohighlight">
+\[k_h(r)=\kappa_X/\kappa\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[A=\frac{\kappa-1}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s-\kappa}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_X= 1+\frac{\kappa-1}{s-1}\left({s_X-1}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[s_X = 2n-s\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rfacb7c542e38-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.k_parabolic">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">k_parabolic</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#k_parabolic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.k_parabolic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permeability distribution for smear zone with parabolic permeability</p>
+<p>Normalised with respect to undisturbed permeability.  i.e. if you want the
+actual permeability then multiply by whatever you used to determine kap.</p>
+<p>Permeability is parabolic with value 1/kap at the drain soil interface
+i.e. at s=1 k=k0=1/kap.  for si&gt;s, permeability=1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the permeability
+i.e. si=ri/rw</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>permeability</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Normalised permeability (i.e. ki/kh) at the si values.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Parabolic distribution of permeability in smear zone is given by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{k_h^\prime\left({r}\right)}{k_h}=
+\frac{\kappa-1}{\kappa}
+\left({A-B+C\frac{r}{r_w}}\right)
+\left({A+B-C\frac{r}{r_w}}\right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[A=\sqrt{\frac{\kappa}{\kappa-1}}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[C=\frac{1}{s-1}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r59c245b7f396-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>Walker, Rohan, and Buddhima Indraratna. 2006. ‘Vertical Drain
+Consolidation with Parabolic Distribution of Permeability in
+Smear Zone’. Journal of Geotechnical and Geoenvironmental
+Engineering 132 (7): 937-41.
+doi:10.1061/(ASCE)1090-0241(2006)132:7(937).</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_constant</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for smear zone with constant permeability</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw)</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float.</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to smear zone
+horizontal permeanility (kh / ks).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">smear zone permeability/geometry parameter</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The <span class="math notranslate nohighlight">\(\mu\)</span> parameter is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu=\frac{n^2}{\left({n^2-1}\right)}
+\left({\ln\left({\frac{n}{s}}\right)
++\kappa\ln\left({s}\right)
+-\frac{3}{4}}\right)+
+\frac{s^2}{\left({n^2-1}\right)}\left({1-\frac{s^2}{4n^2}}
+\right)
++\frac{\kappa}{\left({n^2-1}\right)}\left({\frac{s^4-1}{4n^2}}
+-s^2+1
+\right)\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r64400c359f3b-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>Hansbo, S. 1981. ‘Consolidation of Fine-Grained Soils by
+Prefabricated Drains’. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_ideal">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_ideal</code><span class="sig-paren">(</span><em>n</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_ideal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone permeability/geometry parameter for ideal drain (no smear)</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius to drain radius (re/rw).</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">anything</span></dt>
+<dd><p class="first last"><cite>args</cite> does not contribute to any calculations it is merely so you
+can have other arguments such as s and kappa which are used in other
+smear zone formulations.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The <span class="math notranslate nohighlight">\(\mu\)</span> parameter is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu=\frac{n^2}{\left({n^2-1}\right)}
+\left({\ln\left({n}\right)-\frac{3}{4}}\right)+
+\frac{1}{\left({n^2-1}\right)}\left({1-\frac{1}{4n^2}}
+\right)\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r1c1c05cdaf32-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>Hansbo, S. 1981. “Consolidation of Fine-Grained Soils by
+Prefabricated Drains”. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_linear</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for smear zone linear variation of permeability</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>For <span class="math notranslate nohighlight">\(s\neq\kappa\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu=\frac{n^2}{\left({n^2-1}\right)}
+\left[{
+    \ln\left({\frac{n}{s}}\right)
+    -\frac{3}{4}
+    +\frac{s^2}{n^2}\left({1-\frac{s^2}{4n^2}}\right)
+    -\frac{\kappa}{B}\ln\left({\frac{\kappa}{s}}\right)
+    +\frac{\kappa B}{A^2 n^2}\left({2-\frac{B^2}{A^2 n^2}}
+        \right)\ln\left({\kappa}\right)
+    -\frac{\kappa\left({s-1}\right)}{A n^2}
+        \left\{
+            2
+            +\frac{1}{n^2}
+                \left[
+                {\frac{A-B}{A}\left({\frac{1}{A}}-\frac{s+1}{2}
+                \right)}
+                -\frac{s+1}{2}
+                -\frac{\left({s-1}\right)^2}{3}
+                \right]
+        \right\}
+}\right]\]</div>
+<p>and for the special case <span class="math notranslate nohighlight">\(s=\kappa\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu=\frac{n^2}{\left({n^2-1}\right)}
+\left[{
+    \ln\left({\frac{n}{s}}\right)
+    -\frac{3}{4}
+    +s-1
+    -\frac{s^2}{n^2}\left({1-\frac{s^2}{12n^2}}\right)
+    -\frac{s}{n^2}\left({2-\frac{1}{3n^2}}\right)
+}\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[A=\frac{\kappa-1}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s-\kappa}{s-1}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="re8be46a8949e-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_overlapping_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_overlapping_linear</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_overlapping_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_overlapping_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for smear zone with overlapping linear permeability</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_linear" title="geotecha.consolidation.smear_zones.mu_linear"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_linear</span></code></a></dt>
+<dd><span class="math notranslate nohighlight">\(\mu\)</span> for non-overlapping smear zones</dd>
+<dt><a class="reference internal" href="#geotecha.consolidation.smear_zones.mu_ideal" title="geotecha.consolidation.smear_zones.mu_ideal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mu_ideal</span></code></a></dt>
+<dd><span class="math notranslate nohighlight">\(\mu\)</span> for ideal drain with no smear zone</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>The smear zone parameter <span class="math notranslate nohighlight">\(\mu\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mu_X =
+  \left\{\begin{array}{lr}
+      \mu_L\left({n,s,\kappa}\right) &amp; n\geq s \\
+      \frac{\kappa}{\kappa_X}\mu_L
+          \left({n, s_X,\kappa_x}\right)
+          &amp; \frac{s+1}{2}&lt;n&lt;s \\
+      \frac{\kappa}{\kappa_X}\mu_I
+          \left({n}\right) &amp; n\leq \frac{s+1}{2}
+   \end{array}\right.\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu_L\)</span> is the <span class="math notranslate nohighlight">\(\mu\)</span> parameter for non_overlapping
+smear zones with linear permeability, <span class="math notranslate nohighlight">\(\mu_I\)</span> is the <span class="math notranslate nohighlight">\(\mu\)</span>
+parameter for no smear zone, and:</p>
+<div class="math notranslate nohighlight">
+\[\kappa_X= 1+\frac{\kappa-1}{s-1}\left({s_X-1}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[s_X = 2n-s\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rc9feab973420-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[1]</a></td><td>Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_parabolic">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_parabolic</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_parabolic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_parabolic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for parabolic variation of permeability</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh/ks).</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The smear zone parameter <span class="math notranslate nohighlight">\(\mu\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{n^2}{\left({n^2-1}\right)}
+\left({
+    \frac{A^2}{n^2}\mu_1+\mu_2
+}\right)\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\mu_1=
+\frac{1}{A^2-B^2}
+    \left({
+        s^2\ln\left({s}\right)
+        -\frac{1}{2}\left({s^2-1}\right)
+    }\right)
+-\frac{1}{\left({A^2-B^2}\right)C^2}
+    \left({
+        \frac{A^2}{2}\ln\left({\kappa}\right)
+        +\frac{ABE}{2}+\frac{1}{2}-B
+        -\left({A^2-B^2}\right)\ln\left({\kappa}\right)
+    }\right)
++\frac{1}{n^2C^4}
+    \left({
+        -\left({\frac{A^2}{2}+B^2}\right)
+            \ln\left({\kappa}\right)
+        +\frac{3ABE}{2}+\frac{1}{2}-3B
+    }\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\mu_2=
+\ln\left({\frac{n}{s}}\right)
+-\frac{3}{4}
++\frac{s^2}{n^2}\left({1-\frac{s^2}{4n^2}}\right)
++A^2\left({1-\frac{s^2}{n^2}}\right)
+\left[{
+    \frac{1}{A^2-B^2}
+    \left({
+        \ln\left({\frac{s}{\sqrt{\kappa}}}\right)
+        -\frac{BE}{2A}
+    }\right)
+    +\frac{1}{n^2C^2}
+    \left({
+        \ln\left({\sqrt{\kappa}}\right)
+        -\frac{BE}{2A}
+    }\right)
+}\right]\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(E\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[A=\sqrt{\frac{\kappa}{\kappa-1}}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[C=\frac{1}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[E=\ln\left({\frac{A+1}{A-1}}\right)\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r51b074ac3ef2-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[1]</a></td><td>Walker, Rohan, and Buddhima Indraratna. 2006. ‘Vertical Drain
+Consolidation with Parabolic Distribution of Permeability in
+Smear Zone’. Journal of Geotechnical and Geoenvironmental
+Engineering 132 (7): 937-41.
+doi:10.1061/(ASCE)1090-0241(2006)132:7(937).</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_piecewise_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_piecewise_constant</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>n=None</em>, <em>kap_m=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_piecewise_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_piecewise_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for piecewise constant permeability distribution</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of segment outer radii to drain radius (r_i/r_0). The first value
+of s should be greater than 1, i.e. the first value should be s_1;
+s_0=1 at the drain soil interface is implied.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability in each
+segment kh/khi.</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soilpermeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The smear zone parameter <span class="math notranslate nohighlight">\(\mu\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{n^2}{\left({n^2-1}\right)}
+\sum\limits_{i=1}^{m} \kappa_i
+    \left[{
+        \frac{s_i^2}{n^2}\ln
+            \left({
+                \frac{s_i}{s_{i-1}}
+            }\right)
+        -\frac{s_i^2-s_{i-1}^2}{2n^2}
+        -\frac{\left({s_i^2-s_{i-1}^2}\right)^2}{4n^4}
+    }\right]
+    +\psi_i\frac{s_i^2-s_{i-1}^2}{n^2}\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\psi_{i} = \sum\limits_{j=1}^{i-1}\kappa_j
+\left[{
+        \ln
+            \left({
+                \frac{s_j}{s_{j-1}}
+            }\right)
+        -\frac{s_j^2-s_{j-1}^2}{2n^2}
+    }\right]\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{hi}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the outer radius of the ith segment,
+<span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability in the ith segment,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability in the ith segment</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rd4f4b7d08882-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[1]</a></td><td>Walker, Rohan. 2006. ‘Analytical Solutions for Modeling Soft Soil
+Consolidation by Vertical Drains’. PhD Thesis, Wollongong, NSW,
+Australia: University of Wollongong. <a class="reference external" href="http://ro.uow.edu.au/theses/501">http://ro.uow.edu.au/theses/501</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="rd4f4b7d08882-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[2]</a></td><td>Walker, Rohan T. 2011. ‘Vertical Drain Consolidation Analysis in
+One, Two and Three Dimensions’. Computers and
+Geotechnics 38 (8): 1069-77. doi:10.1016/j.compgeo.2011.07.006.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_piecewise_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_piecewise_linear</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>n=None</em>, <em>kap_m=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_piecewise_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_piecewise_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smear zone parameter for piecewise linear permeability distribution</p>
+<p>mu parameter in equal strain radial consolidation equations e.g.
+u = u0 * exp(-8*Th/mu)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of radii to drain radius (r_i/r_0). The first value
+of s should be 1, i.e. at the drain soil interface.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at each
+value of s.</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soilpermeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>With permeability in the ith segment defined by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{k_i}{k_{ref}}= \frac{1}{\kappa_{i-1}}
+\left({A_ir/r_w+B_i}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[A_i = \frac{\kappa_{i-1}/\kappa_i-1}{s_i-s_{i-1}}\]</div>
+<div class="math notranslate nohighlight">
+\[B_i = \frac{s_i-s_{i-1}\kappa_{i-1}/\kappa_i}{s_i-s_{i-1}}\]</div>
+<p>the smear zone <span class="math notranslate nohighlight">\(\mu\)</span> parameter is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu = \frac{n^2}{n^2-1}
+\left[{
+    \sum\limits_{i=1}^{m}\kappa_{i-1}\theta_i
+    + \Psi_i
+    \left({
+        \frac{s_i^2-s_{i-1}^2}{n^2}
+    }\right)
+    +\mu_w
+}\right]\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\theta_i = \left\{
+\begin{array}{lr}
+\frac{s_i^2}{n^2}\ln
+    \left[{\frac{s_i}{s_{i-1}}}\right]
+    -\frac{s_i^2-s_{i-1}^2}{2n^2}
+    -\frac{\left({s_i^2-s_{i-1}^2}\right)^2}{4n^4}
+&amp; \textrm{for } \frac{\kappa_{i-1}}{\kappa_i}=1 \\
+\frac{\left({s_i^2-s_{i-1}^2}\right)}{3n^4}
+    \left({3n^2-s_{i-1}^2-2s_{i-1}s_i}\right)
+&amp; \textrm{for }\frac{\kappa_{i-1}}{\kappa_i}=
+ \frac{s_i}{s_{i-1}} \\
+ \begin{multline}
+\frac{s_i}{B_i n^2}\ln\left[{
+    \frac{\kappa_i s_i}{\kappa_{i-1}s_{i-1}}}\right]
+-\frac{s_i-s_{i-1}}{A_in^2}
+    \left({1-\frac{B_i^2}{A_i^2n^4}}\right)
+\\-\frac{\left({s_i-s_{i-1}}\right)^2}{3A_in^2}
+    \left({2s_i+s_{i-1}}\right)
+\\+\frac{B_i}{A_i^2 n^4}\ln\left[{
+    \frac{\kappa_{i-1}}{\kappa_i}}\right]
+    \left({1-\frac{B_i^2}{A_i^2n^2}}\right)
+\\+\frac{B_i}{2A_i^2 n^4}
+    \left({
+    2s_i^2\ln\left[{
+    \frac{\kappa_{i-1}}{\kappa_i}}\right]
+    -s_i^2 + s_{i-1}^2
+    }\right)
+\end{multline}
+&amp; \textrm{otherwise}
+\end{array}\right.\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\Psi_i = \sum\limits_{j=1}^{i-1}\kappa_{j-1}\psi_j\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\psi_i = \left\{
+\begin{array}{lr}
+\ln\left[{\frac{s_j}{s_{j-1}}}\right]
+- \frac{s_j^2- s_{j-1}^2}{2n^2}
+&amp; \textrm{for } \frac{\kappa_{j-1}}{\kappa_j}=1 \\
+\frac{\left({s_j - s_{j-1}}\right)
+    \left({n^2-s_js_{j-1}}\right)}{s_jn^2}
+&amp; \textrm{for }\frac{\kappa_{j-1}}{\kappa_j}=
+ \frac{s_j}{s_{j-1}} \\
+ \begin{multline}
+\frac{1}{B_i}\ln\left[{\frac{s_j}{s_{j-1}}}\right]
+    +\ln\left[{\frac{\kappa_{j-1}}{\kappa_j}}\right]
+    \left({\frac{B_j}{A_j^2n^2}-\frac{1}{B_j}}\right)
+    \\-\frac{s_j-s_{j-1}}{A_j^2n^2}
+\end{multline}
+&amp; \textrm{otherwise}
+\end{array}\right.\end{split}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{ref}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the radius of the ith radial point,
+<span class="math notranslate nohighlight">\(k_{ref}\)</span> is a convienient refernce permeability, usually
+the undisturbed
+horizontal permeability,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability at the ith radial point</p>
+<p class="rubric">References</p>
+<p>Derived by Rohan Walker in 2011 and 2014.
+Derivation steps are the same as for mu_piecewise_constant in appendix of
+<a class="reference internal" href="#r55fdbf0e9a93-1" id="id11">[1]</a> but permeability is linear in a segemetn as in <a class="reference internal" href="#r55fdbf0e9a93-2" id="id12">[2]</a>.</p>
+<table class="docutils citation" frame="void" id="r55fdbf0e9a93-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id11">1</a>, <a class="fn-backref" href="#id13">2</a>)</em> Walker, Rohan. 2006. ‘Analytical Solutions for Modeling Soft Soil
+Consolidation by Vertical Drains’. PhD Thesis, Wollongong, NSW,
+Australia: University of Wollongong. <a class="reference external" href="http://ro.uow.edu.au/theses/501">http://ro.uow.edu.au/theses/501</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r55fdbf0e9a93-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id12">1</a>, <a class="fn-backref" href="#id14">2</a>)</em> Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.mu_well_resistance">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">mu_well_resistance</code><span class="sig-paren">(</span><em>kh</em>, <em>qw</em>, <em>n</em>, <em>H</em>, <em>z=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#mu_well_resistance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.mu_well_resistance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional smear zone parameter for well resistance</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>kh</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The normalising permeability used in calculating kappa for smear zone
+calcs.  Usually the undisturbed permeability i.e. the kh in
+kappa = kh/ks</p>
+</dd>
+<dt><strong>qw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain discharge capacity.  qw = kw * pi * rw**2.  Make sure
+the kw used has the same units as kh.</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Length of drainage path.</p>
+</dd>
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Evaluation depth. Default = None, in which case the well resistance
+factor will be averaged.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>mu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">mu parameter for well resistance</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The smear zone parameter <span class="math notranslate nohighlight">\(\mu_w\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu_w = \frac{k_h}{q_w}\pi z
+\left({2H-z}\right)
+\left({1-\frac{1}{n^2}}\right)\]</div>
+<p>when <span class="math notranslate nohighlight">\(z\)</span> is None then the average <span class="math notranslate nohighlight">\(\mu_w\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\mu_{w\textrm{average}} = \frac{2k_h H^2}{3q_w}\pi
+\left({1-\frac{1}{n^2}}\right)\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[q_w = k_w \pi r_w^2\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed horizontal permeability,
+<span class="math notranslate nohighlight">\(k_w\)</span> is the drain permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r47d5ab535c54-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[1]</a></td><td>Hansbo, S. 1981. ‘Consolidation of Fine-Grained Soils by
+Prefabricated Drains’. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.non_darcy_beta_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">non_darcy_beta_constant</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>nflow=1.0001</em>, <em>nterms=20</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#non_darcy_beta_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.non_darcy_beta_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-darcian flow smear zone permeability/geometry parameter for
+smear zone with constant permeability.</p>
+<p>beta parameter is in equal strain radial consolidation equations  with
+non-Darcian flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw)</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float.</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to smear zone
+horizontal permeanility (kh / ks).</p>
+</dd>
+<dt><strong>nflow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">non_darcian flow exponent</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of terms to use in series</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">anything</span></dt>
+<dd><p class="first last"><cite>args</cite> does not contribute to any calculations it is merely so you
+can have other arguments such as s and kappa which are used in other
+smear zone formulations.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_g</span></code></dt>
+<dd>used in this function.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_gbar</span></code></dt>
+<dd>used in this function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\beta = \frac{1}{N^2-1}
+    \left({
+        \begin{multline}
+        2\overline{g}\left({N}\right)
+        -\kappa^{1/n}\left({
+            2\overline{g}\left({1}\right)
+            + g\left({1}\right) \left({N^2-1}\right)
+                             }\right) \\
+        +\left({\kappa^{1/n}-1}\right)\left({
+            2\overline{g}\left({s}\right)
+            + g\left({s}\right) \left({N^2-s^2}\right)
+                                                }\right)
+         \end{multline}
+           }\right)\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(g\left({y}\right)\)</span> and <span class="math notranslate nohighlight">\(\overline{g}\left({y}\right)\)</span>
+are described in the <cite>_g</cite> and <cite>_gbar</cite> functions respectively.</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="ra8bc7ac25b9b-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[1]</a></td><td>Hansbo, S. 1981. “Consolidation of Fine-Grained Soils by
+Prefabricated Drains”. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="ra8bc7ac25b9b-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[2]</a></td><td>Walker, R., B. Indraratna, and C. Rujikiatkamjorn.
+“Vertical Drain Consolidation with Non-Darcian Flow and
+Void-Ratio-Dependent Compressibility and Permeability.”
+Geotechnique 62, no. 11 (November 1, 2012): 985-97.
+doi:10.1680/geot.10.P.084.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_constant</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.000001</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">2.2538...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_constant</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.000001</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">8.4710...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_constant</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">6.1150...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_constant</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]),</span> <span class="mi">5</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.000001</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">]),</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">array([8.471..., 6.1150...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.non_darcy_beta_ideal">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">non_darcy_beta_ideal</code><span class="sig-paren">(</span><em>n</em>, <em>nflow=1.0001</em>, <em>nterms=20</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#non_darcy_beta_ideal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.non_darcy_beta_ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-darcian flow smear zone permeability/geometry parameter for
+ideal drain (no smear).</p>
+<p>beta parameter is in equal strain radial consolidation equations  with
+non-Darcian flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius to drain radius (re/rw).</p>
+</dd>
+<dt><strong>nflow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">non_darcian flow exponent</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of terms to use in series</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">anything</span></dt>
+<dd><p class="first last"><cite>args</cite> does not contribute to any calculations it is merely so you
+can have other arguments such as s and kappa which are used in other
+smear zone formulations.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_g</span></code></dt>
+<dd>used in this function.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_gbar</span></code></dt>
+<dd>used in this function.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{1}{N^2-1}
+    \left({
+        2\overline{g}\left({N}\right)
+        -2\overline{g}\left({1}\right)
+        -g\left({1}\right) \left({N^2-1}\right)
+           }\right)\]</div>
+<p><span class="math notranslate nohighlight">\(g\left({y}\right)\)</span> and <span class="math notranslate nohighlight">\(\overline{g}\left({y}\right)\)</span>
+are described in the <cite>_g</cite> and <cite>_gbar</cite> functions respectively.</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rbed5241fa398-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[1]</a></td><td>Hansbo, S. 1981. “Consolidation of Fine-Grained Soils by
+Prefabricated Drains”. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="rbed5241fa398-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[2]</a></td><td>Walker, R., B. Indraratna, and C. Rujikiatkamjorn.
+“Vertical Drain Consolidation with Non-Darcian Flow and
+Void-Ratio-Dependent Compressibility and Permeability.”
+Geotechnique 62, no. 11 (November 1, 2012): 985-97.
+doi:10.1680/geot.10.P.084.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_ideal</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mf">1.000001</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">2.2538...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_ideal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span> <span class="mf">1.000001</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">array([2.253..., 1.578...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_ideal</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">)</span>
+<span class="go">2.618...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_ideal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.000001</span><span class="p">,</span><span class="mf">1.3</span><span class="p">]),</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">array([2.253..., 2.618...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.non_darcy_beta_piecewise_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">non_darcy_beta_piecewise_constant</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>n=None</em>, <em>kap_m=None</em>, <em>nflow=1.0001</em>, <em>nterms=20</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#non_darcy_beta_piecewise_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.non_darcy_beta_piecewise_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-darcian flow smear zone permeability/geometry parameter for
+smear zone with piecewise constant permeability.</p>
+<p>beta parameter is in equal strain radial consolidation equations  with
+non-Darcian flow.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of segment outer radii to drain radius (r_i/r_0). The first value
+of s should be greater than 1, i.e. the first value should be s_1;
+s_0=1 at the drain soil interface is implied.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability in each
+segment kh/khi.</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soil permeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+<dt><strong>nflow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">non_darcian flow exponent</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of terms to use in series</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Smear zone permeability/geometry parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The non-darcian smear zone parameter <span class="math notranslate nohighlight">\(\beta\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[\beta = \frac{1}{\left({n^2-1}\right)}
+\sum\limits_{i=1}^{m} \kappa^{1/n}_i
+    \left[{
+        2\overline{g}\left({s_i}\right)
+        -2\overline{g}\left({s_{i-1}}\right)
+    }\right]
+    +\psi_i \left({s_i^2-s_{i-1}^2}\right)\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\psi_{i} = \sum\limits_{j=1}^{i-1}\kappa^{1/n}_j
+\left[{
+        g\left({s_j}\right)
+        -g\left({s_{j-1}}\right)
+    }\right]\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{hi}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the outer radius of the ith segment,
+<span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability in the ith segment,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability in the ith segment</p>
+<p class="rubric">References</p>
+<p>None because it is new.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mu_piecewise_constant</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">2.2533...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_beta_piecewise_constant</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span>
+<span class="gp">... </span><span class="n">kap</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">nflow</span><span class="o">=</span><span class="mf">1.000001</span><span class="p">)</span>
+<span class="go">2.2533...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.non_darcy_drain_eta">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">non_darcy_drain_eta</code><span class="sig-paren">(</span><em>re</em>, <em>iL</em>, <em>gamw</em>, <em>beta_function</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#non_darcy_drain_eta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.non_darcy_drain_eta" title="Permalink to this definition">¶</a></dt>
+<dd><p>For non-Darcy flow calculate the vertical drain eta parameter</p>
+<p>eta = 2 / (re**2 * beta**nflow * (rw * gamw)**(nflow-1) * nflow * iL**(nflow-1))</p>
+<p>nflow will be obtained from the <a href="#id20"><span class="problematic" id="id21">**</span></a>kwargs.  rw will be back calculated
+from the n parameter (n=re/rw) which is usually the first of the <a href="#id22"><span class="problematic" id="id23">*</span></a>arg parameters
+or one of the <a href="#id24"><span class="problematic" id="id25">**</span></a>kwargs</p>
+<p>Note that eta is used in radial consolidation equations:
+[strain rate] = (u - uw)**n * k / gamw * eta
+Compare with the Darcian case of (eta terms are calculated differerntly
+for Darcy and non-Darcy cases):
+[strain rate] = (u - uw) * k / gamw * eta</p>
+<p>Note that <cite>non_darcy_drain_eta</cite> only uses the exponential portion of the
+Non-Darcian flow relationship.  If hydraulic gradients are greater than
+iL then the flow rates will be overestimated.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>re</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain influence radius.</p>
+</dd>
+<dt><strong>iL</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Limiting hydraulic gradient beyond which flow follows Darcy’s law.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Unit weight of water. Usually gamw=10 kN/m**3 or gamw=9.807 kN/m**3.</p>
+</dd>
+<dt><strong>beta_function</strong> <span class="classifier-delimiter">:</span> <span class="classifier">obj or string</span></dt>
+<dd><p class="first last">The non_darcy_beta function to use. e.g. non_darcy_beta_ideal
+non_darcy_beat_constant, non_darcy_piecewise_constant.
+This can either be the function object itself
+or the name of the function e.g. ‘non_darcy_beta_ideal’.</p>
+</dd>
+<dt><strong>*args, **kwargs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">various</span></dt>
+<dd><p class="first last">The arguments to pass to the beta_function.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>eta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Value of eta parameter for non-Darcian flow</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_drain_eta</span><span class="p">(</span><span class="n">re</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">beta_function</span><span class="o">=</span><span class="s1">&#39;non_darcy_beta_ideal&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">nflow</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">0.09807...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_drain_eta</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span><span class="s1">&#39;non_darcy_beta_ideal&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">nflow</span><span class="o">=</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">0.09807...</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_drain_eta</span><span class="p">(</span><span class="n">re</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">iL</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">beta_function</span><span class="o">=</span><span class="s1">&#39;non_darcy_beta_ideal&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">20.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">]),</span>
+<span class="gp">... </span><span class="n">nflow</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.000001</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">]),</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="go">array([0.3943..., 0.0980...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.non_darcy_u_piecewise_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">non_darcy_u_piecewise_constant</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em>, <em>n=None</em>, <em>kap_m=None</em>, <em>nflow=1.0001</em>, <em>nterms=20</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#non_darcy_u_piecewise_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.non_darcy_u_piecewise_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for piecewise constant permeability distribution</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><cite>muw</cite> must always be zero. i.e. no well resistance (It exists to have
+the same inputs as <cite>u_piecewise_constant</cite>.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of segment outer radii to drain radius (r_i/r_0). The first value
+of s should be greater than 1, i.e. the first value should be s_1;
+s_0=1 at the drain soil interface is implied.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability in each
+segment kh/khi.</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id26"><span class="problematic" id="id27">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter. Default = 0</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soilpermeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+<dt><strong>nflow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">non_darcian flow exponent</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of terms to use in series</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>non_darcy_u_piecewise_constant()
+The pore pressure in the ith segment is given by:</p>
+<div class="math notranslate nohighlight">
+\[u_i(y) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \kappa^{1/n}_i
+      \left({
+        g\left({y}\right)
+        -g\left({s_{i-1}}\right)
+             }\right)
+    +\psi_i
+}\right]+u_w\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\psi_{i} = \sum\limits_{j=1}^{i-1}\kappa^{1/n}_j
+\left[{
+        g\left({s_j}\right)
+        -g\left({s_{j-1}}\right)
+    }\right]\]</div>
+<p>and:</p>
+<p><span class="math notranslate nohighlight">\(g\left({y}\right)\)</span> is described in the <cite>_g</cite> function</p>
+<div class="math notranslate nohighlight">
+\[y = \frac{r}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{hi}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the outer radius of the ith segment,
+<span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability in the ith segment,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability in the ith segment</p>
+<p class="rubric">References</p>
+<p>none because it is new.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u_piecewise_constant</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">kap_m</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">array([0.4153...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_u_piecewise_constant</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">kap_m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">nflow</span><span class="o">=</span><span class="mf">1.0000001</span><span class="p">)</span>
+<span class="go">array([0.4153...])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">non_darcy_u_piecewise_constant</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mf">1.6</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">kap_m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">nflow</span><span class="o">=</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="go">array([0.3865...])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.re_from_drain_spacing">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">re_from_drain_spacing</code><span class="sig-paren">(</span><em>sp</em>, <em>pattern='Triangle'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#re_from_drain_spacing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.re_from_drain_spacing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate drain influence radius from drain spacing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>sp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Distance between drain centers.</p>
+</dd>
+<dt><strong>pattern</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[‘Triangle’, ‘Square’], optional</span></dt>
+<dd><p class="first last">Drain installation pattern. default = ‘Triangle’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>re</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">drain influence radius</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The influence radius, <span class="math notranslate nohighlight">\(r_e\)</span>, is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r_e =
+\left\{\begin{array}{lr}
+S_p \frac{1}{\sqrt{\pi}}=S_p\times 0.564189583
+&amp; \textrm{square pattern}\\
+S_p \sqrt{\frac{\sqrt{3}}{2\pi}}=S_p\times 0.525037567
+&amp; \textrm{triangular pattern}
+\end{array}\right.\end{split}\]</div>
+<p class="rubric">References</p>
+<p>Eta method is described in <a class="reference internal" href="#r7202fea46615-1" id="id28">[1]</a>.</p>
+<table class="docutils citation" frame="void" id="r7202fea46615-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id28">1</a>, <a class="fn-backref" href="#id29">2</a>)</em> Walker, Rohan T. 2011. ‘Vertical Drain Consolidation Analysis in
+One, Two and Three Dimensions’. Computers and
+Geotechnics 38 (8): 1069-77. doi:10.1016/j.compgeo.2011.07.006.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.scratch">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">scratch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#scratch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.scratch" title="Permalink to this definition">¶</a></dt>
+<dd><p>scratch pad for testing latex markup for docstrings</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_constant</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for constant permeability smear zone</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id30"><span class="problematic" id="id31">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The uavg is calculated from the eta method.  It is not the uavg used when
+considering the vacuum as an equivalent surcharge.  You would have to do
+other manipulations for that.</p>
+<p>Noteing that <span class="math notranslate nohighlight">\(s_i=r_i/r_w\)</span>, the radial pore pressure distribution
+in the smear zone is given by:</p>
+<div class="math notranslate nohighlight">
+\[u^\prime(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \kappa\left({
+    \ln\left({s_i}\right)
+    -\frac{1}{2n^2}\left({s_i^2-1}\right)
+    }\right)
+    +\mu_w
+}\right]+u_w\]</div>
+<p>The pore pressure in the undisturbed zone is:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}u(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+                    \left[{
+                        \ln\left({\frac{s_i}{s}}\right)
+                        -\frac{1}{2n^2}\left({s_i^2-s^2}\right)
+                        +\kappa\left[{
+                        \ln\left({s}\right)
+                        -\frac{1}{2n^2}\left({s^2-1}\right)
+                    }\right]
+                        +\mu_w
+                    }\right]+u_w\\where:\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r9ac10117ee1f-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id32">[1]</a></td><td>Hansbo, S. 1981. ‘Consolidation of Fine-Grained Soils by
+Prefabricated Drains’. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_ideal">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_ideal</code><span class="sig-paren">(</span><em>n</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_ideal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_ideal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for ideal drain with no smear zone</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id33"><span class="problematic" id="id34">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The uavg is calculated from the eta method.  It is not the uavg used when
+considering the vacuum as an equivalent surcharge.  You would have to do
+other manipulations for that.</p>
+<p>Noteing that <span class="math notranslate nohighlight">\(s_i=r_i/r_w\)</span>, the radial pore pressure distribution is given by:</p>
+<div class="math notranslate nohighlight">
+\[u(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \ln\left({\frac{r}{r_w}}\right)
+    -\frac{(r/r_w)^2-1}{2n^2}
+    +\mu_w
+}\right]+u_w\]</div>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rc6e8ed442a0e-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id35">[1]</a></td><td>Hansbo, S. 1981. ‘Consolidation of Fine-Grained Soils by
+Prefabricated Drains’. In 10th ICSMFE, 3:677-82.
+Rotterdam-Boston: A.A. Balkema.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_linear</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for linear smear zone</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id36"><span class="problematic" id="id37">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The uavg is calculated from the eta method.  It is not the uavg used when
+considering the vacuum as an equivalent surcharge.  You would have to do
+other manipulations for that.</p>
+<p>Noteing that <span class="math notranslate nohighlight">\(s_i=r_i/r_w\)</span>, the radial pore pressure distribution
+in the smear zone is given by:</p>
+<div class="math notranslate nohighlight">
+\[u^\prime(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \kappa\left({\frac{1}{B}\ln\left({s_i}\right)
+    +\left({\frac{B}{A^2n^2}-\frac{1}{B}}\right)
+    \ln\left({B+As_i}\right)
+    +\frac{1-s_i}{An^2}
+    }\right)
+    +\mu_w
+}\right]+u_w\]</div>
+<p>The pore pressure in the undisturbed zone is:</p>
+<div class="math notranslate nohighlight">
+\[u(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \ln\left({\frac{s_i}{s}}\right)
+    -\frac{s_i^2-s^2}{2n^2}
+    +\kappa
+\left[{
+    \frac{1}{B}\ln\left({s}\right)
+    +\left({\frac{B}{A^2n^2}-\frac{1}{B}}\right)
+    \ln\left({\kappa}\right)
+    +\frac{1-s}{An^2}
+}\right]
+    +\mu_w
+}\right]+u_w\]</div>
+<p>for the special case where <span class="math notranslate nohighlight">\(s=\kappa\)</span> the pore pressure
+in the undisturbed zone is:</p>
+<div class="math notranslate nohighlight">
+\[u^\prime(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    s\frac{\left({n^2-s_i}\right)
+        \left({s_i-1}\right)}{n^2s_i}
+    +\mu_w
+}\right]+u_w\]</div>
+<p>The pore pressure in the undisturbed zone is:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[u(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \ln\left({\frac{s_i}{s}}\right)
+    +s-1+\frac{s}{n^2}
+    -\frac{s_i^2-s^2}{2n^2}
+    +\mu_w
+}\right]+u_w\]</div>
+</div></blockquote>
+<p>where:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p>If <span class="math notranslate nohighlight">\(s=1\)</span> or <span class="math notranslate nohighlight">\(\kappa=1\)</span> then u_ideal will be used.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rd6e48e9b6644-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id38">[1]</a></td><td>Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_parabolic">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_parabolic</code><span class="sig-paren">(</span><em>n</em>, <em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_parabolic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_parabolic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for parabolic smear zone</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of drain influence radius  to drain radius (re/rw).</p>
+</dd>
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of smear zone radius to  drain radius (rs/rw).</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at
+the drain-soil interface (kh / ks).</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id39"><span class="problematic" id="id40">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The uavg is calculated from the eta method.  It is not the uavg used when
+considering the vacuum as an equivalent surcharge.  You would have to do
+other manipulations for that.</p>
+<p>Noteing that <span class="math notranslate nohighlight">\(s_i=r_i/r_w\)</span>, the radial pore pressure distribution
+in the smear zone is given by:</p>
+<div class="math notranslate nohighlight">
+\[u^\prime(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \frac{\kappa}{\kappa-1}\left\{{
+    \frac{1}{A^2-B^2}
+        \left({
+        \ln\left({s_i}\right)
+        -\frac{1}{2A}
+            \left[{
+            \left({A-B}\right)F
+            +\left({A+B}\right)G
+            }\right]
+        }\right)
+        +\frac{1}{2n^2AC}
+            \left[{
+            \left({A+B}\right)F
+            +\left({A-B}\right)G
+            }\right]
+    }\right\}
+    +\mu_w
+}\right]+u_w\]</div>
+<p>The pore pressure in the undisturbed zone is:</p>
+<div class="math notranslate nohighlight">
+\[u(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \ln\left({\frac{s_i}{s}}\right)
+    -\frac{s_i^2-s^2}{2n^2}
+    +A^2
+\left[{
+    \frac{1}{A^2-B^2}
+        \left({
+            \ln\left({s}\right)
+            -\frac{1}{2}\left[{
+                \ln\left({\kappa}\right)
+                +\frac{BE}{A}}\right]
+        }\right)
+    +\frac{1}{2n^2C^2}
+        \left({\ln\left({\kappa}\right)
+        -\frac{BE}{A}}\right)
+}\right]
+    +\mu_w
+}\right]+u_w\]</div>
+<p>where <span class="math notranslate nohighlight">\(A\)</span>, <span class="math notranslate nohighlight">\(B\)</span>, <span class="math notranslate nohighlight">\(C\)</span>, <span class="math notranslate nohighlight">\(E\)</span>, <span class="math notranslate nohighlight">\(F\)</span>, and
+<span class="math notranslate nohighlight">\(G\)</span>  are:</p>
+<div class="math notranslate nohighlight">
+\[A=\sqrt{\frac{\kappa}{\kappa-1}}\]</div>
+<div class="math notranslate nohighlight">
+\[B=\frac{s}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[C=\frac{1}{s-1}\]</div>
+<div class="math notranslate nohighlight">
+\[E=\ln\left({\frac{A+1}{A-1}}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[F(r/r_w) = \ln\left({\frac{A+B-Cs_i}{A+1}}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[G(r/r_w) = \ln\left({\frac{A-B+Cs_i}{A-1}}\right)\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_e}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[s = \frac{r_s}{r_w}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa = \frac{k_h}{k_s}\]</div>
+<p><span class="math notranslate nohighlight">\(r_w\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_e\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_s\)</span> is the smear zone radius, <span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability, <span class="math notranslate nohighlight">\(k_s\)</span> is the smear zone horizontal
+permeability</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r1c0fa862dbcb-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id41">[1]</a></td><td>Walker, Rohan, and Buddhima Indraratna. 2006. ‘Vertical Drain
+Consolidation with Parabolic Distribution of Permeability in
+Smear Zone’. Journal of Geotechnical and Geoenvironmental
+Engineering 132 (7): 937-41.
+doi:10.1061/(ASCE)1090-0241(2006)132:7(937).</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_piecewise_constant">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_piecewise_constant</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em>, <em>n=None</em>, <em>kap_m=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_piecewise_constant"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_piecewise_constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for piecewise constant permeability distribution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of segment outer radii to drain radius (r_i/r_0). The first value
+of s should be greater than 1, i.e. the first value should be s_1;
+s_0=1 at the drain soil interface is implied.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability in each
+segment kh/khi.</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id42"><span class="problematic" id="id43">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soilpermeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The pore pressure in the ith segment is given by:</p>
+<div class="math notranslate nohighlight">
+\[u_i(r) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+\left[{
+    \kappa_i\left({\ln\left({\frac{r}{r_{i-1}}}\right)
+    -\frac{r^2/r_0^2-s_{i-1}^2}{2n^2}}\right)
+    +\psi_i+\mu_w
+}\right]+u_w\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\psi_{i} = \sum\limits_{j=1}^{i-1}\kappa_j
+\left[{
+        \ln
+            \left({
+                \frac{s_j}{s_{j-1}}
+            }\right)
+        -\frac{s_j^2-s_{j-1}^2}{2n^2}
+    }\right]\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{hi}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the outer radius of the ith segment,
+<span class="math notranslate nohighlight">\(k_h\)</span> is the undisturbed
+horizontal permeability in the ith segment,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability in the ith segment</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r6e7eed62b058-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id44">[1]</a></td><td>Walker, Rohan. 2006. ‘Analytical Solutions for Modeling Soft Soil
+Consolidation by Vertical Drains’. PhD Thesis, Wollongong, NSW,
+Australia: University of Wollongong. <a class="reference external" href="http://ro.uow.edu.au/theses/501">http://ro.uow.edu.au/theses/501</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r6e7eed62b058-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id45">[2]</a></td><td>Walker, Rohan T. 2011. ‘Vertical Drain Consolidation Analysis in
+One, Two and Three Dimensions’. Computers and
+Geotechnics 38 (8): 1069-77. doi:10.1016/j.compgeo.2011.07.006.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.smear_zones.u_piecewise_linear">
+<code class="descclassname">geotecha.consolidation.smear_zones.</code><code class="descname">u_piecewise_linear</code><span class="sig-paren">(</span><em>s</em>, <em>kap</em>, <em>si</em>, <em>uavg=1</em>, <em>uw=0</em>, <em>muw=0</em>, <em>n=None</em>, <em>kap_m=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/smear_zones.html#u_piecewise_linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.smear_zones.u_piecewise_linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pore pressure at radius for piecewise constant permeability distribution</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or 1d ndarray of float</span></dt>
+<dd><p class="first last">Ratio of radii to drain radius (r_i/r_0). The first value
+of s should be 1, i.e. at the drain soil interface.</p>
+</dd>
+<dt><strong>kap</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or ndarray of float</span></dt>
+<dd><p class="first last">Ratio of undisturbed horizontal permeability to permeability at each
+value of s.</p>
+</dd>
+<dt><strong>si</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of ndarray of float</span></dt>
+<dd><p class="first last">Normalised radial coordinate(s) at which to calc the pore pressure
+i.e. si=ri/rw.</p>
+</dd>
+<dt><strong>uavg</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional = 1</span></dt>
+<dd><p class="first last">Average pore pressure in soil. default = 1.  when <a href="#id46"><span class="problematic" id="id47">`</span></a>uw`=0 , then if
+uavg=1.</p>
+</dd>
+<dt><strong>uw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Pore pressure in drain, default = 0.</p>
+</dd>
+<dt><strong>muw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Well resistance mu parameter.</p>
+</dd>
+<dt><strong>n, kap_m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">If <cite>n</cite> and <cite>kap_m</cite> are given then they will each be appended to <cite>s</cite> and
+<cite>kap</cite>. This allows the specification of a smear zone separate to the
+specification of the drain influence radius.
+Default n=kap_m=None, i.e. soilpermeability is completely described
+by <cite>s</cite> and <cite>kap</cite>. If n is given but kap_m is None then the last
+kappa value in kap will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>u</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float</span></dt>
+<dd><p class="first last">Pore pressure at specified si.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>With permeability in the ith segment defined by:</p>
+<div class="math notranslate nohighlight">
+\[\frac{k_i}{k_{ref}}= \frac{1}{\kappa_{i-1}}
+\left({A_ir/r_w+B_i}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[A_i = \frac{\kappa_{i-1}/\kappa_i-1}{s_i-s_{i-1}}\]</div>
+<div class="math notranslate nohighlight">
+\[B_i = \frac{s_i-s_{i-1}\kappa_{i-1}/\kappa_i}{s_i-s_{i-1}}\]</div>
+<p>The pore pressure in the ith segment is given by:</p>
+<div class="math notranslate nohighlight">
+\[u_i(s) = \frac{u_{avg}-u_w}{\mu+\mu_w}
+    \left[{
+    \sum\limits_{i=1}^{m}\kappa_{i-1}\phi_i
+    + \Psi_i
+    +\mu_w
+}\right]+u_w\]</div>
+<p>where,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\phi_i = \left\{
+\begin{array}{lr}
+\ln\left[{\frac{s}{s_{i-1}}}\right]
+- \frac{s^2- s_{i-1}^2}{2n^2}
+&amp; \textrm{for } \frac{\kappa_{i-1}}{\kappa_i}=1 \\
+\frac{\left({s - s_{i-1}}\right)
+    \left({n^2-ss_{i-1}}\right)}{sn^2}
+&amp; \textrm{for }\frac{\kappa_{i-1}}{\kappa_i}=
+ \frac{s_i}{s_{i-1}} \\
+ \begin{multline}
+\frac{1}{B_i}\ln\left[{\frac{s}{s_{i-1}}}\right]
+    +\ln\left[{A_is+B_i}\right]
+    \left({\frac{B_i}{A_i^2n^2}-\frac{1}{B_i}}\right)
+    \\-\frac{s-s_{i-1}}{A_i^2n^2}
+\end{multline}
+&amp; \textrm{otherwise}
+\end{array}\right.\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\Psi_i = \sum\limits_{j=1}^{i-1}\kappa_{j-1}\psi_j\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}\psi_i = \left\{
+\begin{array}{lr}
+\ln\left[{\frac{s_j}{s_{j-1}}}\right]
+- \frac{s_j^2- s_{j-1}^2}{2n^2}
+&amp; \textrm{for } \frac{\kappa_{j-1}}{\kappa_j}=1 \\
+\frac{\left({s_j - s_{j-1}}\right)
+    \left({n^2-s_js_{j-1}}\right)}{s_jn^2}
+&amp; \textrm{for }\frac{\kappa_{j-1}}{\kappa_j}=
+ \frac{s_j}{s_{j-1}} \\
+ \begin{multline}
+\frac{1}{B_i}\ln\left[{\frac{s_j}{s_{j-1}}}\right]
+    +\ln\left[{\frac{\kappa_{j-1}}{\kappa_j}}\right]
+    \left({\frac{B_j}{A_j^2n^2}-\frac{1}{B_j}}\right)
+    \\-\frac{s_j-s_{j-1}}{A_j^2n^2}
+\end{multline}
+&amp; \textrm{otherwise}
+\end{array}\right.\end{split}\]</div>
+<p>and:</p>
+<div class="math notranslate nohighlight">
+\[n = \frac{r_m}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[s_i = \frac{r_i}{r_0}\]</div>
+<div class="math notranslate nohighlight">
+\[\kappa_i = \frac{k_h}{k_{ref}}\]</div>
+<p><span class="math notranslate nohighlight">\(r_0\)</span> is the drain radius, <span class="math notranslate nohighlight">\(r_m\)</span> is the drain influence radius,
+<span class="math notranslate nohighlight">\(r_i\)</span> is the radius of the ith radial point,
+<span class="math notranslate nohighlight">\(k_{ref}\)</span> is a convienient refernce permeability, usually
+the undisturbed
+horizontal permeability,
+<span class="math notranslate nohighlight">\(k_{hi}\)</span> is the horizontal
+permeability at the ith radial point</p>
+<p class="rubric">References</p>
+<p>Derived by Rohan Walker in 2011 and 2014.
+Derivation steps are the same as for mu_piecewise_constant in appendix of
+<a class="reference internal" href="#r9de2fc9f205b-1" id="id48">[1]</a> but permeability is linear in a segemetn as in <a class="reference internal" href="#r9de2fc9f205b-2" id="id49">[2]</a>.</p>
+<table class="docutils citation" frame="void" id="r9de2fc9f205b-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id48">1</a>, <a class="fn-backref" href="#id50">2</a>)</em> Walker, Rohan. 2006. ‘Analytical Solutions for Modeling Soft Soil
+Consolidation by Vertical Drains’. PhD Thesis, Wollongong, NSW,
+Australia: University of Wollongong. <a class="reference external" href="http://ro.uow.edu.au/theses/501">http://ro.uow.edu.au/theses/501</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r9de2fc9f205b-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id49">1</a>, <a class="fn-backref" href="#id51">2</a>)</em> Walker, R., and B. Indraratna. 2007. ‘Vertical Drain Consolidation
+with Overlapping Smear Zones’. Geotechnique 57 (5): 463-67.
+doi:10.1680/geot.2007.57.5.463.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.consolidation.smear_zones.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

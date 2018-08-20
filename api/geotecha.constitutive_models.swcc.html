@@ -1,0 +1,848 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>swcc &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">swcc</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.constitutive_models.swcc">Module listing</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.constitutive_models.html">constitutive_models</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.constitutive_models.swcc.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="swcc">
+<h1>swcc<a class="headerlink" href="#swcc" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC" title="geotecha.constitutive_models.swcc.SWCC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SWCC</span></code></a></td>
+<td>Base class for defining soil water characteristic curve</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994" title="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SWCC_FredlundAndXing1994</span></code></a>(a,&nbsp;n,&nbsp;m[,&nbsp;ws,&nbsp;…])</td>
+<td>Soil water characteristic curve from Fredlund and Xing 1994</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008" title="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SWCC_PhamAndFredlund2008</span></code></a>(ws,&nbsp;a,&nbsp;b,&nbsp;wr,&nbsp;s1[,&nbsp;…])</td>
+<td>Soil water characteristic curve from Fredlund and Xing 2008</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.karel_air_from_saturation" title="geotecha.constitutive_models.swcc.karel_air_from_saturation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">karel_air_from_saturation</span></code></a>(Sr[,&nbsp;qfit])</td>
+<td>Relative air peremability (w.r.t.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.kwrel_from_discrete_swcc" title="geotecha.constitutive_models.swcc.kwrel_from_discrete_swcc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">kwrel_from_discrete_swcc</span></code></a>(psi,&nbsp;psi_swcc,&nbsp;vw_swcc)</td>
+<td>Relative permeability from integrating discrete soil water characteristic curve.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.constitutive_models.swcc">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.constitutive_models.swcc" title="Permalink to this headline">¶</a></h2>
+<p>Some soil water characteristic curves (SWCC) for unsaturated soil</p>
+<dl class="class">
+<dt id="geotecha.constitutive_models.swcc.SWCC">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.swcc.</code><code class="descname">SWCC</code><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for defining soil water characteristic curve</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC.dw_dpsi" title="geotecha.constitutive_models.swcc.SWCC.dw_dpsi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dw_dpsi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Slope of SWCC dw/dpsi</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC.plot_model" title="geotecha.constitutive_models.swcc.SWCC.plot_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code></a>(**kwargs)</td>
+<td>Plot the void ratio-permeability</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC.psi_and_w_for_plotting" title="geotecha.constitutive_models.swcc.SWCC.psi_and_w_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_and_w_for_plotting</span></code></a>(**kwargs)</td>
+<td>Suction and water content for plotting that plot the method</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC.psi_from_w" title="geotecha.constitutive_models.swcc.SWCC.psi_from_w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_from_w</span></code></a>(w,&nbsp;**kwargs)</td>
+<td>Suction from water content</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC.w_from_psi" title="geotecha.constitutive_models.swcc.SWCC.w_from_psi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_from_psi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Water content from suction</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC.dw_dpsi">
+<code class="descname">dw_dpsi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC.dw_dpsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC.dw_dpsi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of SWCC dw/dpsi</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC.plot_model">
+<code class="descname">plot_model</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC.plot_model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC.plot_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the void ratio-permeability</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC.psi_and_w_for_plotting">
+<code class="descname">psi_and_w_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC.psi_and_w_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC.psi_and_w_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction and water content for plotting that plot the method</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC.psi_from_w">
+<code class="descname">psi_from_w</code><span class="sig-paren">(</span><em>w</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC.psi_from_w"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC.psi_from_w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction from water content</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC.w_from_psi">
+<code class="descname">w_from_psi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC.w_from_psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC.w_from_psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Water content from suction</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.swcc.</code><code class="descname">SWCC_FredlundAndXing1994</code><span class="sig-paren">(</span><em>a</em>, <em>n</em>, <em>m</em>, <em>ws=1.0</em>, <em>psir=1000000.0</em>, <em>correction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_FredlundAndXing1994"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC" title="geotecha.constitutive_models.swcc.SWCC"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.constitutive_models.swcc.SWCC</span></code></a></p>
+<p>Soil water characteristic curve from Fredlund and Xing 1994</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Fitting parameter corresponding to soil suction at the inflection
+point.</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Fitting parameter designating th rate of desaturation.</p>
+</dd>
+<dt><strong>m</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Third fitting parameter</p>
+</dd>
+<dt><strong>ws</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Saturated water content. Default ws=1.0 i.e. basically a degree of
+saturation.</p>
+</dd>
+<dt><strong>psir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Residual suction. Default psir=1e6.</p>
+</dd>
+<dt><strong>correction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Manual correction factor.  Default correction=None i.e. correction
+factor is caclulated.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The equation for the soil water charcteristic curve is given by:</p>
+<div class="math notranslate nohighlight">
+\[w(\psi) = C(\psi)
+\frac{w_s}
+    {\left[{\ln\left[{\exp(1)+
+                         \left({\psi/a}\right)^n}\right]}\right]^m}\]</div>
+<p>where the correction factor is given by:</p>
+<div class="math notranslate nohighlight">
+\[C(\psi) = \left[{1 - \frac{\ln\left({1+\psi/\psi_r}\right)}
+{\ln\left({1+10^6/\psi_r}\right)}}\right]\]</div>
+<p>SWCC_FredlundAndXing1994()</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r55de23beca2f-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Fredlund, D.G., Anqing Xing, and Shangyan Huang.
+“Predicting the Permeability Function for Unsaturated Soils
+Using the Soil-Water Characteristic Curve.”
+Canadian Geotechnical Journal 31, no. 4 (1994): 533-46.
+doi:10.1139/t94-062.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.dw_dpsi" title="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.dw_dpsi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dw_dpsi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Slope of SWCC dw/dpsi</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.k_from_psi" title="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.k_from_psi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_from_psi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Relative permeability from suction</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code>(**kwargs)</td>
+<td>Plot the void ratio-permeability</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.psi_and_w_for_plotting" title="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.psi_and_w_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_and_w_for_plotting</span></code></a>(**kwargs)</td>
+<td>Suction and water content for plotting</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_from_w</span></code>(w,&nbsp;**kwargs)</td>
+<td>Suction from water content</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.w_from_psi" title="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.w_from_psi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_from_psi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>water content from suction</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.dw_dpsi">
+<code class="descname">dw_dpsi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_FredlundAndXing1994.dw_dpsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.dw_dpsi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of SWCC dw/dpsi</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>psi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dw_dpsi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction corresponding to psi</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">dw_dpsi</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">-0.00536...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">dw_dpsi</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="go">-0.00640...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">427</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">0.794</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">0.613</span><span class="p">,</span> <span class="n">psir</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">dw_dpsi</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="go">-1.317...e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.k_from_psi">
+<code class="descname">k_from_psi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_FredlundAndXing1994.k_from_psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.k_from_psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative permeability from suction</p>
+<p>Parameters
+———_
+psi : float</p>
+<blockquote>
+<div>Soil suction. Can be a 1d array.</div></blockquote>
+<dl class="docutils">
+<dt>aev <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>Air entry soil suction. Default aev=1.0</dd>
+<dt>npts <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd>Numper of intervals to break integral into. Default npts=500.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Relative permeability.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The permability relative to the saturated value is given by:</p>
+<div class="math notranslate nohighlight">
+\[k_r(\psi) =  \left.
+\int_{\ln(\psi)}^{b}
+  {\frac{\theta(e^y) - \theta(\psi)}{e^y} \theta^{\prime}(e^y)\,dy}
+\middle/
+  \int_{\ln(\psi_{\textrm{aev}})}^{b}
+  {\frac{\theta(e^y) - \theta_s}{e^y} \theta^{\prime}(e^y)\,dy}
+\right.\]</div>
+<p>where, <span class="math notranslate nohighlight">\(b=\ln(10^6)\)</span>, <span class="math notranslate nohighlight">\(\theta(\psi)\)</span> is the volumetric
+water content at a given soil suction.  <span class="math notranslate nohighlight">\(\psi_{\textrm{aev}}\)</span>
+is the air entry value of soil suction (must be positive for the
+log integral to work).  Each integral is performed by dividing the
+integration inteval into N sections, evaluating the integrand at the
+mid point of each inteval, then summing the areas of each section.</p>
+<p>If you enter a single elment array you will get a scalar returned.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="ref1c9f794493-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Fredlund, D.G., Anqing Xing, and Shangyan Huang.
+“Predicting the Permeability Function for Unsaturated
+Soils Using the Soil-Water Characteristic Curve.
+Canadian Geotechnical Journal 31, no. 4 (1994): 533-46.
+doi:10.1139/t94-062.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">2.77</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">11.2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">psir</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">k_from_psi</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">0.0520...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.psi_and_w_for_plotting">
+<code class="descname">psi_and_w_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_FredlundAndXing1994.psi_and_w_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.psi_and_w_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction and water content for plotting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points to return.  Default npts=100.</p>
+</dd>
+<dt><strong>xmin, xmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Range of x (i.e. effective stress) values from which
+to return points. Default xmin=1, xmax=1e6.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last"><cite>npts</cite> permeability, and void ratio values between
+<cite>xmin</cite> and <cite>xmax</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.w_from_psi">
+<code class="descname">w_from_psi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_FredlundAndXing1994.w_from_psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_FredlundAndXing1994.w_from_psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>water content from suction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>psi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction corresponding to psi</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">3000</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ws</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">w_from_psi</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="go">50.73...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">correction</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">w_from_psi</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<span class="go">0.395...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">427</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">0.794</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">0.613</span><span class="p">,</span> <span class="n">psir</span><span class="o">=</span><span class="mi">3000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span><span class="o">.</span><span class="n">w_from_psi</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="go">0.40...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.swcc.</code><code class="descname">SWCC_PhamAndFredlund2008</code><span class="sig-paren">(</span><em>ws</em>, <em>a</em>, <em>b</em>, <em>wr</em>, <em>s1</em>, <em>psir=None</em>, <em>correction=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_PhamAndFredlund2008"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC" title="geotecha.constitutive_models.swcc.SWCC"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.constitutive_models.swcc.SWCC</span></code></a></p>
+<p>Soil water characteristic curve from Fredlund and Xing 2008</p>
+<p>Be careful interpreting results when suction is less than 1.
+At low suction values we expect wc approx equal to wsat-wr, but the
+s1 * log10(psi) term gives large negative numbers for psi&lt;&lt;1,
+whereas at psi=1 the term dissapears as expected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>wr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Residual gravimetric water content.</p>
+</dd>
+<dt><strong>s1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Initial slope of SWCC (i.e. Cc/Gs)</p>
+</dd>
+<dt><strong>ws</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Saturated water content. Default ws=1.0 i.e. basically a degree of
+saturation.</p>
+</dd>
+<dt><strong>psir</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Residual suction. Default psir=None, i.e. psir = (2.7*a) <a href="#id3"><span class="problematic" id="id4">**</span></a>(1/b).</p>
+</dd>
+<dt><strong>correction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Manual correction factor.  Default correction=None i.e. correction
+factor is caclulated.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The equation for the soil water charcteristic curve is given by:</p>
+<div class="math notranslate nohighlight">
+\[w(\psi) = C(\psi)
+\left[{\left({w_{sat} - S_l \log(\psi) -w_r}\right)
+    \frac{a}{\psi^{b}+a} + w_r}\right]\]</div>
+<p>where the correction factor is given by:</p>
+<div class="math notranslate nohighlight">
+\[C(\psi) = \left[{1 - \frac{\ln\left({1+\psi/\psi_r}\right)}
+{\ln\left({1+10^6/\psi_r}\right)}}\right]\]</div>
+<p>SWCC_PhamAndFredlund2008()</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r1860ced1236f-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>Pham, Hung Q., and Delwyn G. Fredlund. “Equations for the
+Entire Soil-Water Characteristic Curve of a Volume Change
+Soil.” Canadian Geotechnical Journal 45, no. 4
+(April 1, 2008): 443-53.
+doi:10.1139/T07-117.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.dw_dpsi" title="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.dw_dpsi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dw_dpsi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Slope of SWCC dw/dpsi</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.k_from_psi" title="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.k_from_psi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">k_from_psi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>Relative permeability from suction</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_model</span></code>(**kwargs)</td>
+<td>Plot the void ratio-permeability</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.psi_and_w_for_plotting" title="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.psi_and_w_for_plotting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_and_w_for_plotting</span></code></a>(**kwargs)</td>
+<td>Suction and water content for plotting</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">psi_from_w</span></code>(w,&nbsp;**kwargs)</td>
+<td>Suction from water content</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.w_from_psi" title="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.w_from_psi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_from_psi</span></code></a>(psi,&nbsp;**kwargs)</td>
+<td>water content from suction</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.dw_dpsi">
+<code class="descname">dw_dpsi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_PhamAndFredlund2008.dw_dpsi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.dw_dpsi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Slope of SWCC dw/dpsi</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>psi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dw_dpsi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction corresponding to psi</p>
+</dd>
+<dt><strong>#        Examples</strong></dt>
+<dd></dd>
+<dt><strong>#        ——–</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; a = SWCC_FredlundAndXing1994(a=3000, n=1.5, m=1, ws=60, correction=1)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; a.dw_dpsi(2000)</strong></dt>
+<dd></dd>
+<dt><strong>#        -0.00536…</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b = SWCC_FredlundAndXing1994(a=100, n=2, m=4, correction=1)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b.dw_dpsi(90)</strong></dt>
+<dd></dd>
+<dt><strong>#        -0.00640…</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; c = SWCC_FredlundAndXing1994(a=427, n=0.794, m=0.613, psir=3000)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; c.dw_dpsi(10000)</strong></dt>
+<dd></dd>
+<dt><strong>#        -1.317…e-05</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.k_from_psi">
+<code class="descname">k_from_psi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_PhamAndFredlund2008.k_from_psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.k_from_psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative permeability from suction</p>
+<blockquote>
+<div><p>If k_from_psi returns a number greater than zero then try reducing
+aev.</p>
+<dl class="docutils">
+<dt>psi <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd>Soil suction. Can be a 1d array.</dd>
+<dt>aev <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd>Air entry soil suction. Default aev=0.001</dd>
+<dt>npts <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd>Numper of intervals to break integral into. Default npts=500.</dd>
+</dl>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>k</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Relative permeability.</p>
+</dd>
+<dt><strong>#        Examples</strong></dt>
+<dd></dd>
+<dt><strong>#        ——–</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b = SWCC_FredlundAndXing1994(a=2.77, n=11.2, m=0.45, psir=300)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b.k_from_psi(4)</strong></dt>
+<dd></dd>
+<dt><strong>#        0.0520…</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The permability relative to the saturated value is given by:</p>
+<div class="math notranslate nohighlight">
+\[k_r(\psi) =  \left.
+\int_{\ln(\psi)}^{b}
+  {\frac{\theta(e^y) - \theta(\psi)}{e^y} \theta^{\prime}(e^y)\,dy}
+\middle/
+  \int_{\ln(\psi_{\textrm{aev}})}^{b}
+  {\frac{\theta(e^y) - \theta_s}{e^y} \theta^{\prime}(e^y)\,dy}
+\right.\]</div>
+<p>where, <span class="math notranslate nohighlight">\(b=\ln(10^6)\)</span>, <span class="math notranslate nohighlight">\(\theta(\psi)\)</span> is the volumetric
+water content at a given soil suction.  <span class="math notranslate nohighlight">\(\psi_{\textrm{aev}}\)</span>
+is the air entry value of soil suction (must be positive for the
+log integral to work).  Each integral is performed by dividing the
+integration inteval into N sections, evaluating the integrand at the
+mid point of each inteval, then summing the areas of each section.</p>
+<p>If you enter a single element array you will get a scalar returned.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.psi_and_w_for_plotting">
+<code class="descname">psi_and_w_for_plotting</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_PhamAndFredlund2008.psi_and_w_for_plotting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.psi_and_w_for_plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Suction and water content for plotting</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points to return.  Default npts=100.</p>
+</dd>
+<dt><strong>xmin, xmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Range of x (i.e. effective stress) values from which
+to return points. Default xmin=1, xmax=1e6.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last"><cite>npts</cite> permeability, and void ratio values between
+<cite>xmin</cite> and <cite>xmax</cite>.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.w_from_psi">
+<code class="descname">w_from_psi</code><span class="sig-paren">(</span><em>psi</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#SWCC_PhamAndFredlund2008.w_from_psi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.SWCC_PhamAndFredlund2008.w_from_psi" title="Permalink to this definition">¶</a></dt>
+<dd><p>water content from suction</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>psi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction corresponding to psi</p>
+</dd>
+<dt><strong>#        Examples</strong></dt>
+<dd></dd>
+<dt><strong>#        ——–</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; a = SWCC_FredlundAndXing1994(a=3000, n=1.5, m=1, ws=60, correction=1)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; a.w_from_psi(2000)</strong></dt>
+<dd></dd>
+<dt><strong>#        50.73…</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b = SWCC_FredlundAndXing1994(a=100, n=2, m=4, correction=1)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; b.w_from_psi(90)</strong></dt>
+<dd></dd>
+<dt><strong>#        0.395…</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; c = SWCC_FredlundAndXing1994(a=427, n=0.794, m=0.613, psir=3000)</strong></dt>
+<dd></dd>
+<dt><strong>#        &gt;&gt;&gt; c.w_from_psi(10000)</strong></dt>
+<dd></dd>
+<dt><strong>#        0.40…</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.constitutive_models.swcc.karel_air_from_saturation">
+<code class="descclassname">geotecha.constitutive_models.swcc.</code><code class="descname">karel_air_from_saturation</code><span class="sig-paren">(</span><em>Sr</em>, <em>qfit=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#karel_air_from_saturation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.karel_air_from_saturation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative air peremability (w.r.t. dry_ka)</p>
+<p>krel = (1-Sr)**0.5*(1-Sr**(1 / qfit))**(2*qfit)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Sr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Degree of saturation at which to calc relative permeability of air.</p>
+</dd>
+<dt><strong>qfit</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Fitting parameter.  Generally between between 0 and 1.
+Default qfit=1</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r6267f88819e7-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>Ba-Te, B., Limin Zhang, and Delwyn G. Fredlund. “A General
+Air-Phase Permeability Function for Airflow through Unsaturated
+Soils.” In Proceedings of Geofrontiers 2005 Cngress,
+2961-85. Austin, Tx: ASCE, 2005. doi:10.1061/40787(166)29.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.constitutive_models.swcc.kwrel_from_discrete_swcc">
+<code class="descclassname">geotecha.constitutive_models.swcc.</code><code class="descname">kwrel_from_discrete_swcc</code><span class="sig-paren">(</span><em>psi</em>, <em>psi_swcc</em>, <em>vw_swcc</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/swcc.html#kwrel_from_discrete_swcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.swcc.kwrel_from_discrete_swcc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative permeability from integrating discrete soil water
+characteristic curve.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>psi: float</strong></dt>
+<dd><p class="first last">Suction values to calculate relative permeability at. Suction is
+positve.</p>
+</dd>
+<dt><strong>psi_swcc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Suction values defining soil water charteristic curve.</p>
+</dd>
+<dt><strong>vw_swcc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Volumetric water content corresponding to psi_swcc</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>krel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">relative permeability values corresponding to psi.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This integrates the whole SWCC.  Initial slope of SWCC is non-zero then
+peremability reduction with suction will commence straight from first
+value of psi_swcc.</p>
+<p>Uses _[1] method but does it assuming taht you already have all
+the SWCC points (_[1] can calculate volumetric water content from suction).
+Main differnce is that in _[1] vw and dvw/dpsi at the midpoint are
+calculated analytically, whereas here midpoint value is half the
+segment endpoint values, and slope is approx value at segmetn endpoint.</p>
+<p>Will return scalar if scalar or single elemtn array is input.</p>
+<p>If you get some sort of index error then probably your pis input is
+beyond your data range.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r55ec60cf5fb4-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[1]</a></td><td>Fredlund, D.G., Anqing Xing, and Shangyan Huang.
+“Predicting the Permeability Function for Unsaturated
+Soils Using the Soil-Water Characteristic Curve.
+Canadian Geotechnical Journal 31, no. 4 (1994): 533-46.
+doi:10.1139/t94-062.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">SWCC_FredlundAndXing1994</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">2.77</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mf">11.2</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">psir</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">w_from_psi</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kwrel_from_discrete_swcc</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="go">0.0550...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.constitutive_models.swcc.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

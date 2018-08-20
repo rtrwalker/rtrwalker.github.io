@@ -1,0 +1,794 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon1d_unsat &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">speccon1d_unsat</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.speccon.speccon1d_unsat">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.speccon.html">speccon</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.speccon.speccon1d_unsat.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon1d-unsat">
+<h1>speccon1d_unsat<a class="headerlink" href="#speccon1d-unsat" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Speccon1dUnsat</span></code></a>([reader,&nbsp;pkg_for_version])</td>
+<td>Multilayer consolidation of unsaturated soil</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.main" title="geotecha.speccon.speccon1d_unsat.main"><code class="xref py py-obj docutils literal notranslate"><span class="pre">main</span></code></a>()</td>
+<td>Run speccon1d_unsat as scipt</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.speccon.speccon1d_unsat">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.speccon.speccon1d_unsat" title="Permalink to this headline">¶</a></h2>
+<p>Multilayer consolidation of unsaturated soil using the spectral Galerkin
+method.</p>
+<dl class="class">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat">
+<em class="property">class </em><code class="descclassname">geotecha.speccon.speccon1d_unsat.</code><code class="descname">Speccon1dUnsat</code><span class="sig-paren">(</span><em>reader=None</em>, <em>pkg_for_version='geotecha'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="geotecha.speccon.speccon1d.html#geotecha.speccon.speccon1d.Speccon1d" title="geotecha.speccon.speccon1d.Speccon1d"><code class="xref py py-class docutils literal notranslate"><span class="pre">geotecha.speccon.speccon1d.Speccon1d</span></code></a></p>
+<p>Multilayer consolidation of unsaturated soil</p>
+<p>Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Multiple layers.</li>
+<li>Unsaturated vertical drainage only.</li>
+<li>Water and air phases.</li>
+<li>Material properties that are constant in time but piecewsie linear with
+depth.</li>
+<li>Surcharge loading.</li>
+<li>Independent non-zero top and bottom pore air and pore water pressure
+boundary conditions.</li>
+<li>Surcharge/Boundary Conditions vary
+with time in a piecewise-linear function multiplied by a cosine
+function of time.<ul>
+<li>Surcharge can also vary piecewise linear with depth.
+The depth dependence does not vary with time.</li>
+<li>Mulitple loads will be combined using superposition.</li>
+</ul>
+</li>
+<li>Subset of Python syntax available in input files/strings allowing
+basic calculations within input files.</li>
+<li>Output:<ul>
+<li>Excess pore air and pore water pressure at depth</li>
+<li>Average excess pore air and pore water pressure between depths.</li>
+<li>Settlement between depths of air phase, water phase and overall.</li>
+<li>Charts and csv output available.</li>
+</ul>
+</li>
+<li>Program can be run as script or in a python interpreter.</li>
+<li>Note there is no pumping or fixed pore pressure functionality.</li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The ‘Parameters’ and ‘Attributes’ sections below require further
+explanation.  The parameters listed below are not used to explicitly
+initialize the object.  Rather they are defined in either a
+multi-line string or a file-like object using python syntax; the
+file/string is then used to initialize the object using the
+<cite>reader</cite> parameter. As well as simple assignment statements
+(H = 1, drn = 0 etc.), the input file/string can contain basic
+calculations (z = np.linspace(0, H, 20) etc.).  Not all of the
+listed parameters are needed. The user should pick an appropriate
+combination of attributes for their analysis (minimal explicit
+checks on input data will be performed).
+Each  ‘parameter’ will be turned into an attribute that
+can be accessed using conventional python dot notation, after the
+object has been initialised.  The attributes listed below are
+calculated values (i.e. they could be interpreted as results) which
+are accessible using dot notation after all calculations are
+complete.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Total height of soil profile. Default H=1.0. Note that even though
+this program deals with normalised depth values it is important to
+enter the correct H valu, as it is used when plotting, outputing
+data and in normalising gradient boundary conditions (see
+<cite>bot_vs_time</cite> below)</p>
+</dd>
+<dt><strong>mvref</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reference value of volume compressibility mv (used with <cite>H</cite> in
+settlement calculations). Default mvref=1.0.  Note this is used to
+normalise all the unsaturated volume compressibilities. It is also
+used in the porosity/saturation term.</p>
+</dd>
+<dt><strong>kwref</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reference value of water phase vertical permeability kw in soil
+(only used for pretty output). Default kwref=1.0.</p>
+</dd>
+<dt><strong>Daref</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reference value of coefficeint of transmission for the air phase
+(only used for pretty output). Default Daref=1.0. (note ka=Da*g).</p>
+</dd>
+<dt><strong>drn</strong> <span class="classifier-delimiter">:</span> <span class="classifier">{0, 1}, optional</span></dt>
+<dd><p class="first last">drainage boundary condition. Default drn=0.
+0 = Pervious top pervious bottom (PTPB).
+1 = Pervious top impoervious bottom (PTIB).</p>
+</dd>
+<dt><strong>dT</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Convienient normaliser for time factor multiplier. Default dT=1.0.</p>
+</dd>
+<dt><strong>neig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of series terms to use in solution. Default neig=2. Don’t use
+neig=1.</p>
+</dd>
+<dt><strong>dTw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Vertical reference time factor multiplier for water phase.
+dTw is calculated with the chosen reference values of kw and mv:
+dTw = kwref /(mvref*gamw) / H ^ 2</p>
+</dd>
+<dt><strong>dTa</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Vertical reference time factor multiplier for air phase.
+dTa is calculated with the chosen reference values of Da and mv:
+dTa = Daref / (mvref) / (wa/(R*T)/<a href="#id9"><span class="problematic" id="id10">ua_</span></a> / H ^ 2. Where wa=molecular
+mass of air= 28.966e-3 kg/mol for air, R=universal gas
+constant=8.31432 J/(mol.K), T = absolute
+temperature in Kelvin=273.16+t0 (K), t0=temperature in celsius, ua_=
+absolute air pressure=ua+uatm (kPa), ua=guage air pressure, uatm=
+atmospheric air pressure=101 kPa.  When ua is small or rapidly
+dissipates during consolidation <a href="#id11"><span class="problematic" id="id12">ua_</span></a> can be considered a constant;
+so let ua_=uatm</p>
+</dd>
+<dt><strong>m1ka</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised coefficient of air volume change with respect to a change
+in the net normal stress (dsig-dua), PolyLine(depth, m1ka).</p>
+</dd>
+<dt><strong>m1kw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised coefficient of water volume change with respect to a change
+in the net normal stress (dsig-dua), PolyLine(depth, m1kw).</p>
+</dd>
+<dt><strong>m2a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised coefficient of air volume change with respect to a change
+in the matirx suction (duw-dua), PolyLine(depth, m2a).</p>
+</dd>
+<dt><strong>m2w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised coefficient of water volume change with respect to a change
+in the matirx suction (duw-dua), PolyLine(depth, m2w).</p>
+</dd>
+<dt><strong>kw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised vertical permeability PolyLine(depth, kw).</p>
+</dd>
+<dt><strong>Da</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Normalised coefficeint of transmission for the air phase
+PolyLine(depth, Da).</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Porosity PolyLine(depth, n). Porosity must be between 0 and 1.</p>
+</dd>
+<dt><strong>S</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine</span></dt>
+<dd><p class="first last">Degree of saturation, PolyLine(depth, S). Degree of saturation
+must be between 0 and 1.</p>
+</dd>
+<dt><strong>ua_</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Absolute pore air pressure, assumed constant usually at
+atmospheric pressure. Default ua_=101 kPa.  This is used in the
+porosity-saturation term.</p>
+</dd>
+<dt><strong>surcharge_vs_depth</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">Surcharge variation with depth. PolyLine(depth, multiplier).</p>
+</dd>
+<dt><strong>surcharge_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">Surcharge magnitude variation with time. PolyLine(time, magnitude).</p>
+</dd>
+<dt><strong>surcharge_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) to define cyclic variation of surcharge. i.e.
+mag_vs_time * cos(omega*t + phase). If surcharge_omega_phase is None
+then cyclic component will be ignored.  If surcharge_omega_phase is a
+list then if any member is None then cyclic component will not be
+applied for that load combo.</p>
+</dd>
+<dt><strong>atop_vs_time, wtop_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">Top air and water p.press variation with time.
+Polyline(time, magnitude).</p>
+</dd>
+<dt><strong>atop_omega_phase, wtop_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) to define cyclic variation of top air and water BC. i.e.
+mag_vs_time * cos(omega*t + phase). If top_omega_phase is None
+then cyclic component will be ignored.  If top_omega_phase is a
+list then if any member is None then cyclic component will not be
+applied for that load combo.</p>
+</dd>
+<dt><strong>abot_vs_time, wbot_vs_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">Bottom air and water p.press variation with time.
+Polyline(time, magnitude).
+When drn=1, i.e. PTIB, bot_vs_time is equivilent to saying
+D[u(H,t), z] = bot_vs_time. Within the program the actual gradient
+will be normalised with depth by multiplying H.</p>
+</dd>
+<dt><strong>abot_omega_phase, wbot_omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) to define cyclic variation of bot air and water BC. i.e.
+mag_vs_time * cos(omega*t + phase). If bot_omega_phase is None
+then cyclic component will be ignored.  If bot_omega_phase is a
+list then if any member is None then cyclic component will not be
+applied for that load combo.</p>
+</dd>
+<dt><strong>ppress_z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list_like of float, optional</span></dt>
+<dd><p class="first last">Normalised z to calculate pore pressure at.</p>
+</dd>
+<dt><strong>avg_ppress_z_pairs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of two element list of float, optional</span></dt>
+<dd><p class="first last">Nomalised zs to calculate average pore pressure between
+e.g. average of all profile is [[0,1]].</p>
+</dd>
+<dt><strong>settlement_z_pairs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of two element list of float, optional</span></dt>
+<dd><p class="first last">Normalised depths to calculate normalised settlement between.
+e.g. surface settlement would be [[0, 1]].</p>
+</dd>
+<dt><strong>tvals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">Times to calculate output at.</p>
+</dd>
+<dt><strong>ppress_z_tval_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list/array of int, slice, optional</span></dt>
+<dd><p class="first last">Indexes of <cite>tvals</cite> at which to calculate ppress_z. i.e. only calculate
+ppress_z at a subset of the <cite>tvals</cite> values.
+Default ppress_z_tval_indexes=slice(None, None) i.e. use all the
+<cite>tvals</cite>.</p>
+</dd>
+<dt><strong>avg_ppress_z_pairs_tval_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list/array of int, slice, optional</span></dt>
+<dd><p class="first last">Indexes of <cite>tvals</cite> at which to calculate avg_ppress_z_pairs.
+i.e. only calc avg_ppress_z_pairs at a subset of the <cite>tvals</cite> values.
+Default avg_ppress_z_pairs_tval_indexes=slice(None, None) i.e. use
+all the <cite>tvals</cite>.</p>
+</dd>
+<dt><strong>settlement_z_pairs_tval_indexes</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list/array of int, slice, optional</span></dt>
+<dd><p class="first last">Indexes of <cite>tvals</cite> at which to calculate settlement_z_pairs.
+i.e. only calc settlement_z_pairs at a subset of the <cite>tvals</cite> values.
+Default settlement_z_pairs_tval_indexes=slice(None, None) i.e. use
+all the <cite>tvals</cite>.</p>
+</dd>
+<dt><strong>implementation</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[‘scalar’, ‘vectorized’,’fortran’], optional</span></dt>
+<dd><p class="first last">Where possible use the stated implementation type.  ‘scalar’=
+python loops (slowest), ‘vectorized’ = numpy (fast), ‘fortran’ =
+fortran extension (fastest).  Note only some functions have multiple
+implementations.</p>
+</dd>
+<dt><strong>RLzero</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reduced level of the top of the soil layer.  If RLzero is not None
+then all depths (in plots and results) will be transformed to an RL
+by RL = RLzero - z*H.  If RLzero is None (i.e. the default) then all
+depths will be reported  z*H (i.e. positive numbers).</p>
+</dd>
+<dt><strong>plot_properties</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dict of dict, optional</span></dt>
+<dd><p class="first">Dictionary that overrides some of the plot properties.
+Each member of <cite>plot_properties</cite> will correspond to one of the plots.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">plot_properties</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>porw</td>
+<td>dict of prop to pass to water pore pressure
+plot.</td>
+</tr>
+<tr class="row-odd"><td>pora</td>
+<td>dict of prop to pass to air pore pressure
+plot.</td>
+</tr>
+<tr class="row-even"><td>avpw</td>
+<td>dict of prop to pass to average
+water pore pressure plot.</td>
+</tr>
+<tr class="row-odd"><td>avpa</td>
+<td>dict of prop to pass to average
+air pore pressure plot.</td>
+</tr>
+<tr class="row-even"><td>set</td>
+<td>dict of prop to pass to settlement plot.</td>
+</tr>
+<tr class="row-odd"><td>seta</td>
+<td>dict of prop to pass to air settlement
+plot.</td>
+</tr>
+<tr class="row-even"><td>setw</td>
+<td>dict of prop to pass to water settlement
+plot.</td>
+</tr>
+<tr class="row-odd"><td>load</td>
+<td>dict of prop to pass to loads plot.</td>
+</tr>
+<tr class="row-even"><td>material</td>
+<td>dict of prop to pass to materials plot.</td>
+</tr>
+</tbody>
+</table>
+<p class="last">see geotecha.plotting.one_d.plot_vs_depth and
+geotecha.plotting.one_d.plot_vs_time for options to specify in
+each plot dict.</p>
+</dd>
+<dt><strong>save_data_to_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True data will be saved to file.  Default save_data_to_file=False</p>
+</dd>
+<dt><strong>save_figures_to_file</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False</span></dt>
+<dd><p class="first last">If True then figures will be saved to file.
+Default save_figures_to_file=False</p>
+</dd>
+<dt><strong>show_figures</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True the after calculation figures will be shown on screen.
+Default show_figures=False.</p>
+</dd>
+<dt><strong>directory</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Path to directory where files should be stored.
+Default directory=None which
+will use the current working directory.  Note if you keep getting
+directory does not exist errors then try putting an r before the
+string definition. i.e. directory = r’C:Users…’</p>
+</dd>
+<dt><strong>overwrite</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then existing files will be overwritten.
+Default overwrite=False.</p>
+</dd>
+<dt><strong>prefix</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename prefix for all output files.  Default prefix= ‘out’</p>
+</dd>
+<dt><strong>create_directory</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/Fase, optional</span></dt>
+<dd><p class="first last">If True a new sub-folder with name based on  <cite>prefix</cite> and an
+incremented number will contain the output
+files. Default create_directory=True.</p>
+</dd>
+<dt><strong>data_ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">File extension for data files. Default data_ext=’.csv’</p>
+</dd>
+<dt><strong>input_ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">File extension for original and parsed input files. default = “.py”</p>
+</dd>
+<dt><strong>figure_ext</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">File extension for figures.  Can be any valid matplotlib option for
+savefig. Default figure_ext=”.eps”. Others include ‘pdf’, ‘png’.</p>
+</dd>
+<dt><strong>title</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">A title for the input file.  This will appear at the top of data files.
+Default title=None, i.e. no title.</p>
+</dd>
+<dt><strong>author</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">Author of analysis. Default author=’unknown’.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p><strong>Gotchas</strong></p>
+<p>All the loading terms e.g. surcharge_vs_time, surcharge_vs_depth,
+surcharge_omega_phase can be either a single value or a list of values.
+The corresponding lists that define a load must have the same length
+e.g. if specifying multiple surcharge loads then surcharge_vs_time and
+surcharge_vs_depth must be lists of the same length such that
+surcharge_vs_time[0] can be paired with surcharge_vs_depth[0],
+surcharge_vs_time[1] can be paired with surcharge_vs_depth[1], etc.</p>
+<p><strong>Material and geometric properties</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math notranslate nohighlight">\(\sigma - u_a\)</span> is net normal stress.</li>
+<li><span class="math notranslate nohighlight">\(u_a - u_w\)</span> is matric suction.</li>
+<li><span class="math notranslate nohighlight">\(u_a\)</span> is air pressure.</li>
+<li><span class="math notranslate nohighlight">\(u_w\)</span> is water pressure.</li>
+<li><span class="math notranslate nohighlight">\(m_{1k}^a\)</span> is coefficient of air volume change with respect to a
+change in the net normal stress.</li>
+<li><span class="math notranslate nohighlight">\(m_{1k}^w\)</span> is coefficient of awater volume change with respect to a
+change in the net normal stress.</li>
+<li><span class="math notranslate nohighlight">\(m_2^a\)</span> is coefficient of air volume change with respect to a
+change in the matric suction.</li>
+<li><span class="math notranslate nohighlight">\(m_2^a\)</span> is coefficient of air volume change with respect to a
+change in the matric suction.</li>
+<li><span class="math notranslate nohighlight">\(k_w\)</span> is vertical water permeability.</li>
+<li><span class="math notranslate nohighlight">\(D_a\)</span> is coefficeint of transmission for the air phase.
+<span class="math notranslate nohighlight">\(D_a = k_a g\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(n\)</span> is porosity <span class="math notranslate nohighlight">\(0&gt;n&gt;1\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(S\)</span> is degree of saturation <span class="math notranslate nohighlight">\(0&gt;S&gt;1\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(\overline{u}_a\)</span> is the absolute air pressure.
+<span class="math notranslate nohighlight">\(\overline{u}_a = u_{atm}+u_a\)</span>.</li>
+<li><span class="math notranslate nohighlight">\(u_{atm}\)</span> is absolute atmospheric air pressure.</li>
+<li><span class="math notranslate nohighlight">\(\gamma_w\)</span> is the unit weight of water.</li>
+<li><span class="math notranslate nohighlight">\(Z\)</span> is the nomalised depth (<span class="math notranslate nohighlight">\(Z=z/H\)</span>).</li>
+<li><span class="math notranslate nohighlight">\(H\)</span> is the total height of the soil profile.</li>
+<li><span class="math notranslate nohighlight">\(T\)</span> is the absolute temperature in kelvin.</li>
+<li><span class="math notranslate nohighlight">\(\omega\)</span> is the molecular mass of air often taken as
+29e-3 kg/mol.</li>
+<li><span class="math notranslate nohighlight">\(R\)</span> is the universal gas constant 8.314 J/(mol.K).</li>
+</ul>
+</div></blockquote>
+<p><strong>Governing equation</strong></p>
+<p>Overall strain <span class="math notranslate nohighlight">\(\varepsilon\)</span> is the sum of the air strain,
+<span class="math notranslate nohighlight">\(\varepsilon_a\)</span> and the water strain <span class="math notranslate nohighlight">\(\varepsilon_w\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon = \varepsilon_a + \varepsilon_w\]</div>
+<p>The water and air strain components are:</p>
+<div class="math notranslate nohighlight">
+\[\varepsilon_a =
+    m_{1k}^a\left({\sigma - u_a}\right)
+    + m_2^a\left({u_a - u_w}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\varepsilon_w =
+    m_{1k}^w\left({\sigma - u_a}\right)
+    + m_2^w\left({u_a - u_w}\right)\]</div>
+<p>Both pore air and pore water pressures are functions of normalised depth
+<span class="math notranslate nohighlight">\(Z\)</span> and time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(u\left({Z, t}\right)\)</span>.  The water
+and air phase partial differential equations are:</p>
+<div class="math notranslate nohighlight">
+\[\left({\overline{m}_{1k}^w - \overline{m}_2^w}\right) u_a,_t
++  \overline{m}_2^w u_w,_t
++ dT_w\left({\overline{k}_w u_w,_Z}\right),_Z
+= \overline{m}_{1k}^w \sigma,_t\]</div>
+<div class="math notranslate nohighlight">
+\[\left({\overline{m}_{1k}^a
+       - \overline{m}_2^a
+       - \frac{\left({1-S}\right)n}{\overline{u}_a m_{\textrm{ref}}}
+       }\right) u_a,_t
++  \overline{m}_2^a u_w,_t
++ dT_a\left({\overline{D}_a u_a,_Z}\right),_Z
+= \overline{m}_{1k}^a \sigma,_t\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[dT_w = \frac{k_{w\textrm{ref}}}
+             {H^2 m_{v\textrm{ref}} \gamma_w}\]</div>
+<div class="math notranslate nohighlight">
+\[dT_a = \frac{D_{a\textrm{ref}}}
+             {\left({\omega R T}\right)
+              \overline{u}_a m_{\textrm{ref}}}\]</div>
+<p>The overline notation represents a depth dependent property normalised
+by the relevant reference property. e.g.
+<span class="math notranslate nohighlight">\(\overline{k}_w = k_w\left({z}\right) / k_{w\textrm{ref}}\)</span>.</p>
+<p>A comma followed by a subscript represents differentiation with respect to
+the subscripted variable e.g.
+<span class="math notranslate nohighlight">\(u,_Z = u\left({Z,t}\right) / \partial Z\)</span>.</p>
+<p><strong>Non-zero Boundary conditions</strong></p>
+<p>The following two sorts of boundary conditions for the air and water
+phases can be modelled independently using:</p>
+<div class="math notranslate nohighlight">
+\[\left.u\left({Z,t}\right)\right|_{Z=0} = u^{\textrm{top}}\left({t}\right)
+\textrm{ and }
+\left.u\left({Z,t}\right)\right|_{Z=1} = u^{\textrm{bot}}\left({t}\right)\]</div>
+<div class="math notranslate nohighlight">
+\[\left.u\left({Z,t}\right)\right|_{Z=0} = u^{\textrm{top}}\left({t}\right)
+\textrm{ and }
+\left.u\left({Z,t}\right),_Z\right|_{Z=1} = u^{\textrm{bot}}\left({t}\right)\]</div>
+<p>The boundary conditions are incorporated by homogenising the governing
+equation with the following substitution:</p>
+<div class="math notranslate nohighlight">
+\[u\left({Z,t}\right)
+= \hat{u}\left({Z,t}\right) + u_b\left({Z,t}\right)\]</div>
+<p>where for the two types of non zero boundary boundary conditions:</p>
+<div class="math notranslate nohighlight">
+\[u_b\left({Z,t}\right)
+= u^{\textrm{top}}\left({t}\right) \left({1-Z}\right)
++ u^{\textrm{bot}}\left({t}\right) Z\]</div>
+<div class="math notranslate nohighlight">
+\[u_b\left({Z,t}\right)
+= u^{\textrm{top}}\left({t}\right)
++ u^{\textrm{bot}}\left({t}\right) Z\]</div>
+<p><strong>Time and depth dependence of loads/material properties</strong></p>
+<p>Soil properties do not vary with time.</p>
+<p>Loads are formulated as the product of separate time and depth
+dependant functions as well as a cyclic component:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left({Z,t}\right)=
+\sigma\left({Z}\right)
+\sigma\left({t}\right)
+\cos\left(\omega t + \phi\right)\]</div>
+<p><span class="math notranslate nohighlight">\(\sigma\left(t\right)\)</span> is a piecewise linear function of time
+that within the kth loading stage is defined by the load magnitude at
+the start and end of the stage:</p>
+<div class="math notranslate nohighlight">
+\[\sigma\left(t\right)
+= \sigma_k^{\textrm{start}}
++ \frac{\sigma_k^{\textrm{end}}
+         - \sigma_k^{\textrm{start}}}
+        {t_k^{\textrm{end}}
+         - t_k^{\textrm{start}}}
+\left(t - t_k^{\textrm{start}}\right)\]</div>
+<p>The depth dependence of loads and material property
+<span class="math notranslate nohighlight">\(a\left(Z\right)\)</span> is a piecewise linear function
+with respect to <span class="math notranslate nohighlight">\(Z\)</span>, that within a layer are defined by:</p>
+<div class="math notranslate nohighlight">
+\[a\left(z\right)
+= a_t + \frac{a_b - a_t}{z_b - z_t}\left(z - z_t\right)\]</div>
+<p>with <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(b\)</span> subscripts representing ‘top’ and ‘bottom’ of
+each layer respectively.</p>
+<p class="rubric">References</p>
+<p>The genesis of this work is from research carried out by
+Dr. Rohan Walker, Prof. Buddhima Indraratna and others
+at the University of Wollongong, NSW, Austrlia, <a class="reference internal" href="#r757c8fd88416-1" id="id1">[1]</a>, <a class="reference internal" href="#r757c8fd88416-2" id="id2">[2]</a>, <a class="reference internal" href="#r757c8fd88416-3" id="id3">[3]</a>, <a class="reference internal" href="#r757c8fd88416-4" id="id4">[4]</a>.</p>
+<table class="docutils citation" frame="void" id="r757c8fd88416-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> Walker, Rohan. 2006. ‘Analytical Solutions for Modeling Soft
+Soil Consolidation by Vertical Drains’. PhD Thesis, Wollongong,
+NSW, Australia: University of Wollongong.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r757c8fd88416-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> Walker, R., and B. Indraratna. 2009. ‘Consolidation Analysis of
+a Stratified Soil with Vertical and Horizontal Drainage Using the
+Spectral Method’. Geotechnique 59 (5) (January): 439-449.
+doi:10.1680/geot.2007.00019.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r757c8fd88416-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> Walker, Rohan, Buddhima Indraratna, and Nagaratnam Sivakugan. 2009.
+‘Vertical and Radial Consolidation Analysis of Multilayered
+Soil Using the Spectral Method’. Journal of Geotechnical and
+Geoenvironmental Engineering 135 (5) (May): 657-663.
+doi:10.1061/(ASCE)GT.1943-5606.0000075.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r757c8fd88416-4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[4]</td><td><em>(<a class="fn-backref" href="#id4">1</a>, <a class="fn-backref" href="#id8">2</a>)</em> Walker, Rohan T. 2011. Vertical Drain Consolidation Analysis
+in One, Two and Three Dimensions’. Computers and
+Geotechnics 38 (8) (December): 1069-1077.
+doi:10.1016/j.compgeo.2011.07.006.</td></tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>porw, pora</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray, only present if ppress_z is input</span></dt>
+<dd><p class="first last">Calculated pore pressure at depths corresponding to <cite>ppress_z</cite> and
+times corresponding to <cite>tvals</cite>.  This is an output array of
+size (len(ppress_z), len(tvals[ppress_z_tval_indexes])). porw and
+pora are pore pressure in water and air.</p>
+</dd>
+<dt><strong>avpw, avpa</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray, only present if avg_ppress_z_pairs is input</span></dt>
+<dd><p class="first last">Calculated average pore pressure between depths corresponding to
+<cite>avg_ppress_z_pairs</cite> and times corresponding to <cite>tvals</cite>.  This is an
+output array of size
+(len(avg_ppress_z_pairs), len(tvals[avg_ppress_z_pairs_tval_indexes])).
+avpw and avas are average pore pressure in water and air.</p>
+</dd>
+<dt><strong>set, setw, seta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray, only present if settlement_z_pairs is input</span></dt>
+<dd><p class="first last">Settlement between depths corresponding to <cite>settlement_z_pairs</cite> and
+times corresponding to <cite>tvals</cite>.  This is an output array of size
+(len(avg_ppress_z_pairs), len(tvals[settlement_z_pairs_tval_indexes])).
+setw and sets are settlement in water and air. set is water + air.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_input_attributes</span></code>()</td>
+<td>Perform checks on attributes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_E_Igamv_the" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_E_Igamv_the"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_E_Igamv_the</span></code></a>()</td>
+<td>sum contributions from all loads</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_all</span></code>()</td>
+<td>Run checks, make all arrays, make output</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_output" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_output</span></code></a>()</td>
+<td>make all output</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_dependent_arrays" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_dependent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_dependent_arrays</span></code></a>()</td>
+<td>make all time dependent arrays</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_independent_arrays" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_independent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_independent_arrays</span></code></a>()</td>
+<td>make all time independent arrays</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.print_eigs" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.print_eigs"><code class="xref py py-obj docutils literal notranslate"><span class="pre">print_eigs</span></code></a>()</td>
+<td>print eigenvalues to stdout</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.produce_plots" title="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.produce_plots"><code class="xref py py-obj docutils literal notranslate"><span class="pre">produce_plots</span></code></a>()</td>
+<td>produce plots of analysis</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_E_Igamv_the">
+<code class="descname">make_E_Igamv_the</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.make_E_Igamv_the"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_E_Igamv_the" title="Permalink to this definition">¶</a></dt>
+<dd><p>sum contributions from all loads</p>
+<p>Calculates all contributions to E*inverse(gam*v)*theta part of solution
+u=phi*vE*inverse(gam*v)*theta. i.e. surcharge, vacuum, top and bottom
+pore pressure boundary conditions. <cite>make_load_matrices will create
+`self.E_Igamv_the</cite>.  <cite>self.E_Igamv_the</cite>  is an array
+of size (neig, len(tvals)). So the columns are the column array
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do u = phi*v*self.E_Igamv_the</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_make_E_Igamv_the_surcharge</span></code></dt>
+<dd>surchage contribution</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_make_E_Igamv_the_BC</span></code></dt>
+<dd>top boundary pore pressure contribution</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_make_E_Igamv_the_bot</span></code></dt>
+<dd>bottom boundary pore pressure contribution</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_output">
+<code class="descname">make_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.make_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>make all output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_dependent_arrays">
+<code class="descname">make_time_dependent_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.make_time_dependent_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_dependent_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>make all time dependent arrays</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self.make_E_Igamv_the</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_independent_arrays">
+<code class="descname">make_time_independent_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.make_time_independent_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.make_time_independent_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>make all time independent arrays</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">self._make_m</span></code></dt>
+<dd>make the basis function eigenvalues</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">self._make_gam</span></code></dt>
+<dd>make the mv dependent gamma matrix</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">self._make_psi</span></code></dt>
+<dd>make the kv, kh, et dependent psi matrix</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">self._make_eigs_and_v</span></code></dt>
+<dd>make eigenvalues, eigenvectors and I_gamv</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.print_eigs">
+<code class="descname">print_eigs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.print_eigs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.print_eigs" title="Permalink to this definition">¶</a></dt>
+<dd><p>print eigenvalues to stdout</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.produce_plots">
+<code class="descname">produce_plots</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#Speccon1dUnsat.produce_plots"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.Speccon1dUnsat.produce_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>produce plots of analysis</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.speccon.speccon1d_unsat.main">
+<code class="descclassname">geotecha.speccon.speccon1d_unsat.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/speccon/speccon1d_unsat.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.speccon.speccon1d_unsat.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run speccon1d_unsat as scipt</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.speccon.speccon1d_unsat.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

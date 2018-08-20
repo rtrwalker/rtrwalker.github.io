@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013:
+
+speccon example code: speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.py
+=====================================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.py
+   :include-source:
+
+

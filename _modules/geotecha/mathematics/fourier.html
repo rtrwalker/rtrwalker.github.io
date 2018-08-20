@@ -1,0 +1,1083 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.mathematics.fourier &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.mathematics.fourier</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+<span class="sd">&quot;&quot;&quot;Fourier transforms.&quot;&quot;&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">integrate</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">jn_zeros</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">jn</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+
+<span class="kn">import</span> <span class="nn">unittest</span>
+<span class="kn">from</span> <span class="nn">numpy.testing</span> <span class="k">import</span> <span class="n">assert_allclose</span>
+
+
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gl_quad</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gk_quad</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gauss_kronrod_abscissae_and_weights</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">gauss_legendre_abscissae_and_weights</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">shanks_table</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.quadrature</span> <span class="k">import</span> <span class="n">shanks</span>
+
+
+<div class="viewcode-block" id="real_func"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.real_func">[docs]</a><span class="k">def</span> <span class="nf">real_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">myargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Real part of a function</span>
+
+<span class="sd">    Basically return np.real(func(x, *myargs[1:])) where func is the first</span>
+<span class="sd">    argument after x.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Value to evaluate function at.</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function from which to return the real part. Always the first</span>
+<span class="sd">        argument after `x`.</span>
+<span class="sd">    myargs : optional</span>
+<span class="sd">        Any remaining arguments will be passed to func(x, *myargs[1:]).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Real part of func(x, *myargs)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    imag_func : imaginary part of function</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def f(x, a):</span>
+<span class="sd">    ...  return a*x+a*1.j</span>
+<span class="sd">    &gt;&gt;&gt; real_func(2, f, 4)</span>
+<span class="sd">    8.0</span>
+<span class="sd">    &gt;&gt;&gt; real_func(3.j,f, 2)</span>
+<span class="sd">    0.0</span>
+<span class="sd">    &gt;&gt;&gt; real_func(np.array([3.j, 1+2.j]),f, 2)</span>
+<span class="sd">    array([0., 2.])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">func</span> <span class="o">=</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">myargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,)</span> <span class="o">+</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">myargs</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="imag_func"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.imag_func">[docs]</a><span class="k">def</span> <span class="nf">imag_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">myargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Imaginary part of a function</span>
+
+<span class="sd">    Basically return np.imag(func(x, *myargs[1:])) where func is the first</span>
+<span class="sd">    argument after x.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Value to evaluate function at.</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function from which to return the imaginary part. Always the first</span>
+<span class="sd">        argument after `x`</span>
+<span class="sd">    myargs : optional</span>
+<span class="sd">        Any remaining arguments will be passed to func(x, *myargs[1:]).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Imaginary part of func(x, *myargs).</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    real_func : real part of function</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def f(x, a):</span>
+<span class="sd">    ...  return a*x+a*1.j</span>
+<span class="sd">    &gt;&gt;&gt; imag_func(2, f, 4)</span>
+<span class="sd">    4.0</span>
+<span class="sd">    &gt;&gt;&gt; imag_func(3.j,f, 2)</span>
+<span class="sd">    8.0</span>
+<span class="sd">    &gt;&gt;&gt; imag_func(np.array([3.j, 2.j]),f, 2)</span>
+<span class="sd">    array([8., 6.])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">func</span> <span class="o">=</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">myargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">,)</span> <span class="o">+</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">myargs</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="func_mirror_for_even_weight"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.func_mirror_for_even_weight">[docs]</a><span class="k">def</span> <span class="nf">func_mirror_for_even_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">myargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mirror a function abount the y-axis</span>
+
+<span class="sd">    Given a composite function f(x) * w(x) where w(x) is an even weighting</span>
+<span class="sd">    function, return g(x) such that g(x)*w(x) gives same value as f(-x)*w(-x).</span>
+<span class="sd">    This can be useful in transforming a fourier cosine integral</span>
+<span class="sd">    with negative integation limits to one with positive limits.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Value to evaluate function at.</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function to mirror. Always the first argument after `x`.</span>
+<span class="sd">    myargs : optional</span>
+<span class="sd">        Any remaining arguments will be passed to `func`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Value of func(-x, *myargs).</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    func_mirror_for_odd_weight : mirror for an odd weight function</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def f(x, a):</span>
+<span class="sd">    ...  return a*x+1</span>
+<span class="sd">    &gt;&gt;&gt; func_mirror_for_even_weight(5, f, 2)</span>
+<span class="sd">    -9</span>
+<span class="sd">    &gt;&gt;&gt; def ff(x, a):</span>
+<span class="sd">    ...  return a*x + 1.j</span>
+<span class="sd">    &gt;&gt;&gt; func_mirror_for_even_weight(3, real_func, ff, 4)</span>
+<span class="sd">    -12.0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">myargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">,)</span> <span class="o">+</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="o">+</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">myargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="func_mirror_for_odd_weight"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.func_mirror_for_odd_weight">[docs]</a><span class="k">def</span> <span class="nf">func_mirror_for_odd_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">myargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rotate function by 180 degrees (or mirror about x and y-axis in turn).</span>
+
+<span class="sd">    Given a composite function f(x) * w(x) where w(x) is an odd weighting</span>
+<span class="sd">    function, return g(x) such that g(x)*w(x) gives same value as f(-x)*w(-x).</span>
+<span class="sd">    This can be useful in transforming a fourier sine integral</span>
+<span class="sd">    with negative integration limits to one with positive limits.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : float</span>
+<span class="sd">        Value to evaluate function at.</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function to mirror. Always the first argument after `x`.</span>
+<span class="sd">    myargs : optional</span>
+<span class="sd">        Any remaining arguments will be passed to `func`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    out : ndarray</span>
+<span class="sd">        Value of -func(-x, *myargs)</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    func_mirror_for_even_weight : mirror for an even wieght function</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; def f(x, a):</span>
+<span class="sd">    ...  return a*x+1</span>
+<span class="sd">    &gt;&gt;&gt; func_mirror_for_odd_weight(5, f, 2)</span>
+<span class="sd">    9</span>
+<span class="sd">    &gt;&gt;&gt; def ff(x, a):</span>
+<span class="sd">    ...  return a*x + 1.j</span>
+<span class="sd">    &gt;&gt;&gt; func_mirror_for_odd_weight(3, real_func, ff, 4)</span>
+<span class="sd">    12.0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">myargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="p">,)</span> <span class="o">+</span> <span class="n">myargs</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="o">-</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">myargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="cosine_transform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.cosine_transform">[docs]</a><span class="k">def</span> <span class="nf">cosine_transform</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fourier cosine transform</span>
+
+<span class="sd">    Note that any function that can divide by zero may cause problems because</span>
+<span class="sd">    QUADPACK includes the end points in integration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function to transform.  `func` will be called func(x, *args). `func`</span>
+<span class="sd">        must return a real.</span>
+<span class="sd">    w : float</span>
+<span class="sd">        Transform variable.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Arguments to pass to `func`</span>
+<span class="sd">    a, b : float, optional</span>
+<span class="sd">        Integration limits. Defualt a=0.0, b=np.inf.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    value : float</span>
+<span class="sd">        Value of transform at w</span>
+<span class="sd">    err : float</span>
+<span class="sd">        Error estimate from quadpack</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    The fourier cosine transform is given by:</span>
+
+<span class="sd">    .. math:: F_c=\mathcal{F}_c\\{f(x)\\}(w) =</span>
+<span class="sd">                \\int_0^{\\infty}f(x)\\cos(wx)\\,\\mathrm{d}x</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;cos&#39;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="n">w</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sine_transform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.sine_transform">[docs]</a><span class="k">def</span> <span class="nf">sine_transform</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fourier sine transform</span>
+
+<span class="sd">    Note that any function that can divide by zero may cause problems because</span>
+<span class="sd">    QUADPACK includes the end points in integration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function/callable</span>
+<span class="sd">        Function to transform.  `func` will be called func(x, *args). `func`</span>
+<span class="sd">        must return a real.</span>
+<span class="sd">    w : float</span>
+<span class="sd">        Transform varibale.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Arguments to pass to `func`</span>
+<span class="sd">    a, b : float, optional</span>
+<span class="sd">        Integration limits. Defualt a=0.0, b=np.inf.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    value : float</span>
+<span class="sd">        Value of transform at w.</span>
+<span class="sd">    err : float</span>
+<span class="sd">        Error estimate from quadpack.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    The fourier sine transform is given by:</span>
+
+<span class="sd">    .. math:: F_s=\mathcal{F}_s\\{f(x)\\}(w) =</span>
+<span class="sd">                \\int_0^{\\infty}f(x)\\sin(wx)\\,\\mathrm{d}x</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s1">&#39;sin&#39;</span><span class="p">,</span> <span class="n">wvar</span><span class="o">=</span><span class="n">w</span><span class="p">)</span></div>
+
+
+
+
+<div class="viewcode-block" id="FourierTransform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform">[docs]</a><span class="k">class</span> <span class="nc">FourierTransform</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;One dimensional Fourier transform using scipy.quad</span>
+
+<span class="sd">    Note that any function that can divide by zero may cause problems because</span>
+<span class="sd">    QUADPACK includes the end points in integration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function</span>
+<span class="sd">        Function to transform. `func` is called by func(x, *args)</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        tuple of arguments to pass to func.  Default args=().</span>
+<span class="sd">    inv : True/False, optional</span>
+<span class="sd">        If True then the inverse Fourier transform will be performed.</span>
+<span class="sd">        Default inv=False.</span>
+<span class="sd">    func_is_real : True/False, optional</span>
+<span class="sd">        If True then func is purely real.  It returns a real number.</span>
+<span class="sd">        default func_is_real=False.</span>
+<span class="sd">    func_is_imag : True/False, optional</span>
+<span class="sd">        If True then func is purely imaginary.  It returns a real number that</span>
+<span class="sd">        should be multiplied by i. Default func_is_imag=False</span>
+<span class="sd">    real_part_even : True/False, optional</span>
+<span class="sd">        If True then the real part of func is even. Default</span>
+<span class="sd">        real_part_even=False.</span>
+<span class="sd">    real_part_odd : True/False, optional</span>
+<span class="sd">        If True then the real part of func is odd. Default real_part_odd=False.</span>
+<span class="sd">    imag_part_even : True/False, optional</span>
+<span class="sd">        If True then the imaginary part of func is even. Default</span>
+<span class="sd">        imag_part_even=False.</span>
+<span class="sd">    imag_part_odd : True/False, optional</span>
+<span class="sd">        If True then the imaginary part of func is odd. Default</span>
+<span class="sd">        imag_part_odd=False.</span>
+<span class="sd">    a, b : float, optional</span>
+<span class="sd">        Integration limits. Defualt a=0.0, b=np.inf</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inv_sign : float</span>
+<span class="sd">        The sign of some expressions change for the inverse fourier transform,</span>
+<span class="sd">        `inv_sign` accounts for that sign change.  If inv=True, inv_sign=-1;</span>
+<span class="sd">        If inv=False, inv_sign=+1.</span>
+<span class="sd">    inv_const : float</span>
+<span class="sd">        For inverse fourier transform all expressions are multiplied by</span>
+<span class="sd">        1/(2*pi).</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">inv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">func_is_real</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">func_is_imag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">real_part_even</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">real_part_odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">imag_part_even</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">imag_part_odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">a</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inv</span> <span class="o">=</span> <span class="n">inv</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span><span class="o">=</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#fourier inverse is 1/(2*pi) * integral</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="c1"># some fourier inverse terms are negative</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_is_real</span> <span class="o">=</span> <span class="n">func_is_real</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_is_imag</span> <span class="o">=</span> <span class="n">func_is_imag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_part_even</span> <span class="o">=</span> <span class="n">real_part_even</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">real_part_odd</span> <span class="o">=</span> <span class="n">real_part_odd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imag_part_even</span> <span class="o">=</span> <span class="n">imag_part_even</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imag_part_odd</span> <span class="o">=</span> <span class="n">imag_part_odd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
+
+<div class="viewcode-block" id="FourierTransform.real_func"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.real_func">[docs]</a>    <span class="k">def</span> <span class="nf">real_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Real part of func&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
+<div class="viewcode-block" id="FourierTransform.imag_func"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.imag_func">[docs]</a>    <span class="k">def</span> <span class="nf">imag_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Imaginary part of func&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="FourierTransform.mfe"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfe">[docs]</a>    <span class="k">def</span> <span class="nf">mfe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror func for even weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">func_mirror_for_even_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">)</span></div>
+<div class="viewcode-block" id="FourierTransform.mfo"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfo">[docs]</a>    <span class="k">def</span> <span class="nf">mfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror func for odd weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">func_mirror_for_odd_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">)</span></div>
+<div class="viewcode-block" id="FourierTransform.mfre"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfre">[docs]</a>    <span class="k">def</span> <span class="nf">mfre</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror real(func) for even weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">func_mirror_for_even_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">))</span></div>
+<div class="viewcode-block" id="FourierTransform.mfro"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfro">[docs]</a>    <span class="k">def</span> <span class="nf">mfro</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror real(func) for odd weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">func_mirror_for_odd_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">))</span></div>
+<div class="viewcode-block" id="FourierTransform.mfie"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfie">[docs]</a>    <span class="k">def</span> <span class="nf">mfie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror imag(func) for even weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">func_mirror_for_even_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">))</span></div>
+<div class="viewcode-block" id="FourierTransform.mfio"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform.mfio">[docs]</a>    <span class="k">def</span> <span class="nf">mfio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mirror imag(func) for odd weight function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">func_mirror_for_odd_weight</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fargs</span><span class="p">))</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform 1d Fourier transform at s</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        s : float</span>
+<span class="sd">            Transform variable</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_is_real</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_part_even</span><span class="p">:</span>
+                <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span>
+                                         <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_part_odd</span><span class="p">:</span>
+                <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="o">-</span><span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#func is real and exhibits no symmetry.</span>
+                <span class="n">igral</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="c1"># real transform result [-inf, 0]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfe</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># real transform result [-, inf]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># imag transform result [0, inf]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfo</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># imag transform result [-inf, 0]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_is_imag</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imag_part_even</span><span class="p">:</span>
+                <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">imag_part_odd</span><span class="p">:</span>
+                <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span>  <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#func is imaginary and ehibits non symmetry</span>
+                <span class="n">igral</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="mi">0</span>
+
+                <span class="c1"># imag transform result [-inf, 0]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfe</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># imag transform result [0, inf]</span>
+                <span class="n">ig</span><span class="p">,</span><span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># real transform result [-inf, 0]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfo</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+                <span class="c1"># real transform result [0, inf]</span>
+                <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+                <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+
+                <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span>
+
+        <span class="c1">#if we have reached here then func is complex</span>
+        <span class="c1">#use real and imag parts of func</span>
+        <span class="n">igral</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">err</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_part_even</span><span class="p">:</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_part_odd</span><span class="p">:</span>
+            <span class="c1"># 2 * I(real_func * sin(s*x), 0, +inf)</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#real part of function exhibits no symmetry</span>
+            <span class="c1"># real transform result [-inf, 0]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfre</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># real transform result [0, inf]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># imag transform result [-inf, 0]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfro</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># imag transform result [0, inf]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">real_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">-=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">imag_part_even</span><span class="p">:</span>
+            <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_part_odd</span><span class="p">:</span>
+            <span class="n">igral</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#imag part of function exhibits no symmetry</span>
+            <span class="c1"># imag transform result [-inf, 0]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfie</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># imag transform result [0, inf]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="n">j</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">cosine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imag_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># real transform result [-inf, 0]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mfio</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+            <span class="c1"># real transform result [0, inf]</span>
+            <span class="n">ig</span><span class="p">,</span> <span class="n">er</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inv_const</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_sign</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span>
+                        <span class="n">sine_transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imag_func</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)]</span>
+            <span class="n">igral</span> <span class="o">+=</span> <span class="n">ig</span><span class="p">;</span> <span class="n">err</span> <span class="o">+=</span> <span class="n">er</span>
+        <span class="k">return</span> <span class="n">igral</span><span class="p">,</span> <span class="n">err</span></div>
+
+
+
+
+<div class="viewcode-block" id="vcosine_transform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.vcosine_transform">[docs]</a><span class="k">def</span> <span class="nf">vcosine_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">m</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cosine transform of f(x) at transform variable s</span>
+
+<span class="sd">    This is a vectorized cosine transform.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : function or method</span>
+<span class="sd">        Function to apply cosine trasnform to.  f is called with</span>
+<span class="sd">        f(x, *args).</span>
+<span class="sd">    s : 1d array</span>
+<span class="sd">        Coordinate(s) to evaluate transform at.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        arguments to pass to f</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Number of segments to break the integration interval into.  Each</span>
+<span class="sd">        segment will be between the zeros of the cos function, Default m=20.</span>
+<span class="sd">    ng : [2-20, 32, 64, 100], optional</span>
+<span class="sd">        Number of gauss points to use in integration., Default ng=20.</span>
+<span class="sd">    shanks_ind : int, optional</span>
+<span class="sd">        Start position of intervals to start shanks extrapolation.</span>
+<span class="sd">        Default shanks_ind=None i.e. no extrapolation.</span>
+<span class="sd">        Be careful when using shanks extrapolation; make sure you only begin</span>
+<span class="sd">        to use it after the intgrand is well behaved.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    f : 1d array of float</span>
+<span class="sd">        Value of transform at s</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Careful with singularities.  Because there is no way to increase the</span>
+<span class="sd">    integration points at a particular spot the infinite behaviur may not be</span>
+<span class="sd">    captured well. For example x**-0.5 should transform to sqrt(pi/2*w) but</span>
+<span class="sd">    due to the sinularity at x=0 it does not converge well even using ng=100.</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">si</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">xk_</span><span class="p">,</span> <span class="n">wk</span> <span class="o">=</span> <span class="n">gauss_legendre_abscissae_and_weights</span><span class="p">(</span><span class="n">ng</span><span class="p">)</span>
+
+    <span class="c1"># integration intervals</span>
+
+    <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c1">#dims of array:</span>
+    <span class="c1"># 0 or i dim is each transform coordinate</span>
+    <span class="c1"># 1 or j dim is each integration interval</span>
+    <span class="c1"># 2 or k dim is each integration point</span>
+
+    <span class="c1"># 2 dim will be summed to get integral of each interval</span>
+    <span class="c1"># 1 dim will be summed or shanks&#39;ed to give transform at each coord</span>
+    <span class="c1">#</span>
+
+    <span class="n">si</span> <span class="o">=</span> <span class="n">si</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">aj</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">bj</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">xk_</span> <span class="o">=</span> <span class="n">xk_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">wk</span> <span class="o">=</span> <span class="n">wk</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+
+    <span class="n">aij</span> <span class="o">=</span> <span class="n">aj</span> <span class="o">/</span> <span class="n">si</span>
+    <span class="n">bij</span> <span class="o">=</span> <span class="n">bj</span> <span class="o">/</span> <span class="n">si</span>
+
+    <span class="n">bma</span> <span class="o">=</span> <span class="p">(</span><span class="n">bij</span> <span class="o">-</span> <span class="n">aij</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># b minus a</span>
+    <span class="n">bpa</span> <span class="o">=</span> <span class="p">(</span><span class="n">aij</span> <span class="o">+</span> <span class="n">bij</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span> <span class="c1"># b plus a</span>
+
+
+    <span class="n">xijk</span> <span class="o">=</span> <span class="n">bma</span> <span class="o">*</span> <span class="n">xk_</span> <span class="o">+</span> <span class="n">bpa</span> <span class="c1"># xj_ are in [-1, 1] so need to transform to [a, b]</span>
+
+    <span class="n">fijk</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">xijk</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">fijk</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">si</span> <span class="o">*</span> <span class="n">xijk</span><span class="p">)</span>
+<span class="c1">#    fijk *= xijk</span>
+
+    <span class="n">igral</span> <span class="o">=</span> <span class="n">bma</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">fijk</span> <span class="o">*</span> <span class="n">wk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+    <span class="k">if</span> <span class="n">shanks_ind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">igral</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#extrapolate</span>
+        <span class="n">igral</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">igral</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">shanks</span><span class="p">(</span><span class="n">igral</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="v2dcosine_transform"><a class="viewcode-back" href="../../../api/geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.v2dcosine_transform">[docs]</a><span class="k">def</span> <span class="nf">v2dcosine_transform</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">m</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ng</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cosine transform of f(x, y) at transform variable s1, s2</span>
+
+<span class="sd">    Vectorised 2d cosine transform.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    f : function or method</span>
+<span class="sd">        Function to apply 2D cosine trasnform to.  f is called with</span>
+<span class="sd">        f(x, y, *args).</span>
+<span class="sd">    s1, s2 : 1d array</span>
+<span class="sd">        Transformation variables. A grid of points will be made.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Arguments to pass to f.</span>
+<span class="sd">    m : int, optional</span>
+<span class="sd">        Number of segments to break the integration interval into.  Each</span>
+<span class="sd">        segment will be between the zeros of the cos function, default m=20.</span>
+<span class="sd">    ng : [2-20, 32, 64, 100], optional</span>
+<span class="sd">        Number of gauss points to use in integration. Default ng=20.</span>
+<span class="sd">    shanks_ind : int, optional</span>
+<span class="sd">        Start position of intervals to start shanks extrapolation.</span>
+<span class="sd">        default=None i.e. no extrapolation.</span>
+<span class="sd">        Be careful when using shanks extrapolation; make sure you only begin</span>
+<span class="sd">        to use it after the intgrand is well behaved.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    f : 1d array of float</span>
+<span class="sd">        value of transform at s</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Careful with singularities.  Because there is no way to increase the</span>
+<span class="sd">    integration points at a particular sport the infinite behaviur may not be</span>
+<span class="sd">    captured well. For example x**-0.5 should transform to sqrt(pi/2*w) but</span>
+<span class="sd">    due to the sinularity at x=0 it does not converge well even using ng=100.</span>
+
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#dims of array:</span>
+    <span class="c1"># 0 or i dim is each of the 1st transform coordinate s1</span>
+    <span class="c1"># 1 or j dim is each integration inteval corresponding to s1, a1, b1</span>
+    <span class="c1"># 2 or k dim is each gauss point in interval a1, b1</span>
+    <span class="c1"># 3 or l dim is each of the 2nd transform coordinate s2</span>
+    <span class="c1"># 4 or m dim is each integration interval corresponding to s2, a2, b2</span>
+    <span class="c1"># 5 or n dim is each gauss point in interval a2, b2</span>
+
+    <span class="c1"># 5 dim will be summed to get integral of each interval a2, b2</span>
+    <span class="c1"># 4 dim will be summed to get shanks&#39;ed to give transform at each s2 coord</span>
+    <span class="c1"># 2 dim will be summed to get integral of each interval a1, b1</span>
+    <span class="c1"># 1 dim will be summed to get shanks&#39;ed to give transform at each s1 coord</span>
+
+
+    <span class="n">si</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span>
+    <span class="n">sl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">s2</span><span class="p">)</span>
+
+    <span class="n">xk_</span><span class="p">,</span> <span class="n">wk</span> <span class="o">=</span> <span class="n">gauss_legendre_abscissae_and_weights</span><span class="p">(</span><span class="n">ng</span><span class="p">)</span>
+    <span class="n">xn_</span><span class="p">,</span> <span class="n">wn</span> <span class="o">=</span> <span class="n">xk_</span><span class="p">,</span> <span class="n">wk</span>
+
+    <span class="c1"># integration intervals</span>
+    <span class="n">zeros</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">am</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">bm</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="n">si</span> <span class="o">=</span> <span class="n">si</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">aj</span> <span class="o">=</span> <span class="n">aj</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">bj</span> <span class="o">=</span> <span class="n">bj</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">xk_</span> <span class="o">=</span> <span class="n">xk_</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">wk</span> <span class="o">=</span> <span class="n">wk</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">aij</span> <span class="o">=</span> <span class="n">aj</span> <span class="o">/</span> <span class="n">si</span>
+    <span class="n">bij</span> <span class="o">=</span> <span class="n">bj</span> <span class="o">/</span> <span class="n">si</span>
+
+    <span class="n">bmaij</span> <span class="o">=</span> <span class="p">(</span><span class="n">bij</span> <span class="o">-</span> <span class="n">aij</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># b minus a</span>
+    <span class="n">bpaij</span> <span class="o">=</span> <span class="p">(</span><span class="n">aij</span> <span class="o">+</span> <span class="n">bij</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span> <span class="c1"># b plus a</span>
+
+
+    <span class="n">sl</span> <span class="o">=</span> <span class="n">sl</span><span class="p">[</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">am</span> <span class="o">=</span> <span class="n">am</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">bm</span> <span class="o">=</span> <span class="n">bm</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="n">xn_</span> <span class="o">=</span> <span class="n">xn_</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">wn</span> <span class="o">=</span> <span class="n">wn</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">alm</span> <span class="o">=</span> <span class="n">am</span> <span class="o">/</span> <span class="n">sl</span>
+    <span class="n">blm</span> <span class="o">=</span> <span class="n">bm</span> <span class="o">/</span> <span class="n">sl</span>
+
+    <span class="n">bmalm</span> <span class="o">=</span> <span class="p">(</span><span class="n">blm</span> <span class="o">-</span> <span class="n">alm</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># b minus a</span>
+    <span class="n">bpalm</span> <span class="o">=</span> <span class="p">(</span><span class="n">alm</span> <span class="o">+</span> <span class="n">blm</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span> <span class="c1"># b plus a</span>
+
+
+    <span class="n">xijk</span> <span class="o">=</span> <span class="n">bmaij</span> <span class="o">*</span> <span class="n">xk_</span> <span class="o">+</span> <span class="n">bpaij</span> <span class="c1"># xj_ are in [-1, 1] so need to transform to [a, b]</span>
+
+    <span class="n">xlmn</span> <span class="o">=</span> <span class="n">bmalm</span> <span class="o">*</span> <span class="n">xn_</span> <span class="o">+</span> <span class="n">bpalm</span>
+
+    <span class="n">fijklmn</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">xijk</span><span class="p">,</span> <span class="n">xlmn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">si</span><span class="o">*</span><span class="n">xijk</span><span class="p">)</span>
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">sl</span><span class="o">*</span><span class="n">xlmn</span><span class="p">)</span>
+
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">wk</span>
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">wn</span>
+
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">bmaij</span><span class="c1">#[:,:,0,:,:,:]</span>
+    <span class="n">fijklmn</span><span class="o">*=</span><span class="n">bmalm</span><span class="c1">#[:,:,:,:,:,0]</span>
+
+    <span class="n">igral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">fijklmn</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">shanks_ind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">igral</span> <span class="o">=</span> <span class="n">igral</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#extrapolate</span>
+        <span class="n">igral</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">4</span> <span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">igral</span><span class="p">)</span>
+        <span class="n">igral</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">shanks</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">igral</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="p">)</span>
+
+    <span class="n">igral</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">igral</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">shanks_ind</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">igral</span> <span class="o">=</span> <span class="n">igral</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1">#extrapolate</span>
+        <span class="n">igral</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span> <span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">igral</span><span class="p">)</span>
+        <span class="n">igral</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">apply_along_axis</span><span class="p">(</span><span class="n">shanks</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">igral</span><span class="p">,</span> <span class="n">shanks_ind</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">igral</span></div>
+
+
+
+
+<span class="c1">##&lt;Start of big commented block</span>
+<span class="c1">## Below is a failed attempt at multiple transform.</span>
+<span class="c1">## Instead see geotecha.mathematics.multi-transform</span>
+<span class="c1">#def cot(phi):</span>
+<span class="c1">#    return 1/np.tan(phi)</span>
+<span class="c1">#</span>
+<span class="c1">#def csc(phi):</span>
+<span class="c1">#    return 1.0/np.sin(phi)</span>
+<span class="c1">#</span>
+<span class="c1">#def vinv_laplace_2dcosine_transform(f, s1, s2, t, args=(),</span>
+<span class="c1">#                                    m=20, ng=20, shanks_ind=None,</span>
+<span class="c1">#                                    nlap=24, shift=0.0):</span>
+<span class="c1">#    &quot;&quot;&quot;Inverse laplace transform and 2D Cosine transform of f(x, y, t)</span>
+<span class="c1">#</span>
+<span class="c1">#    Parameters</span>
+<span class="c1">#    ----------</span>
+<span class="c1">#    f : function or method</span>
+<span class="c1">#        function to apply cosine trasnform to.  f is called with</span>
+<span class="c1">#        f(x, y, *args)</span>
+<span class="c1">#    s1, s2, t : 1d array</span>
+<span class="c1">#        transformation variables. a grid of points will be made, s1 and s2</span>
+<span class="c1">#        are the x and y fourier directions, s3 is the t direction for the</span>
+<span class="c1">#        inverse laplace</span>
+<span class="c1">#    args : tuple, optional</span>
+<span class="c1">#        arguments to pass to f</span>
+<span class="c1">#    m : int, optional</span>
+<span class="c1">#        number of segments to break the integration interval into.  Each</span>
+<span class="c1">#        segment will be between the zeros of the cos function, default=20</span>
+<span class="c1">#    ng : [2-20, 32, 64, 100], optional</span>
+<span class="c1">#        number of gauss points to use in integration.</span>
+<span class="c1">#    shanks_ind : int, optional</span>
+<span class="c1">#        Start position of intervals to start shanks extrapolatoin.</span>
+<span class="c1">#        default=None i.e. no extrapolation.</span>
+<span class="c1">#        Be careful when using shanks extrapolation; make sure you only begin</span>
+<span class="c1">#        to use it after the intgrand is well behaved.</span>
+<span class="c1">#    nlap : even int, optional</span>
+<span class="c1">#        number of integration points for talbot method inverse laplace.</span>
+<span class="c1">#        if n is odd it will be rounded up to</span>
+<span class="c1">#        nearest even number default n = 24</span>
+<span class="c1">#    shift : float</span>
+<span class="c1">#        For inverse laplace transorm, shift contour to the right in case</span>
+<span class="c1">#        there is a pole on the positive real axis. default shift=0.0</span>
+<span class="c1">#</span>
+<span class="c1">#    Returns</span>
+<span class="c1">#    -------</span>
+<span class="c1">#    f : ndarray of shape (len(s1), len(s2), len(s3)</span>
+<span class="c1">#       value of transform at s1, s2, s3</span>
+<span class="c1">#</span>
+<span class="c1">#    Notes</span>
+<span class="c1">#    -----</span>
+<span class="c1">#    Careful with singularities in the fourier transform.  Because there is</span>
+<span class="c1">#    no way to increase the</span>
+<span class="c1">#    integration points at a particular sport the infinite behaviur may not be</span>
+<span class="c1">#    captured well. For example x**-0.5 should transform to sqrt(pi/2*w) but</span>
+<span class="c1">#    due to the sinularity at x=0 it does not converge well even using ng=100.</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    &quot;&quot;&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#    #dims of array:</span>
+<span class="c1">#    # 0 or i dim is each of the 1st fourier transform coordinate s1</span>
+<span class="c1">#    # 1 or j dim is each integration inteval corresponding to s1, a1, b1</span>
+<span class="c1">#    # 2 or k dim is each gauss point in interval a1, b1</span>
+<span class="c1">#    # 3 or l dim is each of the 2nd fourier transform coordinate s2</span>
+<span class="c1">#    # 4 or m dim is each integration interval corresponding to s2, a2, b2</span>
+<span class="c1">#    # 5 or n dim is each gauss point in interval a2, b2</span>
+<span class="c1">#    # 6 or o dim is each of the inv laplace transform coordinate t</span>
+<span class="c1">#    # 7 or p dim is the theta corresponding to t</span>
+<span class="c1">#</span>
+<span class="c1">#    # 7 dim will be summed to get inv laplace for each t</span>
+<span class="c1">#    # 5 dim will be summed to get integral of each interval a2, b2</span>
+<span class="c1">#    # 4 dim will be summed to get shanks&#39;ed to give transform at each s2 coord</span>
+<span class="c1">#    # 2 dim will be summed to get integral of each interval a1, b1</span>
+<span class="c1">#    # 1 dim will be summed to get shanks&#39;ed to give transform at each s1 coord</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    to = np.atleast_1d(t)</span>
+<span class="c1">#    nlap = nlap + nlap % 2</span>
+<span class="c1">#    if np.any(to==0):</span>
+<span class="c1">#            raise ValueError(&#39;Inverse transform can not be calculated for t=0&#39;)</span>
+<span class="c1">#    #   Initiate the inv laplace stepsize</span>
+<span class="c1">#    h = 2*np.pi/nlap;</span>
+<span class="c1">#    theta = (-np.pi + (np.arange(nlap) + 1./2)*h)</span>
+<span class="c1">#</span>
+<span class="c1">#    to = to[None, None, None, None, None, :, None]</span>
+<span class="c1">#    thetap = theta[None, None, None, None, None, None, :]</span>
+<span class="c1">#    zop = shift + nlap/to*(0.5017*thetap*cot(0.6407*thetap) - 0.6122 + 0.2645j*thetap)</span>
+<span class="c1">#    dzop = nlap/to*(-0.5017*0.6407*thetap*(csc(0.6407*thetap)**2)+0.5017*cot(0.6407*thetap)+0.2645j)</span>
+<span class="c1">#</span>
+<span class="c1">##    theta = (-np.pi + (np.arange(self.n)+1./2)*h)[:, np.newaxis]</span>
+<span class="c1">##    z = self.shift + self.n/t*(0.5017*theta*cot(0.6407*theta) - 0.6122 + 0.2645j*theta)</span>
+<span class="c1">##    dz = self.n/t*(-0.5017*0.6407*theta*(csc(0.6407*theta)**2)+0.5017*cot(0.6407*theta)+0.2645j)</span>
+<span class="c1">##    inv_laplace = (np.exp(z * t) * self.f(z, *args) * dz).sum(axis=0)</span>
+<span class="c1">##    inv_laplace *= h / (2j * np.pi)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    si = np.atleast_1d(s1)</span>
+<span class="c1">#    sl = np.atleast_1d(s2)</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    xk_, wk = gauss_legendre_abscissae_and_weights(ng)</span>
+<span class="c1">#    xn_, wn = xk_, wk</span>
+<span class="c1">#</span>
+<span class="c1">#    # integration intervals</span>
+<span class="c1">#    zeros = np.zeros(m + 1, dtype=float)</span>
+<span class="c1">#    zeros[1:] = (2 * np.arange(m) + 1) * np.pi/2</span>
+<span class="c1">#</span>
+<span class="c1">#    aj = am = zeros[0:-1]</span>
+<span class="c1">#    bj = bm = zeros[1:]</span>
+<span class="c1">#</span>
+<span class="c1">#    si = si[:, None, None, None, None, None, None, None]</span>
+<span class="c1">#</span>
+<span class="c1">#    aj = aj[None, :, None, None, None, None, None, None]</span>
+<span class="c1">#    bj = bj[None, :, None, None, None, None, None, None]</span>
+<span class="c1">#</span>
+<span class="c1">#    xk_ = xk_[None, None, :, None, None, None, None, None]</span>
+<span class="c1">#    wk = wk[None, None, :, None, None, None, None, None]</span>
+<span class="c1">#</span>
+<span class="c1">#    aij = aj / si</span>
+<span class="c1">#    bij = bj / si</span>
+<span class="c1">#</span>
+<span class="c1">#    bmaij = (bij - aij) / 2 # b minus a</span>
+<span class="c1">#    bpaij = (aij + bij) /2 # b plus a</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    sl = sl[None, None, None, :, None, None, None, None ]</span>
+<span class="c1">#    am = am[None, None, None, None, :, None, None, None]</span>
+<span class="c1">#    bm = bm[None, None, None, None, :, None, None, None]</span>
+<span class="c1">#</span>
+<span class="c1">#    xn_ = xn_[None, None, None, None, None, :, None, None]</span>
+<span class="c1">#    wn = wn[None, None, None, None, None, :, None, None]</span>
+<span class="c1">#</span>
+<span class="c1">#    alm = am / sl</span>
+<span class="c1">#    blm = bm / sl</span>
+<span class="c1">#</span>
+<span class="c1">#    bmalm = (blm - alm) / 2 # b minus a</span>
+<span class="c1">#    bpalm = (alm + blm) /2 # b plus a</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#    xijk = bmaij * xk_ + bpaij # xj_ are in [-1, 1] so need to transform to [a, b]</span>
+<span class="c1">#</span>
+<span class="c1">#    xlmn = bmalm * xn_ + bpalm</span>
+<span class="c1">#</span>
+<span class="c1">#    fijklmnop=f(xijk, xlmn, zop, *args)</span>
+<span class="c1">#    fijklmnop*=np.cos(si*xijk)</span>
+<span class="c1">#    fijklmnop*=np.cos(sl*xlmn)</span>
+<span class="c1">#</span>
+<span class="c1">#    fijklmnop*=wk</span>
+<span class="c1">#    fijklmnop*=wn</span>
+<span class="c1">#</span>
+<span class="c1">#    fijklmnop*=bmaij#[:,:,0,:,:,:]</span>
+<span class="c1">#    fijklmnop*=bmalm#[:,:,:,:,:,0]</span>
+<span class="c1">#</span>
+<span class="c1">#    fijklmnop*=np.exp(zop * to)</span>
+<span class="c1">#    fijklmnop*=dzop</span>
+<span class="c1">#    fijklmnop*=h / (2j * np.pi)</span>
+<span class="c1">#</span>
+<span class="c1">#    igral = np.sum(fijklmnop,axis=7)</span>
+<span class="c1">#    igral = np.real(igral)</span>
+<span class="c1">#    igral = np.sum(igral, axis=5)</span>
+<span class="c1">#</span>
+<span class="c1">##    igral = np.sum(fijklmn, axis=5)</span>
+<span class="c1">#</span>
+<span class="c1">#    if shanks_ind is None:</span>
+<span class="c1">#        igral = igral.sum(axis=4)</span>
+<span class="c1">#    else:</span>
+<span class="c1">#        #extrapolate</span>
+<span class="c1">#        igral.cumsum(axis=4 , out=igral)</span>
+<span class="c1">#        igral= np.apply_along_axis(shanks, 4, igral, shanks_ind)</span>
+<span class="c1">#</span>
+<span class="c1">#    igral = np.sum(igral, axis=2)</span>
+<span class="c1">#</span>
+<span class="c1">#    if shanks_ind is None:</span>
+<span class="c1">#        igral = igral.sum(axis=1)</span>
+<span class="c1">#    else:</span>
+<span class="c1">#        #extrapolate</span>
+<span class="c1">#        igral.cumsum(axis=1 , out=igral)</span>
+<span class="c1">#        igral= np.apply_along_axis(shanks, 1, igral, shanks_ind)</span>
+<span class="c1">#</span>
+<span class="c1">#    return igral</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#def ilapcosine3(x, y, t, a, b, c):</span>
+<span class="c1">#    &quot;&quot;&quot;np.exp(-a * x) * np.exp(-b * y) / (1+t+c)&quot;&quot;&quot;</span>
+<span class="c1">#    f= np.exp(-a * x)</span>
+<span class="c1">#    f*=np.exp(-b * y)</span>
+<span class="c1">#    f/=(1+t+c)</span>
+<span class="c1">#    return f</span>
+<span class="c1">#</span>
+<span class="c1">#def ilapcosine3_(x, y, t, a, b, c):</span>
+<span class="c1">#    return a / (a**2 + x**2) * b / (b**2 + y**2) *np.exp(-(c + 1) * t)</span>
+<span class="c1">#</span>
+<span class="c1">#class test_vinv_laplace_2dcosine_transform(unittest.TestCase):</span>
+<span class="c1">#    &quot;&quot;&quot;tests for vinv_laplace_2dcosine_transform&quot;&quot;&quot;</span>
+<span class="c1">#</span>
+<span class="c1">#    def test_ilapcosine3(self):</span>
+<span class="c1">#        s1 = np.array([0.5, 1, 1.6])</span>
+<span class="c1">#        s2 = np.array([0.6,1,2])</span>
+<span class="c1">#        t = np.array([0.2, 2, 4,])</span>
+<span class="c1">#        args=(1.2, 1.4, 0.8)</span>
+<span class="c1">#</span>
+<span class="c1">#        shanks_ind=-5#None</span>
+<span class="c1">#        nlap=24</span>
+<span class="c1">#        shift = 0.0</span>
+<span class="c1">#        assert_allclose(vinv_laplace_2dcosine_transform(</span>
+<span class="c1">#                            ilapcosine3, s1, s2, t,</span>
+<span class="c1">#                            args, shanks_ind=shanks_ind,</span>
+<span class="c1">#                            nlap=nlap, shift=shift),</span>
+<span class="c1">#                        ilapcosine3_(s1[:, None, None],</span>
+<span class="c1">#                                 s2[None,:, None],</span>
+<span class="c1">#                                 t[None, None, :], *args), atol=1e-8)</span>
+<span class="c1">##&gt;&gt;END of big commented block.</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nose</span>
+    <span class="n">nose</span><span class="o">.</span><span class="n">runmodule</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nose&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbosity=3&#39;</span><span class="p">,</span> <span class="s1">&#39;--with-doctest&#39;</span><span class="p">])</span>
+<span class="c1">#    nose.runmodule(argv=[&#39;nose&#39;, &#39;--verbosity=3&#39;])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

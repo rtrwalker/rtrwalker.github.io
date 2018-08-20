@@ -1,0 +1,28 @@
+velocity_hydraulic_gradient
+---------------------------
+
+
+Class summary
++++++++++++++
+
+.. currentmodule:: geotecha.constitutive_models.velocity_hydraulic_gradient
+
+.. autosummary::
+
+   DarcyFlowModel
+   HansboNonDarcianFlowModel
+   OneDimensionalFlowRelationship
+
+
+
+
+Module listing
+++++++++++++++
+
+.. automodule:: geotecha.constitutive_models.velocity_hydraulic_gradient
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+

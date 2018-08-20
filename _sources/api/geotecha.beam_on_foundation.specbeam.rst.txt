@@ -1,0 +1,78 @@
+specbeam
+--------
+
+
+Class summary
++++++++++++++
+
+.. currentmodule:: geotecha.beam_on_foundation.specbeam
+
+.. autosummary::
+
+   MovingPointLoads
+   SpecBeam
+
+
+
+Function summary
+++++++++++++++++
+
+.. currentmodule:: geotecha.beam_on_foundation.specbeam
+
+.. autosummary::
+
+   DAFinfinite
+   DAFrelative
+   FIGURE_DAF_constant_prop
+   FIGURE_DAF_transition_length
+   FIGURE_DAF_transition_length_esveld
+   FIGURE_DAFwrtinf_transition_length
+   FIGURE_DAFwrtinf_transition_length_betaconst
+   FIGURE_DAFwrtinf_transition_lengthrev
+   FIGURE_convergence_step_change
+   FIGURE_defl_envelope_vary_velocity
+   FIGURE_verify_against_DingEtAl2012_fig8
+   FIG_DAF_envelope_vary_beta
+   SpecBeam_const_mat_midpoint_defl_runme_analytical_play
+   SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play
+   align_yaxis
+   article_figure_01
+   article_figure_02
+   article_figure_03
+   article_figure_04
+   article_figure_05a_05b_05c_07
+   article_figure_06
+   article_figure_08
+   article_figure_09
+   article_figure_10_11
+   article_figure_12
+   case_study_PaixaoEtAl2014
+   dingetal_figure_8
+   esveld_fig6p17
+   esveld_fig6p18
+   moving_load_on_beam_on_elastic_foundation
+   multi_static
+   point_load_static_defl_shape_function
+   reverse_curve_transition
+   specbeam_vs_analytical_single_static_load
+   static_point_load_shape
+   tanhtran
+   tanhtrani
+   tanhtranib
+   transition_DAF1
+   transition_DAF1_at_specific_alp
+   transition_zones1
+   transition_zones2
+
+
+
+Module listing
+++++++++++++++
+
+.. automodule:: geotecha.beam_on_foundation.specbeam
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+

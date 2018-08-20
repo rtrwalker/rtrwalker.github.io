@@ -1,0 +1,16 @@
+.. _specbeam-examples-index:
+
+##############################################
+specbeam Examples
+##############################################
+
+.. htmlonly::
+
+    :Release: |version|
+    :Date: |today|
+
+.. toctree::
+    :maxdepth: 1
+
+    specbeam_infinite_beam_dynamic_amplification_factor <specbeam_infinite_beam_dynamic_amplification_factor.rst>
+    specbeam_transition_zone <specbeam_transition_zone.rst>

@@ -1,0 +1,476 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>quadrature &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="root_finding" href="geotecha.mathematics.root_finding.html" />
+    <link rel="prev" title="multi_transform" href="geotecha.mathematics.multi_transform.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">quadrature</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.quadrature">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+      <li>Previous: <a href="geotecha.mathematics.multi_transform.html" title="previous chapter">multi_transform</a></li>
+      <li>Next: <a href="geotecha.mathematics.root_finding.html" title="next chapter">root_finding</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.quadrature.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="quadrature">
+<h1>quadrature<a class="headerlink" href="#quadrature" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.gauss_kronrod_abscissae_and_weights" title="geotecha.mathematics.quadrature.gauss_kronrod_abscissae_and_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gauss_kronrod_abscissae_and_weights</span></code></a>(n)</td>
+<td>Gauss-Kronrod quadrature abscissae and weights</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.gauss_legendre_abscissae_and_weights" title="geotecha.mathematics.quadrature.gauss_legendre_abscissae_and_weights"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gauss_legendre_abscissae_and_weights</span></code></a>(n)</td>
+<td>Gauss-Legendre quadrature abscissae and weights</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.gk_quad" title="geotecha.mathematics.quadrature.gk_quad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gk_quad</span></code></a>(f,&nbsp;a,&nbsp;b[,&nbsp;args,&nbsp;n,&nbsp;sum_intervals])</td>
+<td>Integration by Gauss-Kronrod quadrature between intervals</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.gl_quad" title="geotecha.mathematics.quadrature.gl_quad"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gl_quad</span></code></a>(f,&nbsp;a,&nbsp;b[,&nbsp;args,&nbsp;n,&nbsp;shanks_ind,&nbsp;…])</td>
+<td>Integration by Gauss-Legendre quadrature with subdivided interval</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.shanks" title="geotecha.mathematics.quadrature.shanks"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shanks</span></code></a>(seq[,&nbsp;ind])</td>
+<td>Iterated Shanks transformation to accelerate series convergence</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.quadrature.shanks_table" title="geotecha.mathematics.quadrature.shanks_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shanks_table</span></code></a>(seq[,&nbsp;table,&nbsp;randomized])</td>
+<td>Copied from sympy.mpmath.mpmath.calculus.extrapolation.py</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.quadrature">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.quadrature" title="Permalink to this headline">¶</a></h2>
+<p>Numerical integration by quadrature</p>
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.gauss_kronrod_abscissae_and_weights">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">gauss_kronrod_abscissae_and_weights</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#gauss_kronrod_abscissae_and_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.gauss_kronrod_abscissae_and_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gauss-Kronrod quadrature abscissae and weights</p>
+<p>Coarse integral = Sum(f(xi) * wi1)</p>
+<p>Fine integral   = Sum(f(xi) * wi2)</p>
+<p>For the coarse integral the unused weights are set to zero</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[2-20, 32, 64, 100]</span></dt>
+<dd><p class="first last">number of integration points for the Gauss points.  Number of Kronrod
+points will automatically be 2 * n + 1.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Abscissae for the quadrature points.</p>
+</dd>
+<dt><strong>wi1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Weights for the coarse integral.</p>
+</dd>
+<dt><strong>wi2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Weights for the fine integral</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rce54218d395f-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[2]</a></td><td>Holoborodko, Pavel. 2011. ‘Gauss-Kronrod Quadrature Nodes and
+Weights. November 7.
+<a class="reference external" href="http://www.advanpix.com/2011/11/07/gauss-kronrod-quadrature-nodes-weights/#Tabulated_Gauss-Kronrod_weights_and_abscissae">http://www.advanpix.com/2011/11/07/gauss-kronrod-quadrature-nodes-weights/#Tabulated_Gauss-Kronrod_weights_and_abscissae</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.gauss_legendre_abscissae_and_weights">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">gauss_legendre_abscissae_and_weights</code><span class="sig-paren">(</span><em>n</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#gauss_legendre_abscissae_and_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.gauss_legendre_abscissae_and_weights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gauss-Legendre quadrature abscissae and weights</p>
+<p>Integral = Sum(f(xi) * wi)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[2-20, 32, 64, 100]</span></dt>
+<dd><p class="first last">Number of integration points</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xi, wi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of len(n)</span></dt>
+<dd><p class="first last">Abscissae and weights for numericla integration</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rcf33a23d2274-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Holoborodko, Pavel. 2014. ‘Numerical Integration’. Accessed
+April 24.
+<a class="reference external" href="http://www.holoborodko.com/pavel/numerical-methods/numerical-integration/">http://www.holoborodko.com/pavel/numerical-methods/numerical-integration/</a>.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.gk_quad">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">gk_quad</code><span class="sig-paren">(</span><em>f</em>, <em>a</em>, <em>b</em>, <em>args=()</em>, <em>n=10</em>, <em>sum_intervals=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#gk_quad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.gk_quad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integration by Gauss-Kronrod quadrature between intervals</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function or method</span></dt>
+<dd><p class="first last">Function to integrate.</p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">Limits of integration. Must have len(a)==len(b).</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last"><cite>args</cite> will be passed to f using f(x, <a href="#id3"><span class="problematic" id="id4">*</span></a>args). Default args=().</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[7,10,15,20,25,30], optional</span></dt>
+<dd><p class="first last">Number of gauss quadrature evaluation points. Default n=10. There will
+be 2*n+1 Kronrod quadrature points.
+sum_intervals : [False, True]</p>
+</dd>
+<dt><strong>If sum_intervals=True the integral for each a and b, will be summed.</strong></dt>
+<dd><p class="first last">Otherwise each interval integration will be returned.  The sum of the
+error estimates will also be summed.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>igral</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Integral of f between a and b.
+If sum_intervals=False then shape of igral will be (len(a), …)
+where … corresponds to however many dimensions are returned
+from f with scalar arguments.   Each value in igral corresponds to
+the corresponding a-b interval.  If sum_intervals=True then igral will
+have shape (…).</p>
+</dd>
+<dt><strong>err_estimate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray same size as igal</span></dt>
+<dd><p class="first last">Estimate of the error in the integral.  i.e. absolute value of fine
+integral minus coarse integral.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.gl_quad">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">gl_quad</code><span class="sig-paren">(</span><em>f</em>, <em>a</em>, <em>b</em>, <em>args=()</em>, <em>n=10</em>, <em>shanks_ind=False</em>, <em>sum_intervals=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#gl_quad"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.gl_quad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integration by Gauss-Legendre quadrature with subdivided interval</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function or method</span></dt>
+<dd><p class="first last">function to integrate. Must accept vector aguments for x. Might
+need to use numpy.vecotrize.</p>
+</dd>
+<dt><strong>a, b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">limits of integration</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">args will be passed to f using f(x, <a href="#id5"><span class="problematic" id="id6">*</span></a>args). default=()</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[2-20, 32, 64, 100], optional</span></dt>
+<dd><p class="first last">number of quadrature evaluation points. default=10</p>
+</dd>
+<dt><strong>sum_intervals</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True]</span></dt>
+<dd><p class="first last">If sum_intervals=True the integral for each a and b, will be summed.
+Otherwise each interval integration will be returned.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>igral</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray</span></dt>
+<dd><p class="first last">Integral of f between a and b.
+If sum_intervals=False then shape of igral will be (len(a), …)
+where … corresponds to however many dimensions are returned
+from f with scalar arguments.   Each value in igral corresponds to
+the corresponding a-b interval.  If sum_intervals=True then igral will
+have shape (…).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Be careful when using large values of n.There may be precision issues.
+If f returns an ndarray when x is scalar.  igral will have additonal
+dimensions corresponding to those of the f-with-scalar-x output.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.shanks">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">shanks</code><span class="sig-paren">(</span><em>seq</em>, <em>ind=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#shanks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.shanks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterated Shanks transformation to accelerate series convergence</p>
+<p>Though normally applied to a 1d array, <cite>shanks</cite> will actually operate on
+the last dimension of seq which allows for multi-dimensional arrays. e.g.
+for 2d data each row of sequence whould be a separate sequence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>seq</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list or array</span></dt>
+<dd><p class="first last">If seq is a numpy array then it’s elements will be modified in-place.
+If seq is a list then seq will not be modified.</p>
+</dd>
+<dt><strong>ind</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Start index for extrapolation. Can be negative, e.g. ind=-5
+will extrapolate based on the last 5 elements of the <cite>seq</cite>.
+default ind=0 i.e. use all elements.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array with 1 dim less than <cite>seq</cite>, or float if seq is only 1d.</span></dt>
+<dd><p class="first last">Extrapolated value.  If <cite>seq</cite> is a numpy array then due to in-place
+modification the result will also be in seq[…, -1].</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.mathematics.quadrature.shanks_table" title="geotecha.mathematics.quadrature.shanks_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">shanks_table</span></code></a></dt>
+<dd>Copy of sympy.mpmath.calculus.extrapolation.shanks Provides the whole epsilon table and error estimates.</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">numpy.apply_along_axis</span></code></dt>
+<dd>If your sequence is not in the last dimension of an array then use np.apply_along_axis to apply it along a specific axis.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>I think this will also work on multi-dimensional data.  The shanks
+extrapolation will be performed on the last dimension of the data.
+So for 2d data each row is a separate sequence.</p>
+<p>For sequence:</p>
+<p>The partial sum is first defined as:</p>
+<div class="math notranslate nohighlight">
+\[A_n=\sum_{m=0}^{n}a_m\]</div>
+<p>This forms a new sequence, the convergence of which can be sped up by
+repeated use of:</p>
+<div class="math notranslate nohighlight">
+\[S(A_n)=\frac{A_{n+1}A_{n-1}-A_n^2}{A_{n+1}-2A_n+A_{n-1}}\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.quadrature.shanks_table">
+<code class="descclassname">geotecha.mathematics.quadrature.</code><code class="descname">shanks_table</code><span class="sig-paren">(</span><em>seq</em>, <em>table=None</em>, <em>randomized=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/quadrature.html#shanks_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.quadrature.shanks_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copied from sympy.mpmath.mpmath.calculus.extrapolation.py</p>
+<p>This shanks function is taken almost verbatim (minus an initial ctx
+argument???) from sympy.mpmath.mpmath.calculus.extrapolation.py:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="http://docs.sympy.org/dev/modules/mpmath/calculus/sums_limits.html#mpmath.shanks">http://docs.sympy.org/dev/modules/mpmath/calculus/sums_limits.html#mpmath.shanks</a></li>
+<li><a class="reference external" href="https://github.com/sympy/sympy/blob/master/sympy/mpmath/calculus/extrapolation.py">https://github.com/sympy/sympy/blob/master/sympy/mpmath/calculus/extrapolation.py</a></li>
+</ul>
+</div></blockquote>
+<p>mpmath is BSD license</p>
+<p class="rubric">Notes</p>
+<p>Given a list <code class="docutils literal notranslate"><span class="pre">seq</span></code> of the first <cite>N</cite> elements of a slowly
+convergent infinite sequence <cite>(A_k)</cite>, <code class="xref py py-func docutils literal notranslate"><span class="pre">shanks()</span></code> computes the iterated
+Shanks transformation <cite>S(A), S(S(A)), ldots, S^{N/2}(A)</cite>. The Shanks
+transformation often provides strong convergence acceleration,
+especially if the sequence is oscillating.</p>
+<p>The iterated Shanks transformation is computed using the Wynn
+epsilon algorithm (see [1]). <code class="xref py py-func docutils literal notranslate"><span class="pre">shanks()</span></code> returns the full
+epsilon table generated by Wynn’s algorithm, which can be read
+off as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li>The table is a list of lists forming a lower triangular matrix,
+where higher row and column indices correspond to more accurate
+values.</li>
+<li>The columns with even index hold dummy entries (required for the
+computation) and the columns with odd index hold the actual
+extrapolates.</li>
+<li>The last element in the last row is typically the most
+accurate estimate of the limit.</li>
+<li>The difference to the third last element in the last row
+provides an estimate of the approximation error.</li>
+<li>The magnitude of the second last element provides an estimate
+of the numerical accuracy lost to cancellation.</li>
+</ul>
+</div></blockquote>
+<p>For convenience, so the extrapolation is stopped at an odd index
+so that <code class="docutils literal notranslate"><span class="pre">shanks(seq)[-1][-1]</span></code> always gives an estimate of the
+limit.</p>
+<p>Optionally, an existing table can be passed to <code class="xref py py-func docutils literal notranslate"><span class="pre">shanks()</span></code>.
+This can be used to efficiently extend a previous computation after
+new elements have been appended to the sequence. The table will
+then be updated in-place.</p>
+<p>The Shanks transformation:</p>
+<p>The Shanks transformation is defined as follows (see [2]): given
+the input sequence <cite>(A_0, A_1, ldots)</cite>, the transformed sequence is
+given by</p>
+<div class="math notranslate nohighlight">
+\[S(A_k) = \frac{A_{k+1}A_{k-1}-A_k^2}{A_{k+1}+A_{k-1}-2 A_k}\]</div>
+<p>The Shanks transformation gives the exact limit <cite>A_{infty}</cite> in a
+single step if <cite>A_k = A + a q^k</cite>. Note in particular that it
+extrapolates the exact sum of a geometric series in a single step.</p>
+<p>Applying the Shanks transformation once often improves convergence
+substantially for an arbitrary sequence, but the optimal effect is
+obtained by applying it iteratively:
+<cite>S(S(A_k)), S(S(S(A_k))), ldots</cite>.</p>
+<p>Wynn’s epsilon algorithm provides an efficient way to generate
+the table of iterated Shanks transformations. It reduces the
+computation of each element to essentially a single division, at
+the cost of requiring dummy elements in the table. See [1] for
+details.</p>
+<p>Precision issues:</p>
+<p>Due to cancellation effects, the sequence must be typically be
+computed at a much higher precision than the target accuracy
+of the extrapolation.</p>
+<p>If the Shanks transformation converges to the exact limit (such
+as if the sequence is a geometric series), then a division by
+zero occurs. By default, <code class="xref py py-func docutils literal notranslate"><span class="pre">shanks()</span></code> handles this case by
+terminating the iteration and returning the table it has
+generated so far. With <em>randomized=True</em>, it will instead
+replace the zero by a pseudorandom number close to zero.
+(TODO: find a better solution to this problem.)</p>
+<p>Examples (truncated from original)</p>
+<p>We illustrate by applying Shanks transformation to the Leibniz
+series for <cite>pi</cite>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="o">*</span><span class="nb">sum</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<span class="gp">... </span><span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">30</span><span class="p">)]</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">T</span> <span class="o">=</span> <span class="n">shanks_table</span><span class="p">(</span><span class="n">S</span><span class="p">[:</span><span class="mi">7</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">T</span><span class="p">:</span>
+<span class="gp">... </span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;[&#39;</span><span class="o">+</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;</span><span class="si">{:.6g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">[-0.75]</span>
+<span class="go">[1.25, 3.16667]</span>
+<span class="go">[-1.75, 3.13333, -28.75]</span>
+<span class="go">[2.25, 3.14524, 82.25, 3.14234]</span>
+<span class="go">[-2.75, 3.13968, -177.75, 3.14139, -969.938]</span>
+<span class="go">[3.25, 3.14271, 327.25, 3.14166, 3515.06, 3.14161]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.quadrature.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

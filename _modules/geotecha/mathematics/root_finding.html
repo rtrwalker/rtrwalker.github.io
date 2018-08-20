@@ -1,0 +1,403 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.mathematics.root_finding &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.mathematics.root_finding</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;Routines for finding zeros/roots of equations.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span>
+
+
+
+<div class="viewcode-block" id="find_n_roots"><a class="viewcode-back" href="../../../api/geotecha.mathematics.root_finding.html#geotecha.mathematics.root_finding.find_n_roots">[docs]</a><span class="k">def</span> <span class="nf">find_n_roots</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span>
+                 <span class="n">atol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fsolve_kwargs</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="sd">&quot;&quot;&quot;Find the first n zeros/roots of a function</span>
+
+<span class="sd">    Root/zero finding can be tempramental.  Small `dx`, `p`=1,  and large</span>
+<span class="sd">    `max_iter` will probably find the roots/zeros but it may take some time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : callable f(x, *args)</span>
+<span class="sd">        A function that takes at least one argument.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Any extra arguments to `func`. Default args=().</span>
+<span class="sd">    n : float, optional</span>
+<span class="sd">        Number of roots to find, Default n=1.</span>
+<span class="sd">    x0 : float, optional</span>
+<span class="sd">        An x value less than the first root. This is NOT the initial guess of</span>
+<span class="sd">        fsolve! Default x0=0.001.</span>
+<span class="sd">    dx : float, optional</span>
+<span class="sd">        Initial interval length to check for root in. Default dx=0.001.</span>
+<span class="sd">    p : float, optional</span>
+<span class="sd">        Factor to increase dx by up untill first root is found. Default p=1.0.</span>
+<span class="sd">    max_iter : int, optional</span>
+<span class="sd">        Maximum iterations when searching for an interval containing a root.</span>
+<span class="sd">        Default max_iter=2000.  Note this is not the same as fsolve</span>
+<span class="sd">        maxfev keword argument.</span>
+<span class="sd">    atol, rtol : float, optional</span>
+<span class="sd">        numpy.allclose parameters.  Used for checking if found the</span>
+<span class="sd">        same root. Default atol=1e-8, rtol=1e-5.</span>
+<span class="sd">    debug : True/False, optional</span>
+<span class="sd">        Print calculations to stdout. Default debug=False</span>
+<span class="sd">    fsolve_kwargs : dict, optional</span>
+<span class="sd">        dict of kwargs to pass to scipy.optimize.fsolve.</span>
+<span class="sd">        Default fsolve_kwargs={}.</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    roots : 1d ndarray</span>
+<span class="sd">        Array of len n containing the first n roots of `func`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Here is approximately what happens:</span>
+
+<span class="sd">     - `func` is evaluated with `x0` and `args` to give y0</span>
+<span class="sd">     - x is incremented by dx to give x1</span>
+<span class="sd">     - `func` is evaluated with `x1` and `args` to give y1</span>
+<span class="sd">     - If y0 and y1 have the same sign then there is no root between x0 and x1.</span>
+<span class="sd">     - `dx` is multiplied by `p` and the x is incremented again.</span>
+<span class="sd">     - successive intevals are checked until y0 and y1 are of different sign</span>
+<span class="sd">       indicating that there is a root somewhere between x0 and x1.</span>
+<span class="sd">     - `scipy.optimize.fsolve` is used to find the root. If it is the first</span>
+<span class="sd">       root then the the left end of the interval, the current x0, is used as</span>
+<span class="sd">       the initial guess for fsolve.  If it is a later root then the guess</span>
+<span class="sd">       for fsolve is the x-axis intercept of the straight line joining</span>
+<span class="sd">       (x0, y0) and (x1, y1).</span>
+<span class="sd">     - Once a root is found, the search begins for the next root which starts</span>
+<span class="sd">       between the root and the current x1. The</span>
+<span class="sd">       current dx value, the one that contained the root is reduced by a fifth</span>
+<span class="sd">       and off we go again.</span>
+
+<span class="sd">    There are a few checks:</span>
+
+<span class="sd">     - At least five intervals must be checked before a possible root</span>
+<span class="sd">         interval is found.  If less than five occur then we go back to the</span>
+<span class="sd">         starting point of that roots search and use a reduced dx.</span>
+<span class="sd">     - There is a maximum limit to the number of iterations used for each root</span>
+<span class="sd">     - It is possible that the algorithm will, when searching for succesive</span>
+<span class="sd">       roots, find identical roots.  This is wrong.  The current interval size</span>
+<span class="sd">       along with the current dx will be reduced and the search will continue.</span>
+<span class="sd">       If the same root is found five times then the root finding parameters</span>
+<span class="sd">       are inappropriate and an error message will be raised.</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="c1">#    debug=True</span>
+
+    <span class="n">dx_zero</span> <span class="o">=</span> <span class="n">dx</span> <span class="c1">#starting increment from input</span>
+    <span class="n">x0_zero</span> <span class="o">=</span> <span class="n">x0</span> <span class="c1">#starting point from input</span>
+
+    <span class="n">roots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="n">root_number</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">iter_count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">x00</span> <span class="o">=</span> <span class="n">x0_zero</span> <span class="c1">#starting point for current root</span>
+    <span class="n">dx0</span> <span class="o">=</span> <span class="n">dx_zero</span> <span class="c1">#starting increment for current root</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trying to find </span><span class="si">{0}</span><span class="s1"> roots of &quot;</span><span class="si">{1}</span><span class="s1">&quot; starting at x0=</span><span class="si">{2}</span><span class="s1"> &#39;</span>
+             <span class="s1">&#39;with dx=</span><span class="si">{3}</span><span class="s1">, p=</span><span class="si">{4}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">p</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;root_number, iter_count, x, y, comment&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="s1">&#39;start&#39;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">root_number</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">iter_count</span> <span class="o">&gt;</span> <span class="n">max_iter</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Exceeded </span><span class="si">{0}</span><span class="s2"> iterations in trying to find &quot;</span>
+                            <span class="s2">&quot;root #</span><span class="si">{1}</span><span class="s2"> of </span><span class="si">{2}</span><span class="s2"> for the function &#39;</span><span class="si">{3}</span><span class="s2">&#39;. &quot;</span>
+                            <span class="s2">&quot;Consider changing x0,dx, and to better capture &quot;</span>
+                            <span class="s2">&quot;the root.  Currently x0=</span><span class="si">{4:.4g}</span><span class="s2">, dx=</span><span class="si">{5:.4g}</span><span class="s2">, &quot;</span>
+                            <span class="s2">&quot;p=</span><span class="si">{6}</span><span class="s2">. Roots already found are: </span><span class="si">{7}</span><span class="s2">&quot;</span>
+
+                            <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_iter</span><span class="p">,</span>
+                                      <span class="n">root_number</span><span class="p">,</span>
+                                      <span class="n">n</span><span class="p">,</span>
+                                      <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                      <span class="n">x0_zero</span><span class="p">,</span>
+                                      <span class="n">dx_zero</span><span class="p">,</span>
+                                      <span class="n">p</span><span class="p">,</span>
+                                      <span class="p">[</span><span class="n">roots</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">root_number</span><span class="p">)]))</span>
+        <span class="n">iter_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">x1</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="n">dx</span>
+        <span class="n">y1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y0</span> <span class="o">*</span> <span class="n">y1</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span> <span class="c1">#root found</span>
+
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;possible root interval&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">iter_count</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="c1">#too few steps to reach possible root; go back to start and</span>
+                <span class="c1"># use a smaller increment</span>
+                <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span>
+                          <span class="s1">&#39;too few steps to reach possible root. &#39;</span>
+                          <span class="s1">&#39;Trying again with smaller dx&#39;</span><span class="p">)</span>
+                <span class="n">x0</span> <span class="o">=</span> <span class="n">x00</span>
+                <span class="n">y0</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="n">iter_count</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">dx</span> <span class="o">*=</span> <span class="mf">0.2</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">root_number</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">dx</span> <span class="o">/=</span> <span class="n">p</span>
+                <span class="n">xguess</span> <span class="o">=</span> <span class="n">x0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">xguess</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">-</span> <span class="n">y0</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span>
+
+            <span class="n">xr</span><span class="p">,</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">xguess</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">fsolve_kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">root_number</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">roots</span><span class="p">[</span><span class="n">root_number</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">):</span>
+                    <span class="c1">#found same root</span>
+                    <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="s1">&#39;found same root. reducing dx&#39;</span><span class="p">)</span>
+                    <span class="n">iter_same</span> <span class="o">+=</span><span class="mi">1</span>
+                    <span class="k">if</span> <span class="n">iter_same</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                            <span class="s2">&quot;Found same root </span><span class="si">{0}</span><span class="s2"> times while trying to find &quot;</span>
+                            <span class="s2">&quot;root #</span><span class="si">{1}</span><span class="s2"> of </span><span class="si">{2}</span><span class="s2"> for the function &#39;</span><span class="si">{3}</span><span class="s2">&#39;. &quot;</span>
+                            <span class="s2">&quot;Consider changing x0, dx, and to better capture &quot;</span>
+                            <span class="s2">&quot;the root.  Currently x0=</span><span class="si">{4:.4g}</span><span class="s2">, dx=</span><span class="si">{5:.4g}</span><span class="s2">, &quot;</span>
+                            <span class="s2">&quot;p=</span><span class="si">{6}</span><span class="s2">. Roots already found are: </span><span class="si">{7}</span><span class="s2">&quot;</span>
+                                <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iter_same</span><span class="p">,</span>
+                                          <span class="n">root_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                                          <span class="n">n</span><span class="p">,</span>
+                                          <span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                          <span class="n">x0_zero</span><span class="p">,</span>
+                                          <span class="n">dx_zero</span><span class="p">,</span>
+                                          <span class="n">p</span><span class="p">,</span>
+                                          <span class="p">[</span><span class="n">roots</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">root_number</span><span class="p">)]))</span>
+                    <span class="n">iter_count</span> <span class="o">=</span> <span class="n">iter_count</span><span class="o">-</span><span class="mi">2</span>
+                    <span class="n">dx</span><span class="o">*=</span><span class="mf">0.2</span>
+                    <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">xr</span><span class="p">,</span> <span class="n">func</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="s1">&#39;found root&#39;</span><span class="p">)</span>
+
+            <span class="n">roots</span><span class="p">[</span><span class="n">root_number</span><span class="p">]</span> <span class="o">=</span> <span class="n">xr</span>
+
+            <span class="c1">#reset dx</span>
+            <span class="n">dx</span><span class="o">*=</span><span class="mf">0.5</span>
+            <span class="n">dx0</span> <span class="o">=</span> <span class="n">dx</span>
+            <span class="c1">#move right</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">xr</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">):</span>
+                <span class="n">x1</span> <span class="o">=</span> <span class="n">xr</span><span class="o">+</span><span class="p">(</span><span class="n">x1</span><span class="o">-</span><span class="n">xr</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+                <span class="n">y1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">x00</span> <span class="o">=</span> <span class="n">x1</span>
+
+            <span class="c1">#reset iters for next root</span>
+            <span class="n">iter_count</span><span class="o">=</span><span class="mi">0</span>
+            <span class="n">iter_same</span><span class="o">=</span><span class="mi">0</span>
+
+
+<span class="c1">#            if root_number &gt;= 2:</span>
+<span class="c1">#                dx = (roots[root_number] - roots[root_number-1]) / 20</span>
+            <span class="n">root_number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">debug</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">root_number</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">root_number</span><span class="p">,</span> <span class="n">iter_count</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span>
+                          <span class="s1">&#39;start root#</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">root_number</span><span class="p">))</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">x1</span>
+        <span class="n">y0</span> <span class="o">=</span> <span class="n">y1</span>
+<span class="c1">#        if root_number == 0:</span>
+        <span class="n">dx</span> <span class="o">*=</span> <span class="n">p</span>
+
+
+    <span class="k">return</span> <span class="n">roots</span></div>
+
+
+<div class="viewcode-block" id="fixed_point_no_accel"><a class="viewcode-back" href="../../../api/geotecha.mathematics.root_finding.html#geotecha.mathematics.root_finding.fixed_point_no_accel">[docs]</a><span class="k">def</span> <span class="nf">fixed_point_no_accel</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(),</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find a fixed point of the function (NO CONVEGENCE ACCELERATION!!!).</span>
+
+<span class="sd">    Based on scipy.optimize.fixed_point but no convergence acelleration (RTRW)</span>
+
+<span class="sd">    Given a function of one or more variables and a starting point, find a</span>
+<span class="sd">    fixed-point of the function: i.e. where ``func(x0) == x0``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    func : function</span>
+<span class="sd">        Function to evaluate.</span>
+<span class="sd">    x0 : array_like</span>
+<span class="sd">        Fixed point of function.</span>
+<span class="sd">    args : tuple, optional</span>
+<span class="sd">        Extra arguments to `func`.</span>
+<span class="sd">    xtol : float, optional</span>
+<span class="sd">        Convergence tolerance, defaults to 1e-08.</span>
+<span class="sd">    maxiter : int, optional</span>
+<span class="sd">        Maximum number of iterations, defaults to 500.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Does NOT use Steffensen&#39;s Method using Aitken&#39;s ``Del^2`` convergence</span>
+<span class="sd">    Acceleration. See Burden, Faires, &quot;Numerical Analysis&quot;, 5th edition, pg. 80</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from scipy import optimize</span>
+<span class="sd">    &gt;&gt;&gt; def func(x, c1, c2):</span>
+<span class="sd">    ...    return np.sqrt(c1/(x+c2))</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; c1 = np.array([10,12.])</span>
+<span class="sd">    &gt;&gt;&gt; c2 = np.array([3, 5.])</span>
+<span class="sd">    &gt;&gt;&gt; optimize.fixed_point(func, [1.2, 1.3], args=(c1,c2))</span>
+<span class="sd">    array([1.4920333 , 1.37228132])</span>
+<span class="sd">    &gt;&gt;&gt; fixed_point_no_accel(func, [1.2, 1.3], args=(c1,c2))</span>
+<span class="sd">    array([1.4920333 , 1.37228132])</span>
+
+
+<span class="sd">    Sometimes iterations should converge but fail when acceleration</span>
+<span class="sd">    convergence is used:</span>
+
+<span class="sd">    &gt;&gt;&gt; def fn(n, kl, ks, i0):</span>
+<span class="sd">    ...     return np.log(kl/ks/n) / np.log((i0 *n/(n - 1))) + 1</span>
+<span class="sd">    &gt;&gt;&gt; fixed_point_no_accel(fn, 1.001, args=[6, 2, 3.7477525683])</span>
+<span class="sd">    1.300...</span>
+<span class="sd">    &gt;&gt;&gt; optimize.fixed_point(fn, 1.001, args=[6, 2, 3.7477525683])</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    RuntimeError: Failed to converge after 500 iterations, value is nan</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">x0</span><span class="p">):</span>
+        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">x0</span>
+        <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="c1">#            p2 = func(p1, *args)</span>
+<span class="c1">#            d = p2 - 2.0 * p1 + p0</span>
+<span class="c1">#            p = where(d == 0, p2, p0 - (p1 - p0)*(p1 - p0) / d)</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">p1</span>
+            <span class="n">relerr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">p0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="n">p0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">relerr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">xtol</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">p</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">x0</span>
+        <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxiter</span><span class="p">):</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="c1">#            p2 = func(p1, *args)</span>
+<span class="c1">#            d = p2 - 2.0 * p1 + p0</span>
+<span class="c1">#            if d == 0.0:</span>
+<span class="c1">#                return p2</span>
+<span class="c1">#            else:</span>
+<span class="c1">#                p = p0 - (p1 - p0)*(p1 - p0) / d</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">p1</span>
+            <span class="k">if</span> <span class="n">p0</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">relerr</span> <span class="o">=</span> <span class="n">p</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">relerr</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="n">p0</span><span class="p">)</span><span class="o">/</span><span class="n">p0</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">relerr</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">xtol</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span>
+            <span class="n">p0</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Failed to converge after </span><span class="si">%d</span><span class="s2"> iterations, value is </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">maxiter</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">nose</span>
+    <span class="n">nose</span><span class="o">.</span><span class="n">runmodule</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nose&#39;</span><span class="p">,</span> <span class="s1">&#39;--verbosity=3&#39;</span><span class="p">,</span> <span class="s1">&#39;--with-doctest&#39;</span><span class="p">,</span> <span class="s1">&#39;--doctest-options=+ELLIPSIS&#39;</span><span class="p">,</span> <span class="s1">&#39;--doctest-options=+IGNORE_EXCEPTION_DETAIL&#39;</span><span class="p">])</span>
+<span class="c1">#    nose.runmodule(argv=[&#39;nose&#39;, &#39;--verbosity=3&#39;])</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

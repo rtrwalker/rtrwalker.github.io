@@ -1,0 +1,308 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.terzahi &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.terzahi</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Terzaghi one-dimensional consolidation</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1">#import cmath</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="c1">#import scipy</span>
+<span class="c1">#from scipy.integrate import quad</span>
+
+
+<div class="viewcode-block" id="plot_one_dim_consol"><a class="viewcode-back" href="../../../api/geotecha.consolidation.terzahi.html#geotecha.consolidation.terzahi.plot_one_dim_consol">[docs]</a><span class="k">def</span> <span class="nf">plot_one_dim_consol</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">por</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;rough plotting&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">por</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Depth, z&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pore pressure&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">doc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time, t&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Degree of consolidation&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">()</span>
+
+
+
+
+    <span class="k">return</span></div>
+
+
+
+
+<div class="viewcode-block" id="terzaghi_1d"><a class="viewcode-back" href="../../../api/geotecha.consolidation.terzahi.html#geotecha.consolidation.terzahi.terzaghi_1d">[docs]</a><span class="k">def</span> <span class="nf">terzaghi_1d</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kv</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mv</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">ui</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Terzaghi 1d consolidation</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer.</span>
+<span class="sd">     - Vertical flow.</span>
+<span class="sd">     - Instant load uniform with depth.</span>
+<span class="sd">     - Soil properties constant with time.</span>
+<span class="sd">     - Pore pressure vs depth.</span>
+<span class="sd">     - Degree of consolidation vs time.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth to calc pore pressure at.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time to calc pore degree of consolidation at.</span>
+<span class="sd">    H : float, optional</span>
+<span class="sd">        Drainage path length.  Default H=1</span>
+<span class="sd">    kv : float, optional</span>
+<span class="sd">        Vertical coefficient of permeability.  Default kv=1.</span>
+<span class="sd">    mv : float, optional</span>
+<span class="sd">        Volume compressibility.  Default mv=0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  Default gamw=10.</span>
+<span class="sd">    ui : float, optional</span>
+<span class="sd">        Initial uniform pore water pressure.  Default ui = 1.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        Maximum number of series terms. Default nterms=100</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    por : 2d array of float</span>
+<span class="sd">        Pore pressure at depth and time.  ppress is an array of size</span>
+<span class="sd">        (len(z), len(t)).</span>
+<span class="sd">    doc : 1d array of float</span>
+<span class="sd">        degree of consolidation at time `t&#39;</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">dTv</span> <span class="o">=</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+    <span class="n">Tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">dTv</span> <span class="o">*</span> <span class="n">t</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">H</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+    <span class="n">por</span> <span class="o">=</span>  <span class="mi">2</span> <span class="o">/</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">Z</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+    <span class="n">por</span> <span class="o">=</span> <span class="n">ui</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">por</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#the following is inefficient</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="mi">2</span><span class="o">/</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+
+
+    <span class="k">return</span> <span class="n">por</span><span class="p">,</span> <span class="n">doc</span></div>
+
+
+<div class="viewcode-block" id="terzaghi_1d_flowrate"><a class="viewcode-back" href="../../../api/geotecha.consolidation.terzahi.html#geotecha.consolidation.terzahi.terzaghi_1d_flowrate">[docs]</a><span class="k">def</span> <span class="nf">terzaghi_1d_flowrate</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kv</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mv</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+                <span class="n">ui</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Terzaghi 1d consolidation, flowrate at depth</span>
+
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer.</span>
+<span class="sd">     - Vertical flow.</span>
+<span class="sd">     - Instant load uniform with depth.</span>
+<span class="sd">     - Soil properties constant with time.</span>
+<span class="sd">     - flowrate at depth vs time.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth to calc pore pressure at.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time to calc pore degree of consolidation at.</span>
+<span class="sd">    H : float, optional</span>
+<span class="sd">        Drainage path length.  Default H=1</span>
+<span class="sd">    kv : float, optional</span>
+<span class="sd">        Vertical coefficient of permeability.  Default kv=1.</span>
+<span class="sd">    mv : float, optional</span>
+<span class="sd">        Volume compressibility.  Default mv=0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  Default gamw=10.</span>
+<span class="sd">    ui : float, optional</span>
+<span class="sd">        Initial uniform pore water pressure.  Default ui = 1.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        Maximum number of series terms. Default nterms=100</span>
+
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flowrate : 2d array of float</span>
+<span class="sd">        flowrate depth and time.  flowrate is an array of size</span>
+<span class="sd">        (len(z), len(t)).</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="n">dTv</span> <span class="o">=</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">mv</span> <span class="o">/</span> <span class="n">gamw</span>
+    <span class="n">Tv</span> <span class="o">=</span> <span class="p">(</span><span class="n">dTv</span> <span class="o">*</span> <span class="n">t</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">/</span> <span class="n">H</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="c1">#    por =  2 / M * np.sin(M * Z) * np.exp(-M**2 * Tv)</span>
+    <span class="n">flowrate</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">Z</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Tv</span><span class="p">)</span>
+    <span class="n">flowrate</span> <span class="o">=</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">gamw</span> <span class="o">*</span> <span class="n">ui</span> <span class="o">/</span> <span class="n">H</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">flowrate</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+
+
+    <span class="k">return</span> <span class="n">flowrate</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>
+<span class="c1">#    flow_t = np.array([  0, 0.00000000e+00,   1.00000000e-05,   1.32571137e-05,</span>
+<span class="c1">#         1.75751062e-05,   2.32995181e-05,   3.08884360e-05,</span>
+<span class="c1">#         4.09491506e-05,   5.42867544e-05,   7.19685673e-05,</span>
+<span class="c1">#         9.54095476e-05,   1.26485522e-04,   1.67683294e-04,</span>
+<span class="c1">#         2.22299648e-04,   2.94705170e-04,   3.90693994e-04,</span>
+<span class="c1">#         5.17947468e-04,   6.86648845e-04,   9.10298178e-04,</span>
+<span class="c1">#         1.20679264e-03,   1.59985872e-03,   2.12095089e-03,</span>
+<span class="c1">#         2.81176870e-03,   3.72759372e-03,   4.94171336e-03,</span>
+<span class="c1">#         6.55128557e-03,   8.68511374e-03,   1.15139540e-02,</span>
+<span class="c1">#         1.52641797e-02,   2.02358965e-02,   2.68269580e-02,</span>
+<span class="c1">#         3.55648031e-02,   4.71486636e-02,   6.25055193e-02,</span>
+<span class="c1">#         8.28642773e-02,   1.09854114e-01,   1.45634848e-01,</span>
+<span class="c1">#         1.93069773e-01,   2.55954792e-01,   3.39322177e-01,</span>
+<span class="c1">#         4.49843267e-01,   5.96362332e-01,   7.90604321e-01,</span>
+<span class="c1">#         1.04811313e+00,   1.38949549e+00,   1.84206997e+00,</span>
+<span class="c1">#         2.44205309e+00,   3.23745754e+00,   4.29193426e+00,</span>
+<span class="c1">#         5.68986603e+00,   7.54312006e+00,   1.00000000e+01])</span>
+<span class="c1">#    flow_v = -np.array([0,  2.00000000e+05,   3.56824823e+04,   3.09906417e+04,</span>
+<span class="c1">#         2.69157248e+04,   2.33766131e+04,   2.03028544e+04,</span>
+<span class="c1">#         1.76332600e+04,   1.53146868e+04,   1.33009797e+04,</span>
+<span class="c1">#         1.15520522e+04,   1.00330887e+04,   8.71385164e+03,</span>
+<span class="c1">#         7.56807926e+03,   6.57296291e+03,   5.70869305e+03,</span>
+<span class="c1">#         4.95806484e+03,   4.30613571e+03,   3.73992784e+03,</span>
+<span class="c1">#         3.24816986e+03,   2.82107247e+03,   2.45013353e+03,</span>
+<span class="c1">#         2.12796884e+03,   1.84816514e+03,   1.60515244e+03,</span>
+<span class="c1">#         1.39409315e+03,   1.21078576e+03,   1.05158120e+03,</span>
+<span class="c1">#         9.13310235e+02,   7.93220327e+02,   6.88920876e+02,</span>
+<span class="c1">#         5.98335616e+02,   5.19661287e+02,   4.51331637e+02,</span>
+<span class="c1">#         3.91982248e+02,   3.40369144e+02,   2.95064036e+02,</span>
+<span class="c1">#         2.53909631e+02,   2.14068409e+02,   1.73374382e+02,</span>
+<span class="c1">#         1.31849349e+02,   9.18362586e+01,   5.68676559e+01,</span>
+<span class="c1">#         3.01248089e+01,   1.29749663e+01,   4.24753612e+00,</span>
+<span class="c1">#         9.66513565e-01,   1.35790536e-01,   1.00673399e-02,</span>
+<span class="c1">#         3.19831215e-04,   3.30379683e-06,   7.69614367e-09])</span>
+<span class="c1">#</span>
+<span class="c1">#    tslice = slice(1, None)</span>
+<span class="c1">#    print(2*terzaghi_1d_flowrate(z=np.array([0.0]), t=flow_t[tslice], kv=10, mv=1, gamw=10, ui=100, nterms=500))</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,531 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon example code: speccon1d_unsat_3layer_shanetal2014.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="speccon example code: speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.py" href="speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.html" />
+    <link rel="prev" title="speccon Examples" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">speccon Examples</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">speccon Examples</a></li>
+      <li>Next: <a href="speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.html" title="next chapter">speccon example code: speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/speccon/speccon1d_unsat_3layer_shanetal2014.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon-example-code-speccon1d-unsat-3layer-shanetal2014-py">
+<span id="speccon-speccon1d-unsat-3layer-shanetal2014"></span><h1>speccon example code: speccon1d_unsat_3layer_shanetal2014.py<a class="headerlink" href="#speccon-example-code-speccon1d-unsat-3layer-shanetal2014-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># speccon1d_unsat example (if viewing this in docs, plots are at bottom of page)</span>
+
+<span class="c1"># Unsaturated soil 1 dimensional consolidation.</span>
+<span class="c1"># 3 layers, instant load</span>
+<span class="c1"># Compare with Shan et al. (2014) Fig5</span>
+
+<span class="c1"># Shan, Z., Ling, D., and Ding, H. (2014). &quot;Analytical solution</span>
+<span class="c1"># for the 1D consolidation of unsaturated multi-layered soil.&quot;</span>
+<span class="c1"># Computers and Geotechnics, 57, 17-23. doi 10.1016/j.compgeo.2013.11.009</span>
+
+
+<span class="c1"># This file should be run with python.  It will not work if run with the</span>
+<span class="c1"># speccon1d_unsat.exe script program.</span>
+
+
+<span class="c1"># note the code is a bit slopy</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">geotecha.piecewise.piecewise_linear_1d</span> <span class="kn">as</span> <span class="nn">pwise</span>
+<span class="kn">from</span> <span class="nn">geotecha.piecewise.piecewise_linear_1d</span> <span class="kn">import</span> <span class="n">PolyLine</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_unsat</span> <span class="kn">import</span> <span class="n">Speccon1dUnsat</span>
+
+
+<span class="k">def</span> <span class="nf">shanetal2014_3_layers_instant</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Test speccon1d_unsat against 3laye eg from Shan et al. (2014)</span>
+
+<span class="sd">    Shan et al (2014) &#39;Analytical solution for the 1D</span>
+<span class="sd">        consolidation of unsaturated multi-layered soil&#39;</span>
+
+<span class="sd">    test data is digitized from article</span>
+
+<span class="sd">    dsig=?kPa instantly</span>
+
+
+<span class="sd">    other data:</span>
+<span class="sd">    h = [3,4,3] (m)</span>
+<span class="sd">    n = [0.45, 0.5, 0.4] (Porosity)</span>
+<span class="sd">    S = [0.8, 0.6, 0.7] (Saturation)</span>
+<span class="sd">    kw = [1e-10, 1e-9, 1e-10] (m/s)</span>
+<span class="sd">    ka = [1e-9, 1e-8, 1e-9] (m/s)</span>
+<span class="sd">    m1s = -2.5e-4 (1/kPa)</span>
+<span class="sd">    m2s / m1s = 0.4</span>
+<span class="sd">    m1w / m1s = 0.2</span>
+<span class="sd">    m2w/m1w = 4</span>
+<span class="sd">    #m1s = m1a + m1w</span>
+<span class="sd">    #m2s = m2a + m2w</span>
+<span class="sd">    gamw = 10,000 N/m3</span>
+<span class="sd">    uatm = ua_ = 101kPa</span>
+<span class="sd">    T = 293.16 K</span>
+<span class="sd">    R = 8.31432J/molK</span>
+<span class="sd">    wa = 29x10**3 kg/mol</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">t_for_z_vs_uw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e1</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="mf">1e4</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">])</span>
+    <span class="c1">#uw is uw/q0</span>
+    <span class="n">uw_for_z_vs_uw</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.288</span><span class="p">,</span>  <span class="mf">0.386</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.38</span> <span class="p">,</span>
+        <span class="mf">0.354</span><span class="p">,</span>  <span class="mf">0.341</span><span class="p">,</span>  <span class="mf">0.331</span><span class="p">,</span>  <span class="mf">0.327</span><span class="p">,</span>  <span class="mf">0.326</span><span class="p">,</span>  <span class="mf">0.327</span><span class="p">,</span>  <span class="mf">0.328</span><span class="p">,</span>  <span class="mf">0.327</span><span class="p">,</span>
+        <span class="mf">0.335</span><span class="p">,</span>  <span class="mf">0.356</span><span class="p">,</span>  <span class="mf">0.368</span><span class="p">,</span>  <span class="mf">0.368</span><span class="p">,</span>  <span class="mf">0.369</span><span class="p">,</span>  <span class="mf">0.37</span> <span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.191</span><span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>  <span class="mf">0.279</span><span class="p">,</span>  <span class="mf">0.33</span> <span class="p">,</span>  <span class="mf">0.38</span> <span class="p">,</span>  <span class="mf">0.395</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>
+        <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.396</span><span class="p">,</span>  <span class="mf">0.381</span><span class="p">,</span>  <span class="mf">0.364</span><span class="p">,</span>  <span class="mf">0.35</span> <span class="p">,</span>  <span class="mf">0.339</span><span class="p">,</span>  <span class="mf">0.333</span><span class="p">,</span>
+        <span class="mf">0.328</span><span class="p">,</span>  <span class="mf">0.328</span><span class="p">,</span>  <span class="mf">0.328</span><span class="p">,</span>  <span class="mf">0.331</span><span class="p">,</span>  <span class="mf">0.334</span><span class="p">,</span>  <span class="mf">0.336</span><span class="p">,</span>  <span class="mf">0.351</span><span class="p">,</span>  <span class="mf">0.363</span><span class="p">,</span>
+        <span class="mf">0.37</span> <span class="p">,</span>  <span class="mf">0.37</span> <span class="p">,</span>  <span class="mf">0.37</span> <span class="p">,</span>  <span class="mf">0.369</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.001</span><span class="p">,</span>  <span class="mf">0.234</span><span class="p">,</span>  <span class="mf">0.251</span><span class="p">,</span>  <span class="mf">0.285</span><span class="p">,</span>  <span class="mf">0.319</span><span class="p">,</span>  <span class="mf">0.339</span><span class="p">,</span>  <span class="mf">0.357</span><span class="p">,</span>  <span class="mf">0.361</span><span class="p">,</span>
+        <span class="mf">0.354</span><span class="p">,</span>  <span class="mf">0.345</span><span class="p">,</span>  <span class="mf">0.341</span><span class="p">,</span>  <span class="mf">0.34</span> <span class="p">,</span>  <span class="mf">0.339</span><span class="p">,</span>  <span class="mf">0.337</span><span class="p">,</span>  <span class="mf">0.336</span><span class="p">,</span>  <span class="mf">0.337</span><span class="p">,</span>
+        <span class="mf">0.338</span><span class="p">,</span>  <span class="mf">0.339</span><span class="p">,</span>  <span class="mf">0.347</span><span class="p">,</span>  <span class="mf">0.357</span><span class="p">,</span>  <span class="mf">0.361</span><span class="p">,</span>  <span class="mf">0.368</span><span class="p">,</span>  <span class="mf">0.37</span> <span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.06</span> <span class="p">,</span>  <span class="mf">0.118</span><span class="p">,</span>  <span class="mf">0.168</span><span class="p">,</span>  <span class="mf">0.214</span><span class="p">,</span>  <span class="mf">0.246</span><span class="p">,</span>  <span class="mf">0.255</span><span class="p">,</span>  <span class="mf">0.258</span><span class="p">,</span>
+        <span class="mf">0.264</span><span class="p">,</span>  <span class="mf">0.265</span><span class="p">,</span>  <span class="mf">0.266</span><span class="p">,</span>  <span class="mf">0.267</span><span class="p">,</span>  <span class="mf">0.267</span><span class="p">,</span>  <span class="mf">0.267</span><span class="p">,</span>  <span class="mf">0.268</span><span class="p">,</span>  <span class="mf">0.269</span><span class="p">,</span>
+        <span class="mf">0.269</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.046</span><span class="p">,</span>  <span class="mf">0.087</span><span class="p">,</span>  <span class="mf">0.121</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.208</span><span class="p">,</span>  <span class="mf">0.213</span><span class="p">,</span>
+        <span class="mf">0.216</span><span class="p">,</span>  <span class="mf">0.229</span><span class="p">,</span>  <span class="mf">0.236</span><span class="p">,</span>  <span class="mf">0.24</span> <span class="p">,</span>  <span class="mf">0.242</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.01</span> <span class="p">,</span>  <span class="mf">0.018</span><span class="p">,</span>  <span class="mf">0.028</span><span class="p">,</span>  <span class="mf">0.036</span><span class="p">,</span>  <span class="mf">0.038</span><span class="p">,</span>  <span class="mf">0.039</span><span class="p">,</span>  <span class="mf">0.039</span><span class="p">,</span>
+        <span class="mf">0.04</span> <span class="p">,</span>  <span class="mf">0.045</span><span class="p">,</span>  <span class="mf">0.046</span><span class="p">,</span>  <span class="mf">0.047</span><span class="p">],</span>
+        <span class="p">]</span>
+    <span class="c1">#z is z/H</span>
+    <span class="n">z_for_z_vs_uw</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.004</span><span class="p">,</span>  <span class="mf">0.013</span><span class="p">,</span>  <span class="mf">0.125</span><span class="p">,</span>  <span class="mf">0.205</span><span class="p">,</span>  <span class="mf">0.29</span> <span class="p">,</span>  <span class="mf">0.297</span><span class="p">,</span>
+        <span class="mf">0.299</span><span class="p">,</span>  <span class="mf">0.299</span><span class="p">,</span>  <span class="mf">0.31</span> <span class="p">,</span>  <span class="mf">0.319</span><span class="p">,</span>  <span class="mf">0.407</span><span class="p">,</span>  <span class="mf">0.523</span><span class="p">,</span>  <span class="mf">0.655</span><span class="p">,</span>  <span class="mf">0.69</span> <span class="p">,</span>
+        <span class="mf">0.7</span>  <span class="p">,</span>  <span class="mf">0.702</span><span class="p">,</span>  <span class="mf">0.71</span> <span class="p">,</span>  <span class="mf">0.755</span><span class="p">,</span>  <span class="mf">0.877</span><span class="p">,</span>  <span class="mf">0.976</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.006</span><span class="p">,</span>  <span class="mf">0.007</span><span class="p">,</span>  <span class="mf">0.028</span><span class="p">,</span>  <span class="mf">0.058</span><span class="p">,</span>  <span class="mf">0.078</span><span class="p">,</span>  <span class="mf">0.105</span><span class="p">,</span>
+        <span class="mf">0.147</span><span class="p">,</span>  <span class="mf">0.202</span><span class="p">,</span>  <span class="mf">0.237</span><span class="p">,</span>  <span class="mf">0.26</span> <span class="p">,</span>  <span class="mf">0.279</span><span class="p">,</span>  <span class="mf">0.29</span> <span class="p">,</span>  <span class="mf">0.3</span>  <span class="p">,</span>  <span class="mf">0.37</span> <span class="p">,</span>
+        <span class="mf">0.429</span><span class="p">,</span>  <span class="mf">0.478</span><span class="p">,</span>  <span class="mf">0.576</span><span class="p">,</span>  <span class="mf">0.625</span><span class="p">,</span>  <span class="mf">0.677</span><span class="p">,</span>  <span class="mf">0.707</span><span class="p">,</span>  <span class="mf">0.725</span><span class="p">,</span>  <span class="mf">0.745</span><span class="p">,</span>
+        <span class="mf">0.779</span><span class="p">,</span>  <span class="mf">0.832</span><span class="p">,</span>  <span class="mf">0.919</span><span class="p">,</span>  <span class="mf">0.986</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.006</span><span class="p">,</span>  <span class="mf">0.007</span><span class="p">,</span>  <span class="mf">0.038</span><span class="p">,</span>  <span class="mf">0.078</span><span class="p">,</span>  <span class="mf">0.11</span> <span class="p">,</span>  <span class="mf">0.158</span><span class="p">,</span>  <span class="mf">0.202</span><span class="p">,</span>
+        <span class="mf">0.25</span> <span class="p">,</span>  <span class="mf">0.289</span><span class="p">,</span>  <span class="mf">0.305</span><span class="p">,</span>  <span class="mf">0.36</span> <span class="p">,</span>  <span class="mf">0.437</span><span class="p">,</span>  <span class="mf">0.508</span><span class="p">,</span>  <span class="mf">0.563</span><span class="p">,</span>  <span class="mf">0.625</span><span class="p">,</span>
+        <span class="mf">0.682</span><span class="p">,</span>  <span class="mf">0.703</span><span class="p">,</span>  <span class="mf">0.743</span><span class="p">,</span>  <span class="mf">0.79</span> <span class="p">,</span>  <span class="mf">0.832</span><span class="p">,</span>  <span class="mf">0.882</span><span class="p">,</span>  <span class="mf">0.944</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.009</span><span class="p">,</span>  <span class="mf">0.017</span><span class="p">,</span>  <span class="mf">0.029</span><span class="p">,</span>  <span class="mf">0.046</span><span class="p">,</span>  <span class="mf">0.064</span><span class="p">,</span>  <span class="mf">0.086</span><span class="p">,</span>  <span class="mf">0.148</span><span class="p">,</span>
+        <span class="mf">0.257</span><span class="p">,</span>  <span class="mf">0.303</span><span class="p">,</span>  <span class="mf">0.466</span><span class="p">,</span>  <span class="mf">0.566</span><span class="p">,</span>  <span class="mf">0.67</span> <span class="p">,</span>  <span class="mf">0.703</span><span class="p">,</span>  <span class="mf">0.81</span> <span class="p">,</span>  <span class="mf">0.894</span><span class="p">,</span>
+        <span class="mf">0.999</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.067</span><span class="p">,</span>  <span class="mf">0.121</span><span class="p">,</span>  <span class="mf">0.174</span><span class="p">,</span>  <span class="mf">0.235</span><span class="p">,</span>  <span class="mf">0.298</span><span class="p">,</span>  <span class="mf">0.435</span><span class="p">,</span>  <span class="mf">0.564</span><span class="p">,</span>
+        <span class="mf">0.7</span>  <span class="p">,</span>  <span class="mf">0.792</span><span class="p">,</span>  <span class="mf">0.855</span><span class="p">,</span>  <span class="mf">0.947</span><span class="p">,</span>  <span class="mf">1.001</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.072</span><span class="p">,</span>  <span class="mf">0.149</span><span class="p">,</span>  <span class="mf">0.219</span><span class="p">,</span>  <span class="mf">0.299</span><span class="p">,</span>  <span class="mf">0.437</span><span class="p">,</span>  <span class="mf">0.572</span><span class="p">,</span>  <span class="mf">0.667</span><span class="p">,</span>
+        <span class="mf">0.704</span><span class="p">,</span>  <span class="mf">0.815</span><span class="p">,</span>  <span class="mf">0.893</span><span class="p">,</span>  <span class="mf">0.997</span><span class="p">],</span>
+        <span class="p">]</span>
+
+
+    <span class="n">t_for_z_vs_ua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1e1</span><span class="p">,</span> <span class="mf">1e3</span><span class="p">,</span> <span class="mf">1e4</span><span class="p">,</span> <span class="mf">1e5</span><span class="p">,</span> <span class="mf">1e6</span><span class="p">])</span>
+    <span class="n">ua_for_z_vs_ua</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.119</span><span class="p">,</span>  <span class="mf">0.183</span><span class="p">,</span>  <span class="mf">0.2</span>  <span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.202</span><span class="p">,</span>  <span class="mf">0.189</span><span class="p">,</span>
+        <span class="mf">0.153</span><span class="p">,</span>  <span class="mf">0.119</span><span class="p">,</span>  <span class="mf">0.108</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.105</span><span class="p">,</span>  <span class="mf">0.113</span><span class="p">,</span>
+        <span class="mf">0.129</span><span class="p">,</span>  <span class="mf">0.143</span><span class="p">,</span>  <span class="mf">0.154</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.027</span><span class="p">,</span>  <span class="mf">0.065</span><span class="p">,</span>  <span class="mf">0.094</span><span class="p">,</span>  <span class="mf">0.128</span><span class="p">,</span>  <span class="mf">0.157</span><span class="p">,</span>  <span class="mf">0.179</span><span class="p">,</span>  <span class="mf">0.191</span><span class="p">,</span>
+        <span class="mf">0.197</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.202</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.198</span><span class="p">,</span>  <span class="mf">0.189</span><span class="p">,</span>
+        <span class="mf">0.179</span><span class="p">,</span>  <span class="mf">0.166</span><span class="p">,</span>  <span class="mf">0.15</span> <span class="p">,</span>  <span class="mf">0.135</span><span class="p">,</span>  <span class="mf">0.123</span><span class="p">,</span>  <span class="mf">0.117</span><span class="p">,</span>  <span class="mf">0.11</span> <span class="p">,</span>  <span class="mf">0.107</span><span class="p">,</span>
+        <span class="mf">0.104</span><span class="p">,</span>  <span class="mf">0.103</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.103</span><span class="p">,</span>  <span class="mf">0.104</span><span class="p">,</span>  <span class="mf">0.106</span><span class="p">,</span>  <span class="mf">0.108</span><span class="p">,</span>  <span class="mf">0.11</span> <span class="p">,</span>
+        <span class="mf">0.114</span><span class="p">,</span>  <span class="mf">0.122</span><span class="p">,</span>  <span class="mf">0.13</span> <span class="p">,</span>  <span class="mf">0.138</span><span class="p">,</span>  <span class="mf">0.147</span><span class="p">,</span>  <span class="mf">0.154</span><span class="p">,</span>  <span class="mf">0.158</span><span class="p">,</span>  <span class="mf">0.16</span> <span class="p">,</span>
+        <span class="mf">0.16</span> <span class="p">,</span>  <span class="mf">0.16</span> <span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.016</span><span class="p">,</span>  <span class="mf">0.04</span> <span class="p">,</span>  <span class="mf">0.057</span><span class="p">,</span>  <span class="mf">0.086</span><span class="p">,</span>  <span class="mf">0.114</span><span class="p">,</span>  <span class="mf">0.132</span><span class="p">,</span>  <span class="mf">0.142</span><span class="p">,</span>
+        <span class="mf">0.147</span><span class="p">,</span>  <span class="mf">0.148</span><span class="p">,</span>  <span class="mf">0.146</span><span class="p">,</span>  <span class="mf">0.139</span><span class="p">,</span>  <span class="mf">0.127</span><span class="p">,</span>  <span class="mf">0.122</span><span class="p">,</span>  <span class="mf">0.119</span><span class="p">,</span>  <span class="mf">0.118</span><span class="p">,</span>
+        <span class="mf">0.116</span><span class="p">,</span>  <span class="mf">0.116</span><span class="p">,</span>  <span class="mf">0.116</span><span class="p">,</span>  <span class="mf">0.117</span><span class="p">,</span>  <span class="mf">0.117</span><span class="p">,</span>  <span class="mf">0.125</span><span class="p">,</span>  <span class="mf">0.137</span><span class="p">,</span>  <span class="mf">0.144</span><span class="p">,</span>
+        <span class="mf">0.152</span><span class="p">,</span>  <span class="mf">0.156</span><span class="p">,</span>  <span class="mf">0.158</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.021</span><span class="p">,</span>  <span class="mf">0.048</span><span class="p">,</span>  <span class="mf">0.063</span><span class="p">,</span>  <span class="mf">0.075</span><span class="p">,</span>  <span class="mf">0.089</span><span class="p">,</span>  <span class="mf">0.103</span><span class="p">,</span>  <span class="mf">0.105</span><span class="p">,</span>
+        <span class="mf">0.108</span><span class="p">,</span>  <span class="mf">0.11</span> <span class="p">,</span>  <span class="mf">0.111</span><span class="p">,</span>  <span class="mf">0.113</span><span class="p">,</span>  <span class="mf">0.114</span><span class="p">,</span>  <span class="mf">0.118</span><span class="p">,</span>  <span class="mf">0.122</span><span class="p">,</span>  <span class="mf">0.125</span><span class="p">,</span>
+        <span class="mf">0.129</span><span class="p">,</span>  <span class="mf">0.129</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.006</span><span class="p">,</span>  <span class="mf">0.012</span><span class="p">,</span>  <span class="mf">0.02</span> <span class="p">,</span>  <span class="mf">0.021</span><span class="p">,</span>  <span class="mf">0.022</span><span class="p">,</span>  <span class="mf">0.022</span><span class="p">,</span>  <span class="mf">0.022</span><span class="p">,</span>
+        <span class="mf">0.024</span><span class="p">,</span>  <span class="mf">0.025</span><span class="p">,</span>  <span class="mf">0.025</span><span class="p">],</span>
+        <span class="p">]</span>
+
+    <span class="n">z_for_z_vs_ua</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.008</span><span class="p">,</span>  <span class="mf">0.012</span><span class="p">,</span>  <span class="mf">0.023</span><span class="p">,</span>  <span class="mf">0.161</span><span class="p">,</span>  <span class="mf">0.283</span><span class="p">,</span>  <span class="mf">0.295</span><span class="p">,</span>
+        <span class="mf">0.298</span><span class="p">,</span>  <span class="mf">0.303</span><span class="p">,</span>  <span class="mf">0.31</span> <span class="p">,</span>  <span class="mf">0.318</span><span class="p">,</span>  <span class="mf">0.396</span><span class="p">,</span>  <span class="mf">0.676</span><span class="p">,</span>  <span class="mf">0.693</span><span class="p">,</span>  <span class="mf">0.699</span><span class="p">,</span>
+        <span class="mf">0.702</span><span class="p">,</span>  <span class="mf">0.702</span><span class="p">,</span>  <span class="mf">0.707</span><span class="p">,</span>  <span class="mf">0.716</span><span class="p">,</span>  <span class="mf">0.772</span><span class="p">,</span>  <span class="mf">0.853</span><span class="p">,</span>  <span class="mf">0.914</span><span class="p">,</span>  <span class="mf">0.969</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.005</span><span class="p">,</span>  <span class="mf">0.016</span><span class="p">,</span>  <span class="mf">0.024</span><span class="p">,</span>  <span class="mf">0.035</span><span class="p">,</span>  <span class="mf">0.047</span><span class="p">,</span>  <span class="mf">0.061</span><span class="p">,</span>  <span class="mf">0.078</span><span class="p">,</span>
+        <span class="mf">0.086</span><span class="p">,</span>  <span class="mf">0.107</span><span class="p">,</span>  <span class="mf">0.12</span> <span class="p">,</span>  <span class="mf">0.154</span><span class="p">,</span>  <span class="mf">0.178</span><span class="p">,</span>  <span class="mf">0.198</span><span class="p">,</span>  <span class="mf">0.225</span><span class="p">,</span>  <span class="mf">0.246</span><span class="p">,</span>
+        <span class="mf">0.261</span><span class="p">,</span>  <span class="mf">0.269</span><span class="p">,</span>  <span class="mf">0.283</span><span class="p">,</span>  <span class="mf">0.295</span><span class="p">,</span>  <span class="mf">0.3</span>  <span class="p">,</span>  <span class="mf">0.323</span><span class="p">,</span>  <span class="mf">0.367</span><span class="p">,</span>  <span class="mf">0.4</span>  <span class="p">,</span>
+        <span class="mf">0.446</span><span class="p">,</span>  <span class="mf">0.491</span><span class="p">,</span>  <span class="mf">0.515</span><span class="p">,</span>  <span class="mf">0.546</span><span class="p">,</span>  <span class="mf">0.583</span><span class="p">,</span>  <span class="mf">0.617</span><span class="p">,</span>  <span class="mf">0.648</span><span class="p">,</span>  <span class="mf">0.67</span> <span class="p">,</span>
+        <span class="mf">0.7</span>  <span class="p">,</span>  <span class="mf">0.709</span><span class="p">,</span>  <span class="mf">0.716</span><span class="p">,</span>  <span class="mf">0.728</span><span class="p">,</span>  <span class="mf">0.74</span> <span class="p">,</span>  <span class="mf">0.757</span><span class="p">,</span>  <span class="mf">0.779</span><span class="p">,</span>  <span class="mf">0.816</span><span class="p">,</span>
+        <span class="mf">0.887</span><span class="p">,</span>  <span class="mf">0.976</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.01</span> <span class="p">,</span>  <span class="mf">0.031</span><span class="p">,</span>  <span class="mf">0.048</span><span class="p">,</span>  <span class="mf">0.074</span><span class="p">,</span>  <span class="mf">0.103</span><span class="p">,</span>  <span class="mf">0.135</span><span class="p">,</span>  <span class="mf">0.155</span><span class="p">,</span>
+        <span class="mf">0.181</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.228</span><span class="p">,</span>  <span class="mf">0.251</span><span class="p">,</span>  <span class="mf">0.284</span><span class="p">,</span>  <span class="mf">0.3</span>  <span class="p">,</span>  <span class="mf">0.369</span><span class="p">,</span>  <span class="mf">0.42</span> <span class="p">,</span>
+        <span class="mf">0.48</span> <span class="p">,</span>  <span class="mf">0.542</span><span class="p">,</span>  <span class="mf">0.605</span><span class="p">,</span>  <span class="mf">0.665</span><span class="p">,</span>  <span class="mf">0.704</span><span class="p">,</span>  <span class="mf">0.731</span><span class="p">,</span>  <span class="mf">0.772</span><span class="p">,</span>  <span class="mf">0.802</span><span class="p">,</span>
+        <span class="mf">0.853</span><span class="p">,</span>  <span class="mf">0.899</span><span class="p">,</span>  <span class="mf">0.938</span><span class="p">,</span>  <span class="mf">0.971</span><span class="p">,</span>  <span class="mf">0.998</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.</span>   <span class="p">,</span>  <span class="mf">0.061</span><span class="p">,</span>  <span class="mf">0.136</span><span class="p">,</span>  <span class="mf">0.175</span><span class="p">,</span>  <span class="mf">0.214</span><span class="p">,</span>  <span class="mf">0.26</span> <span class="p">,</span>  <span class="mf">0.298</span><span class="p">,</span>  <span class="mf">0.357</span><span class="p">,</span>
+        <span class="mf">0.464</span><span class="p">,</span>  <span class="mf">0.542</span><span class="p">,</span>  <span class="mf">0.626</span><span class="p">,</span>  <span class="mf">0.702</span><span class="p">,</span>  <span class="mf">0.727</span><span class="p">,</span>  <span class="mf">0.761</span><span class="p">,</span>  <span class="mf">0.806</span><span class="p">,</span>  <span class="mf">0.858</span><span class="p">,</span>
+        <span class="mf">0.933</span><span class="p">,</span>  <span class="mf">1.001</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.082</span><span class="p">,</span>  <span class="mf">0.177</span><span class="p">,</span>  <span class="mf">0.297</span><span class="p">,</span>  <span class="mf">0.418</span><span class="p">,</span>  <span class="mf">0.554</span><span class="p">,</span>  <span class="mf">0.661</span><span class="p">,</span>  <span class="mf">0.701</span><span class="p">,</span>
+        <span class="mf">0.812</span><span class="p">,</span>  <span class="mf">0.914</span><span class="p">,</span>  <span class="mf">0.995</span><span class="p">],</span>
+        <span class="p">]</span>
+
+
+    <span class="n">z_for_uw_vs_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mf">8.5</span><span class="p">])</span>
+    <span class="n">t_for_uw_vs_t</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span>  <span class="mf">1.42100000e+00</span><span class="p">,</span>   <span class="mf">4.12800000e+00</span><span class="p">,</span>   <span class="mf">1.23410000e+01</span><span class="p">,</span>
+         <span class="mf">5.68400000e+01</span><span class="p">,</span>   <span class="mf">7.17913000e+02</span><span class="p">,</span>   <span class="mf">1.43367000e+03</span><span class="p">,</span>
+         <span class="mf">2.27363000e+03</span><span class="p">,</span>   <span class="mf">3.30788000e+03</span><span class="p">,</span>   <span class="mf">4.81306000e+03</span><span class="p">,</span>
+         <span class="mf">6.06455000e+03</span><span class="p">,</span>   <span class="mf">7.00754000e+03</span><span class="p">,</span>   <span class="mf">9.08780000e+03</span><span class="p">,</span>
+         <span class="mf">1.11271000e+04</span><span class="p">,</span>   <span class="mf">1.66725000e+04</span><span class="p">,</span>   <span class="mf">2.35847000e+04</span><span class="p">,</span>
+         <span class="mf">3.14819000e+04</span><span class="p">,</span>   <span class="mf">4.32394000e+04</span><span class="p">,</span>   <span class="mf">6.85894000e+04</span><span class="p">,</span>
+         <span class="mf">1.08791000e+05</span><span class="p">,</span>   <span class="mf">1.88155000e+05</span><span class="p">,</span>   <span class="mf">3.25448000e+05</span><span class="p">,</span>
+         <span class="mf">5.16347000e+05</span><span class="p">,</span>   <span class="mf">8.19144000e+05</span><span class="p">,</span>   <span class="mf">1.83676000e+06</span><span class="p">,</span>
+         <span class="mf">3.46322000e+06</span><span class="p">,</span>   <span class="mf">4.89594000e+06</span><span class="p">,</span>   <span class="mf">6.72573000e+06</span><span class="p">,</span>
+         <span class="mf">8.72317000e+06</span><span class="p">,</span>   <span class="mf">1.26974000e+07</span><span class="p">,</span>   <span class="mf">1.55475000e+07</span><span class="p">,</span>
+         <span class="mf">1.90345000e+07</span><span class="p">,</span>   <span class="mf">2.33071000e+07</span><span class="p">,</span>   <span class="mf">2.93759000e+07</span><span class="p">,</span>
+         <span class="mf">3.70178000e+07</span><span class="p">,</span>   <span class="mf">4.66387000e+07</span><span class="p">,</span>   <span class="mf">6.22643000e+07</span><span class="p">,</span>
+         <span class="mf">8.55306000e+07</span><span class="p">,</span>   <span class="mf">1.14164000e+08</span><span class="p">,</span>   <span class="mf">1.91904000e+08</span><span class="p">,</span>
+         <span class="mf">2.71400000e+08</span><span class="p">,</span>   <span class="mf">3.41985000e+08</span><span class="p">,</span>   <span class="mf">4.56585000e+08</span><span class="p">,</span>
+         <span class="mf">5.58882000e+08</span><span class="p">,</span>   <span class="mf">7.46091000e+08</span><span class="p">,</span>   <span class="mf">9.96106000e+08</span><span class="p">,</span>
+         <span class="mf">1.40839000e+09</span><span class="p">,</span>   <span class="mf">2.04896000e+09</span><span class="p">,</span>   <span class="mf">2.89590000e+09</span><span class="p">],</span>
+      <span class="p">[</span>  <span class="mf">1.23600000e+00</span><span class="p">,</span>   <span class="mf">3.50792000e+02</span><span class="p">,</span>   <span class="mf">7.20940000e+02</span><span class="p">,</span>
+         <span class="mf">1.66261000e+03</span><span class="p">,</span>   <span class="mf">3.22543000e+03</span><span class="p">,</span>   <span class="mf">6.43960000e+03</span><span class="p">,</span>
+         <span class="mf">1.24921000e+04</span><span class="p">,</span>   <span class="mf">2.42368000e+04</span><span class="p">,</span>   <span class="mf">3.52516000e+04</span><span class="p">,</span>
+         <span class="mf">6.09651000e+04</span><span class="p">,</span>   <span class="mf">9.95393000e+04</span><span class="p">,</span>   <span class="mf">1.53433000e+05</span><span class="p">,</span>
+         <span class="mf">2.04749000e+05</span><span class="p">,</span>   <span class="mf">2.81271000e+05</span><span class="p">,</span>   <span class="mf">3.54390000e+05</span><span class="p">,</span>
+         <span class="mf">5.01146000e+05</span><span class="p">,</span>   <span class="mf">6.68853000e+05</span><span class="p">,</span>   <span class="mf">9.45692000e+05</span><span class="p">,</span>
+         <span class="mf">1.37634000e+06</span><span class="p">,</span>   <span class="mf">1.94554000e+06</span><span class="p">,</span>   <span class="mf">3.66834000e+06</span><span class="p">,</span>
+         <span class="mf">1.30371000e+07</span><span class="p">,</span>   <span class="mf">1.89620000e+07</span><span class="p">,</span>   <span class="mf">2.67987000e+07</span><span class="p">,</span>
+         <span class="mf">3.78852000e+07</span><span class="p">,</span>   <span class="mf">5.05610000e+07</span><span class="p">,</span>   <span class="mf">7.35855000e+07</span><span class="p">,</span>
+         <span class="mf">9.82439000e+07</span><span class="p">,</span>   <span class="mf">1.27409000e+08</span><span class="p">,</span>   <span class="mf">1.56007000e+08</span><span class="p">,</span>
+         <span class="mf">2.08305000e+08</span><span class="p">,</span>   <span class="mf">2.55124000e+08</span><span class="p">,</span>   <span class="mf">3.21570000e+08</span><span class="p">,</span>
+         <span class="mf">3.93884000e+08</span><span class="p">,</span>   <span class="mf">4.82343000e+08</span><span class="p">,</span>   <span class="mf">5.90696000e+08</span><span class="p">,</span>
+         <span class="mf">6.82810000e+08</span><span class="p">,</span>   <span class="mf">8.12285000e+08</span><span class="p">,</span>   <span class="mf">9.66359000e+08</span><span class="p">,</span>
+         <span class="mf">1.21822000e+09</span><span class="p">,</span>   <span class="mf">1.58001000e+09</span><span class="p">,</span>   <span class="mf">2.10846000e+09</span><span class="p">,</span>
+         <span class="mf">2.89576000e+09</span><span class="p">],</span>
+      <span class="p">[</span>  <span class="mf">1.23300000e+00</span><span class="p">,</span>   <span class="mf">1.39543000e+03</span><span class="p">,</span>   <span class="mf">2.95200000e+03</span><span class="p">,</span>
+         <span class="mf">5.56549000e+03</span><span class="p">,</span>   <span class="mf">1.24764000e+04</span><span class="p">,</span>   <span class="mf">2.87852000e+04</span><span class="p">,</span>
+         <span class="mf">6.83609000e+04</span><span class="p">,</span>   <span class="mf">1.36602000e+05</span><span class="p">,</span>   <span class="mf">2.29677000e+05</span><span class="p">,</span>
+         <span class="mf">4.59284000e+05</span><span class="p">,</span>   <span class="mf">7.08468000e+05</span><span class="p">,</span>   <span class="mf">1.26217000e+06</span><span class="p">,</span>
+         <span class="mf">2.00252000e+06</span><span class="p">,</span>   <span class="mf">3.46288000e+06</span><span class="p">,</span>   <span class="mf">1.16165000e+07</span><span class="p">,</span>
+         <span class="mf">3.00701000e+07</span><span class="p">,</span>   <span class="mf">5.35142000e+07</span><span class="p">,</span>   <span class="mf">8.24844000e+07</span><span class="p">,</span>
+         <span class="mf">1.16636000e+08</span><span class="p">,</span>   <span class="mf">1.51268000e+08</span><span class="p">,</span>   <span class="mf">1.90647000e+08</span><span class="p">,</span>
+         <span class="mf">2.47362000e+08</span><span class="p">,</span>   <span class="mf">3.02988000e+08</span><span class="p">,</span>   <span class="mf">3.71159000e+08</span><span class="p">,</span>
+         <span class="mf">4.54668000e+08</span><span class="p">,</span>   <span class="mf">6.25380000e+08</span><span class="p">,</span>   <span class="mf">8.11854000e+08</span><span class="p">,</span>
+         <span class="mf">1.05378000e+09</span><span class="p">,</span>   <span class="mf">1.29031000e+09</span><span class="p">,</span>   <span class="mf">1.77332000e+09</span><span class="p">,</span>
+         <span class="mf">2.65580000e+09</span><span class="p">,</span>   <span class="mf">3.64678000e+09</span><span class="p">],</span>
+        <span class="p">]</span>
+    <span class="c1">#uw is uw/q0</span>
+    <span class="n">uw_for_uw_vs_t</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.402</span><span class="p">,</span>  <span class="mf">0.401</span><span class="p">,</span>  <span class="mf">0.402</span><span class="p">,</span>  <span class="mf">0.4</span>  <span class="p">,</span>  <span class="mf">0.4</span>  <span class="p">,</span>  <span class="mf">0.399</span><span class="p">,</span>  <span class="mf">0.394</span><span class="p">,</span>
+        <span class="mf">0.387</span><span class="p">,</span>  <span class="mf">0.377</span><span class="p">,</span>  <span class="mf">0.37</span> <span class="p">,</span>  <span class="mf">0.36</span> <span class="p">,</span>  <span class="mf">0.347</span><span class="p">,</span>  <span class="mf">0.331</span><span class="p">,</span>  <span class="mf">0.313</span><span class="p">,</span>  <span class="mf">0.302</span><span class="p">,</span>
+        <span class="mf">0.297</span><span class="p">,</span>  <span class="mf">0.292</span><span class="p">,</span>  <span class="mf">0.288</span><span class="p">,</span>  <span class="mf">0.283</span><span class="p">,</span>  <span class="mf">0.276</span><span class="p">,</span>  <span class="mf">0.268</span><span class="p">,</span>  <span class="mf">0.261</span><span class="p">,</span>  <span class="mf">0.251</span><span class="p">,</span>
+        <span class="mf">0.248</span><span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.232</span><span class="p">,</span>  <span class="mf">0.22</span> <span class="p">,</span>  <span class="mf">0.207</span><span class="p">,</span>  <span class="mf">0.193</span><span class="p">,</span>  <span class="mf">0.182</span><span class="p">,</span>  <span class="mf">0.169</span><span class="p">,</span>
+        <span class="mf">0.154</span><span class="p">,</span>  <span class="mf">0.142</span><span class="p">,</span>  <span class="mf">0.134</span><span class="p">,</span>  <span class="mf">0.12</span> <span class="p">,</span>  <span class="mf">0.112</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.091</span><span class="p">,</span>  <span class="mf">0.077</span><span class="p">,</span>
+        <span class="mf">0.066</span><span class="p">,</span>  <span class="mf">0.052</span><span class="p">,</span>  <span class="mf">0.045</span><span class="p">,</span>  <span class="mf">0.032</span><span class="p">,</span>  <span class="mf">0.018</span><span class="p">,</span>  <span class="mf">0.008</span><span class="p">,</span>  <span class="mf">0.004</span><span class="p">,</span>  <span class="mf">0.002</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.325</span><span class="p">,</span>  <span class="mf">0.325</span><span class="p">,</span>  <span class="mf">0.327</span><span class="p">,</span>  <span class="mf">0.329</span><span class="p">,</span>  <span class="mf">0.332</span><span class="p">,</span>  <span class="mf">0.336</span><span class="p">,</span>  <span class="mf">0.339</span><span class="p">,</span>  <span class="mf">0.34</span> <span class="p">,</span>
+        <span class="mf">0.34</span> <span class="p">,</span>  <span class="mf">0.336</span><span class="p">,</span>  <span class="mf">0.33</span> <span class="p">,</span>  <span class="mf">0.323</span><span class="p">,</span>  <span class="mf">0.317</span><span class="p">,</span>  <span class="mf">0.307</span><span class="p">,</span>  <span class="mf">0.298</span><span class="p">,</span>  <span class="mf">0.286</span><span class="p">,</span>
+        <span class="mf">0.278</span><span class="p">,</span>  <span class="mf">0.269</span><span class="p">,</span>  <span class="mf">0.258</span><span class="p">,</span>  <span class="mf">0.253</span><span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>  <span class="mf">0.247</span><span class="p">,</span>
+        <span class="mf">0.24</span> <span class="p">,</span>  <span class="mf">0.233</span><span class="p">,</span>  <span class="mf">0.222</span><span class="p">,</span>  <span class="mf">0.207</span><span class="p">,</span>  <span class="mf">0.197</span><span class="p">,</span>  <span class="mf">0.184</span><span class="p">,</span>  <span class="mf">0.168</span><span class="p">,</span>  <span class="mf">0.15</span> <span class="p">,</span>
+        <span class="mf">0.134</span><span class="p">,</span>  <span class="mf">0.115</span><span class="p">,</span>  <span class="mf">0.1</span>  <span class="p">,</span>  <span class="mf">0.084</span><span class="p">,</span>  <span class="mf">0.07</span> <span class="p">,</span>  <span class="mf">0.057</span><span class="p">,</span>  <span class="mf">0.044</span><span class="p">,</span>  <span class="mf">0.025</span><span class="p">,</span>
+        <span class="mf">0.013</span><span class="p">,</span>  <span class="mf">0.008</span><span class="p">,</span>  <span class="mf">0.003</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.369</span><span class="p">,</span>  <span class="mf">0.369</span><span class="p">,</span>  <span class="mf">0.369</span><span class="p">,</span>  <span class="mf">0.367</span><span class="p">,</span>  <span class="mf">0.361</span><span class="p">,</span>  <span class="mf">0.356</span><span class="p">,</span>  <span class="mf">0.349</span><span class="p">,</span>  <span class="mf">0.338</span><span class="p">,</span>
+        <span class="mf">0.323</span><span class="p">,</span>  <span class="mf">0.3</span>  <span class="p">,</span>  <span class="mf">0.28</span> <span class="p">,</span>  <span class="mf">0.26</span> <span class="p">,</span>  <span class="mf">0.252</span><span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>  <span class="mf">0.25</span> <span class="p">,</span>  <span class="mf">0.249</span><span class="p">,</span>
+        <span class="mf">0.248</span><span class="p">,</span>  <span class="mf">0.241</span><span class="p">,</span>  <span class="mf">0.23</span> <span class="p">,</span>  <span class="mf">0.219</span><span class="p">,</span>  <span class="mf">0.205</span><span class="p">,</span>  <span class="mf">0.186</span><span class="p">,</span>  <span class="mf">0.167</span><span class="p">,</span>  <span class="mf">0.146</span><span class="p">,</span>
+        <span class="mf">0.125</span><span class="p">,</span>  <span class="mf">0.094</span><span class="p">,</span>  <span class="mf">0.066</span><span class="p">,</span>  <span class="mf">0.041</span><span class="p">,</span>  <span class="mf">0.028</span><span class="p">,</span>  <span class="mf">0.011</span><span class="p">,</span>  <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.002</span><span class="p">],</span>
+        <span class="p">]</span>
+
+    <span class="n">z_for_ua_vs_t</span> <span class="o">=</span> <span class="n">z_for_uw_vs_t</span>
+    <span class="n">t_for_ua_vs_t</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span>  <span class="mf">1.12200000e+00</span><span class="p">,</span>   <span class="mf">2.66400000e+00</span><span class="p">,</span>   <span class="mf">1.09350000e+01</span><span class="p">,</span>
+         <span class="mf">3.08580000e+01</span><span class="p">,</span>   <span class="mf">1.59497000e+02</span><span class="p">,</span>   <span class="mf">6.93508000e+02</span><span class="p">,</span>
+         <span class="mf">1.55414000e+03</span><span class="p">,</span>   <span class="mf">2.53662000e+03</span><span class="p">,</span>   <span class="mf">3.48279000e+03</span><span class="p">,</span>
+         <span class="mf">4.51407000e+03</span><span class="p">,</span>   <span class="mf">5.68451000e+03</span><span class="p">,</span>   <span class="mf">6.95509000e+03</span><span class="p">,</span>
+         <span class="mf">8.50966000e+03</span><span class="p">,</span>   <span class="mf">9.82858000e+03</span><span class="p">,</span>   <span class="mf">1.16838000e+04</span><span class="p">,</span>
+         <span class="mf">1.34947000e+04</span><span class="p">,</span>   <span class="mf">1.69937000e+04</span><span class="p">,</span>   <span class="mf">2.07921000e+04</span><span class="p">,</span>
+         <span class="mf">2.40146000e+04</span><span class="p">,</span>   <span class="mf">3.20355000e+04</span><span class="p">,</span>   <span class="mf">4.39850000e+04</span><span class="p">,</span>
+         <span class="mf">7.17910000e+04</span><span class="p">,</span>   <span class="mf">1.04418000e+05</span><span class="p">,</span>   <span class="mf">1.47557000e+05</span><span class="p">,</span>
+         <span class="mf">2.02597000e+05</span><span class="p">,</span>   <span class="mf">2.62588000e+05</span><span class="p">,</span>   <span class="mf">3.30673000e+05</span><span class="p">,</span>
+         <span class="mf">4.54016000e+05</span><span class="p">,</span>   <span class="mf">5.39716000e+05</span><span class="p">,</span>   <span class="mf">6.41592000e+05</span><span class="p">,</span>
+         <span class="mf">8.31572000e+05</span><span class="p">,</span>   <span class="mf">1.17513000e+06</span><span class="p">,</span>   <span class="mf">1.56763000e+06</span><span class="p">,</span>
+         <span class="mf">2.21530000e+06</span><span class="p">,</span>   <span class="mf">3.04161000e+06</span><span class="p">],</span>
+      <span class="p">[</span>  <span class="mf">1.22400000e+00</span><span class="p">,</span>   <span class="mf">4.87900000e+00</span><span class="p">,</span>   <span class="mf">2.74980000e+01</span><span class="p">,</span>
+         <span class="mf">2.18991000e+02</span><span class="p">,</span>   <span class="mf">5.35070000e+02</span><span class="p">,</span>   <span class="mf">9.80029000e+02</span><span class="p">,</span>
+         <span class="mf">1.79501000e+03</span><span class="p">,</span>   <span class="mf">3.19434000e+03</span><span class="p">,</span>   <span class="mf">5.36614000e+03</span><span class="p">,</span>
+         <span class="mf">8.50966000e+03</span><span class="p">,</span>   <span class="mf">1.31113000e+04</span><span class="p">,</span>   <span class="mf">2.02014000e+04</span><span class="p">,</span>
+         <span class="mf">3.29722000e+04</span><span class="p">,</span>   <span class="mf">5.38163000e+04</span><span class="p">,</span>   <span class="mf">8.29179000e+04</span><span class="p">,</span>
+         <span class="mf">1.20601000e+05</span><span class="p">,</span>   <span class="mf">1.56312000e+05</span><span class="p">,</span>   <span class="mf">2.14617000e+05</span><span class="p">,</span>
+         <span class="mf">2.78167000e+05</span><span class="p">,</span>   <span class="mf">3.71075000e+05</span><span class="p">,</span>   <span class="mf">4.67291000e+05</span><span class="p">,</span>
+         <span class="mf">5.55496000e+05</span><span class="p">,</span>   <span class="mf">7.19982000e+05</span><span class="p">,</span>   <span class="mf">9.88539000e+05</span><span class="p">,</span>
+         <span class="mf">1.17513000e+06</span><span class="p">,</span>   <span class="mf">1.52310000e+06</span><span class="p">,</span>   <span class="mf">2.09122000e+06</span><span class="p">,</span>
+         <span class="mf">2.78970000e+06</span><span class="p">],</span>
+       <span class="p">[</span>  <span class="mf">1.18900000e+00</span><span class="p">,</span>   <span class="mf">3.76500000e+00</span><span class="p">,</span>   <span class="mf">1.41720000e+01</span><span class="p">,</span>
+         <span class="mf">7.11730000e+01</span><span class="p">,</span>   <span class="mf">3.47277000e+02</span><span class="p">,</span>   <span class="mf">1.50999000e+03</span><span class="p">,</span>
+         <span class="mf">2.92977000e+03</span><span class="p">,</span>   <span class="mf">5.52303000e+03</span><span class="p">,</span>   <span class="mf">9.01454000e+03</span><span class="p">,</span>
+         <span class="mf">1.51435000e+04</span><span class="p">,</span>   <span class="mf">2.69487000e+04</span><span class="p">,</span>   <span class="mf">5.38163000e+04</span><span class="p">,</span>
+         <span class="mf">9.30488000e+04</span><span class="p">,</span>   <span class="mf">1.47557000e+05</span><span class="p">,</span>   <span class="mf">1.91250000e+05</span><span class="p">,</span>
+         <span class="mf">2.47881000e+05</span><span class="p">,</span>   <span class="mf">3.21280000e+05</span><span class="p">,</span>   <span class="mf">4.04584000e+05</span><span class="p">,</span>
+         <span class="mf">4.80953000e+05</span><span class="p">,</span>   <span class="mf">6.05658000e+05</span><span class="p">,</span>   <span class="mf">7.62699000e+05</span><span class="p">,</span>
+         <span class="mf">9.06665000e+05</span><span class="p">,</span>   <span class="mf">1.14175000e+06</span><span class="p">,</span>   <span class="mf">1.39695000e+06</span><span class="p">,</span>
+         <span class="mf">1.81060000e+06</span><span class="p">,</span>   <span class="mf">2.55864000e+06</span><span class="p">,</span>   <span class="mf">3.51303000e+06</span><span class="p">]</span>
+        <span class="p">]</span>
+    <span class="c1">#ua is ua/q0</span>
+    <span class="n">ua_for_ua_vs_t</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[</span> <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.202</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.201</span><span class="p">,</span>  <span class="mf">0.197</span><span class="p">,</span>
+        <span class="mf">0.191</span><span class="p">,</span>  <span class="mf">0.184</span><span class="p">,</span>  <span class="mf">0.173</span><span class="p">,</span>  <span class="mf">0.163</span><span class="p">,</span>  <span class="mf">0.152</span><span class="p">,</span>  <span class="mf">0.142</span><span class="p">,</span>  <span class="mf">0.131</span><span class="p">,</span>  <span class="mf">0.12</span> <span class="p">,</span>
+        <span class="mf">0.108</span><span class="p">,</span>  <span class="mf">0.096</span><span class="p">,</span>  <span class="mf">0.085</span><span class="p">,</span>  <span class="mf">0.073</span><span class="p">,</span>  <span class="mf">0.063</span><span class="p">,</span>  <span class="mf">0.056</span><span class="p">,</span>  <span class="mf">0.053</span><span class="p">,</span>  <span class="mf">0.048</span><span class="p">,</span>
+        <span class="mf">0.044</span><span class="p">,</span>  <span class="mf">0.04</span> <span class="p">,</span>  <span class="mf">0.035</span><span class="p">,</span>  <span class="mf">0.029</span><span class="p">,</span>  <span class="mf">0.025</span><span class="p">,</span>  <span class="mf">0.02</span> <span class="p">,</span>  <span class="mf">0.014</span><span class="p">,</span>  <span class="mf">0.009</span><span class="p">,</span>
+        <span class="mf">0.004</span><span class="p">,</span>  <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.</span>   <span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.102</span><span class="p">,</span>  <span class="mf">0.101</span><span class="p">,</span>  <span class="mf">0.103</span><span class="p">,</span>  <span class="mf">0.105</span><span class="p">,</span>  <span class="mf">0.109</span><span class="p">,</span>
+        <span class="mf">0.112</span><span class="p">,</span>  <span class="mf">0.116</span><span class="p">,</span>  <span class="mf">0.119</span><span class="p">,</span>  <span class="mf">0.121</span><span class="p">,</span>  <span class="mf">0.12</span> <span class="p">,</span>  <span class="mf">0.117</span><span class="p">,</span>  <span class="mf">0.111</span><span class="p">,</span>  <span class="mf">0.104</span><span class="p">,</span>
+        <span class="mf">0.097</span><span class="p">,</span>  <span class="mf">0.088</span><span class="p">,</span>  <span class="mf">0.077</span><span class="p">,</span>  <span class="mf">0.066</span><span class="p">,</span>  <span class="mf">0.058</span><span class="p">,</span>  <span class="mf">0.049</span><span class="p">,</span>  <span class="mf">0.036</span><span class="p">,</span>  <span class="mf">0.024</span><span class="p">,</span>
+        <span class="mf">0.016</span><span class="p">,</span>  <span class="mf">0.009</span><span class="p">,</span>  <span class="mf">0.003</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">],</span>
+      <span class="p">[</span> <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.158</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.159</span><span class="p">,</span>  <span class="mf">0.158</span><span class="p">,</span>  <span class="mf">0.156</span><span class="p">,</span>
+        <span class="mf">0.153</span><span class="p">,</span>  <span class="mf">0.148</span><span class="p">,</span>  <span class="mf">0.142</span><span class="p">,</span>  <span class="mf">0.137</span><span class="p">,</span>  <span class="mf">0.127</span><span class="p">,</span>  <span class="mf">0.116</span><span class="p">,</span>  <span class="mf">0.107</span><span class="p">,</span>  <span class="mf">0.097</span><span class="p">,</span>
+        <span class="mf">0.085</span><span class="p">,</span>  <span class="mf">0.074</span><span class="p">,</span>  <span class="mf">0.064</span><span class="p">,</span>  <span class="mf">0.052</span><span class="p">,</span>  <span class="mf">0.039</span><span class="p">,</span>  <span class="mf">0.031</span><span class="p">,</span>  <span class="mf">0.021</span><span class="p">,</span>  <span class="mf">0.013</span><span class="p">,</span>
+        <span class="mf">0.007</span><span class="p">,</span>  <span class="mf">0.002</span><span class="p">,</span>  <span class="mf">0.001</span><span class="p">],</span>
+        <span class="p">]</span>
+
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span> <span class="c1">#these should include the t for z vs u values.</span>
+
+    <span class="n">dq</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">dedent</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">    #from geotecha.piecewise.piecewise_linear_1d import PolyLine</span>
+<span class="s2">    #import numpy as np</span>
+<span class="s2">    # shan et al,</span>
+<span class="s2">    H = 10 #m</span>
+<span class="s2">    drn = 1</span>
+<span class="s2">    neig = 200</span>
+
+<span class="s2">    mvref = 1e-4 #1/kPa</span>
+<span class="s2">    kwref = 1.0e-9 #m/s</span>
+
+<span class="s2">    karef = 1e-8 #m/s</span>
+<span class="s2">    Daref = karef / 10 # from equation ka=Da*g</span>
+
+<span class="s2">    wa = 29.0e-3 #kg / mol</span>
+<span class="s2">    R = 8.31432 #J/(mol.K)</span>
+<span class="s2">    ua_= 101 #kPa</span>
+<span class="s2">    T = 273.16 + 20</span>
+<span class="s2">    dTa = Daref /(mvref) / (wa*ua_/(R*T))/ H ** 2</span>
+<span class="s2">    dTw = kwref / mvref/ 10 / H**2</span>
+<span class="s2">    dT = max(dTw,dTa)</span>
+
+<span class="s2">    kw = PolyLine([0,0.3,0.7], [0.3,0.7,1.0], [0.1,1,0.1], [0.1,1,0.1])</span>
+<span class="s2">    Da = PolyLine([0,0.3,0.7], [0.3,0.7,1.0], [0.1,1,0.1], [0.1,1,0.1])</span>
+<span class="s2">    S = PolyLine([0,0.3,0.7], [0.3,0.7,1.0], [0.8,0.6,0.7], [0.8,0.6,0.7])</span>
+<span class="s2">    n = PolyLine([0,0.3,0.7], [0.3,0.7,1.0], [0.45,0.5,0.4], [0.45,0.5,0.4])</span>
+
+<span class="s2">    m1s = -2.5</span>
+<span class="s2">    m2s = 0.4*m1s</span>
+<span class="s2">    m1w = 0.2*m1s</span>
+<span class="s2">    m2w = 4*m1w</span>
+<span class="s2">    m1a = m1s-m1w</span>
+<span class="s2">    m2a = m2s-m2w</span>
+
+<span class="s2">    #print(m1w,m2w,m1a,m2a)</span>
+<span class="s2">    m1kw = PolyLine([0,1], [m1w]*2)</span>
+<span class="s2">    m2w =  PolyLine([0,1], [m2w]*2)</span>
+<span class="s2">    m1ka = PolyLine([0,1], [m1a]*2)</span>
+<span class="s2">    m2a =  PolyLine([0,1], [m2a]*2)</span>
+
+
+<span class="s2">    surcharge_vs_depth = PolyLine([0,1], [1,1])</span>
+<span class="s2">    surcharge_vs_time = PolyLine([0,0,10000], [0, {dq}, {dq}])</span>
+
+<span class="s2">    ppress_z = np.{z}</span>
+<span class="s2">    #avg_ppress_z_pairs = [[0,1]]</span>
+<span class="s2">    #settlement_z_pairs = [[0,1]]</span>
+<span class="s2">    tvals = np.{t}</span>
+
+
+<span class="s2">    #ppress_z_tval_indexes = slice(None, len(tua)+len(tuw))</span>
+<span class="s2">    #avg_ppress_z_pairs_tval_indexes = slice(None, None)#[0,4,6]</span>
+<span class="s2">    #settlement_z_pairs_tval_indexes = slice(len(tua)+len(tuw),len(tua)+len(tuw)+len(tset))</span>
+
+<span class="s2">    save_data_to_file= False</span>
+<span class="s2">    save_figures_to_file= False</span>
+<span class="s2">    show_figures= False</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">z</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="n">z</span><span class="p">),</span><span class="n">dq</span><span class="o">=</span><span class="n">dq</span><span class="p">))</span>
+
+    <span class="n">i_for_uw_vs_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z_for_uw_vs_t</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span>
+    <span class="n">i_for_ua_vs_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">z_for_ua_vs_t</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span>
+
+    <span class="n">i_for_z_vs_uw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_for_z_vs_uw</span><span class="p">)</span>
+    <span class="n">i_for_z_vs_ua</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_for_z_vs_ua</span><span class="p">)</span>
+
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dUnsat</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+
+    <span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+
+    <span class="c1">#calculated values to plot</span>
+    <span class="n">calc_uw_vs_t</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">porw</span><span class="p">[</span><span class="n">v</span><span class="p">,:]</span><span class="o">/</span><span class="n">dq</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">i_for_uw_vs_t</span><span class="p">]</span>
+    <span class="n">calc_ua_vs_t</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">pora</span><span class="p">[</span><span class="n">v</span><span class="p">,:]</span><span class="o">/</span><span class="n">dq</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">i_for_ua_vs_t</span><span class="p">]</span>
+    <span class="n">calc_z_vs_uw</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">porw</span><span class="p">[:,</span><span class="n">v</span><span class="p">]</span><span class="o">/</span><span class="n">dq</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">i_for_z_vs_uw</span><span class="p">]</span>
+    <span class="n">calc_z_vs_ua</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">pora</span><span class="p">[:,</span><span class="n">v</span><span class="p">]</span><span class="o">/</span><span class="n">dq</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">i_for_z_vs_ua</span><span class="p">]</span>
+
+
+    <span class="c1">#The remainder of this sub is for plotting with matplotlib</span>
+
+    <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.54</span><span class="p">,</span> <span class="mf">3.54</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Water pressure $u_w/q_0$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+
+    <span class="n">styles</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">dashes</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">),</span>
+              <span class="nb">dict</span><span class="p">(</span><span class="n">dashes</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">),</span>
+              <span class="nb">dict</span><span class="p">(</span><span class="n">dashes</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)]</span>
+
+    <span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">zz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">z_for_uw_vs_t</span><span class="p">):</span>
+        <span class="n">label_calc</span> <span class="o">=</span> <span class="s2">&quot;$z={}m$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zz</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">jj</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">z_for_uw_vs_t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">label_expect</span> <span class="o">=</span> <span class="s2">&quot;Shan et al.</span><span class="se">\n</span><span class="s2">2014&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label_expect</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">calc_uw_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label_calc</span><span class="p">,</span> <span class="o">**</span><span class="n">styles</span><span class="p">[</span><span class="n">jj</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_for_uw_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span> <span class="n">uw_for_uw_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label_expect</span><span class="p">)</span>
+
+
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">leg</span><span class="o">.</span><span class="n">get_title</span><span class="p">(),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.97</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.94</span><span class="p">)</span>
+
+
+
+    <span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.54</span><span class="p">,</span> <span class="mf">3.54</span><span class="p">))</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig2</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Air pressure $u_a/q_0$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.25</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">jj</span><span class="p">,</span> <span class="n">zz</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">z_for_ua_vs_t</span><span class="p">):</span>
+        <span class="n">label_calc</span> <span class="o">=</span> <span class="s2">&quot;$z={}m$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zz</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">jj</span><span class="o">==</span><span class="nb">len</span><span class="p">(</span><span class="n">z_for_ua_vs_t</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">label_expect</span> <span class="o">=</span> <span class="s2">&quot;Shan et </span><span class="se">\n</span><span class="s2">al.(2014)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label_expect</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">calc_ua_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label_calc</span><span class="p">,</span> <span class="o">**</span><span class="n">styles</span><span class="p">[</span><span class="n">jj</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_for_ua_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span> <span class="n">ua_for_ua_vs_t</span><span class="p">[</span><span class="n">jj</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+                <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="n">label_expect</span><span class="p">)</span>
+
+
+    <span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">labelspacing</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">leg</span><span class="o">.</span><span class="n">get_title</span><span class="p">(),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">get_frame</span><span class="p">()</span><span class="o">.</span><span class="n">set_edgecolor</span><span class="p">(</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+    <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+    <span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.97</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.94</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">fig2</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">f1</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">shanetal2014_3_layers_instant</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014.py">Source code</a>)</p>
+<div class="figure" id="id1">
+<img alt="../../_images/speccon1d_unsat_3layer_shanetal2014_00.png" src="../../_images/speccon1d_unsat_3layer_shanetal2014_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_00.png">png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_00.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id2">
+<img alt="../../_images/speccon1d_unsat_3layer_shanetal2014_01.png" src="../../_images/speccon1d_unsat_3layer_shanetal2014_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_01.png">png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_01.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_unsat_3layer_shanetal2014_01.pdf">pdf</a>)</span></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/speccon/speccon1d_unsat_3layer_shanetal2014.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

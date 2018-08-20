@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>luetal2010 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="nogamiandli2003" href="geotecha.consolidation.nogamiandli2003.html" />
+    <link rel="prev" title="dengetal2013and2014" href="geotecha.consolidation.dengetal2013and2014.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">luetal2010</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.consolidation.luetal2010">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.consolidation.html">consolidation</a><ul>
+      <li>Previous: <a href="geotecha.consolidation.dengetal2013and2014.html" title="previous chapter">dengetal2013and2014</a></li>
+      <li>Next: <a href="geotecha.consolidation.nogamiandli2003.html" title="next chapter">nogamiandli2003</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.consolidation.luetal2010.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="luetal2010">
+<h1>luetal2010<a class="headerlink" href="#luetal2010" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.luetal2010.luetal2010" title="geotecha.consolidation.luetal2010.luetal2010"><code class="xref py py-obj docutils literal notranslate"><span class="pre">luetal2010</span></code></a>(z,&nbsp;t,&nbsp;rc,&nbsp;re[,&nbsp;H,&nbsp;rs,&nbsp;ks,&nbsp;kv,&nbsp;…])</td>
+<td>Composite foundation considering radial and vert flows in the column</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.consolidation.luetal2010">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.consolidation.luetal2010" title="Permalink to this headline">¶</a></h2>
+<p>Lu et al (2010) “Composite foundation considering radial and vertical flows
+within the column and the variation of soil permeability within the
+disturbed soil zone”.</p>
+<dl class="function">
+<dt id="geotecha.consolidation.luetal2010.luetal2010">
+<code class="descclassname">geotecha.consolidation.luetal2010.</code><code class="descname">luetal2010</code><span class="sig-paren">(</span><em>z</em>, <em>t</em>, <em>rc</em>, <em>re</em>, <em>H=1</em>, <em>rs=None</em>, <em>ks=None</em>, <em>kv=1.0</em>, <em>kvc=1.0</em>, <em>kh=1.0</em>, <em>khc=1.0</em>, <em>mvs=0.1</em>, <em>mvc=0.1</em>, <em>gamw=10</em>, <em>utop=1</em>, <em>ubot=1</em>, <em>nterms=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/luetal2010.html#luetal2010"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.luetal2010.luetal2010" title="Permalink to this definition">¶</a></dt>
+<dd><p>Composite foundation considering radial and vert flows in the column</p>
+<p>An implementation of <a class="reference internal" href="#r4907b63b355b-1" id="id1">[1]</a>.</p>
+<p>Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Single layer, soil properties constant over time.</li>
+<li>Instant load linear with depth.</li>
+<li>Vertical and radial flow in in soil</li>
+<li>Vertical and radial flow in drain/column</li>
+<li>Different stiffness in column and soil</li>
+<li>Pore pressure in soil, column and averaged at depth</li>
+<li>Average pore pressure over whole profile vs time</li>
+<li>Settlement of whole profile vs time</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Depth.</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Time.</p>
+</dd>
+<dt><strong>rc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain radius</p>
+</dd>
+<dt><strong>re</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Drain influence radius.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Drainage path length.  Default H=1.</p>
+</dd>
+<dt><strong>rs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Drain influence radius.  Default rs=None i.e. no smear zone.</p>
+</dd>
+<dt><strong>ks</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Smear zone permeability. Default ks=None, i.e. no smear zone.</p>
+</dd>
+<dt><strong>kv, kvc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Vertical coefficient of permeability in soil and column.
+Default kv= kvc = 1</p>
+</dd>
+<dt><strong>kh, khc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Horizontal coefficient of permeability in soil and column.
+default kh = khc = 1</p>
+</dd>
+<dt><strong>mvs, mvc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Volume compressibility in soil and column. default mvs=mvc=0.1.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Unit weight of water.  Default gamw=10.</p>
+</dd>
+<dt><strong>utop, ubot</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial pore water pressure at top and bottom of soil.
+Default utop=ubot=1.</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of terms to use in solution. Default=100.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>por, pors, porc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array of float</span></dt>
+<dd><p class="first last">Pore pressure at depth and time overall, in soil, in column.
+por is an array of size (len(z), len(t)).</p>
+</dd>
+<dt><strong>avp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array of float</span></dt>
+<dd><p class="first last">Average overall pore pressure of whole soil profile.</p>
+</dd>
+<dt><strong>settle</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array of float</span></dt>
+<dd><p class="first last">Settlement of whole layer.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r4907b63b355b-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>)</em> Lu, Meng-Meng, Kang-He Xie, and Biao Guo. 2010. ‘Consolidation
+Theory for a Composite Foundation Considering Radial and Vertical
+Flows within the Column and the Variation of Soil Permeability
+within the Disturbed Soil Zone’. Canadian Geotechnical
+Journal 47 (2): 207-17. doi:10.1139/T09-086.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.consolidation.luetal2010.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

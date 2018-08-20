@@ -1,0 +1,36 @@
+dingetal2012
+------------
+
+
+Class summary
++++++++++++++
+
+.. currentmodule:: geotecha.beam_on_foundation.dingetal2012
+
+.. autosummary::
+
+   DingEtAl2012
+
+
+
+Function summary
+++++++++++++++++
+
+.. currentmodule:: geotecha.beam_on_foundation.dingetal2012
+
+.. autosummary::
+
+   dingetal_figure_8
+
+
+
+Module listing
+++++++++++++++
+
+.. automodule:: geotecha.beam_on_foundation.dingetal2012
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+

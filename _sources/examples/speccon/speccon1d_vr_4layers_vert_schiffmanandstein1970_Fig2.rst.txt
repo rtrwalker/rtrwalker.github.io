@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_vr_4layers_vert_schiffmanandstein1970_Fig2:
+
+speccon example code: speccon1d_vr_4layers_vert_schiffmanandstein1970_Fig2.py
+=============================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_vr_4layers_vert_schiffmanandstein1970_Fig2.py
+   :include-source:
+
+

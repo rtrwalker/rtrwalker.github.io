@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>speccon example code: speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="speccon example code: speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000.py" href="speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">speccon Examples</a><ul>
+      <li>Previous: <a href="speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000.html" title="previous chapter">speccon example code: speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="speccon-example-code-speccon1d-vrw-well-resistance-linear-with-depth-dengetal2013-py">
+<span id="speccon-speccon1d-vrw-well-resistance-linear-with-depth-dengetal2013"></span><h1>speccon example code: speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.py<a class="headerlink" href="#speccon-example-code-speccon1d-vrw-well-resistance-linear-with-depth-dengetal2013-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># speccon1d_vrw example (if viewing this in docs, plots are at bottom of page)</span>
+
+<span class="c1"># Single layer radial drainage only with depth dependent drain permeability</span>
+<span class="c1"># Comapre with Deng et al. (2013) where kw = kw0*(A1-A2*z/l).</span>
+<span class="c1"># There should be differences because</span>
+<span class="c1"># Deng et al use the approximate well resistance method of hansbo</span>
+<span class="c1"># where as speccon1d_vrw uses a more rigorous approach.  However, the</span>
+<span class="c1"># differences are consistant with rigorous vs approximate formulations</span>
+<span class="c1"># for constant well resistance.</span>
+<span class="c1"># The orignal solution of Deng et al. (2013)</span>
+<span class="c1"># is implemented separately in</span>
+<span class="c1"># geotecha.consolidation.dengetal2013and2014.</span>
+
+<span class="c1"># Deng, Yue-Bao, Kang-He Xie, and Meng-Meng Lu. 2013. &#39;Consolidation</span>
+<span class="c1"># by Vertical Drains When the Discharge Capacity Varies</span>
+<span class="c1"># with Depth and Time&#39;. Computers and Geotechnics 48 (March): 1-8.</span>
+<span class="c1"># Doi:10.1016/j.compgeo.2012.09.012.</span>
+
+
+<span class="c1"># This file should be run with python.  It will not work if run with the</span>
+<span class="c1"># speccon1d_vr.exe script program.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">geotecha.speccon.speccon1d_vrw</span> <span class="kn">import</span> <span class="n">Speccon1dVRW</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="c1">#Expected values</span>
+<span class="c1">#t = time values</span>
+<span class="c1">#por_99 = pore pressure values at time t for A2=0.99</span>
+<span class="c1">#por_0 = pore pressure values at time t for A2=0 i.e. constant well resitance</span>
+<span class="c1">#z = depth values</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[</span><span class="mf">11025.</span><span class="p">,</span>  <span class="mf">110250.</span><span class="p">])</span>
+
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+  <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+
+<span class="n">por_99</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+<span class="p">[[</span> <span class="mf">0.81168066</span><span class="p">,</span>  <span class="mf">0.12412292</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.83668852</span><span class="p">,</span>  <span class="mf">0.16812724</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.87096244</span><span class="p">,</span>  <span class="mf">0.25118534</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.92073203</span><span class="p">,</span>  <span class="mf">0.43785721</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.94257216</span><span class="p">,</span>  <span class="mf">0.55353625</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.95050775</span><span class="p">,</span>  <span class="mf">0.60194473</span><span class="p">]])</span>
+
+
+<span class="n">por_0</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.81096427</span><span class="p">,</span>  <span class="mf">0.12303176</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.83451179</span><span class="p">,</span>  <span class="mf">0.16380411</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.86536448</span><span class="p">,</span>  <span class="mf">0.23549986</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.90572564</span><span class="p">,</span>  <span class="mf">0.37150668</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.91883398</span><span class="p">,</span>  <span class="mf">0.42891426</span><span class="p">],</span>
+   <span class="p">[</span> <span class="mf">0.92092841</span><span class="p">,</span>  <span class="mf">0.43879202</span><span class="p">]])</span>
+
+<span class="n">por</span><span class="o">=</span><span class="n">por_99</span>
+
+<span class="c1">##############</span>
+<span class="c1">##dengetal2013 input to generate expected values.</span>
+<span class="c1">#dengetal2013(z=np.array([0.05, 0.1, 0.2, 0.5, 0.8, 1.0])*20,</span>
+<span class="c1">#                             t=[11025.,  110250.],</span>
+<span class="c1">#                             rw=0.035, re=0.525,</span>
+<span class="c1">#                             A1=1, A2=0.99, A3=9.07029478e-06,</span>
+<span class="c1">#                             H=20,</span>
+<span class="c1">#                             rs=0.175,</span>
+<span class="c1">#                             ks=2e-8/1.8,</span>
+<span class="c1">#                             kw0=1e-3,</span>
+<span class="c1">#                             kh=2e-8,</span>
+<span class="c1">#                             mv=0.2e-3,</span>
+<span class="c1">#                             gamw=10,</span>
+<span class="c1">#                             ui=1)</span>
+<span class="c1">###############</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">H = 20</span>
+<span class="s2">drn = 1</span>
+<span class="s2">#re=0.525, rw=0.035, rs=0.175, kh/ks=1.8, n=15, s=5, kap=1.8</span>
+<span class="s2">#mu=3.18131104929, eta = 2/re**2/mu=2.28089479942</span>
+
+<span class="s2">mvref = 0.2e-3</span>
+<span class="s2">khref = 2e-8</span>
+<span class="s2">etref = 2.28089479942</span>
+<span class="s2">kwref = 1e-3</span>
+
+<span class="s2">dTh=khref/mvref*etref/10</span>
+<span class="s2">dTw=kwref/H**2/mvref/10 / (15**2-1)</span>
+
+<span class="s2">neig = 40</span>
+
+<span class="s2">kw = PolyLine([0, 1], [1, 0.01])</span>
+<span class="s2">#kw = PolyLine([0, 1], [1, 1])</span>
+<span class="s2">mv = PolyLine([0,1], [1,1])</span>
+<span class="s2">kh = PolyLine([0,1], [1,1])</span>
+<span class="s2">#kv = PolyLine([0,1], [5,5])</span>
+
+<span class="s2">et = PolyLine([0,1], [1,1])</span>
+<span class="s2">surcharge_vs_depth = [PolyLine([0,1], [1,1])]</span>
+<span class="s2">surcharge_vs_time = [PolyLine([0,0,10], [0,1,1])]</span>
+
+
+<span class="s2">ppress_z = np.</span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">tvals = np.</span><span class="si">%s</span><span class="s2"></span>
+
+
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span>
+
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">Speccon1dVRW</span><span class="p">(</span><span class="n">reader</span><span class="p">)</span>
+<span class="n">a</span><span class="o">.</span><span class="n">make_all</span><span class="p">()</span>
+
+
+<span class="c1"># custom plots</span>
+<span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Deng et al. (2013) Radial drainage with linear depth dependent well resistance&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+<span class="c1">#z vs u</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;111&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Excess pore pressure, kPa&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">por</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax1</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]):</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;expected t={:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">por</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">markerfacecolor</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span>
+         <span class="n">markeredgecolor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;calculated&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax1</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]):</span>
+    <span class="n">line</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;calculated t={:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.90</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.94</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="c1">#fig.tight_layout()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.py">Source code</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.png">png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../../_images/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.png" src="../../_images/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/speccon/speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

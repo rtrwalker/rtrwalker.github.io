@@ -1,0 +1,31 @@
+epus
+----
+
+
+Class summary
++++++++++++++
+
+.. currentmodule:: geotecha.constitutive_models.epus
+
+.. autosummary::
+
+   CurveFittingSWCC
+   DataResults
+   EPUS
+   EpusProfile
+   PoresizeDistribution
+   StressPath
+
+
+
+
+Module listing
+++++++++++++++
+
+.. automodule:: geotecha.constitutive_models.epus
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+

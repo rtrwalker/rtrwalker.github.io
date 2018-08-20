@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_unsat_3layer_shanetal2014:
+
+speccon example code: speccon1d_unsat_3layer_shanetal2014.py
+============================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_unsat_3layer_shanetal2014.py
+   :include-source:
+
+

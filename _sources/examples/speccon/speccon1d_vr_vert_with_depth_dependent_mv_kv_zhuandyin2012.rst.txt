@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012:
+
+speccon example code: speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py
+===================================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.py
+   :include-source:
+
+

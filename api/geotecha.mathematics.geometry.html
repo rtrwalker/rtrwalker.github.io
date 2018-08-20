@@ -1,0 +1,447 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geometry &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="hankel" href="geotecha.mathematics.hankel.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">geometry</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.geometry">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+      <li>Next: <a href="geotecha.mathematics.hankel.html" title="next chapter">hankel</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.geometry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="geometry">
+<h1>geometry<a class="headerlink" href="#geometry" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.geometry.eqn_of_plane" title="geotecha.mathematics.geometry.eqn_of_plane"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eqn_of_plane</span></code></a>(pts)</td>
+<td>Equation of plane defined by polygon points</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.geometry.integrate_f_over_polygon_code" title="geotecha.mathematics.geometry.integrate_f_over_polygon_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integrate_f_over_polygon_code</span></code></a>(f)</td>
+<td>Generate code that will integrate a function over a polygon</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.geometry.integrate_f_over_polyhedra_code" title="geotecha.mathematics.geometry.integrate_f_over_polyhedra_code"><code class="xref py py-obj docutils literal notranslate"><span class="pre">integrate_f_over_polyhedra_code</span></code></a>(f)</td>
+<td>Generate code that will integrate a function over a polyhedra</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.geometry.make_hexahedron" title="geotecha.mathematics.geometry.make_hexahedron"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_hexahedron</span></code></a>(coords)</td>
+<td>Assemble the face vertices of a hexahedron</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.geometry.polygon_2nd_moment_of_area" title="geotecha.mathematics.geometry.polygon_2nd_moment_of_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polygon_2nd_moment_of_area</span></code></a>(pts)</td>
+<td>2nd moment of area of polygon defined by points</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.geometry.polygon_area" title="geotecha.mathematics.geometry.polygon_area"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polygon_area</span></code></a>(pts)</td>
+<td>Area of polygon defined by points</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.geometry.polygon_centroid" title="geotecha.mathematics.geometry.polygon_centroid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polygon_centroid</span></code></a>(pts)</td>
+<td>Centroid of polygon defined by points</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.geometry.polyhedron_volume" title="geotecha.mathematics.geometry.polyhedron_volume"><code class="xref py py-obj docutils literal notranslate"><span class="pre">polyhedron_volume</span></code></a>(faces)</td>
+<td>Volume of polyhedron defined by faces defined py pts</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.geometry.replace_x0_and_x1_with_vect" title="geotecha.mathematics.geometry.replace_x0_and_x1_with_vect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">replace_x0_and_x1_with_vect</span></code></a>(s[,&nbsp;xyz])</td>
+<td>Replaces strings x0 with x[:-1],  x1 with x[1:], y0 with y[:-1] …</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.geometry.xyz_from_pts" title="geotecha.mathematics.geometry.xyz_from_pts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">xyz_from_pts</span></code></a>(pts[,&nbsp;close_polygon])</td>
+<td>Extract x, y and z values from an (n, 3) or (n, 2) shaped array</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.geometry">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.geometry" title="Permalink to this headline">¶</a></h2>
+<p>Some routines loosely related to geometry.</p>
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.eqn_of_plane">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">eqn_of_plane</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#eqn_of_plane"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.eqn_of_plane" title="Permalink to this definition">¶</a></dt>
+<dd><p>Equation of plane defined by polygon points</p>
+<p>a, b, c, d from a*x+b*y+c*z+d = 0
+Looking at the plane, counter-clockwise (CCW) points the positive normal
+is towards you.  For clockwise points (CW) the positive normal is away
+from you.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">aAray of x, y or x, y, z points.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>[a, b, c]</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray with 3 elements</span></dt>
+<dd><p class="first last">Direction cosines of normal to plane.</p>
+</dd>
+<dt><strong>d</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Constant in plane equation.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.integrate_f_over_polygon_code">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">integrate_f_over_polygon_code</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#integrate_f_over_polygon_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.integrate_f_over_polygon_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate code that will integrate a function over a polygon</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy expression</span></dt>
+<dd><p class="first last">Expression to be integrated over the polygon.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Multiline string of function code</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.integrate_f_over_polyhedra_code">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">integrate_f_over_polyhedra_code</code><span class="sig-paren">(</span><em>f</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#integrate_f_over_polyhedra_code"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.integrate_f_over_polyhedra_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate code that will integrate a function over a polyhedra</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">sympy expression</span></dt>
+<dd><p class="first last">Expression to be integrated over the polyhedron.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">Multiline string of funciton code.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.make_hexahedron">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">make_hexahedron</code><span class="sig-paren">(</span><em>coords</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#make_hexahedron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.make_hexahedron" title="Permalink to this definition">¶</a></dt>
+<dd><p>Assemble the face vertices of a hexahedron</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>coords</strong> <span class="classifier-delimiter">:</span> <span class="classifier">8 by 3 ndarray</span></dt>
+<dd><p class="first last">x, y, z coords of 8 corner nodes of hexahedron.  node numbering is as
+per Smith and Grifiths.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>faces</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of pts arrays</span></dt>
+<dd><p class="first last">List of pts arrays.  Each list defines vertices of a face.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Node numbering:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                        <span class="n">x</span>
+    <span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">-------</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>       <span class="o">^</span>
+    <span class="o">/</span>         <span class="o">/|</span>        <span class="o">|</span>  <span class="n">y</span>
+   <span class="o">/</span>         <span class="o">/</span> <span class="o">|</span>        <span class="o">|</span> <span class="o">/</span>
+  <span class="o">/</span>         <span class="o">/</span>  <span class="o">|</span>        <span class="o">|/</span>
+<span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-------</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">(</span><span class="mi">8</span><span class="p">)</span>       <span class="o">|--------&gt;</span><span class="n">x</span>
+ <span class="o">|</span>         <span class="o">|</span>   <span class="o">/</span>
+ <span class="o">|</span>         <span class="o">|</span>  <span class="o">/</span>
+ <span class="o">|</span>         <span class="o">|</span> <span class="o">/</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-------</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.polygon_2nd_moment_of_area">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">polygon_2nd_moment_of_area</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#polygon_2nd_moment_of_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.polygon_2nd_moment_of_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>2nd moment of area of polygon defined by points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of x, y or x, y, z points.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>[Ixx, Iyy, Izz]</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of float</span></dt>
+<dd><p class="first last">2nd moment of area about centroidal x, y, and z axes.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.polygon_area">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">polygon_area</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#polygon_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.polygon_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Area of polygon defined by points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of x, y or x, y, z points.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Area of polygon.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.polygon_centroid">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">polygon_centroid</code><span class="sig-paren">(</span><em>pts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#polygon_centroid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.polygon_centroid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centroid of polygon defined by points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of x, y or x, y, z points.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>[xc, yc, zc]</strong> <span class="classifier-delimiter">:</span> <span class="classifier">ndarray of float</span></dt>
+<dd><p class="first last">Coordinates of centroid.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.polyhedron_volume">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">polyhedron_volume</code><span class="sig-paren">(</span><em>faces</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#polyhedron_volume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.polyhedron_volume" title="Permalink to this definition">¶</a></dt>
+<dd><p>Volume of polyhedron defined by faces defined py pts</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>faces</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list</span></dt>
+<dd><p class="first last">A list of pts arrays defining x,y,z coords of face vertices.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Volume of polyhedron.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>I think points on a face have to be defined in anti clockwise (CCW) order
+to give a positive volume.  No checks are done to check the order.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.replace_x0_and_x1_with_vect">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">replace_x0_and_x1_with_vect</code><span class="sig-paren">(</span><em>s, xyz=['x', 'y', 'z']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#replace_x0_and_x1_with_vect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.replace_x0_and_x1_with_vect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces strings x0 with x[:-1],  x1 with x[1:], y0 with y[:-1] …</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, or sympy_expression</span></dt>
+<dd><p class="first last">Expression to make replacements on</p>
+</dd>
+<dt><strong>xyz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of strings</span></dt>
+<dd><p class="first last">Replacements will be made for each element of xyz.
+default xyz=[‘x’,’y’,’z’].</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string</span></dt>
+<dd><p class="first last">string with all replacements made</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.geometry.xyz_from_pts">
+<code class="descclassname">geotecha.mathematics.geometry.</code><code class="descname">xyz_from_pts</code><span class="sig-paren">(</span><em>pts</em>, <em>close_polygon=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/geometry.html#xyz_from_pts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.geometry.xyz_from_pts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract x, y and z values from an (n, 3) or (n, 2) shaped array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>pts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array_like</span></dt>
+<dd><p class="first last">Array of x, y or x, y, z points.</p>
+</dd>
+<dt><strong>close_polygon</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean, optional</span></dt>
+<dd><p class="first last">If True then 1st point will be repeated i.e. to close the polygon.
+Default close_polygon=False.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x, y, z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarrays</span></dt>
+<dd><p class="first last">1d array of x coords, y coords, z coords.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.geometry.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.nogamiandli2003 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.nogamiandli2003</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Nogami and Li (2003) &#39;Consolidation of Clay with a System of Vertical and</span>
+<span class="sd">Horizontal Drains&#39;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="kn">import</span> <span class="nn">geotecha.inputoutput.inputoutput</span> <span class="k">as</span> <span class="nn">inputoutput</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span>
+<span class="kn">import</span> <span class="nn">geotecha.piecewise.piecewise_linear_1d</span> <span class="k">as</span> <span class="nn">pwise</span>
+<span class="kn">import</span> <span class="nn">cmath</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">geotecha.mathematics.root_finding</span> <span class="k">import</span> <span class="n">find_n_roots</span>
+<span class="kn">import</span> <span class="nn">geotecha.plotting.one_d</span>
+<span class="kn">import</span> <span class="nn">scipy.special</span>
+<span class="c1">#from scipy.special import j0, y0, j1, y1</span>
+
+<span class="n">besselj</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">jn</span>
+<span class="n">bessely</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">special</span><span class="o">.</span><span class="n">yn</span>
+
+<span class="kn">from</span> <span class="nn">geotecha.inputoutput.inputoutput</span> <span class="k">import</span> <span class="n">GenericInputFileArgParser</span>
+
+
+<div class="viewcode-block" id="NogamiAndLi2003"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003">[docs]</a><span class="k">class</span> <span class="nc">NogamiAndLi2003</span><span class="p">(</span><span class="n">inputoutput</span><span class="o">.</span><span class="n">InputFileLoaderCheckerSaver</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Multi-layer vertical and radial consolidation using matrix transfer</span>
+
+<span class="sd">    Partially implements the article by Nogami and Li (2003) [1]_. While the</span>
+<span class="sd">    article includes special treatment for sand layers and geotextile layers,</span>
+<span class="sd">    this implementation only considers &#39;soil&#39; layers.  (Sand layers are</span>
+<span class="sd">    just normal layers  with high kv and low mv).</span>
+
+<span class="sd">    The coding is not of high quality.  The main use is for verification of</span>
+<span class="sd">    speccon models noting that Nogami and Li (2003) use rigourous methods</span>
+<span class="sd">    where as speccon uses equal-strain assumptions for the radial flow part.</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Multiple layers.</span>
+<span class="sd">     - Vertical flow and radial flow to a central drain (no smear zone).</span>
+<span class="sd">     - Load is uniform with depth but varies piecewise-linear with time.</span>
+<span class="sd">     - No assumptions on radial distribution of strain (i.e. NOT equal-strain).</span>
+<span class="sd">     - pore pressure vs depth at various times.  Either at a particular radial</span>
+<span class="sd">       coordinate or averaged in the radial direction.</span>
+<span class="sd">     - Average pore pressure vs time.  Average is over the entire soil layer.</span>
+
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        The &#39;Parameters&#39; and &#39;Attributes&#39; sections below require further</span>
+<span class="sd">        explanation.  The parameters listed below are not used to explicitly</span>
+<span class="sd">        initialize the object.  Rather they are defined in either a</span>
+<span class="sd">        multi-line string or a file-like object using python syntax.</span>
+<span class="sd">        It is the file object or string object that is used to initialize</span>
+<span class="sd">        the object.  Each  &#39;parameter&#39; will be turned into an attribute that</span>
+<span class="sd">        can be accessed using conventional python dot notation, after the</span>
+<span class="sd">        object has been initialised.  The attributes listed below are</span>
+<span class="sd">        calculated values (i.e. they could be interpreted as results) which</span>
+<span class="sd">        are accessible using dot notation after all calculations are</span>
+<span class="sd">        complete.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : list/array of float</span>
+<span class="sd">        Depth to calc pore pressure at.</span>
+<span class="sd">    t : list/array of float</span>
+<span class="sd">        Time values to calc average pore pressure at.</span>
+<span class="sd">    tpor : list/array of float</span>
+<span class="sd">        Time values to calc pore pressure profiles at.</span>
+<span class="sd">    h : list/array of float</span>
+<span class="sd">        Layer thicknesses.</span>
+<span class="sd">    nv, nh : tuple of 2 int, optional</span>
+<span class="sd">        Number of series terms to use in vertical and horizontal direction.</span>
+<span class="sd">        Default nv=nh=5.</span>
+<span class="sd">    kv, kh : list/array of float</span>
+<span class="sd">        Layer vertical and horizontal permeability divided by unit weight of</span>
+<span class="sd">        water.</span>
+<span class="sd">    mv : list/array of float</span>
+<span class="sd">        Layer volume compressibility.</span>
+<span class="sd">    bctop, bcbot : [0, 1]</span>
+<span class="sd">        Boundary condition. bctop=0 is free draining, bctop=1 is</span>
+<span class="sd">        impervious.</span>
+<span class="sd">    surcharge_vs_time : PolyLine</span>
+<span class="sd">        Piecewise linear variation of surcharge with time</span>
+<span class="sd">    r1, r0 : float optional</span>
+<span class="sd">        drain influence zone and drain radius. If either is none then only</span>
+<span class="sd">        vertical drainage will be considered.</span>
+<span class="sd">    rcalc : float, optional</span>
+<span class="sd">        Radial coordinate at which to calc pore pressure.  Default rcalc=None</span>
+<span class="sd">        i.e. pore pressure is averaged in the radial direction.</span>
+<span class="sd">    radial_roots_x0 : float, optional</span>
+<span class="sd">        Starting point for finding radial eigenvalues.</span>
+<span class="sd">        Default radial_roots_x0=1e-3.</span>
+<span class="sd">    radial_roots_dx : float, optional</span>
+<span class="sd">        Starting increment for finding radial eigenvalues.</span>
+<span class="sd">        Default radial_roots_dx=1e-3.</span>
+<span class="sd">    radial_roots_p : float, optional</span>
+<span class="sd">        Succesive increment length increase factor for finding radial</span>
+<span class="sd">        eigenvalues. default radial_roots_p=1.05.</span>
+<span class="sd">    vertical_roots_x0 : float, optional</span>
+<span class="sd">        Starting point for finding vertical eigenvalues.</span>
+<span class="sd">        Default vertical_roots_x0=1e-7.</span>
+<span class="sd">    vertical_roots_dx : float, optional</span>
+<span class="sd">        Starting increment for finding vertical eigenvalues.</span>
+<span class="sd">        Default vertical_roots_dx=1e-7.</span>
+<span class="sd">    vertical_roots_p : float, optional</span>
+<span class="sd">        Succesive increment lenght increase factor for finding vertical</span>
+<span class="sd">        eigenvalues.  Default vertical_roots_p=1.05.</span>
+<span class="sd">    max_iter : int, optional</span>
+<span class="sd">        Max iterations when searching for eigenvalue intervals.</span>
+<span class="sd">        Default max_iter=10000</span>
+<span class="sd">    show_vert_eigs : True/False, optional</span>
+<span class="sd">        If true a vertical eigen value plot will be made.</span>
+<span class="sd">        Default show_vert_eigs=False</span>
+<span class="sd">    plot_properties : dict of dict, optional</span>
+<span class="sd">        dictionary that overrides some of the plot properties.</span>
+<span class="sd">        Each member of `plot_properties` will correspond to one of the plots.</span>
+
+<span class="sd">        ==================  ============================================</span>
+<span class="sd">        plot_properties     description</span>
+<span class="sd">        ==================  ============================================</span>
+<span class="sd">        por                 dict of prop to pass to pore pressure plot.</span>
+<span class="sd">        avp                 dict of prop to pass to average pore</span>
+<span class="sd">                            pressure plot.</span>
+<span class="sd">        set                 dict of prop to pass to settlement plot.</span>
+<span class="sd">        ==================  ============================================</span>
+<span class="sd">        see geotecha.plotting.one_d.plot_vs_depth and</span>
+<span class="sd">        geotecha.plotting.one_d.plot_vs_time for options to specify in</span>
+<span class="sd">        each plot dict.</span>
+<span class="sd">    save_data_to_file : True/False, optional</span>
+<span class="sd">        If True data will be saved to file.  Default save_data_to_file=False</span>
+<span class="sd">    save_figures_to_file : True/False</span>
+<span class="sd">        If True then figures will be saved to file.</span>
+<span class="sd">        Default save_figures_to_file=False</span>
+<span class="sd">    show_figures : True/False, optional</span>
+<span class="sd">        If True the after calculation figures will be shown on screen.</span>
+<span class="sd">        Default show_figures=False.</span>
+<span class="sd">    directory : string, optional</span>
+<span class="sd">        Path to directory where files should be stored.</span>
+<span class="sd">        Default directory=None which</span>
+<span class="sd">        will use the current working directory.  Note if you keep getting</span>
+<span class="sd">        directory does not exist errors then try putting an r before the</span>
+<span class="sd">        string definition. i.e. directory = r&#39;C:\\Users\\...&#39;</span>
+<span class="sd">    overwrite : True/False, optional</span>
+<span class="sd">        If True then existing files will be overwritten.</span>
+<span class="sd">        Default overwrite=False.</span>
+<span class="sd">    prefix : string, optional</span>
+<span class="sd">         Filename prefix for all output files.  Default prefix= &#39;out&#39;</span>
+<span class="sd">    create_directory : True/Fase, optional</span>
+<span class="sd">        If True a new sub-folder with name based on  `prefix` and an</span>
+<span class="sd">        incremented number will contain the output</span>
+<span class="sd">        files. Default create_directory=True.</span>
+<span class="sd">    data_ext : string, optional</span>
+<span class="sd">        File extension for data files. Default data_ext=&#39;.csv&#39;</span>
+<span class="sd">    input_ext : string, optional</span>
+<span class="sd">        File extension for original and parsed input files. default = &quot;.py&quot;</span>
+<span class="sd">    figure_ext : string, optional</span>
+<span class="sd">        File extension for figures.  Can be any valid matplotlib option for</span>
+<span class="sd">        savefig. Default figure_ext=&quot;.eps&quot;. Others include &#39;pdf&#39;, &#39;png&#39;.</span>
+<span class="sd">    title : str, optional</span>
+<span class="sd">        A title for the input file.  This will appear at the top of data files.</span>
+<span class="sd">        Default title=None, i.e. no title.</span>
+<span class="sd">    author : str, optional</span>
+<span class="sd">        Author of analysis. Default=&#39;unknown&#39;.</span>
+
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    por : array of shape (len(z), len(tpor))</span>
+<span class="sd">        Pore pressure vs depth at various times.  Only present if tpor defined.</span>
+<span class="sd">        If rcalc defined then porepressure will be at r=rcalc.  If rcalc is</span>
+<span class="sd">        not defined then pore pressure is averaged radially</span>
+<span class="sd">    avp : array of shape (1, len(t))</span>
+<span class="sd">        Averge pore pressure of profile various times.  Only present if t</span>
+<span class="sd">        defined. If rcalc defined then pore pressure will be at r=rcalc.</span>
+<span class="sd">        If rcalc is not defined then pore pressure is averaged radially</span>
+<span class="sd">    set : array of shape (1, len(t))</span>
+<span class="sd">        Surface settlement at various times.  Only present if t</span>
+<span class="sd">        defined. If rcalc defined then settlement will be at r=rcalc.</span>
+<span class="sd">        If `rcalc` is not defined then settlement is averaged radially.</span>
+
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    It is possbile to initialize the object without a file-like object or</span>
+<span class="sd">    multi-line string, i.e. using the default reader=None.  This is not</span>
+<span class="sd">    recommended because you have to explicitly set each attribute.  It will</span>
+<span class="sd">    most likely be easier to use a string or file object and then do any</span>
+<span class="sd">    custom modifications to the attributes afterwards.</span>
+
+
+<span class="sd">    This program relies on numerical root finding, which can be extremely</span>
+<span class="sd">    troublesome in for the vertical eigenvalue case here (Mainly because I</span>
+<span class="sd">    never figured out how to normalise in the z direction... but that is</span>
+<span class="sd">    another story). You will probably need to fine tune the vertical_roots</span>
+<span class="sd">    parameters to ensure the correct eigenvalues have been found, so:</span>
+
+<span class="sd">     1. Run the program with the defaults.  If it actually excecutes go to</span>
+<span class="sd">        step 3.</span>
+<span class="sd">     2. Increase a combo of `vertical_roots_dx`, `vertical_roots_p` and</span>
+<span class="sd">        `max_iter` untill the program excecutes.</span>
+<span class="sd">     3. Does your pore pressure vs depth plots look ok.  If yes, then possibly</span>
+<span class="sd">        accept the results.  But better to check eigen values in step 4.</span>
+<span class="sd">     4. Run the method `_plot_vert_roots` with enough points to smoothly</span>
+<span class="sd">        show the characteristic curve.  zoom in on the roots and check if</span>
+<span class="sd">        all the roots are found (usually the problems occur with leftmost line.</span>
+<span class="sd">        If not alter `vertical_roots_dx`, `vertical_roots_p` and</span>
+<span class="sd">        `max_iter` untill all roots are captured.  Basically if you choose</span>
+<span class="sd">        `vertical_roots_dx` tiny, `vertical_roots_p`=1, and `max_iter` huge</span>
+<span class="sd">        then you will find all the roots but it may take a long time.</span>
+
+<span class="sd">    Root finding is very hard when there are clumps of closely spaced roots</span>
+<span class="sd">    but the clumps themselves are far apart.</span>
+
+<span class="sd">    Also note that there are errors in eq.24a and eq.24b in the published</span>
+<span class="sd">    article of Nogami and Li.  Also I could never get the vertical</span>
+<span class="sd">    normalisation to work.  Also I&#39;ve done my own normalising for the radial</span>
+<span class="sd">    part.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    geotecha.piecewise.piecewise_linear_1d.PolyLine : How to specify loadings</span>
+
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Nogami, Toyoaki, and Maoxin Li. &#39;Consolidation of Clay with a</span>
+<span class="sd">           System of Vertical and Horizontal Drains&#39;. Journal of</span>
+<span class="sd">           Geotechnical and Geoenvironmental Engineering 129, no. 9</span>
+<span class="sd">           (2003): 838-48. doi:10.1061/(ASCE)1090-0241(2003)129:9(838).</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This method overwrites the _setup method in</span>
+<span class="sd">        inputoutput.InputFileLoaderCheckerSaver</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bctop&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;bcbot&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                    <span class="s1">&#39;radial_roots_x0&#39;</span><span class="p">:</span> <span class="mf">1e-3</span><span class="p">,</span>
+                                    <span class="s1">&#39;radial_roots_dx&#39;</span><span class="p">:</span> <span class="mf">1e-3</span><span class="p">,</span>
+                                    <span class="s1">&#39;radial_roots_p&#39;</span><span class="p">:</span> <span class="mf">1.05</span><span class="p">,</span>
+                                    <span class="s1">&#39;vertical_roots_x0&#39;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+                                    <span class="s1">&#39;vertical_roots_dx&#39;</span><span class="p">:</span> <span class="mf">1e-7</span><span class="p">,</span>
+                                    <span class="s1">&#39;vertical_roots_p&#39;</span><span class="p">:</span> <span class="mf">1.05</span><span class="p">,</span>
+                                    <span class="s1">&#39;max_iter&#39;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">,</span>
+                                    <span class="s1">&#39;prefix&#39;</span><span class="p">:</span> <span class="s1">&#39;nl2003_&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;show_vert_eigs&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;z t tpor nv nh h kv kh mv bctop bcbot &#39;</span>
+            <span class="s1">&#39;surcharge_vs_time r0 r1 rcalc &#39;</span>
+            <span class="s1">&#39;radial_roots_x0 radial_roots_dx radial_roots_p &#39;</span>
+            <span class="s1">&#39;vertical_roots_x0 vertical_roots_dx vertical_roots_p &#39;</span>
+            <span class="s1">&#39;max_iter show_vert_eigs&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes_that_should_have_same_len_pairs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;h kv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;kv mv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;h mv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;h kh&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;h kv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;h mv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span> <span class="c1">#pairs that should have the same length</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes_that_should_be_lists</span><span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes_that_should_have_same_x_limits</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nv&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nh&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mv</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bctop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bctop&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bcbot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bcbot&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r1</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radial_roots_x0&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radial_roots_dx&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radial_roots_p&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_x0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vertical_roots_x0&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vertical_roots_dx&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vertical_roots_p&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;max_iter&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_vert_eigs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_attribute_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;show_vert_eigs&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">surcharge_vs_time</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_zero_or_all</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;h kv mv&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;r0 r1&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_at_least_one</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="s1">&#39;mv&#39;</span><span class="p">],</span>
+            <span class="p">[</span><span class="s1">&#39;surcharge_vs_time&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;kv kh&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+            <span class="s1">&#39;tpor t&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_one_implies_others</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;r0 r1 kh nh&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+                                    <span class="s1">&#39;r1 r0 kh nh&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+                                    <span class="s1">&#39;kh r0 r1 nh&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+                                    <span class="s1">&#39;nh kh r0 r1&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">_calc_derived_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calculate properties/ratios derived from input&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_input_attributes</span><span class="p">()</span>
+
+<span class="c1">#        if self.rcalc is None:</span>
+<span class="c1">#            self.rcalc=self.r1</span>
+
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mv</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">mv</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nh</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mv</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">zlayer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">mv</span>
+
+<span class="c1">#        self.use_normalised = True</span>
+        <span class="c1">#use_normalised is only relevant fot the radial component.</span>
+        <span class="c1">#I couldn&#39;t get non-normalised to work, hence why it is hard coded in</span>
+        <span class="c1">#rather than a user variable.  I could never get the vertical</span>
+        <span class="c1">#normalisation working so I gave up trying</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bctop</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bctop</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+        <span class="c1">#index of phib at bottom to check</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bcbot</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phi_i_check</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bcbot</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">phi_i_check</span> <span class="o">=</span> <span class="mi">1</span>
+
+<div class="viewcode-block" id="NogamiAndLi2003.un_normalised_average"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.un_normalised_average">[docs]</a>    <span class="k">def</span> <span class="nf">un_normalised_average</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;u(r) part of u(r, z, t) = u(r) * phi(z) * T(t), averaged betw r0 r1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">r0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span>
+        <span class="n">nn</span> <span class="o">=</span> <span class="n">r1</span><span class="o">/</span><span class="n">r0</span>
+
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">nn</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">s</span></div>
+
+<div class="viewcode-block" id="NogamiAndLi2003.un_normalised"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.un_normalised">[docs]</a>    <span class="k">def</span> <span class="nf">un_normalised</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;u(r) part of u(r, z, t) = u(r) * phi(z) * T(t)</span>
+
+<span class="sd">        This version is normalised w.r.t. r0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">r0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span>
+        <span class="k">return</span> <span class="n">besselj</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">r</span><span class="o">/</span><span class="n">r0</span><span class="o">*</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">bessely</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">besselj</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">bessely</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">r</span><span class="o">/</span><span class="n">r0</span><span class="o">*</span><span class="n">s</span><span class="p">)</span></div>
+
+
+
+    <span class="k">def</span> <span class="nf">_radial_characteristic_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Zeros of this function provide the radial eigenvalues&quot;&quot;&quot;</span>
+
+        <span class="n">r0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_find_sn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find the radial eigenvalues&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span> <span class="o">=</span> <span class="n">find_n_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_radial_characteristic_curve</span><span class="p">,</span>
+                               <span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span><span class="n">x0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_x0</span><span class="p">,</span>
+                               <span class="n">dx</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_dx</span><span class="p">,</span>
+                               <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_roots_p</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alp</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;beta from alp**2 = cv*beta**2 + cr * s**2 / r0**2&quot;&quot;&quot;</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">r0</span><span class="o">=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">r0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span> <span class="o">*</span> <span class="n">alp</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ch</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">cv</span><span class="p">)</span><span class="o">*</span><span class="n">s</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">r0</span><span class="o">**</span><span class="mi">2</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">))</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_calc_phia_and_phidota</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Determine the pore pressure and pore pressure gradient at top of</span>
+<span class="sd">        each layer</span>
+
+<span class="sd">        Can only be done after finding alp</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1">#        print(&#39;o&#39;*40)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">phia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="c1">#                print(i, &#39;s=&#39;, s)</span>
+<span class="c1">#                print(j, &#39;alp=&#39;, alp)</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">):</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">cmath</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">beta</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="n">phib</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="c1">#                        phib[0] = phia[0]</span>
+<span class="c1">#                        phib[1] = 0+0j</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+                        <span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">beta</span>
+                        <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">beta</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+                        <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+                        <span class="n">phib</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">phia</span><span class="p">)</span>
+<span class="c1">#                    print(k, beta, phia, phib)</span>
+                    <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="c1"># we are not in the last layer</span>
+                        <span class="c1"># transfer phib to next layers phia</span>
+                        <span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">phib</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">phia</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">phib</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">/</span>  <span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">phia</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="c1">#phib[1] * self.kv[i] /  self.kv[i+1]</span>
+
+                <span class="c1">#check</span>
+<span class="c1">#                print(&#39;_&#39;, alp, &#39;s&#39;, phib.real)</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">phib</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_i_check</span><span class="p">]</span><span class="o">.</span><span class="n">real</span><span class="p">)</span><span class="o">&gt;</span><span class="mf">0.1</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;bottom BC not satisfied. ih=&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="s1">&#39;jv=&#39;</span><span class="p">,</span> <span class="n">j</span> <span class="p">)</span>
+<span class="c1">#                    raise ValueError(&#39;Bottom BC not satisfied&#39;)</span>
+
+    <span class="k">def</span> <span class="nf">_vertical_characteristic_curve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alp</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;the roots of this function will give the vertical eigenvalues</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        alp : float</span>
+<span class="sd">            alp common for all layers</span>
+<span class="sd">        s : float</span>
+<span class="sd">            radial eigen value</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span>
+
+        <span class="n">phia</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+        <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span><span class="p">(</span><span class="n">alp</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="c1">#        print(&quot;*&quot;, &#39;s=&#39;, s)</span>
+<span class="c1">#        print(&#39;alp=&#39;, alp)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cmath</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">phib</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+<span class="c1">#                phib[0] = phia[0]</span>
+<span class="c1">#                phib[1] = 0+0j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+                <span class="n">square</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+                <span class="n">square</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">h</span><span class="p">)</span>
+
+                <span class="n">phib</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">square</span><span class="p">,</span> <span class="n">phia</span><span class="p">)</span>
+<span class="c1">#            print(i,  beta[i], phia, phib)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># we are not in the last layer</span>
+                <span class="c1">#transfer phib to the next layer phia</span>
+                <span class="n">phia</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span> <span class="n">phib</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">phia</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">phib</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span>  <span class="bp">self</span><span class="o">.</span><span class="n">kv</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">phib</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_i_check</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+
+        <span class="k">return</span> <span class="n">ret</span>
+
+
+    <span class="k">def</span> <span class="nf">_find_alp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;find alp by matrix transfer method&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">s</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">alp_start_offset</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1e-7</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_dx</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">alp_start_offset</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">alp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_x0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">n</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">find_n_roots</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_vertical_characteristic_curve</span><span class="p">,</span>
+                <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">s</span><span class="p">,),</span><span class="n">n</span><span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="n">x0</span> <span class="o">=</span> <span class="n">alp</span><span class="o">+</span><span class="n">alp_start_offset</span><span class="p">,</span>
+                <span class="n">dx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_dx</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_p</span><span class="p">,</span>
+                <span class="n">max_iter</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iter</span><span class="p">,</span> <span class="n">fsolve_kwargs</span><span class="o">=</span><span class="p">{})</span>
+
+    <span class="k">def</span> <span class="nf">_calc_Cn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calc Cn part of the coefficient Cmn&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Cn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_Cn</span><span class="p">[:]</span><span class="o">=</span><span class="mi">1</span>
+            <span class="k">return</span>
+
+        <span class="n">r0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r0</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r1</span>
+
+        <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">):</span>
+            <span class="n">numer</span> <span class="o">=</span> <span class="o">-</span><span class="n">r0</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">s</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">denom</span> <span class="o">=</span> <span class="n">r0</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">r1</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">r0</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_Cn</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">numer</span> <span class="o">/</span> <span class="n">denom</span>
+
+    <span class="k">def</span> <span class="nf">_calc_betamn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calc beta for each layer and each eigenvalue combination&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span><span class="p">(</span><span class="n">alp</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+
+
+
+    <span class="k">def</span> <span class="nf">_calc_Amn_and_Bmn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calc coefficeints Amn and Bmn for each layer and eigenvalue</span>
+<span class="sd">        combination&quot;&quot;&quot;</span>
+
+
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Amn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Bmn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                <span class="n">phia</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">phia0</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">):</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">bet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                    <span class="n">phi_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+                    <span class="n">phi_a_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span>
+
+                    <span class="k">if</span> <span class="n">cmath</span><span class="o">.</span><span class="n">polar</span><span class="p">(</span><span class="n">bet</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_Amn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">phi_a</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_Bmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span><span class="o">*</span><span class="n">phi_a</span><span class="o">**</span><span class="mi">2</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_Amn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">phi_a</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="n">bet</span> <span class="o">-</span>
+                            <span class="n">phi_a_dot</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">phi_a_dot</span><span class="o">/</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_Bmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="n">phi_a</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span>
+                            <span class="n">h</span><span class="o">*</span><span class="n">phi_a</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span>
+                            <span class="n">phi_a</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">bet</span><span class="p">)</span> <span class="o">+</span>
+                            <span class="n">h</span><span class="o">*</span><span class="n">phi_a_dot</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span>
+                            <span class="n">h</span><span class="o">*</span><span class="n">phi_a_dot</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span>
+                            <span class="n">phi_a</span><span class="o">*</span><span class="n">phi_a_dot</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                            <span class="n">phi_a</span><span class="o">*</span><span class="n">phi_a_dot</span><span class="o">/</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span>
+                            <span class="n">phi_a_dot</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span><span class="o">*</span><span class="n">h</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">bet</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
+
+
+    <span class="k">def</span> <span class="nf">_calc_Cm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Calc Cm part of the coefficient Cmn&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Amn_and_Bmn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+<span class="c1">#                phia = self.phia0</span>
+                <span class="n">numer</span> <span class="o">=</span> <span class="mf">0.0</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="mf">0.0</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nlayers</span><span class="p">):</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">mv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mv</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">Amn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Amn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">Bmn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Bmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">k</span><span class="p">]</span>
+                    <span class="n">numer</span> <span class="o">+=</span> <span class="n">mv</span><span class="o">*</span><span class="n">Amn</span>
+                    <span class="n">denom</span> <span class="o">+=</span> <span class="n">mv</span><span class="o">*</span><span class="n">Bmn</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_Cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">numer</span> <span class="o">/</span> <span class="n">denom</span>
+
+
+
+
+
+    <span class="k">def</span> <span class="nf">_calc_Cmn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calc the coefficient Cmn = Cm * Cn&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Cn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Cm</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Cmn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">Cn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Cn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                <span class="n">Cm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Cm</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_Cmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">Cm</span> <span class="o">*</span> <span class="n">Cn</span>
+
+
+
+
+<div class="viewcode-block" id="NogamiAndLi2003.calc"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.calc">[docs]</a>    <span class="k">def</span> <span class="nf">calc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Perform all calculations&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_derived_properties</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_find_sn</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_find_alp</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_betamn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_phia_and_phidota</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Cmn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_por</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="NogamiAndLi2003.make_all"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.make_all">[docs]</a>    <span class="k">def</span> <span class="nf">make_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check input, make_output produce files and plots&quot;&quot;&quot;</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_input_attributes</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">make_output</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;save_data_to_file&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_save_data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;save_figures_to_file&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;show_figures&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">produce_plots</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;save_figures_to_file&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_save_figures</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;show_figures&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="NogamiAndLi2003.make_output"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.make_output">[docs]</a>    <span class="k">def</span> <span class="nf">make_output</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;make all output&quot;&quot;&quot;</span>
+
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_derived_properties</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_find_sn</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_find_alp</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_betamn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_phia_and_phidota</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Cmn</span><span class="p">()</span>
+<span class="c1">#        self._calc_por()</span>
+
+
+        <span class="n">header1</span> <span class="o">=</span> <span class="s2">&quot;program: nogamiandli2003; geotecha version: </span><span class="si">{}</span><span class="s2">; author: </span><span class="si">{}</span><span class="s2">; date: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">author</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y/%m/</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">header1</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot; at r=</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">extra</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grid_data_dicts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calc_por</span><span class="p">()</span>
+
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">]</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;_data_por&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">por</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;column_labels&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+                 <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">header1</span> <span class="o">+</span> <span class="s1">&#39;Pore pressure at depth&#39;</span><span class="o">+</span><span class="n">extra</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grid_data_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_calc_avp</span><span class="p">()</span>
+
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1"> to </span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))]</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;_data_avp&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">avp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;column_labels&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+                 <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">header1</span> <span class="o">+</span> <span class="s1">&#39;Average pore pressure between depths&#39;</span> <span class="o">+</span> <span class="n">extra</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grid_data_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+            <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1"> to </span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))]</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;_data_set&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">avp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span>
+                 <span class="s1">&#39;row_labels_label&#39;</span><span class="p">:</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;column_labels&#39;</span><span class="p">:</span> <span class="n">labels</span><span class="p">,</span>
+                 <span class="s1">&#39;header&#39;</span><span class="p">:</span> <span class="n">header1</span> <span class="o">+</span> <span class="s1">&#39;settlement between depths&#39;</span> <span class="o">+</span> <span class="n">extra</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grid_data_dicts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="NogamiAndLi2003.produce_plots"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.NogamiAndLi2003.produce_plots">[docs]</a>    <span class="k">def</span> <span class="nf">produce_plots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;produce plots of analysis&quot;&quot;&quot;</span>
+
+<span class="c1">#        geotecha.plotting.one_d.pleasing_defaults()</span>
+
+<span class="c1">#        matplotlib.rcParams[&#39;figure.dpi&#39;] = 80</span>
+<span class="c1">#        matplotlib.rcParams[&#39;savefig.dpi&#39;] = 80</span>
+
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;serif&#39;</span><span class="p">})</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_figures</span><span class="o">=</span><span class="p">[]</span>
+        <span class="c1">#por</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_plot_por</span><span class="p">()</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;fig_por&#39;</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">set_window_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_plot_avp</span><span class="p">()</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;fig_avp&#39;</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">set_window_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+            <span class="n">f</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_plot_set</span><span class="p">()</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;fig_set&#39;</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">set_window_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">show_vert_eigs</span><span class="p">:</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_plot_vert_roots</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+            <span class="n">title</span> <span class="o">=</span> <span class="s1">&#39;vertical characteristic curve and eigs&#39;</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">set_window_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_plot_por</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot depth vs pore pressure for various times</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot; at r=</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">extra</span><span class="o">=</span><span class="s2">&quot; (radial average)&quot;</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span>
+        <span class="n">line_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">t</span><span class="p">]</span>
+        <span class="n">por_prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_properties</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;por&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;xlabel&#39;</span> <span class="ow">in</span> <span class="n">por_prop</span><span class="p">:</span>
+            <span class="n">por_prop</span><span class="p">[</span><span class="s1">&#39;xlabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Pore pressure&#39;</span><span class="o">+</span><span class="n">extra</span>
+
+        <span class="c1">#to do</span>
+        <span class="n">fig_por</span> <span class="o">=</span> <span class="n">geotecha</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">one_d</span><span class="o">.</span><span class="n">plot_vs_depth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">por</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span>
+                                      <span class="n">line_labels</span><span class="o">=</span><span class="n">line_labels</span><span class="p">,</span>
+                                      <span class="n">prop_dict</span><span class="o">=</span><span class="n">por_prop</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig_por</span>
+
+    <span class="k">def</span> <span class="nf">_plot_avp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot average pore pressure of profile&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot; at r=</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">extra</span><span class="o">=</span><span class="s2">&quot; (radial average)&quot;</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span>
+        <span class="n">line_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1"> to </span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))]</span>
+
+        <span class="n">avp_prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_properties</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;avp&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;ylabel&#39;</span> <span class="ow">in</span> <span class="n">avp_prop</span><span class="p">:</span>
+            <span class="n">avp_prop</span><span class="p">[</span><span class="s1">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Average pore pressure&#39;</span><span class="o">+</span><span class="n">extra</span>
+        <span class="n">fig_avp</span> <span class="o">=</span> <span class="n">geotecha</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">one_d</span><span class="o">.</span><span class="n">plot_vs_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">avp</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                           <span class="n">line_labels</span><span class="o">=</span><span class="n">line_labels</span><span class="p">,</span>
+                           <span class="n">prop_dict</span><span class="o">=</span><span class="n">avp_prop</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig_avp</span>
+
+    <span class="k">def</span> <span class="nf">_plot_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;plot surface settlement&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">extra</span> <span class="o">=</span> <span class="s2">&quot; at r=</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">extra</span><span class="o">=</span><span class="s2">&quot; (radial average)&quot;</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span>
+        <span class="n">line_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;</span><span class="si">{:.3g}</span><span class="s1"> to </span><span class="si">{:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">))]</span>
+
+        <span class="n">set_prop</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot_properties</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;set&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="s1">&#39;ylabel&#39;</span> <span class="ow">in</span> <span class="n">set_prop</span><span class="p">:</span>
+            <span class="n">set_prop</span><span class="p">[</span><span class="s1">&#39;ylabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;surface settlement&#39;</span><span class="o">+</span><span class="n">extra</span>
+        <span class="n">fig_set</span> <span class="o">=</span> <span class="n">geotecha</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">one_d</span><span class="o">.</span><span class="n">plot_vs_time</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+                           <span class="n">line_labels</span><span class="o">=</span><span class="n">line_labels</span><span class="p">,</span>
+                           <span class="n">prop_dict</span><span class="o">=</span><span class="n">set_prop</span><span class="p">)</span>
+        <span class="n">fig_set</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fig_set</span>
+
+
+    <span class="k">def</span> <span class="nf">_calc_Tm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alp</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calculate the Tm expression at a given time</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        alp : float</span>
+<span class="sd">            eigenvalue for layer</span>
+<span class="sd">        t : float</span>
+<span class="sd">            time value</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tm: float</span>
+<span class="sd">            time dependant function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">loadmag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surcharge_vs_time</span><span class="o">.</span><span class="n">y</span>
+        <span class="n">loadtim</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">surcharge_vs_time</span><span class="o">.</span><span class="n">x</span>
+        <span class="p">(</span><span class="n">ramps_less_than_t</span><span class="p">,</span> <span class="n">constants_less_than_t</span><span class="p">,</span> <span class="n">steps_less_than_t</span><span class="p">,</span>
+            <span class="n">ramps_containing_t</span><span class="p">,</span> <span class="n">constants_containing_t</span><span class="p">)</span> <span class="o">=</span> <span class="n">pwise</span><span class="o">.</span><span class="n">segment_containing_also_segments_less_than_xi</span><span class="p">(</span><span class="n">loadtim</span><span class="p">,</span> <span class="n">loadmag</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">steps_or_equal_to</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span>
+        <span class="n">Tm</span><span class="o">=</span><span class="mi">0</span>
+        <span class="n">cv</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># I copied the Tm function from SchiffmanAndStein1970</span>
+        <span class="n">i</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#only one time value</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">steps_less_than_t</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">sig1</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">sig2</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">Tm</span> <span class="o">+=</span> <span class="p">(</span><span class="n">sig2</span><span class="o">-</span><span class="n">sig1</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">cv</span> <span class="o">*</span> <span class="n">alp</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">loadtim</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ramps_containing_t</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">sig1</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">sig2</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">loadtim</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">loadtim</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">#            Tm += (-sig1 + sig2)/(alp**2*cv*(-t1 + t2)) - (-sig1 + sig2)*exp(-alp**2*cv*t)*exp(alp**2*cv*t1)/(alp**2*cv*(-t1 + t2))</span>
+            <span class="n">Tm</span> <span class="o">+=</span> <span class="p">(</span><span class="o">-</span><span class="n">sig1</span> <span class="o">+</span> <span class="n">sig2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">sig1</span> <span class="o">+</span> <span class="n">sig2</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">t1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ramps_less_than_t</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+            <span class="n">sig1</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">sig2</span> <span class="o">=</span> <span class="n">loadmag</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">t1</span> <span class="o">=</span> <span class="n">loadtim</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="n">t2</span> <span class="o">=</span> <span class="n">loadtim</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="c1">#            Tm += -(-sig1 + sig2)*exp(-alp**2*cv*t)*exp(alp**2*cv*t1)/(alp**2*cv*(-t1 + t2)) + (-sig1 + sig2)*exp(-alp**2*cv*t)*exp(alp**2*cv*t2)/(alp**2*cv*(-t1 + t2))</span>
+            <span class="n">Tm</span> <span class="o">+=</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">sig1</span> <span class="o">+</span> <span class="n">sig2</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">t1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">))</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">sig1</span> <span class="o">+</span> <span class="n">sig2</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">t2</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">alp</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">cv</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">t1</span> <span class="o">+</span> <span class="n">t2</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">Tm</span>
+
+    <span class="k">def</span> <span class="nf">_calc_un</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;u(r) part of u(r, z, t) = u(r) * phi(z) * T(t)&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_un</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_un</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rcalc</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_un</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">un_normalised_average</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_calc_por</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calculate the pore pressure&quot;&quot;&quot;</span>
+
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span>
+
+<span class="c1">#        if self.tpor is None:</span>
+<span class="c1">#            self.tpor==self.t</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tpor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">por</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tpor</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+
+
+
+        <span class="n">z_in_layer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zlayer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_un</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tpor</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">un</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_un</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                    <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                    <span class="n">Tm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Tm</span><span class="p">(</span><span class="n">alp</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">):</span>
+                        <span class="n">layer</span> <span class="o">=</span> <span class="n">z_in_layer</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                        <span class="n">zlay</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zlayer</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">[</span><span class="n">layer</span><span class="p">])</span>
+
+                        <span class="n">bet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">Cmn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Cmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+                        <span class="n">phi_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">phi_a_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span> <span class="o">*</span> <span class="n">zlay</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi_a</span> <span class="o">+</span>
+                            <span class="n">sin</span><span class="p">(</span><span class="n">bet</span> <span class="o">*</span> <span class="n">zlay</span><span class="p">)</span><span class="o">/</span><span class="n">bet</span> <span class="o">*</span> <span class="n">phi_a_dot</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">por</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Cmn</span> <span class="o">*</span> <span class="n">un</span> <span class="o">*</span> <span class="n">phi</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">Tm</span>
+
+
+    <span class="k">def</span> <span class="nf">_calc_avp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;calculate the average pore pressure&quot;&quot;&quot;</span>
+
+        <span class="n">sin</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">sin</span>
+        <span class="n">cos</span> <span class="o">=</span> <span class="n">cmath</span><span class="o">.</span><span class="n">cos</span>
+
+        <span class="n">h_all</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">avp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="n">z_in_layer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">zlayer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calc_un</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">un</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_un</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span><span class="p">):</span>
+                    <span class="n">alp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+                    <span class="n">Tm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc_Tm</span><span class="p">(</span><span class="n">alp</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+                    <span class="n">load</span> <span class="o">=</span> <span class="n">pwise</span><span class="o">.</span><span class="n">pinterp_x_y</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">surcharge_vs_time</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">layer</span><span class="p">,</span> <span class="n">h</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">):</span>
+<span class="c1">#                        layer = z_in_layer[k]</span>
+<span class="c1">#                        zlay = z - (self.zlayer[layer] - self.h[layer])</span>
+
+                        <span class="n">bet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_betamn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">Cmn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Cmn</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">real</span>
+                        <span class="n">phi_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phia</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">phi_a_dot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phidota</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">layer</span><span class="p">]</span>
+                        <span class="n">phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">bet</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="n">bet</span> <span class="o">*</span> <span class="n">phi_a</span> <span class="o">+</span>
+                                <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">cos</span><span class="p">(</span><span class="n">bet</span> <span class="o">*</span> <span class="n">h</span><span class="p">))</span><span class="o">/</span><span class="n">bet</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">phi_a_dot</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">avp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="n">Cmn</span> <span class="o">*</span> <span class="n">un</span> <span class="o">*</span> <span class="n">phi</span><span class="o">.</span><span class="n">real</span> <span class="o">/</span> <span class="n">h_all</span> <span class="o">*</span> <span class="n">Tm</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span><span class="p">]</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mv</span><span class="p">[</span><span class="n">layer</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">load</span> <span class="o">*</span> <span class="n">h</span> <span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">nv</span> <span class="o">-</span> <span class="n">Cmn</span> <span class="o">*</span>
+                                            <span class="n">un</span> <span class="o">*</span> <span class="n">phi</span><span class="o">.</span><span class="n">real</span> <span class="o">*</span> <span class="n">Tm</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_plot_vert_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">npt</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot the vertical characteristic curve and it&#39;s roots</span>
+
+<span class="sd">        After a &#39;successful&#39; run, use this to check the validity</span>
+<span class="sd">        of the calculated vertical eigenvalues and ensure none are missing</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        npt : int, optional</span>
+<span class="sd">            number of points to plot. default=200</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s1">&#39;111&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nh</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sn</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="c1">#            amin=self._alp_min()[i]</span>
+<span class="c1">#            amin=0.001</span>
+            <span class="n">amin</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">amin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">npt</span><span class="p">)</span>
+
+
+            <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">_x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+
+                <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vertical_characteristic_curve</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+            <span class="c1">#        print(x[i],y[i])</span>
+
+
+            <span class="c1">#    print(y)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_lines</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,:],</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_alp</span><span class="p">[</span><span class="n">i</span><span class="p">,:]),</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;vertical_roots_x0=</span><span class="si">{}</span><span class="s1">, vertical_roots_dx=</span><span class="si">{}</span><span class="s1">, vertical_roots_p=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_x0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_dx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertical_roots_p</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;value of characterisrtic curve&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../../../api/geotecha.consolidation.nogamiandli2003.html#geotecha.consolidation.nogamiandli2003.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Run nogamiandli2003 as script&quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">GenericInputFileArgParser</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">NogamiAndLi2003</span><span class="p">,</span>
+                                  <span class="n">methods</span><span class="o">=</span><span class="p">[(</span><span class="s1">&#39;make_all&#39;</span><span class="p">,</span> <span class="p">[],</span> <span class="p">{})],</span>
+                                 <span class="n">pass_open_file</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">a</span><span class="o">.</span><span class="n">main</span><span class="p">()</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="c1">#    import nose</span>
+<span class="c1">#    nose.runmodule(argv=[&#39;nose&#39;, &#39;--verbosity=3&#39;, &#39;--with-doctest&#39;])</span>
+<span class="c1">##    nose.runmodule(argv=[&#39;nose&#39;, &#39;--verbosity=3&#39;])</span>
+    <span class="n">main</span><span class="p">()</span>
+
+
+
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,18 @@
+.. _examples-index:
+
+#################
+Geotecha Examples
+#################
+
+.. htmlonly::
+
+    :Release: |version|
+    :Date: |today|
+
+.. toctree::
+    :maxdepth: 2
+
+    specbeam/index.rst
+
+    speccon/index.rst
+

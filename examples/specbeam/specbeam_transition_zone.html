@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>specbeam example code: specbeam_transition_zone.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="speccon Examples" href="../speccon/index.html" />
+    <link rel="prev" title="specbeam example code: specbeam_infinite_beam_dynamic_amplification_factor.py" href="specbeam_infinite_beam_dynamic_amplification_factor.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">specbeam Examples</a><ul>
+      <li>Previous: <a href="specbeam_infinite_beam_dynamic_amplification_factor.html" title="previous chapter">specbeam example code: specbeam_infinite_beam_dynamic_amplification_factor.py</a></li>
+      <li>Next: <a href="../speccon/index.html" title="next chapter">speccon Examples</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/specbeam/specbeam_transition_zone.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="specbeam-example-code-specbeam-transition-zone-py">
+<span id="specbeam-specbeam-transition-zone"></span><h1>specbeam example code: specbeam_transition_zone.py<a class="headerlink" href="#specbeam-example-code-specbeam-transition-zone-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># specbeam example(if viewing this in docs, plots are at bottom of page)</span>
+
+
+<span class="c1"># Point load moving at constant speed on beam on elastic foundation.</span>
+<span class="c1"># transitions from stiffness k1 to stiffness k2 over a distance that is</span>
+<span class="c1"># twice the k1-portion&#39;s characteristic length (Lc).  damping remains constant at</span>
+<span class="c1"># the k1-portion&#39;s value. stiffness change is non-linear but was &#39;designed&#39;</span>
+<span class="c1"># to acheive linear displacement change within the transition zone.</span>
+
+<span class="c1"># ONe of the plots will look blank.  This is because it is an animation,and</span>
+<span class="c1"># animations don&#39;t show in the docs.  To see the animation run from source</span>
+<span class="c1"># code.</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="c1">#from collections import OrderedDict</span>
+
+<span class="c1">#from geotecha.plotting.one_d import MarkersDashesColors</span>
+<span class="c1">#from geotecha.piecewise.piecewise_linear_1d import PolyLine</span>
+<span class="kn">from</span> <span class="nn">geotecha.beam_on_foundation.specbeam</span> <span class="kn">import</span> <span class="n">SpecBeam</span>
+<span class="kn">from</span> <span class="nn">geotecha.beam_on_foundation.specbeam</span> <span class="kn">import</span> <span class="n">transition_zones1</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;classic&#39;</span><span class="p">)</span>
+
+
+<span class="c1">#example of deflection envelope</span>
+<span class="k">for</span> <span class="n">alpha_design</span><span class="p">,</span> <span class="n">alphas</span><span class="p">,</span> <span class="n">reverses</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="p">[</span><span class="mf">0.8</span><span class="p">],</span>
+            <span class="p">[[</span><span class="mf">0.8</span><span class="p">]],</span>
+            <span class="p">[[</span><span class="bp">False</span><span class="p">]]</span>
+             <span class="p">):</span>
+
+    <span class="n">transition_zones1</span><span class="p">(</span><span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span>
+       <span class="n">ntrans</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="c1"># number of points to sample analytical trasnstion zone</span>
+        <span class="n">kratio</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">nx</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span>     <span class="c1">#number of x points</span>
+        <span class="n">nt</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="c1">#number of time values</span>
+        <span class="n">nterms</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+        <span class="n">force_calc</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+        <span class="n">ninterp</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="c1"># number of points to discretize the transition zone</span>
+        <span class="n">nloads</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">load_spacing</span> <span class="o">=</span> <span class="mf">0.03</span><span class="p">,</span>
+        <span class="n">Lt_Lcs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="c1">#2,4,6],</span>
+        <span class="n">t_extend</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="c1"># factor to extend maximum evalutated time.</span>
+        <span class="n">DAF_distribution</span> <span class="o">=</span> <span class="s2">&quot;linear&quot;</span><span class="p">,</span>
+<span class="c1">#        tanhend=0.01,</span>
+        <span class="n">alpha_design</span> <span class="o">=</span> <span class="n">alpha_design</span><span class="p">,</span> <span class="c1">#alpha for back calculating k profile</span>
+        <span class="n">alphas</span> <span class="o">=</span> <span class="n">alphas</span><span class="p">,</span>
+        <span class="n">reverses</span><span class="o">=</span><span class="n">reverses</span><span class="p">,</span>
+<span class="c1">#        saveas=saveas,</span>
+        <span class="n">animateme</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+
+        <span class="n">xi_Lc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c1">#ratio of xinterest over characteristic length)</span>
+        <span class="n">article_formatting</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone.py">Source code</a>)</p>
+<div class="figure" id="id1">
+<img alt="../../_images/specbeam_transition_zone_00.png" src="../../_images/specbeam_transition_zone_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_00.png">png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_00.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id2">
+<img alt="../../_images/specbeam_transition_zone_01.png" src="../../_images/specbeam_transition_zone_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_01.png">png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_01.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_01.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id3">
+<img alt="../../_images/specbeam_transition_zone_02.png" src="../../_images/specbeam_transition_zone_02.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_02.png">png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_02.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_02.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id4">
+<img alt="../../_images/specbeam_transition_zone_03.png" src="../../_images/specbeam_transition_zone_03.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_03.png">png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_03.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_transition_zone_03.pdf">pdf</a>)</span></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/specbeam/specbeam_transition_zone.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

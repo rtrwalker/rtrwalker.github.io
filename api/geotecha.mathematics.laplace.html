@@ -1,0 +1,284 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>laplace &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">laplace</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.laplace">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.laplace.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="laplace">
+<h1>laplace<a class="headerlink" href="#laplace" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.laplace.Talbot" title="geotecha.mathematics.laplace.Talbot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Talbot</span></code></a>(f[,&nbsp;n,&nbsp;shift,&nbsp;vectorized])</td>
+<td>Numerical inverse Laplace transform, Talbot method</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.laplace.cot" title="geotecha.mathematics.laplace.cot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cot</span></code></a>(phi)</td>
+<td>Reciprocal of tan function.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.mathematics.laplace.csc" title="geotecha.mathematics.laplace.csc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">csc</span></code></a>(phi)</td>
+<td>Reciprocal of sin function.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.laplace">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.laplace" title="Permalink to this headline">¶</a></h2>
+<p>Numerical inverse Laplace transform</p>
+<dl class="class">
+<dt id="geotecha.mathematics.laplace.Talbot">
+<em class="property">class </em><code class="descclassname">geotecha.mathematics.laplace.</code><code class="descname">Talbot</code><span class="sig-paren">(</span><em>f</em>, <em>n=24</em>, <em>shift=0.0</em>, <em>vectorized=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/laplace.html#Talbot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.laplace.Talbot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Numerical inverse Laplace transform, Talbot method</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function or method</span></dt>
+<dd><p class="first last">Function to perform inverse Laplace transform on. Function should be
+vectorised (but doesn’t have to be).</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">even int, optional</span></dt>
+<dd><p class="first last">Number of integration points. Nf n is even it will be rounded up to
+nearest even number.  Default n=24.</p>
+</dd>
+<dt><strong>shift</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Shift contour to the right in case there is a pole on the positive
+real axis. Default shift=0.0.</p>
+</dd>
+<dt><strong>vectorized</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then <cite>f</cite> accepts vector inputs and numpy broadcasting will be
+used.  Otherwise function evaluation will occur in loops.
+Default vectorized=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.mathematics.mp_laplace.html#geotecha.mathematics.mp_laplace.Talbot" title="geotecha.mathematics.mp_laplace.Talbot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.mathematics.mp_laplace.Talbot</span></code></a></dt>
+<dd>higher precision numerical inverse Laplace transform.</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Talbot suggested that the Bromwich line be deformed into a contour that
+begins and ends in the left half plane, i.e., z infinity at both ends.
+Due to the exponential factor the integrand decays rapidly
+on such a contour. In such situations the trapezoidal rule converge
+extraordinarily rapidly.</p>
+<p>Shift contour to the right in case there is a pole on the positive real
+axis : Note the contour will not be optimal since it was originally
+devoloped for function with singularities on the negative real axis
+For example take F(s) = 1/(s-1), it has a pole at s = 1, the contour
+needs to be shifted with one unit, i.e shift  = 1.</p>
+<p class="rubric">References</p>
+<p>Code adapted (vectorised, args added) from <a class="reference internal" href="#r27f18a80d083-1" id="id1">[1]</a> and <a class="reference internal" href="#r27f18a80d083-2" id="id2">[2]</a> (including much
+of the text taken verbatim). Algorithm from <a class="reference internal" href="#r27f18a80d083-3" id="id3">[3]</a>:</p>
+<table class="docutils citation" frame="void" id="r27f18a80d083-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> Created by Fernando Damian Nieuwveldt, 25 October 2009,
+<a class="reference external" href="mailto:fdnieuwveldt&#37;&#52;&#48;gmail&#46;com">fdnieuwveldt<span>&#64;</span>gmail<span>&#46;</span>com</a>, <a class="reference external" href="http://code.activestate.com/recipes/576934-numerical-inversion-of-the-laplace-transform-using/">http://code.activestate.com/recipes/576934-numerical-inversion-of-the-laplace-transform-using/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r27f18a80d083-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> Adapted to mpmath and classes by Dieter Kadelka, 27 October 2009,
+<a class="reference external" href="mailto:Dieter&#46;Kadelka&#37;&#52;&#48;kit&#46;edu">Dieter<span>&#46;</span>Kadelka<span>&#64;</span>kit<span>&#46;</span>edu</a>, <a class="reference external" href="http://code.activestate.com/recipes/578799-numerical-inversion-of-the-laplace-transform-with-/">http://code.activestate.com/recipes/578799-numerical-inversion-of-the-laplace-transform-with-/</a></td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r27f18a80d083-3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[3]</td><td><em>(<a class="fn-backref" href="#id3">1</a>, <a class="fn-backref" href="#id6">2</a>)</em> L.N.Trefethen, J.A.C.Weideman, and T.Schmelzer. Talbot quadratures
+and rational approximations. BIT. Numerical Mathematics,
+46(3):653 670, 2006.</td></tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(t[,&nbsp;args])</td>
+<td>Numerical inverse laplace transform of F at various time t.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.laplace.cot">
+<code class="descclassname">geotecha.mathematics.laplace.</code><code class="descname">cot</code><span class="sig-paren">(</span><em>phi</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/laplace.html#cot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.laplace.cot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reciprocal of tan function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>phi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of 1d array of float</span></dt>
+<dd><p class="first last">Point to evaluate at.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array of float</span></dt>
+<dd><p class="first last">cot(phi)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.mathematics.laplace.csc">
+<code class="descclassname">geotecha.mathematics.laplace.</code><code class="descname">csc</code><span class="sig-paren">(</span><em>phi</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/laplace.html#csc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.laplace.csc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reciprocal of sin function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>phi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float of 1d array of float</span></dt>
+<dd><p class="first last">Point to evaluate at.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array of float</span></dt>
+<dd><p class="first last">csc(phi)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.laplace.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

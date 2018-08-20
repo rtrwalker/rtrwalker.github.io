@@ -1,0 +1,1340 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epus &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="constitutive_models" href="geotecha.constitutive_models.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">epus</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.constitutive_models.epus">Module listing</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.constitutive_models.html">constitutive_models</a><ul>
+      <li>Previous: <a href="geotecha.constitutive_models.html" title="previous chapter">constitutive_models</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.constitutive_models.epus.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="epus">
+<h1>epus<a class="headerlink" href="#epus" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.CurveFittingSWCC" title="geotecha.constitutive_models.epus.CurveFittingSWCC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurveFittingSWCC</span></code></a>(wsat,&nbsp;a,&nbsp;b,&nbsp;wr,&nbsp;sl)</td>
+<td>Curve fitting soil water characteristic curve for collapsible pores.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.DataResults" title="geotecha.constitutive_models.epus.DataResults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataResults</span></code></a>(npts)</td>
+<td>Container for stress, suction, void ratio, water content, saturation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS" title="geotecha.constitutive_models.epus.EPUS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EPUS</span></code></a>(SimpleSWCC,&nbsp;stp[,&nbsp;logDS,&nbsp;logRS,&nbsp;Ccs,&nbsp;…])</td>
+<td>Elasto-Plastic for Unsaturated Soils</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile" title="geotecha.constitutive_models.epus.EpusProfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EpusProfile</span></code></a>(epus_object,&nbsp;H[,&nbsp;zw,&nbsp;q0,&nbsp;gamw,&nbsp;…])</td>
+<td>1D initial conditons (stress etc.) distribution for EPUS unsaturated soil model.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.PoresizeDistribution" title="geotecha.constitutive_models.epus.PoresizeDistribution"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PoresizeDistribution</span></code></a>([Npoint])</td>
+<td>Pore size distribution curve</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.StressPath" title="geotecha.constitutive_models.epus.StressPath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">StressPath</span></code></a>(path_dicts)</td>
+<td>Stress paths to follow</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.constitutive_models.epus">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.constitutive_models.epus" title="Permalink to this headline">¶</a></h2>
+<p>Elasto-Plastic for Unsaturated Soils, adapted from VB code in Phd thesis of
+Pham (2005).</p>
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.CurveFittingSWCC">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">CurveFittingSWCC</code><span class="sig-paren">(</span><em>wsat</em>, <em>a</em>, <em>b</em>, <em>wr</em>, <em>sl</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#CurveFittingSWCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.CurveFittingSWCC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Curve fitting soil water characteristic curve for collapsible pores.</p>
+<p>i.e. wc(suction)</p>
+<p>Note that that when suction is less than 1, results are not meaningful.
+At low suction values we expect wc approx equal to wsat-wr, but the 
+sl * log10(suction) /Gs term gives large negative numbers for suctions 
+less than 1, whereas at suction =1 it dissapears as expected.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>wsat</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Gravimetric water condent at 100% saturation.</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>wr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Residual gravimetric water content.</p>
+</dd>
+<dt><strong>sl</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Initial slope of SWCC*Gs. This is actually the saturated virgin 
+compressibility index Cc.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>wsat</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Gravimetric water condent at 100% saturation.</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Curve fitting parameter.</p>
+</dd>
+<dt><strong>wr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Residual gravimetric water content.</p>
+</dd>
+<dt><strong>sl</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Initial slope of SWCC.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.DWc" title="geotecha.constitutive_models.epus.CurveFittingSWCC.DWc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DWc</span></code></a>(s[,&nbsp;Gs])</td>
+<td>Derivative of collapsible water content function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.Wc" title="geotecha.constitutive_models.epus.CurveFittingSWCC.Wc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Wc</span></code></a>(s[,&nbsp;Gs])</td>
+<td>Collapsible water content function</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.CurveFittingSWCC.DWc">
+<code class="descname">DWc</code><span class="sig-paren">(</span><em>s</em>, <em>Gs=2.7</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#CurveFittingSWCC.DWc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.DWc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of collapsible water content function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction.</p>
+</dd>
+<dt><strong>Gs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Specific gravity of solids. Default Gs=2.7</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">derivative of water content Wc w.r.t. suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span> <span class="o">=</span> <span class="n">CurveFittingSWCC</span><span class="p">(</span><span class="n">wsat</span><span class="o">=</span><span class="mf">0.262</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">a</span> <span class="o">=</span> <span class="mf">3.1</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">b</span> <span class="o">=</span> <span class="mf">3.377</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">wr</span> <span class="o">=</span> <span class="mf">0.128</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">sl</span> <span class="o">=</span> <span class="mf">0.115</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span><span class="o">.</span><span class="n">DWc</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="mf">2.7</span><span class="p">)</span>
+<span class="go">-2.367...e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.CurveFittingSWCC.Wc">
+<code class="descname">Wc</code><span class="sig-paren">(</span><em>s</em>, <em>Gs=2.7</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#CurveFittingSWCC.Wc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.Wc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collapsible water content function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction.</p>
+</dd>
+<dt><strong>Gs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Specific gravity of solids. Default Gs=2.7</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">water content Wc</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span> <span class="o">=</span> <span class="n">CurveFittingSWCC</span><span class="p">(</span><span class="n">wsat</span><span class="o">=</span><span class="mf">0.262</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">a</span> <span class="o">=</span> <span class="mf">3.1</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="mi">6</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">b</span> <span class="o">=</span> <span class="mf">3.377</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">wr</span> <span class="o">=</span> <span class="mf">0.128</span><span class="p">,</span>
+<span class="gp">... </span>                       <span class="n">sl</span> <span class="o">=</span> <span class="mf">0.115</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span><span class="o">.</span><span class="n">Wc</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="n">Gs</span><span class="o">=</span><span class="mf">2.7</span><span class="p">)</span>
+<span class="go">4.525...e-05</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.DataResults">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">DataResults</code><span class="sig-paren">(</span><em>npts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#DataResults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.DataResults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Container for stress, suction, void ratio, water content, saturation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of data points.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Numer of data points.</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Counter</p>
+</dd>
+<dt><strong>st</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Net normal stress. len is npts</p>
+</dd>
+<dt><strong>ss</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Suction.</p>
+</dd>
+<dt><strong>e</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Void Ratio</p>
+</dd>
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">gravimetric water content</p>
+</dd>
+<dt><strong>Sr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Degree of saturation</p>
+</dd>
+<dt><strong>vw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Volumetric water content.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.EPUS">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">EPUS</code><span class="sig-paren">(</span><em>SimpleSWCC</em>, <em>stp</em>, <em>logDS=0.0</em>, <em>logRS=0.0</em>, <em>Ccs=None</em>, <em>Css=None</em>, <em>Ccd=0.0</em>, <em>Gs=2.7</em>, <em>Assumption=1</em>, <em>beta=0.0</em>, <em>pm=1.0</em>, <em>Pore_shape=1.0</em>, <em>K0=1.0</em>, <em>soilname='unknown'</em>, <em>username='unknown'</em>, <em>Npoint=1000</em>, <em>NumSr=400</em>, <em>MaxSuction=6</em>, <em>MinSuction=-3</em>, <em>implementation='fortran'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Elasto-Plastic for Unsaturated Soils</p>
+<p>This code is adapted from visual basic code in Appendix E of thesis of
+Pham (2005) <a class="reference internal" href="#r6948338726b1-2" id="id1">[2]</a>.  Journal article is <a class="reference internal" href="#r6948338726b1-1" id="id2">[1]</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>SimpleSWCC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">CurveFittingSWCC object</span></dt>
+<dd><p class="first last">Soil water characteristic curve.</p>
+</dd>
+<dt><strong>stp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">StressPath object</span></dt>
+<dd><p class="first last">object containing info abount the stress path.</p>
+</dd>
+<dt><strong>logDS</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Distance ratio between boundary drying and boundary drying curve.
+In log cycles. default logDS=0.</p>
+</dd>
+<dt><strong>logRS</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Slope ratio between boundary drying and boundary drying curve.
+In log cycles. Default logRS=0.</p>
+</dd>
+<dt><strong>Ccs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">semi-log slope of saturated compression curve.  Default=None, i.e.
+Ccs will be equal to SimpleSWCC.sl.</p>
+</dd>
+<dt><strong>Css</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">semi-log slope of saturated recompression curve.  Default Css=None
+i.e Css=Ccs*0.1</p>
+</dd>
+<dt><strong>Ccd</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">semi-log slope of dry compression curve, default Ccd=0.</p>
+</dd>
+<dt><strong>Gs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Specific gravity of solids default Gs=2.7.</p>
+</dd>
+<dt><strong>Assumption</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Assumption=0 dry pores are incompressible,
+Assumption=1 dry pores are compressible. Default Assumption=1.</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optionalB</span></dt>
+<dd><p class="first last">air entrapped in a collapsible pore is proportional to the volume
+of the pore and can be denoted by an entrapped air parameter beta.
+Default beta=0.</p>
+</dd>
+<dt><strong>pm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Soil parameter (Sr)^pm for calculating the yield stress of dry pores.
+Default pm=1.</p>
+</dd>
+<dt><strong>Pore_shape</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">For describing the change in AEV/WEV of the soil. Default
+Pore_shape=1.</p>
+</dd>
+<dt><strong>K0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Lateral earth pressure coefficient. Default K0=1 i.e. isotropic.</p>
+</dd>
+<dt><strong>soilname</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">Default soilname=’unknown’.</p>
+</dd>
+<dt><strong>username</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str, optional</span></dt>
+<dd><p class="first last">Default username=’unknown’</p>
+</dd>
+<dt><strong>Npoint</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of data points along the pore size distribution curve.
+Default Npoint=1000</p>
+</dd>
+<dt><strong>NumSr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number points divided along the wetting and drying Sr.
+Default NumSr=400</p>
+</dd>
+<dt><strong>MaxSuction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">log Scale or 1000000. Default MaxSuction=6</p>
+</dd>
+<dt><strong>MinSuction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">log scale or 0.001. Default MinSuction=-3</p>
+</dd>
+<dt><strong>implementation</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[‘fortran’, ‘scalar’, ], optional</span></dt>
+<dd><p class="first last">Functional implementation: ‘scalar’ = python loops (slow),
+‘fortran’ = fortran code (fastest).  Currently there is no
+‘vectorized’ = numpy(fast) version.
+Default implementation=’fortran’.  If fortran extention module
+cannot be imported then ‘scalar’ version will be used.
+If anything other than ‘scalar’ is used then
+default fortran version will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r6948338726b1-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> Pham, H. Q., and Fredlund, D. G. (2011).
+‘Volume-mass unsaturated soil constitutive model for drying-wetting
+under isotropic loading-unloading conditions. Canadian Geotechnical
+Journal, 48(2), 280-313.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="r6948338726b1-2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id4">2</a>)</em> Pham, H. Q. (2005). ‘A volume-mass constitutive model for
+unsaturated soils’. PhD Thesis, University of Saskatchewan,
+Saskatoon, Saskatchewan, Canada.</td></tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>f</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PoresizeDistribution object</span></dt>
+<dd><p class="first last">Pore size distribution function at initial condition.</p>
+</dd>
+<dt><strong>Suction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Current value of suction.</p>
+</dd>
+<dt><strong>Stress</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Current value of net normal stress.</p>
+</dd>
+<dt><strong>RefSr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Reference value of Saturation.</p>
+</dd>
+<dt><strong>Curveon</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">= 1: on drying; = 2: on horizontal scanning; = 3: on wetting</p>
+</dd>
+<dt><strong>errocc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">bool</span></dt>
+<dd><p class="first last">Some sort of error code.</p>
+</dd>
+<dt><strong>Srdry</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float (size is NumSr)</span></dt>
+<dd><p class="first last">Drying degree of saturation SWCC (zero net mean stress)</p>
+</dd>
+<dt><strong>Srwet</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float (size is NumSr)</span></dt>
+<dd><p class="first last">Wetting degree of saturation SWCC  (zero net mean stress)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.CVStress" title="geotecha.constitutive_models.epus.EPUS.CVStress"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CVStress</span></code></a>()</td>
+<td>K0 to isotropic stress conversion factor</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Calresults" title="geotecha.constitutive_models.epus.EPUS.Calresults"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Calresults</span></code></a>()</td>
+<td>Calculate the results ie calculate the response to the stress path</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.ChangeSuction" title="geotecha.constitutive_models.epus.EPUS.ChangeSuction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChangeSuction</span></code></a>(MaxSumStress,&nbsp;Initialsuction)</td>
+<td>‘ = suction(0)/suction(p)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.ChangeWetSuction" title="geotecha.constitutive_models.epus.EPUS.ChangeWetSuction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ChangeWetSuction</span></code></a>(MaxSumStress,&nbsp;…)</td>
+<td>‘ = suction(0)/suction(p)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.DWc" title="geotecha.constitutive_models.epus.EPUS.DWc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DWc</span></code></a>(s)</td>
+<td>Derivative of collapsible water content function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.DegreeofsaturationSWCC" title="geotecha.constitutive_models.epus.EPUS.DegreeofsaturationSWCC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DegreeofsaturationSWCC</span></code></a>()</td>
+<td>This procedure is used to calculate Srdry and Srwet</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.DryPoreSize" title="geotecha.constitutive_models.epus.EPUS.DryPoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DryPoreSize</span></code></a>()</td>
+<td>Set PoresizeDistribution self.f to slurry state</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Drying" title="geotecha.constitutive_models.epus.EPUS.Drying"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Drying</span></code></a>(ss_new)</td>
+<td>‘Increase soil suction at a certain net mean/vertical stress ‘If increase soil suction at a certain net mean stress.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Loading" title="geotecha.constitutive_models.epus.EPUS.Loading"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Loading</span></code></a>(st_new)</td>
+<td>Increase net mean stress at a certain soil suction</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.RfSr_value" title="geotecha.constitutive_models.epus.EPUS.RfSr_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RfSr_value</span></code></a>(curvetype,&nbsp;ssvalue)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.SlurryPoreSize" title="geotecha.constitutive_models.epus.EPUS.SlurryPoreSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SlurryPoreSize</span></code></a>()</td>
+<td>Set PoresizeDistribution self.f to slurry state</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Unloading" title="geotecha.constitutive_models.epus.EPUS.Unloading"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Unloading</span></code></a>(st_new)</td>
+<td>Decrease net mean stress at a certain soil suction</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Wc" title="geotecha.constitutive_models.epus.EPUS.Wc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Wc</span></code></a>(s)</td>
+<td>Collapsible water content function</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EPUS.Wetting" title="geotecha.constitutive_models.epus.EPUS.Wetting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Wetting</span></code></a>(ss_new)</td>
+<td>Decrease soil suction at a certain net mean/vertical Stress</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Changevolume</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.CVStress">
+<code class="descname">CVStress</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.CVStress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.CVStress" title="Permalink to this definition">¶</a></dt>
+<dd><p>K0 to isotropic stress conversion factor</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">(2 * K0 + 1) / 3</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Calresults">
+<code class="descname">Calresults</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Calresults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Calresults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the results ie calculate the response to the stress path</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.ChangeSuction">
+<code class="descname">ChangeSuction</code><span class="sig-paren">(</span><em>MaxSumStress</em>, <em>Initialsuction</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.ChangeSuction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.ChangeSuction" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘ = suction(0)/suction(p)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>MaxSumStress</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Not sure.</p>
+</dd>
+<dt><strong>Initialsuction</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Not sure.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">not sure</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.ChangeWetSuction">
+<code class="descname">ChangeWetSuction</code><span class="sig-paren">(</span><em>MaxSumStress</em>, <em>Airentryvalue</em>, <em>Waterentryvalue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.ChangeWetSuction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.ChangeWetSuction" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘ = suction(0)/suction(p)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>MaxSumStress</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Not sure.</p>
+</dd>
+<dt><strong>Airentryvalue</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Not sure.</p>
+</dd>
+<dt><strong>Waterentryvalue</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Not sure.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">not sure</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Changevolume">
+<code class="descname">Changevolume</code><span class="sig-paren">(</span><em>InitialVolume</em>, <em>Yieldstress</em>, <em>CurrentStress</em>, <em>CompIndex</em>, <em>UnloadIndex</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Changevolume"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Changevolume" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.DWc">
+<code class="descname">DWc</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.DWc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.DWc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derivative of collapsible water content function</p>
+<p>Calls CurveFittingSWCC.DWc with self.Gs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Derivative of water content Wc w.r.t. suction</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.DWc" title="geotecha.constitutive_models.epus.CurveFittingSWCC.DWc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurveFittingSWCC.DWc</span></code></a></dt>
+<dd>actual function called.</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.DegreeofsaturationSWCC">
+<code class="descname">DegreeofsaturationSWCC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.DegreeofsaturationSWCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.DegreeofsaturationSWCC" title="Permalink to this definition">¶</a></dt>
+<dd><p>This procedure is used to calculate Srdry and Srwet</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.DryPoreSize">
+<code class="descname">DryPoreSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.DryPoreSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.DryPoreSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set PoresizeDistribution self.f to slurry state</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span> <span class="o">=</span> <span class="n">CurveFittingSWCC</span><span class="p">(</span><span class="n">wsat</span><span class="o">=</span><span class="mf">0.262</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">a</span> <span class="o">=</span> <span class="mf">3.1e6</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">b</span> <span class="o">=</span> <span class="mf">3.377</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">wr</span> <span class="o">=</span> <span class="mf">0.128</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sl</span> <span class="o">=</span> <span class="mf">0.115</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stp</span> <span class="o">=</span> <span class="n">StressPath</span><span class="p">([</span><span class="nb">dict</span><span class="p">(</span><span class="n">ist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vl</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;1. Load to 20kPa&quot;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdict</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+<span class="gp">... </span>     <span class="n">SimpleSWCC</span><span class="o">=</span><span class="n">SWCC</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">stp</span><span class="o">=</span><span class="n">stp</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">logDS</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">logRS</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">Css</span><span class="o">=</span><span class="mf">0.019</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">beta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">soilname</span><span class="o">=</span><span class="s1">&#39;Artificial silt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">username</span><span class="o">=</span><span class="s1">&#39;Hung Pham&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">EPUS</span><span class="p">(</span><span class="o">**</span><span class="n">pdict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">DryPoreSize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">AEV</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">-2.78...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">WEV</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">-8.09...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">RVC</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">4.24...e-08</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">RV</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">4.24...e-08</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">Ccp</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">1.04...e-18</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">Csp</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">1.71...e-19</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">Ccd</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">0.0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Drying">
+<code class="descname">Drying</code><span class="sig-paren">(</span><em>ss_new</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Drying"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Drying" title="Permalink to this definition">¶</a></dt>
+<dd><p>‘Increase soil suction at a certain net mean/vertical stress
+‘If increase soil suction at a certain net mean stress. All pores that has air</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Loading">
+<code class="descname">Loading</code><span class="sig-paren">(</span><em>st_new</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Loading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Loading" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increase net mean stress at a certain soil suction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.RfSr_value">
+<code class="descname">RfSr_value</code><span class="sig-paren">(</span><em>curvetype</em>, <em>ssvalue</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.RfSr_value"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.RfSr_value" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>Curvetype</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">curvetype=1: drying; = 2: scanning; =3: wetting</p>
+</dd>
+<dt><strong>ssvalue</strong> <span class="classifier-delimiter">:</span> <span class="classifier">double</span></dt>
+<dd><p class="first last">Don’t know</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Reference saturation value</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.SlurryPoreSize">
+<code class="descname">SlurryPoreSize</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.SlurryPoreSize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.SlurryPoreSize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set PoresizeDistribution self.f to slurry state</p>
+<p>Zero soil suction - Mean kPa net mean stress.</p>
+<p class="rubric">Examples</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">SWCC</span> <span class="o">=</span> <span class="n">CurveFittingSWCC</span><span class="p">(</span><span class="n">wsat</span><span class="o">=</span><span class="mf">0.262</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">a</span> <span class="o">=</span> <span class="mf">3.1e6</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">b</span> <span class="o">=</span> <span class="mf">3.377</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">wr</span> <span class="o">=</span> <span class="mf">0.128</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">sl</span> <span class="o">=</span> <span class="mf">0.115</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stp</span> <span class="o">=</span> <span class="n">StressPath</span><span class="p">([</span><span class="nb">dict</span><span class="p">(</span><span class="n">ist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">vl</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;1. Load to 20kPa&quot;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pdict</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+<span class="gp">... </span>     <span class="n">SimpleSWCC</span><span class="o">=</span><span class="n">SWCC</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">stp</span><span class="o">=</span><span class="n">stp</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">logDS</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">logRS</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">Css</span><span class="o">=</span><span class="mf">0.019</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">beta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">soilname</span><span class="o">=</span><span class="s1">&#39;Artificial silt&#39;</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="n">username</span><span class="o">=</span><span class="s1">&#39;Hung Pham&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span><span class="n">EPUS</span><span class="p">(</span><span class="o">**</span><span class="n">pdict</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">SlurryPoreSize</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">RV</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">4.24...e-08</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">RVC</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">4.24...e-08</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">AEVC</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">-2.78...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">WEVC</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">-8.09...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">YieldSt</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">0.0001</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">f</span><span class="o">.</span><span class="n">Airentrapped</span><span class="p">[</span><span class="mi">24</span><span class="p">]</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Unloading">
+<code class="descname">Unloading</code><span class="sig-paren">(</span><em>st_new</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Unloading"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Unloading" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease net mean stress at a certain soil suction</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Wc">
+<code class="descname">Wc</code><span class="sig-paren">(</span><em>s</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Wc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Wc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Collapsible water content function</p>
+<p>Calls CurveFittingSWCC.Wc with self.Gs</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Suction.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">water content Wc</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.constitutive_models.epus.CurveFittingSWCC.Wc" title="geotecha.constitutive_models.epus.CurveFittingSWCC.Wc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CurveFittingSWCC.Wc</span></code></a></dt>
+<dd>actual function called.</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EPUS.Wetting">
+<code class="descname">Wetting</code><span class="sig-paren">(</span><em>ss_new</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EPUS.Wetting"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EPUS.Wetting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decrease soil suction at a certain net mean/vertical Stress</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.EpusProfile">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">EpusProfile</code><span class="sig-paren">(</span><em>epus_object, H, zw=None, q0=1.0, gamw=10, nz=10, Npoint=1000, npp=100, nz_refine=[1], Npoint_refine=[1], npp_refine=[1], atol=0.01, rtol=1e-06, max_iter=100, initial_stress=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>1D initial conditons (stress etc.) distribution for EPUS unsaturated
+soil model.</p>
+<p>Proceedure:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Determine pore water pressure, uw, at depth based on depth of
+water table, zw,  i.e. uw is negative above water table. This
+gives suction (psi) profile above water table.</li>
+<li>Guess an initial stress (sig) distribution, including an initial
+surcharge of q0.</li>
+<li>Assume a stress path starting from slurry to stress increase to
+sig and then suction to psi.  Use EPUS to calculate void ratio (e)
+and saturation (Sr).</li>
+<li>Use Gs, e, Sr to calc unit weight (gamma) profile.
+Numerically integrate unit weight profile to with sig at z=0 equals q0
+to give new stress profile.</li>
+<li>Check convergence of new stress vs old stress profile.  If not equal
+then iterate.</li>
+<li>Once solutin converged, record stress, void ratio, saturation profiles.</li>
+</ul>
+</div></blockquote>
+<p>Note initial EPUS loading steps begin from 0 net normal stress (sig-ua).
+Below the water table there is a bouyant force so the sig-ua stress input
+is actually an effective stress.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>epus_object</strong> <span class="classifier-delimiter">:</span> <span class="classifier">instance of EPUS object</span></dt>
+<dd><p class="first last">An EPUS object from which all relevant parameters can be taken.
+Use a dummy stress path for this; it will be ignored.  Also Npoint
+will be ignored.  Basically just using and EPUS object as a
+convienient container.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Height of soil profile.</p>
+</dd>
+<dt><strong>zw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Depth of water table.  Default zw=None, i.e. will be set to H.</p>
+</dd>
+<dt><strong>q0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Existing surcharge.  Default q0=1.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Unit weight of water.  Default gamw=10.</p>
+</dd>
+<dt><strong>nz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Final number of depth values in profile. default nz=10.</p>
+</dd>
+<dt><strong>Npoint</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of data points along the pore size distribution curve.
+Default Npoint=1000</p>
+</dd>
+<dt><strong>npp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Number of points per stress path step.  Default npp=100</p>
+</dd>
+<dt><strong>nz_refine</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Allows progressive refinement of the number of points in the profile.
+Initially stress profile will be calcuated at int(nz*nz_refine[0])
+evenly spaced depth values. Once convergence is reached
+a new stress profile will be interpolated at int(nz*nz_refine[1])
+and the convergence process is run again.  The refinement is repeated
+untill the  final value of nz_refine (which should be 1) is used.
+Default nz_refine=[1] i.e. no successvie refinement.</p>
+</dd>
+<dt><strong>Npoint_refine</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Similar to nz_refine.  Last value whould be 1. Sould be same length as
+nz_refine. Default Npoint_refine=[1]</p>
+</dd>
+<dt><strong>npp_refine</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float</span></dt>
+<dd><p class="first last">Similar to nz_refine. Last value should be 1.  Should be same length as
+nz_refine.  Default npp_refine = [1]</p>
+</dd>
+<dt><strong>rtol, atol</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Relative and absolute tolerance for checking convergence of stress.
+See numpy.allclose . Default atol=0.01, rtol=1e-6</p>
+</dd>
+<dt><strong>max_iter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Maxmum number of convergence iterations at each refinement step.
+Default max_iter=100 .</p>
+</dd>
+<dt><strong>initial_stress</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of two 1d arrays</span></dt>
+<dd><p class="first last">Initial stress to use to start of iteration.
+1st element of tuple is list/array of z values, 2nd element is
+list/array. Default intial_stress=None i.e. make up an initial guess
+using unit weight = 15.  Values will be interpolated.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>“stress” below water table is effective stress.  “stress” avbove water
+table is net normal stress.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>_nz, _Npoint, _npp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Current ‘refined’ value of nz, Npoint, and _npp.</p>
+</dd>
+<dt><strong>profile</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataResults object</span></dt>
+<dd><p class="first last">Contains information about each data point in the profile.
+In addition to normal DataResults attributes ( ss, st, e, w, Sr, vw)
+it has unit weight (gam), depth (z), pore water pressure (uw)</p>
+</dd>
+<dt><strong>_epus_dict</strong> <span class="classifier-delimiter">:</span> <span class="classifier">dictionary</span></dt>
+<dd><p class="first last">dict containing common keywords from the epus_object to initialize
+other epus objects at each depth.  Basically just need to add
+Npoints, and stp stress path objects at each depth and refinement.</p>
+</dd>
+<dt><strong>niter</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of int</span></dt>
+<dd><p class="first last">number of iterations to converge at each refinement level.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile.air_permeability" title="geotecha.constitutive_models.epus.EpusProfile.air_permeability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">air_permeability</span></code></a>([e_ksat,&nbsp;qfit])</td>
+<td>Calculate the Air permeability based on saturation</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile.calc" title="geotecha.constitutive_models.epus.EpusProfile.calc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calc</span></code></a>()</td>
+<td>do all the calculations</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile.compression_indexes" title="geotecha.constitutive_models.epus.EpusProfile.compression_indexes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compression_indexes</span></code></a>([dsig,&nbsp;dpsi])</td>
+<td>Calculate the compression indexes</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile.save_profile_to_file" title="geotecha.constitutive_models.epus.EpusProfile.save_profile_to_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_profile_to_file</span></code></a>(fpath)</td>
+<td>Save profile data to a csv file</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.EpusProfile.water_permeability" title="geotecha.constitutive_models.epus.EpusProfile.water_permeability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">water_permeability</span></code></a>([e_ksat,&nbsp;npp_swcc])</td>
+<td>Calculate the water permeability</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="62%" />
+<col width="38%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>plot_profile</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.air_permeability">
+<code class="descname">air_permeability</code><span class="sig-paren">(</span><em>e_ksat=None</em>, <em>qfit=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.air_permeability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.air_permeability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the Air permeability based on saturation</p>
+<p>ka = kd * (1-Sr)**0.5*(1-Sr**(1/qfit))**(2*qfit)</p>
+<p>kd = fn(e)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>e_ksat</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PermeabilityVoidRatioRelationship object</span></dt>
+<dd><p class="first last">PermeabilityVoidRatioRelationship object defining dependence of
+dry air permeability on void ratio.  
+Default e_ksat=ConstantPermeabilityModel(ka=1) i.e. constant 
+saturated permeability with value one.</p>
+</dd>
+<dt><strong>qfit</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">fitting parameter.  Generally between between 0 and 1. 
+Default qfit=1</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.constitutive_models.void_ratio_permeability.html#module-geotecha.constitutive_models.void_ratio_permeability" title="geotecha.constitutive_models.void_ratio_permeability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.constitutive_models.void_ratio_permeability</span></code></a></dt>
+<dd>void ratio saturated permeability relationship.</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r2466e80921bd-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>Ba-Te, B., Limin Zhang, and Delwyn G. Fredlund. “A General 
+Air-Phase Permeability Function for Airflow through Unsaturated 
+Soils.” In Proceedings of Geofrontiers 2005 Cngress, 
+2961-85. Austin, Tx: ASCE, 2005. doi:10.1061/40787(166)29.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.calc">
+<code class="descname">calc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.calc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.calc" title="Permalink to this definition">¶</a></dt>
+<dd><p>do all the calculations</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.compression_indexes">
+<code class="descname">compression_indexes</code><span class="sig-paren">(</span><em>dsig=1.0</em>, <em>dpsi=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.compression_indexes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.compression_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the compression indexes</p>
+<p>m1s, m2s, m1w, m2w, m1a, m2a</p>
+<p>Calculation is volume change indexes after a) net normal stress
+change of dsig, and b) or suction change of dpsi.</p>
+<p>m1a + m1w = m1s
+m2a + m2w = m2s</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>dsig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Change in net normal stress (sig-ua),  Default dsig=1.0</p>
+</dd>
+<dt><strong>dpsi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Change in suction (ua-uw)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.plot_profile">
+<code class="descname">plot_profile</code><span class="sig-paren">(</span><em>fig=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.plot_profile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.plot_profile" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.save_profile_to_file">
+<code class="descname">save_profile_to_file</code><span class="sig-paren">(</span><em>fpath</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.save_profile_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.save_profile_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save profile data to a csv file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fpath</strong> <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd><p class="first last">path of file to save to</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.EpusProfile.water_permeability">
+<code class="descname">water_permeability</code><span class="sig-paren">(</span><em>e_ksat=None</em>, <em>npp_swcc=500</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#EpusProfile.water_permeability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.EpusProfile.water_permeability" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the water permeability</p>
+<p>First saturated permeability at depth is determined based on e_ksat.
+Then unsaturated water permeability is determined by a) working 
+out a volumetric water content vs suction curve (i.e. epus stress
+path of load to stress and then dry to get a SWCC) and b) use _[1] to 
+numerically integrate and determine relative permeability at the 
+relevatnt profile suction value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>e_ksat</strong> <span class="classifier-delimiter">:</span> <span class="classifier">PermeabilityVoidRatioRelationship object</span></dt>
+<dd><p class="first last">PermeabilityVoidRatioRelationship object defining dependence of
+saturated permebility on void ratio.  
+Default e_ksat=ConstantPermeabilityModel(ka=1) i.e. constant 
+saturated permeability with value one.</p>
+</dd>
+<dt><strong>npp_swcc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">number of sterss path intervals to use when determining the 
+volumetric water content vs suction curve that will be used to 
+calculate the relative permeability. Defulat npp_swcc=500</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.constitutive_models.void_ratio_permeability.html#module-geotecha.constitutive_models.void_ratio_permeability" title="geotecha.constitutive_models.void_ratio_permeability"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.constitutive_models.void_ratio_permeability</span></code></a></dt>
+<dd>void ratio saturated permeability relationship.</dd>
+</dl>
+</div>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r5d5fac16ca29-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[1]</a></td><td>Fredlund, D.G., Anqing Xing, and Shangyan Huang. 
+“Predicting the Permeability Function for Unsaturated 
+Soils Using the Soil-Water Characteristic Curve. 
+Canadian Geotechnical Journal 31, no. 4 (1994): 533-46. 
+doi:10.1139/t94-062.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.PoresizeDistribution">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">PoresizeDistribution</code><span class="sig-paren">(</span><em>Npoint=1000</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#PoresizeDistribution"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.PoresizeDistribution" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Pore size distribution curve</p>
+<p>Basically a container for data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>Npoint</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of data points along the pore size distribution curve.
+Default Npoint=1000</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Npoint</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of data points along the pore size distrubution curve.</p>
+</dd>
+<dt><strong>AEV</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Value of Air Entry Value that the function F represents.</p>
+</dd>
+<dt><strong>WEV</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Value of Water Entry Value that the function F represents.</p>
+</dd>
+<dt><strong>Ccp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Virgin compression index of the group of pore at saturated.</p>
+</dd>
+<dt><strong>Csp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Unloading-Reloading index of the group of pore at saturated.</p>
+</dd>
+<dt><strong>Ccd</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Virgin compression index of the group of pore at completely dry
+condition (10^6 kPa).</p>
+</dd>
+<dt><strong>RV</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Ratio of Volume of the group of pore/ volume of solid phase.</p>
+</dd>
+<dt><strong>YieldSt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Equivalent maximum stress acted on the pores at water-filled state.</p>
+</dd>
+<dt><strong>Filled</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of bool</span></dt>
+<dd><p class="first last">State of the pore - either filled or empty.</p>
+</dd>
+<dt><strong>RVC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Actual ratio of volume of the group of pore/ volume of solid phase.</p>
+</dd>
+<dt><strong>AEVC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Actual Air Entry Value of the group of pores [i] which has AEV at
+dried slurry = AEV[i].</p>
+</dd>
+<dt><strong>WEVC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Actual water entry value.</p>
+</dd>
+<dt><strong>Airentrapped</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of bool</span></dt>
+<dd><p class="first last">If experienced dried state = True, if did not = False.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.constitutive_models.epus.StressPath">
+<em class="property">class </em><code class="descclassname">geotecha.constitutive_models.epus.</code><code class="descname">StressPath</code><span class="sig-paren">(</span><em>path_dicts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#StressPath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.StressPath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Stress paths to follow</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>path_dicts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of dict</span></dt>
+<dd><p class="first">Each dict describes a step in the stress path. Each dict in the list
+has the following.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="29%" />
+<col width="71%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">key</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>vl</td>
+<td>Value of net normal stress or suction
+at end of stress path step.</td>
+</tr>
+<tr class="row-odd"><td>ist</td>
+<td>bool. Optional. If change in
+stress…ist=True else ist=False. Default
+ist=True.</td>
+</tr>
+<tr class="row-even"><td>npp</td>
+<td>int. Optional. Number of points to subdivide
+stress path step into. default npp=100.</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>str. Optional. Description of step. Default
+name=’Step 0’ etc.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ist</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of bool</span></dt>
+<dd><p class="first last">Loading type for each step in stress path. True indicates a net
+normal stress change. False indicates a suction change.</p>
+</dd>
+<dt><strong>vl</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Value of stress or suction at end of step.</p>
+</dd>
+<dt><strong>npp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of int</span></dt>
+<dd><p class="first last">Number of points to subdivide each stress path step into.</p>
+</dd>
+<dt><strong>name</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of str</span></dt>
+<dd><p class="first last">Name of each stress path step</p>
+</dd>
+<dt><strong>n</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Counter indicating current subdivision.</p>
+</dd>
+<dt><strong>nsteps</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">Number of stress path steps. i.e. len(path_dicts)</p>
+</dd>
+<dt><strong>datapoints</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of DataResults objects</span></dt>
+<dd><p class="first last">Results data for each stress path step. (ss, st, e, w, sr, vw)</p>
+</dd>
+<dt><strong>datapoints_combined</strong> <span class="classifier-delimiter">:</span> <span class="classifier">DataResults object</span></dt>
+<dd><p class="first last">datapoints joined end to end. e.g. access ss from all steps using
+datapoints_combined.ss  (only exists after running combine_datapoints).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.constitutive_models.epus.StressPath.combine_datapoints" title="geotecha.constitutive_models.epus.StressPath.combine_datapoints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">combine_datapoints</span></code></a>()</td>
+<td>Make datapoints_combined i.e.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.constitutive_models.epus.StressPath.combine_datapoints">
+<code class="descname">combine_datapoints</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/constitutive_models/epus.html#StressPath.combine_datapoints"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.constitutive_models.epus.StressPath.combine_datapoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make datapoints_combined i.e. join all the datapoints</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.constitutive_models.epus.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

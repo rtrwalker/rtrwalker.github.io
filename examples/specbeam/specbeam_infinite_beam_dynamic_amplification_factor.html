@@ -1,0 +1,310 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>specbeam example code: specbeam_infinite_beam_dynamic_amplification_factor.py &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="specbeam example code: specbeam_transition_zone.py" href="specbeam_transition_zone.html" />
+    <link rel="prev" title="specbeam Examples" href="index.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../index.html"><img src="../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Geotecha Examples</a><ul>
+  <li><a href="index.html">specbeam Examples</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">specbeam Examples</a></li>
+      <li>Next: <a href="specbeam_transition_zone.html" title="next chapter">specbeam example code: specbeam_transition_zone.py</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="specbeam-example-code-specbeam-infinite-beam-dynamic-amplification-factor-py">
+<span id="specbeam-specbeam-infinite-beam-dynamic-amplification-factor"></span><h1>specbeam example code: specbeam_infinite_beam_dynamic_amplification_factor.py<a class="headerlink" href="#specbeam-example-code-specbeam-infinite-beam-dynamic-amplification-factor-py" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># specbeam example (if viewing this in docs, plots are at bottom of page)</span>
+
+<span class="c1"># Dynamic Amplification Factor vs velocity ratio (alpha) for variuos</span>
+<span class="c1"># damping ratios (beta) for moving point load on infinite beam on elastic</span>
+<span class="c1"># foundation.</span>
+<span class="c1"># Compare single line of Esveld Figure 6p18. with specbeam using</span>
+<span class="c1"># long finite length beam.</span>
+<span class="c1">#</span>
+<span class="c1"># Esveld, C. (2001). Modern railway track. MRT-productions Zaltbommel, The Netherlands, Netherlands.</span>
+<span class="c1">#</span>
+<span class="c1"># Essentially a duplication of</span>
+<span class="c1"># geotecha.beam_on_foundation.specbam.article_figure_02 which was used to</span>
+<span class="c1"># generate a journal article figure for</span>
+<span class="c1">#    Walker, R.T.R. and Indraratna, B, (in press) &quot;Moving loads on a</span>
+<span class="c1">#    viscoelastic foundation with special reference to railway</span>
+<span class="c1">#    transition zones&quot;. International Journal of Geomechanics.</span>
+<span class="c1">#    &quot;&quot;&quot;</span>
+
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="kn">from</span> <span class="nn">geotecha.plotting.one_d</span> <span class="kn">import</span> <span class="n">MarkersDashesColors</span>
+<span class="kn">from</span> <span class="nn">geotecha.piecewise.piecewise_linear_1d</span> <span class="kn">import</span> <span class="n">PolyLine</span>
+<span class="kn">from</span> <span class="nn">geotecha.beam_on_foundation.specbeam</span> <span class="kn">import</span> <span class="n">SpecBeam</span>
+<span class="kn">from</span> <span class="nn">geotecha.beam_on_foundation.specbeam</span> <span class="kn">import</span> <span class="n">DAFinfinite</span>
+
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;classic&#39;</span><span class="p">)</span>
+
+
+
+<span class="c1"># see geotecha.beam_on_foundation.specbeam.article_figure_02 and</span>
+<span class="c1"># geotecha.beam_on_foundation.specbeam.FIGURE_DAF_constant_prop for description</span>
+<span class="c1"># of variables.</span>
+
+<span class="c1">#Note this can take some time to run</span>
+
+<span class="n">nterms</span><span class="o">=</span><span class="mi">80</span>  <span class="c1"># for low beta need more nterms</span>
+<span class="n">force_calc</span><span class="o">=</span><span class="bp">True</span>
+<span class="n">nx</span><span class="o">=</span><span class="mi">2000</span>
+<span class="n">nt</span><span class="o">=</span><span class="mi">100</span>
+<span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="n">xwindow</span><span class="o">=</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span>
+<span class="n">xeval</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">numerical_DAF</span><span class="o">=</span><span class="bp">False</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="c1">#None</span>
+<span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">]</span> <span class="c1">#None</span>
+<span class="n">end_damp</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">article_formatting</span> <span class="o">=</span> <span class="bp">True</span>
+
+
+
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">3.54</span><span class="p">,</span><span class="mf">3.54</span><span class="p">))</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">})</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="s2">&quot;111&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">alphas</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">betas</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">betas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+
+
+<span class="n">pdict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">(</span>
+            <span class="n">E</span> <span class="o">=</span> <span class="mf">6.998</span><span class="o">*</span><span class="mf">1e9</span><span class="p">,</span> <span class="c1">#Pa</span>
+            <span class="n">rho</span> <span class="o">=</span> <span class="mi">2373</span><span class="p">,</span> <span class="c1">#kg/m3</span>
+            <span class="n">L</span> <span class="o">=</span> <span class="mi">160</span><span class="p">,</span> <span class="c1">#m</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="mf">0.3</span><span class="o">*</span><span class="mf">0.1</span><span class="p">,</span> <span class="c1"># m^2</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="mf">0.00022477900799999998</span><span class="p">,</span>
+            <span class="n">k1</span> <span class="o">=</span> <span class="mf">800002.6125</span><span class="p">,</span>
+            <span class="n">nterms</span><span class="o">=</span><span class="n">nterms</span><span class="p">,</span>
+            <span class="n">BC</span><span class="o">=</span><span class="s2">&quot;SS&quot;</span><span class="p">,</span>
+            <span class="n">moving_loads_x_norm</span><span class="o">=</span><span class="p">[[</span><span class="mi">0</span><span class="p">]],</span>
+            <span class="n">moving_loads_Fz_norm</span><span class="o">=</span><span class="p">[[</span><span class="mf">1.013e-4</span><span class="p">]],</span>
+            <span class="n">xvals_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xeval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">xeval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">nx</span><span class="p">),</span>
+            <span class="n">use_analytical</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">implementation</span><span class="o">=</span><span class="s2">&quot;fortran&quot;</span><span class="p">,</span>
+            <span class="n">force_calc</span><span class="o">=</span><span class="n">force_calc</span><span class="p">,</span>
+            <span class="p">)</span>
+
+
+<span class="n">iwindow</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;xvals_norm&#39;</span><span class="p">],</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">xwindow</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">article_formatting</span><span class="p">:</span>
+    <span class="n">mdc</span> <span class="o">=</span> <span class="n">MarkersDashesColors</span><span class="p">(</span><span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">mdc</span><span class="o">.</span><span class="n">construct_styles</span><span class="p">(</span><span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span>
+                       <span class="n">dashes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                       <span class="n">marker_colors</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+                       <span class="n">line_colors</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+
+    <span class="n">styles</span><span class="o">=</span><span class="n">mdc</span><span class="p">(</span><span class="n">markers</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">15</span><span class="p">],</span>
+                       <span class="n">dashes</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                       <span class="n">marker_colors</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">],</span>
+                       <span class="n">line_colors</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">beta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alphas</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alphas</span><span class="p">):</span>
+
+
+
+
+        <span class="n">v_crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]))</span>
+        <span class="n">v_raw</span> <span class="o">=</span> <span class="n">v_crit</span><span class="o">*</span><span class="n">alpha</span>
+
+        <span class="n">c_crit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;k1&quot;</span><span class="p">])</span>
+        <span class="n">c_raw</span> <span class="o">=</span> <span class="n">c_crit</span> <span class="o">*</span> <span class="n">beta</span>
+
+        <span class="n">tmax</span> <span class="o">=</span> <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;L&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">v_raw</span>
+
+
+        <span class="k">if</span> <span class="n">end_damp</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_raw</span>
+            <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mubar&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">PolyLine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">beta</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+                <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_crit</span>
+                <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mubar&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">PolyLine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">end_damp</span><span class="p">,</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">c_raw</span>
+                <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;mubar&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">PolyLine</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">end_damp</span><span class="p">,</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="o">-</span><span class="n">end_damp</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                                    <span class="p">[</span><span class="n">c_crit</span><span class="o">/</span><span class="n">c_raw</span><span class="p">,</span><span class="n">c_crit</span><span class="o">/</span><span class="n">c_raw</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">c_crit</span><span class="o">/</span><span class="n">c_raw</span><span class="p">,</span><span class="n">c_crit</span><span class="o">/</span><span class="n">c_raw</span><span class="p">])</span>
+
+        <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;tvals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">tmax</span><span class="o">*</span><span class="n">xeval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">tmax</span><span class="o">*</span><span class="n">xeval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">nt</span><span class="p">)</span>
+        <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;moving_loads_v_norm&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="n">v_raw</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">])]</span>
+        <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;file_stem&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="s2">&quot;DAF_alp{:5.3f}_bet{:5.3f}_n{:d}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="n">nterms</span><span class="p">)</span>
+
+        <span class="n">a</span> <span class="o">=</span> <span class="n">SpecBeam</span><span class="p">(</span><span class="o">**</span><span class="n">pdict</span><span class="p">)</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">runme</span><span class="p">()</span>
+
+<span class="c1">#        jjj=np.searchsorted(alphas, 0.7)</span>
+<span class="c1">#        if i==0 and j==jjj:</span>
+<span class="c1">#            a.animateme()</span>
+        <span class="n">w_now</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">defl</span><span class="p">[</span><span class="n">iwindow</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">iwindow</span><span class="p">[</span><span class="mi">1</span><span class="p">],:])</span>
+
+        <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">numerical_DAF</span><span class="p">:</span>
+                <span class="n">w_0</span> <span class="o">=</span> <span class="n">w_now</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lam</span> <span class="o">=</span> <span class="p">(</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;k1&#39;</span><span class="p">]</span> <span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">]))</span><span class="o">**</span><span class="mf">0.25</span>
+                <span class="n">Q</span> <span class="o">=</span> <span class="n">pdict</span><span class="p">[</span><span class="s2">&quot;moving_loads_Fz_norm&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span> <span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;E&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
+                <span class="n">w_0</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">*</span> <span class="n">lam</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pdict</span><span class="p">[</span><span class="s1">&#39;k1&#39;</span><span class="p">])</span>
+                <span class="k">print</span><span class="p">(</span><span class="s2">&quot;analytical&quot;</span><span class="p">)</span>
+
+        <span class="n">DAF</span> <span class="o">=</span> <span class="n">w_now</span><span class="o">/</span><span class="n">w_0</span>
+
+        <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">DAF</span>
+
+    <span class="k">if</span> <span class="n">article_formatting</span><span class="p">:</span>
+        <span class="n">line</span><span class="p">,</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;${}$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">beta</span><span class="p">),</span><span class="n">markevery</span><span class="o">=</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="mi">5</span><span class="o">*</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span><span class="o">**</span><span class="n">styles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">line</span><span class="p">,</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                  <span class="n">label</span><span class="o">=</span><span class="s2">&quot;${}$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
+
+<span class="c1">######Analytical</span>
+<span class="n">alpha</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">alphas</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alphas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">bet</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">betas</span><span class="p">):</span>
+    <span class="n">DAF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">alp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alpha</span><span class="p">):</span>
+        <span class="n">DAF</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">DAFinfinite</span><span class="p">(</span><span class="n">alp</span><span class="o">=</span><span class="n">alp</span><span class="p">,</span> <span class="n">bet</span><span class="o">=</span><span class="n">bet</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">j</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">DAF</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;analytical</span><span class="se">\n</span><span class="s2">inf. beam&quot;</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">DAF</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">markevery</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1">#####end analytical</span>
+
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Velocity ratio, $</span><span class="se">\\</span><span class="s2">alpha$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Deflection amplification factor&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">leg</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">mathrm{Damping\ ratio,\ }</span><span class="se">\\</span><span class="s2">beta$&quot;</span><span class="p">,</span>
+                <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">,</span>
+                <span class="n">labelspacing</span><span class="o">=.</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">handlelength</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span>
+                <span class="p">)</span>
+<span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">labelpad</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">labelpad</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.13</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.14</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../../geotecha_examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.py">Source code</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.png">png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.hires.png">hires.png</a>, <a class="reference external" href="../../geotecha_examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="../../_images/specbeam_infinite_beam_dynamic_amplification_factor.png" src="../../_images/specbeam_infinite_beam_dynamic_amplification_factor.png" />
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/examples/specbeam/specbeam_infinite_beam_dynamic_amplification_factor.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

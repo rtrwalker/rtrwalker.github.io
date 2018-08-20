@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012:
+
+speccon example code: speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.py
+===========================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.py
+   :include-source:
+
+

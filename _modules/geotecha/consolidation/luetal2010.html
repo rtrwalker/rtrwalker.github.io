@@ -1,0 +1,345 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>geotecha.consolidation.luetal2010 &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../../../index.html"><img src="../../../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for geotecha.consolidation.luetal2010</h1><div class="highlight"><pre>
+<span></span><span class="c1"># geotecha - A software suite for geotechncial engineering</span>
+<span class="c1"># Copyright (C) 2018  Rohan T. Walker (rtrwalker@gmail.com)</span>
+<span class="c1">#</span>
+<span class="c1"># This program is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># This program is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="c1"># GNU General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU General Public License</span>
+<span class="c1"># along with this program.  If not, see http://www.gnu.org/licenses/gpl.html.</span>
+
+<span class="sd">&quot;&quot;&quot;Lu et al (2010) &quot;Composite foundation considering radial and vertical flows</span>
+<span class="sd">within the column and the variation of soil permeability within the</span>
+<span class="sd">disturbed soil zone&quot;.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span> <span class="nn">geotecha.consolidation.smear_zones</span> <span class="k">as</span> <span class="nn">smear_zones</span>
+
+<div class="viewcode-block" id="luetal2010"><a class="viewcode-back" href="../../../api/geotecha.consolidation.luetal2010.html#geotecha.consolidation.luetal2010.luetal2010">[docs]</a><span class="k">def</span> <span class="nf">luetal2010</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rc</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">H</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">kv</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kvc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">kh</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">khc</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+               <span class="n">mvs</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">mvc</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">utop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ubot</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Composite foundation considering radial and vert flows in the column</span>
+
+<span class="sd">    An implementation of [1]_.</span>
+
+<span class="sd">    Features:</span>
+
+<span class="sd">     - Single layer, soil properties constant over time.</span>
+<span class="sd">     - Instant load linear with depth.</span>
+<span class="sd">     - Vertical and radial flow in in soil</span>
+<span class="sd">     - Vertical and radial flow in drain/column</span>
+<span class="sd">     - Different stiffness in column and soil</span>
+<span class="sd">     - Pore pressure in soil, column and averaged at depth</span>
+<span class="sd">     - Average pore pressure over whole profile vs time</span>
+<span class="sd">     - Settlement of whole profile vs time</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z : float or 1d array/list of float</span>
+<span class="sd">        Depth.</span>
+<span class="sd">    t : float or 1d array/list of float</span>
+<span class="sd">        Time.</span>
+<span class="sd">    rc : float</span>
+<span class="sd">        Drain radius</span>
+<span class="sd">    re : float</span>
+<span class="sd">        Drain influence radius.</span>
+<span class="sd">    H : float, optional</span>
+<span class="sd">        Drainage path length.  Default H=1.</span>
+<span class="sd">    rs : float, optional</span>
+<span class="sd">        Drain influence radius.  Default rs=None i.e. no smear zone.</span>
+<span class="sd">    ks : float, optional</span>
+<span class="sd">        Smear zone permeability. Default ks=None, i.e. no smear zone.</span>
+<span class="sd">    kv, kvc : float, optional</span>
+<span class="sd">        Vertical coefficient of permeability in soil and column.</span>
+<span class="sd">        Default kv= kvc = 1</span>
+<span class="sd">    kh, khc : float, optional</span>
+<span class="sd">        Horizontal coefficient of permeability in soil and column.</span>
+<span class="sd">        default kh = khc = 1</span>
+<span class="sd">    mvs, mvc : float, optional</span>
+<span class="sd">        Volume compressibility in soil and column. default mvs=mvc=0.1.</span>
+<span class="sd">    gamw : float, optional</span>
+<span class="sd">        Unit weight of water.  Default gamw=10.</span>
+<span class="sd">    utop, ubot : float, optional</span>
+<span class="sd">        Initial pore water pressure at top and bottom of soil.</span>
+<span class="sd">        Default utop=ubot=1.</span>
+<span class="sd">    nterms : int, optional</span>
+<span class="sd">        Number of terms to use in solution. Default=100.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    por, pors, porc : 2d array of float</span>
+<span class="sd">        Pore pressure at depth and time overall, in soil, in column.</span>
+<span class="sd">        por is an array of size (len(z), len(t)).</span>
+<span class="sd">    avp : 2d array of float</span>
+<span class="sd">        Average overall pore pressure of whole soil profile.</span>
+<span class="sd">    settle : 2d array of float</span>
+<span class="sd">        Settlement of whole layer.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Lu, Meng-Meng, Kang-He Xie, and Biao Guo. 2010. &#39;Consolidation</span>
+<span class="sd">           Theory for a Composite Foundation Considering Radial and Vertical</span>
+<span class="sd">           Flows within the Column and the Variation of Soil Permeability</span>
+<span class="sd">           within the Disturbed Soil Zone&#39;. Canadian Geotechnical</span>
+<span class="sd">           Journal 47 (2): 207-17. doi:10.1139/T09-086.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+<span class="c1">#    ch = kh / mv / gamw</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">re</span> <span class="o">/</span> <span class="n">rc</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">mvs</span> <span class="o">/</span> <span class="n">mvc</span>
+
+
+<span class="c1">#    Th = ch * t / 4 / re**2</span>
+
+    <span class="k">if</span> <span class="n">ks</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">rs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_ideal</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">rs</span> <span class="o">/</span> <span class="n">rc</span>
+        <span class="n">kap</span> <span class="o">=</span> <span class="n">kh</span> <span class="o">/</span> <span class="n">ks</span>
+        <span class="n">mu0</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">kap</span><span class="p">)</span>
+
+    <span class="n">M</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nterms</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+    <span class="n">betm_numer</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">kvc</span> <span class="o">/</span> <span class="n">kh</span>
+    <span class="n">betm_numer</span> <span class="o">+=</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">*</span><span class="n">kvc</span> <span class="o">/</span> <span class="n">khc</span>
+    <span class="n">betm_numer</span> <span class="o">*=</span> <span class="p">(</span><span class="n">rc</span> <span class="o">/</span> <span class="n">H</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">betm_numer</span> <span class="o">+=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">kvc</span><span class="o">/</span><span class="n">kv</span>
+    <span class="n">betm_numer</span> <span class="o">*=</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">mvs</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="n">betm_denom</span> <span class="o">=</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">kh</span>
+    <span class="n">betm_denom</span> <span class="o">+=</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">kv</span> <span class="o">/</span> <span class="n">khc</span>
+    <span class="n">betm_denom</span> <span class="o">*=</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">kvc</span> <span class="o">/</span> <span class="n">kv</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">betm_denom</span> <span class="o">+=</span> <span class="n">n</span><span class="o">**</span><span class="mi">4</span> <span class="o">/</span> <span class="n">M</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">H</span> <span class="o">/</span> <span class="n">rc</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">betm_denom</span> <span class="o">*=</span> <span class="n">gamw</span> <span class="o">*</span> <span class="n">rc</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">betm</span> <span class="o">=</span> <span class="n">betm_numer</span> <span class="o">/</span> <span class="n">betm_denom</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">kh</span>
+    <span class="n">C</span> <span class="o">+=</span> <span class="n">rc</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span> <span class="mi">8</span> <span class="o">/</span> <span class="n">khc</span>
+    <span class="n">C</span> <span class="o">*=</span> <span class="n">gamw</span> <span class="o">*</span> <span class="p">((</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">kvc</span> <span class="o">+</span> <span class="n">kv</span><span class="p">)</span> <span class="o">*</span> <span class="n">mvs</span>
+    <span class="n">C</span> <span class="o">/=</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">kvc</span> <span class="o">-</span> <span class="n">kv</span><span class="p">)</span>
+
+    <span class="n">D</span> <span class="o">=</span> <span class="n">re</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu0</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">kh</span>
+    <span class="n">D</span> <span class="o">+=</span> <span class="n">rc</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span> <span class="mi">8</span> <span class="o">/</span> <span class="n">khc</span>
+    <span class="n">D</span> <span class="o">*=</span> <span class="n">kv</span> <span class="o">*</span> <span class="n">kvc</span> <span class="o">/</span> <span class="p">(</span><span class="n">kvc</span> <span class="o">-</span> <span class="n">kv</span><span class="p">)</span>
+
+    <span class="n">minus1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+    <span class="n">minus1</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="n">por</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">utop</span> <span class="o">-</span> <span class="n">minus1</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="p">(</span><span class="n">utop</span> <span class="o">-</span> <span class="n">ubot</span><span class="p">)</span><span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:])</span> <span class="o">*</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">z</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span><span class="o">/</span><span class="n">H</span><span class="p">)</span> <span class="o">*</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">betm</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">t</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="kc">None</span><span class="p">]))</span>
+
+    <span class="n">pors</span> <span class="o">=</span> <span class="n">por</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">betm</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">D</span> <span class="o">*</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span>
+            <span class="p">(</span><span class="n">H</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+
+    <span class="n">porc</span> <span class="o">=</span> <span class="n">por</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">C</span> <span class="o">*</span> <span class="n">betm</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="o">+</span> <span class="n">D</span> <span class="o">*</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">por</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">por</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">pors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pors</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">porc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">porc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">avp</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span>
+            <span class="p">(</span><span class="n">utop</span> <span class="o">-</span> <span class="n">minus1</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="p">(</span><span class="n">utop</span><span class="o">-</span><span class="n">ubot</span><span class="p">)</span><span class="o">/</span> <span class="n">M</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:])</span> <span class="o">*</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">betm</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">*</span> <span class="n">t</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]))</span>
+    <span class="n">avp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">avp</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">settle</span> <span class="o">=</span> <span class="p">(</span><span class="n">utop</span> <span class="o">+</span> <span class="n">ubot</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">avp</span>
+    <span class="n">settle</span> <span class="o">*=</span> <span class="n">H</span> <span class="o">*</span> <span class="n">mvs</span> <span class="o">*</span> <span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">por</span><span class="p">,</span> <span class="n">pors</span><span class="p">,</span> <span class="n">porc</span><span class="p">,</span> <span class="n">avp</span><span class="p">,</span> <span class="n">settle</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+
+
+    <span class="n">rc</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="n">re</span><span class="o">=</span><span class="mf">0.9</span>
+    <span class="n">H</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">rs</span><span class="o">=</span><span class="mf">0.15</span>
+    <span class="n">ks</span><span class="o">=</span><span class="mf">0.5</span>
+    <span class="n">kv</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">kvc</span><span class="o">=</span><span class="mi">2000</span>
+    <span class="n">kh</span><span class="o">=</span><span class="mf">1.0</span>
+    <span class="n">khc</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">mvs</span><span class="o">=</span><span class="mf">0.1</span>
+    <span class="n">mvc</span><span class="o">=</span><span class="mf">0.0005</span>
+    <span class="n">gamw</span><span class="o">=</span><span class="mi">10</span>
+    <span class="n">utop</span><span class="o">=</span><span class="mf">0.9</span>
+    <span class="n">ubot</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="n">nterms</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">])</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>
+
+<span class="c1">#    z= np.linspace(0,H,50)</span>
+<span class="c1">#    t = np.logspace(-2,0.5, 30)</span>
+
+<span class="c1">#    rc=0.1</span>
+<span class="c1">#    re=1</span>
+<span class="c1">#    H=10</span>
+<span class="c1">#    rs=0.15</span>
+<span class="c1">#    ks=0.5</span>
+<span class="c1">#    kv=1.0</span>
+<span class="c1">#    kvc=2000</span>
+<span class="c1">#    kh=1.0</span>
+<span class="c1">#    khc=2000</span>
+<span class="c1">#    mvs=0.1</span>
+<span class="c1">#    mvc=mvs/200</span>
+<span class="c1">#    gamw=10</span>
+<span class="c1">#    utop=1</span>
+<span class="c1">#    ubot=1</span>
+<span class="c1">#    nterms=100</span>
+<span class="c1">#    z= np.linspace(0,H,50)</span>
+<span class="c1">#    t = np.array([0.1, 0.8, 2.0])</span>
+<span class="c1">#    t = np.logspace(-2,0.5, 30)</span>
+
+
+    <span class="n">por</span><span class="p">,</span> <span class="n">pors</span><span class="p">,</span> <span class="n">porc</span><span class="p">,</span> <span class="n">avp</span><span class="p">,</span> <span class="n">settle</span> <span class="o">=</span> <span class="n">luetal2010</span><span class="p">(</span>
+                <span class="n">z</span><span class="p">,</span><span class="n">t</span><span class="p">,</span> <span class="n">rc</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">rs</span><span class="p">,</span> <span class="n">ks</span><span class="p">,</span>
+                 <span class="n">kv</span><span class="p">,</span> <span class="n">kvc</span><span class="p">,</span> <span class="n">kh</span><span class="p">,</span> <span class="n">khc</span><span class="p">,</span>
+                 <span class="n">mvs</span><span class="p">,</span> <span class="n">mvc</span><span class="p">,</span> <span class="n">gamw</span><span class="p">,</span> <span class="n">utop</span><span class="p">,</span> <span class="n">ubot</span><span class="p">,</span> <span class="n">nterms</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">mu</span> <span class="o">=</span> <span class="n">smear_zones</span><span class="o">.</span><span class="n">mu_constant</span><span class="p">(</span><span class="n">re</span><span class="o">/</span><span class="n">rc</span><span class="p">,</span> <span class="n">rs</span><span class="o">/</span><span class="n">rc</span><span class="p">,</span> <span class="n">kh</span><span class="o">/</span><span class="n">ks</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">por&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">por</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">pors&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">pors</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">porc&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">porc</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">avp&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">avp</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">set&#39;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">settle</span><span class="p">))</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Overall pore pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;column pore pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;Soil pore pressure&#39;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">lab</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">por</span><span class="p">,</span> <span class="n">porc</span><span class="p">,</span> <span class="n">pors</span><span class="p">],</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">t_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span><span class="n">j</span><span class="p">],</span> <span class="n">z</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;t=</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">lab</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Depth&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">3</span> <span class="p">)</span>
+        <span class="n">leg</span><span class="o">.</span><span class="n">draggable</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">avp</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Overall average pore pressure&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="c1">#    ax.set_xlim(0,1)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="n">fig</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">settle</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;settlement&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+<span class="c1">#    ax.set_xlim(0,1)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

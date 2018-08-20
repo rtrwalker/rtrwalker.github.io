@@ -1,0 +1,30 @@
+.. _speccon-examples-index:
+
+##############################################
+speccon Examples
+##############################################
+
+.. htmlonly::
+
+    :Release: |version|
+    :Date: |today|
+
+.. toctree::
+    :maxdepth: 1
+
+    speccon1d_unsat_3layer_shanetal2014 <speccon1d_unsat_3layer_shanetal2014.rst>
+    speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012 <speccon1d_unsat_sinusoidal_bot_air_BC_shanetal2012.rst>
+    speccon1d_unsat_sinusoidal_top_water_BC_shanetal2012 <speccon1d_unsat_sinusoidal_top_water_BC_shanetal2012.rst>
+    speccon1d_unsat_surcharge_ka_divide_kw_100_shanetal2012 <speccon1d_unsat_surcharge_ka_divide_kw_100_shanetal2012.rst>
+    speccon1d_vr_4layers_vert_schiffmanandstein1970_Fig2 <speccon1d_vr_4layers_vert_schiffmanandstein1970_Fig2.rst>
+    speccon1d_vr_mimic_terzaghi_with_gradient_bottom_boundary_condition <speccon1d_vr_mimic_terzaghi_with_gradient_bottom_boundary_condition.rst>
+    speccon1d_vr_mimic_terzaghi_with_pumping_at_mid_depth <speccon1d_vr_mimic_terzaghi_with_pumping_at_mid_depth.rst>
+    speccon1d_vr_radial_mimic_hansbo1981_with_vacuum <speccon1d_vr_radial_mimic_hansbo1981_with_vacuum.rst>
+    speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000 <speccon1d_vr_vert_and_radial_drainage_tangandonitsuka2000.rst>
+    speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003 <speccon1d_vr_vert_and_radial_equal_vs_free_strain_nogmaiandli2003.rst>
+    speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012 <speccon1d_vr_vert_with_depth_dependent_mv_kv_zhuandyin2012.rst>
+    speccon1d_vrc_stone_column_luetal2010 <speccon1d_vrc_stone_column_luetal2010.rst>
+    speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load <speccon1d_vrc_stone_column_luetal2010_linear_depth_dependent_load.rst>
+    speccon1d_vrw_mimic_partially_penetrating_drain_with_kw_of_0_in_bottom_layer <speccon1d_vrw_mimic_partially_penetrating_drain_with_kw_of_0_in_bottom_layer.rst>
+    speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000 <speccon1d_vrw_vert_and_radial_with_well_resis_drainage_tangandonitsuka2000.rst>
+    speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013 <speccon1d_vrw_well_resistance_linear_with_depth_dengetal2013.rst>

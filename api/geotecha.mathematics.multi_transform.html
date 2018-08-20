@@ -1,0 +1,260 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>multi_transform &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="quadrature" href="geotecha.mathematics.quadrature.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">multi_transform</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.mathematics.multi_transform">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.mathematics.html">mathematics</a><ul>
+      <li>Next: <a href="geotecha.mathematics.quadrature.html" title="next chapter">quadrature</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.mathematics.multi_transform.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="multi-transform">
+<h1>multi_transform<a class="headerlink" href="#multi-transform" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_NTransform</span></code>(func,&nbsp;transforms,&nbsp;transvars,&nbsp;opts)</td>
+<td>Recursively perform integral transforms</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal notranslate"><span class="pre">_OptFunc</span></code>(opt)</td>
+<td>When called the object will return the variable used to initialize it</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.mathematics.multi_transform.ntransform" title="geotecha.mathematics.multi_transform.ntransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ntransform</span></code></a>(func,&nbsp;transforms,&nbsp;transvars[,&nbsp;…])</td>
+<td>Multi-dimensional integral transforms over multiple variables.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.mathematics.multi_transform">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.mathematics.multi_transform" title="Permalink to this headline">¶</a></h2>
+<p>Some routines related multi dimensional integral transforms</p>
+<dl class="function">
+<dt id="geotecha.mathematics.multi_transform.ntransform">
+<code class="descclassname">geotecha.mathematics.multi_transform.</code><code class="descname">ntransform</code><span class="sig-paren">(</span><em>func</em>, <em>transforms</em>, <em>transvars</em>, <em>args=None</em>, <em>opts=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/mathematics/multi_transform.html#ntransform"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.mathematics.multi_transform.ntransform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi-dimensional integral transforms over multiple variables.</p>
+<p>General idea and organisation of code is from scipy.integrate.nquad</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>func</strong> <span class="classifier-delimiter">:</span> <span class="classifier">callable</span></dt>
+<dd><p class="first last">The function to be integrated. Has arguments of <code class="docutils literal notranslate"><span class="pre">x0,</span> <span class="pre">...</span> <span class="pre">xn</span></code>,
+<code class="docutils literal notranslate"><span class="pre">t0,</span> <span class="pre">tm</span></code>, where integration is carried out over <code class="docutils literal notranslate"><span class="pre">x0,</span> <span class="pre">...</span> <span class="pre">xn</span></code>, which
+must be floats. Function signature should be
+<code class="docutils literal notranslate"><span class="pre">func(x0,</span> <span class="pre">x1,</span> <span class="pre">...,</span> <span class="pre">xn,</span> <span class="pre">t0,</span> <span class="pre">t1,</span> <span class="pre">...,</span> <span class="pre">tm)</span></code>. Integral transforms are
+carried out in order. That is, integration over <code class="docutils literal notranslate"><span class="pre">x0</span></code> is the
+innermost integral/transform, and <code class="docutils literal notranslate"><span class="pre">xn</span></code> is the outermost.</p>
+</dd>
+<dt><strong>transform</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable object of string</span></dt>
+<dd><p class="first">Each elmement of transforms is a string corresponding to one of the
+available transforms.  Current options are:</p>
+<ul class="last simple">
+<li>Hankel</li>
+<li>Hankel_inverse</li>
+<li>Fourier</li>
+<li>Fourier_inverse</li>
+<li>Laplace_inverse</li>
+</ul>
+</dd>
+<dt><strong>transvars</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable</span></dt>
+<dd><p class="first last">Transformation variable for each transformation.</p>
+</dd>
+<dt><strong>args</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable object, optional</span></dt>
+<dd><p class="first last">Additional arguments <code class="docutils literal notranslate"><span class="pre">t0,</span> <span class="pre">...,</span> <span class="pre">tn</span></code>, required by <cite>func</cite>.</p>
+</dd>
+<dt><strong>opts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">iterable object or dict, optional</span></dt>
+<dd><p class="first last">Options to be passed to each transform. May be empty, a dict, or
+a sequence of dicts, or functions that return a dict. If empty, the
+default options of each transform are used. If a dict, the same
+options are used for all levels of integration. If a sequence, then each
+element of the sequence corresponds to a particular integration/
+transform. e.g.
+opts[0] corresponds to integration/transform over x0, and so on.
+See the individual transforms for options.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>result</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The result of the integration.</p>
+</dd>
+<dt><strong>abserr</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">The maximum of the estimates of the absolute error in the various
+integration results.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="geotecha.mathematics.laplace.html#geotecha.mathematics.laplace.Talbot" title="geotecha.mathematics.laplace.Talbot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.mathematics.laplace.Talbot</span></code></a></dt>
+<dd>numerical inverse Laplace</dd>
+<dt><a class="reference internal" href="geotecha.mathematics.hankel.html#geotecha.mathematics.hankel.HankelTransform" title="geotecha.mathematics.hankel.HankelTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.mathematics.hankel.HankelTransform</span></code></a></dt>
+<dd>Hankel transform</dd>
+<dt><a class="reference internal" href="geotecha.mathematics.fourier.html#geotecha.mathematics.fourier.FourierTransform" title="geotecha.mathematics.fourier.FourierTransform"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geotecha.mathematics.fourier.FourierTransform</span></code></a></dt>
+<dd>Fourier transform</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>ntransform is quite temperamental.  Be careful with the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li>For some reason performing repeated multi dimensional fourier
+transforms with the default integration limit of np.inf does not
+work (I get a very small number… the wrong number).  This problem
+also happens when doing the same transforms using scipy’s nquad for
+multidemensional integration.  There is some issue with the recursion
+and use of the underlying QUADPACK integration routines when performing
+integrations with a cos or sin weight function with infinte integration
+limits.  To get around this you could try truncating the integral by
+setting the <cite>b</cite> keyword agument to the FourierTransform object.  You
+will probably have to trial a few values; larger values give more
+accuracy but too large and the solution is gibberish.</li>
+<li>Because the inverse laplace transform uses imaginary and any QUADPACK
+integations can only use real numbers.  A laplace transfrom usually must
+be the inner most intergal, i.e. first in the <cite>transform</cite> list.
+If performing multi-dimensional inverse lapace transforms then
+they must be at the front of the <cite>transform</cite> list; all inverse
+laplace transforms other than the first in the <cite>transform</cite> list must
+have {‘vectorised’: False}, in the corresponding <cite>opts</cite> dict.
+If <cite>f</cite> is not vectorised then the first inverse Laplace transform must
+also have {‘vectorised’: False}</li>
+<li>Because the Hankel transform uses numpy broadcasting, it must always
+be the inner most integral, i.e. first in the <cite>transform</cite> list. If also
+doing an inverse laplace transform, then ‘Laplace_inverse` must be
+second in the <cite>transform</cite> list with {‘vectorised’: False} in the
+corresponding <cite>opts</cite> dict.</li>
+<li>Rules of thumb are 1. ‘Hankel_transform’, if it occurs, must be first
+in the <cite>transform</cite> list, 2. ‘Laplace_inverse’ must be before any
+‘Fourier’ or ‘Fourier_inverse’ instance in the <cite>transform</cite> list, 3. For
+any but the first ‘Laplace_inverse’ instance in the <cite>transform</cite> list,
+the corresponding <cite>opts</cite> dict must contain ‘vectorized’:False, 4.
+‘Fourier’ or ‘Fourier_inverse’ may fail using the default b=np.inf, try
+truncating the integral with ‘b’:35 in the corresponding <cite>opts</cite> dict.</li>
+<li>Make sure that the order of the <cite>transform</cite> list matches the order
+or the args in function <cite>f</cite>.  First in list transforms first arg of
+<cite>f</cite>, 2nd in list transforms secnod arg of <cite>f</cite>.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.mathematics.multi_transform.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

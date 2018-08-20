@@ -1,0 +1,26 @@
+********
+geotecha
+********
+
+.. automodule:: geotecha
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Sub-packages summary:
+
+.. currentmodule:: geotecha
+
+.. autosummary::
+   :toctree:
+
+   beam_on_foundation
+   consolidation
+   constitutive_models
+   inputoutput
+   mathematics
+   piecewise
+   plotting
+   speccon
+
+

@@ -1,0 +1,2616 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>specbeam &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">specbeam</a><ul>
+<li><a class="reference internal" href="#class-summary">Class summary</a></li>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.beam_on_foundation.specbeam">Module listing</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.beam_on_foundation.html">beam_on_foundation</a><ul>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.beam_on_foundation.specbeam.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="specbeam">
+<h1>specbeam<a class="headerlink" href="#specbeam" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="class-summary">
+<h2>Class summary<a class="headerlink" href="#class-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MovingPointLoads</span></code></a>(x,&nbsp;p[,&nbsp;offset,&nbsp;v,&nbsp;L,&nbsp;t0,&nbsp;x0])</td>
+<td>Multi-axle vehicle represented by point loads in a line</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam" title="geotecha.beam_on_foundation.specbeam.SpecBeam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpecBeam</span></code></a>([BC,&nbsp;nterms,&nbsp;E,&nbsp;I,&nbsp;rho,&nbsp;A,&nbsp;L,&nbsp;k1,&nbsp;…])</td>
+<td>Finite elastic Euler-Bernoulli beam resting on     viscoelastic foundation subjected to a moving load, piecewise-linear     properties.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.DAFinfinite" title="geotecha.beam_on_foundation.specbeam.DAFinfinite"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAFinfinite</span></code></a>(alp,&nbsp;bet[,&nbsp;kratio])</td>
+<td>Dynamic amplification factor for infinite beam on winkler foundation</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.DAFrelative" title="geotecha.beam_on_foundation.specbeam.DAFrelative"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DAFrelative</span></code></a>(alp,&nbsp;bet,&nbsp;k2_k1)</td>
+<td>Relative Dynamic Amplification Factor, based on ratio of beam stiffness to some reference beam stiffness.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_constant_prop" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_constant_prop"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAF_constant_prop</span></code></a>([saveas,&nbsp;nterms,&nbsp;…])</td>
+<td>Dynamic amplification plot, esveld fig 6.18.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAF_transition_length</span></code></a>([saveas,&nbsp;…])</td>
+<td>Dynamic amplification factor length of transition</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length_esveld" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length_esveld"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAF_transition_length_esveld</span></code></a>([…])</td>
+<td>Dynamic amplification factor length of transition, reproduce esveld figure</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAFwrtinf_transition_length</span></code></a>([saveas,&nbsp;…])</td>
+<td>Dynamic amplification factor with rest to length of transition</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length_betaconst" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length_betaconst"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAFwrtinf_transition_length_betaconst</span></code></a>([…])</td>
+<td>Dynamic amplification factor with rest to length of transition with beta term constant</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_lengthrev" title="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_lengthrev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_DAFwrtinf_transition_lengthrev</span></code></a>([…])</td>
+<td>Dynamic amplification factor with rest to length of transition</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_convergence_step_change" title="geotecha.beam_on_foundation.specbeam.FIGURE_convergence_step_change"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_convergence_step_change</span></code></a>([v_nterms,&nbsp;…])</td>
+<td>Check convergence with step change in stiffness at midpoint</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_defl_envelope_vary_velocity" title="geotecha.beam_on_foundation.specbeam.FIGURE_defl_envelope_vary_velocity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_defl_envelope_vary_velocity</span></code></a>([…])</td>
+<td>Deflection envelopes with different velocities</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIGURE_verify_against_DingEtAl2012_fig8" title="geotecha.beam_on_foundation.specbeam.FIGURE_verify_against_DingEtAl2012_fig8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIGURE_verify_against_DingEtAl2012_fig8</span></code></a>([…])</td>
+<td>Ding et al Figure 8, displacement vs time at beam midpoint (using the runme method) (50 and 200 terms)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.FIG_DAF_envelope_vary_beta" title="geotecha.beam_on_foundation.specbeam.FIG_DAF_envelope_vary_beta"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIG_DAF_envelope_vary_beta</span></code></a>([ax,&nbsp;betas,&nbsp;…])</td>
+<td>DAF envelope for whole beam with different alpha &amp; beta</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam_const_mat_midpoint_defl_runme_analytical_play" title="geotecha.beam_on_foundation.specbeam.SpecBeam_const_mat_midpoint_defl_runme_analytical_play"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpecBeam_const_mat_midpoint_defl_runme_analytical_play</span></code></a>()</td>
+<td>Test SpecBeam for constant mat: close to Ding et al Figure 8, displacement vs time at beam midpoint (using the runme method) but with k3=0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play" title="geotecha.beam_on_foundation.specbeam.SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play</span></code></a>()</td>
+<td>Test SpecBeam for constant mat: close to Ding et al Figure 8, displacement vs time at beam midpoint (using the runme method) but with k3=0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.align_yaxis" title="geotecha.beam_on_foundation.specbeam.align_yaxis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">align_yaxis</span></code></a>(ax1,&nbsp;ax2)</td>
+<td>Adjust y-axis limits so zeros of the two axes align, zooming them out by same ratio.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_01" title="geotecha.beam_on_foundation.specbeam.article_figure_01"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_01</span></code></a>()</td>
+<td>Figure 1 Mid point deflection comparison with Ding et al 2012, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_02" title="geotecha.beam_on_foundation.specbeam.article_figure_02"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_02</span></code></a>()</td>
+<td>Figure 2 Deflection amplification factor compared with analytical infinite beam solution, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_03" title="geotecha.beam_on_foundation.specbeam.article_figure_03"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_03</span></code></a>()</td>
+<td>Figure 3 Low damping DAF for velocity ratio  alp=0p5, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_04" title="geotecha.beam_on_foundation.specbeam.article_figure_04"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_04</span></code></a>()</td>
+<td>Figure 4 Relative DAF for various stiffness ratios, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_05a_05b_05c_07" title="geotecha.beam_on_foundation.specbeam.article_figure_05a_05b_05c_07"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_05a_05b_05c_07</span></code></a>()</td>
+<td>Figure 5 a),b),&amp;c) Max deflection envelope for  bet=0p1  k2_k1=10, and Figure 7 Deflection vs time at point which experiences maximum deflection  alp=0p8,  bet=0p1,  k2_k1=10, soft to stiff=forward, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_06" title="geotecha.beam_on_foundation.specbeam.article_figure_06"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_06</span></code></a>()</td>
+<td>Additional deflection for transition effects,  bet=0p1,  alp=10, (dashed=stiff to soft, solid=soft to stiff), figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_08" title="geotecha.beam_on_foundation.specbeam.article_figure_08"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_08</span></code></a>()</td>
+<td>Figure 8 Deflection vs time under four moving loads alp=0p8,  bet=0p1,  k2/k1=10, soft to stiff, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_09" title="geotecha.beam_on_foundation.specbeam.article_figure_09"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_09</span></code></a>()</td>
+<td>Figure 9 is  drawing in a word file,  this routine is just a marker to indicated that figure 9 has not been forgotten, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_10_11" title="geotecha.beam_on_foundation.specbeam.article_figure_10_11"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_10_11</span></code></a>()</td>
+<td>Figure 10 Measured vs modelled deflections at various locations in the transition zone, Figure 11 Peak displacement and stiffness distribution, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.article_figure_12" title="geotecha.beam_on_foundation.specbeam.article_figure_12"><code class="xref py py-obj docutils literal notranslate"><span class="pre">article_figure_12</span></code></a>()</td>
+<td>Figure 12 python code for relative dynamic amplification factor calculation, figure from Walker and Indraratna (in press).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.case_study_PaixaoEtAl2014" title="geotecha.beam_on_foundation.specbeam.case_study_PaixaoEtAl2014"><code class="xref py py-obj docutils literal notranslate"><span class="pre">case_study_PaixaoEtAl2014</span></code></a>([saveas,&nbsp;nterms,&nbsp;…])</td>
+<td>Try and replicate Paixao et al 2014 for 6 rail cars going over transition using specbeam.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.dingetal_figure_8" title="geotecha.beam_on_foundation.specbeam.dingetal_figure_8"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dingetal_figure_8</span></code></a>([v_nterms])</td>
+<td>Reproduce Ding Et Al 2012 Figure 8 (might take a while).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.esveld_fig6p17" title="geotecha.beam_on_foundation.specbeam.esveld_fig6p17"><code class="xref py py-obj docutils literal notranslate"><span class="pre">esveld_fig6p17</span></code></a>()</td>
+<td>Displacement shapes before and after a moving point load on infinite beam on elastic foundation for a sub crtical , critical, super critcal velocity ratio (alpha) and damping ratios (beta) , Esveld Figure 6p17.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.esveld_fig6p18" title="geotecha.beam_on_foundation.specbeam.esveld_fig6p18"><code class="xref py py-obj docutils literal notranslate"><span class="pre">esveld_fig6p18</span></code></a>()</td>
+<td>Dynamic Amplification Factor vs velocity ratio (alpha) for variuos damping ratios (beta) for moving point load on infinite beam on elastic foundation, Esveld Figure 6p18.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.moving_load_on_beam_on_elastic_foundation" title="geotecha.beam_on_foundation.specbeam.moving_load_on_beam_on_elastic_foundation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moving_load_on_beam_on_elastic_foundation</span></code></a>(…)</td>
+<td>Displacement vs distance from moving point load on infinite beam on elastic foundation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.multi_static" title="geotecha.beam_on_foundation.specbeam.multi_static"><code class="xref py py-obj docutils literal notranslate"><span class="pre">multi_static</span></code></a>(xc,&nbsp;frel[,&nbsp;wsingle,&nbsp;xlim,&nbsp;n,&nbsp;L])</td>
+<td>Deflection shape for multiple static point loads</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function" title="geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point_load_static_defl_shape_function</span></code></a>(x,&nbsp;L)</td>
+<td>Deflection shape function for static point load on beam on foundation.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.reverse_curve_transition" title="geotecha.beam_on_foundation.specbeam.reverse_curve_transition"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_curve_transition</span></code></a>(x,&nbsp;x1,&nbsp;y1,&nbsp;x2,&nbsp;y2)</td>
+<td>Transition curve between (x1, y1) and (x2, y2)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.specbeam_vs_analytical_single_static_load" title="geotecha.beam_on_foundation.specbeam.specbeam_vs_analytical_single_static_load"><code class="xref py py-obj docutils literal notranslate"><span class="pre">specbeam_vs_analytical_single_static_load</span></code></a>()</td>
+<td>Compare specbeam vs analytical solution for single static load at mid point of ‘long’ beam.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.static_point_load_shape" title="geotecha.beam_on_foundation.specbeam.static_point_load_shape"><code class="xref py py-obj docutils literal notranslate"><span class="pre">static_point_load_shape</span></code></a>(x,&nbsp;L)</td>
+<td>Deflection shape parameter for point load at x=0 on infinite beam on elastic foundation  with characteristic length L.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtran" title="geotecha.beam_on_foundation.specbeam.tanhtran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtran</span></code></a>(x,&nbsp;a,&nbsp;b)</td>
+<td>Transition between two functions using tanh</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtrani" title="geotecha.beam_on_foundation.specbeam.tanhtrani"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtrani</span></code></a>(y,&nbsp;a,&nbsp;b)</td>
+<td>Inverse of Transition between two functions using tanh</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtranib" title="geotecha.beam_on_foundation.specbeam.tanhtranib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtranib</span></code></a>(x,&nbsp;y,&nbsp;a)</td>
+<td>Smoothing factor of tansition curve to get known (x,y)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.transition_DAF1" title="geotecha.beam_on_foundation.specbeam.transition_DAF1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transition_DAF1</span></code></a>([saveas,&nbsp;ax,&nbsp;kratios,&nbsp;…])</td>
+<td>Plot of Dynamic Amplification Factor (DAF) vs velocity ratio for different stiffness and damping values.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.transition_DAF1_at_specific_alp" title="geotecha.beam_on_foundation.specbeam.transition_DAF1_at_specific_alp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transition_DAF1_at_specific_alp</span></code></a>([saveas,&nbsp;…])</td>
+<td>Plot of Dynamic Amplification Factor (DAF) vs stiffness ratio for different velocity ratios and damping values.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.transition_zones1" title="geotecha.beam_on_foundation.specbeam.transition_zones1"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transition_zones1</span></code></a>([Lt_Lcs,&nbsp;alphas,&nbsp;…])</td>
+<td>Exploration of deflection envelopes caused by point loads travelling through a stiffness transition zone on beam on visco-elastic foundation using Specbeam.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.transition_zones2" title="geotecha.beam_on_foundation.specbeam.transition_zones2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">transition_zones2</span></code></a>([animateme,&nbsp;saveas,&nbsp;xlim,&nbsp;…])</td>
+<td>Essentially a duplicate of transition_zones1 to get a DAF* vs Lt/Lc plot for forward and reverse plots</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.beam_on_foundation.specbeam">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.beam_on_foundation.specbeam" title="Permalink to this headline">¶</a></h2>
+<p>Finite elastic Euler-Bernoulli beam resting on viscoelastic foundation
+with piecewise-linear properties, subjected to multiple moving point loads.</p>
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.DAFinfinite">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">DAFinfinite</code><span class="sig-paren">(</span><em>alp</em>, <em>bet</em>, <em>kratio=1.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#DAFinfinite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.DAFinfinite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor for infinite beam on winkler foundation</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>alp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Velocity ratio.  alp = v/vcr where critical velocity
+vcr=sqrt(2*sqrt(k*E*I)/(rho*A))**0.5</p>
+</dd>
+<dt><strong>bet</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Damping ratio.  bet=c/ccr where critical damping ccr=2*sqrt(rho*A*k).
+The damping ratio is with respect to the reference foundation stiffness.</p>
+</dd>
+<dt><strong>kratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Ratio of foundation stiffness to reference value i.e. k2/k1 where
+k1 is the reference value. Default kratio=1</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DAF</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Dynamic/deflection amplification factor with respect to the reference
+foundation stiffness, k1. i.e.
+deflection = DAF*[static deflection of point load  on beam on k1 ]</p>
+</dd>
+<dt><strong>Notes</strong></dt>
+<dd></dd>
+<dt><strong>—–</strong></dt>
+<dd></dd>
+<dt><strong>Only works for scalar input</strong></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.DAFrelative">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">DAFrelative</code><span class="sig-paren">(</span><em>alp</em>, <em>bet</em>, <em>k2_k1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#DAFrelative"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.DAFrelative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative Dynamic Amplification Factor, based on ratio of beam
+stiffness to some reference beam stiffness.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>alp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">velocity ratio. alp=v/vcr; vcr= SQRT(2*SQRT(k*EI)/(rho*A))</p>
+</dd>
+<dt><strong>bet</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">damping ratio.  bet=c/ccr; ccr=2*SQRT(rho*A*k)</p>
+</dd>
+<dt><strong>k2_k1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">stiffness ratio of beam to current beam</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>DAF</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Relative Dynamic Amplification Factor</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>DAFrelative is a terse implementation for an appendix of code in
+Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_constant_prop">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAF_constant_prop</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>nterms=100</em>, <em>force_calc=True</em>, <em>prefix=''</em>, <em>alphas=None</em>, <em>betas=None</em>, <em>nt=20</em>, <em>nx=55</em>, <em>end_damp=0</em>, <em>xwindow=(0.3</em>, <em>0.7)</em>, <em>xeval=(0.3</em>, <em>0.7)</em>, <em>numerical_DAF=True</em>, <em>article_formatting=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAF_constant_prop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_constant_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification plot, esveld fig 6.18. p120</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAF_transition_length</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>k_ratio=4</em>, <em>beta=0.1</em>, <em>nterms=100</em>, <em>force_calc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAF_transition_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor length of transition</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length_esveld">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAF_transition_length_esveld</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>k_ratio=4</em>, <em>beta=0.1</em>, <em>nterms=100</em>, <em>force_calc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAF_transition_length_esveld"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAF_transition_length_esveld" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor length of transition, reproduce esveld figure</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAFwrtinf_transition_length</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>k_ratio=4</em>, <em>beta=0.1</em>, <em>nterms=100</em>, <em>force_calc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAFwrtinf_transition_length"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor with rest to length of transition</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length_betaconst">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAFwrtinf_transition_length_betaconst</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>k_ratio=4</em>, <em>beta=0.1</em>, <em>nterms=100</em>, <em>force_calc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAFwrtinf_transition_length_betaconst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_length_betaconst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor with rest to length of transition with
+beta term constant</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_lengthrev">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_DAFwrtinf_transition_lengthrev</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>k_ratio=4</em>, <em>beta=0.1</em>, <em>nterms=100</em>, <em>force_calc=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_DAFwrtinf_transition_lengthrev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_DAFwrtinf_transition_lengthrev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic amplification factor with rest to length of transition</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_convergence_step_change">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_convergence_step_change</code><span class="sig-paren">(</span><em>v_nterms=(50</em>, <em>75</em>, <em>150</em>, <em>200)</em>, <em>saveas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_convergence_step_change"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_convergence_step_change" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check convergence with step change in stiffness at midpoint</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_defl_envelope_vary_velocity">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_defl_envelope_vary_velocity</code><span class="sig-paren">(</span><em>velocities_norm=(0.01165</em>, <em>)</em>, <em>saveas=None</em>, <em>nterms=100</em>, <em>force_calc=True</em>, <em>nx=400</em>, <em>nt=400</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_defl_envelope_vary_velocity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_defl_envelope_vary_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection envelopes with different velocities</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIGURE_verify_against_DingEtAl2012_fig8">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIGURE_verify_against_DingEtAl2012_fig8</code><span class="sig-paren">(</span><em>v_nterms=(50</em>, <em>75</em>, <em>150</em>, <em>200)</em>, <em>saveas=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIGURE_verify_against_DingEtAl2012_fig8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIGURE_verify_against_DingEtAl2012_fig8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ding et al Figure 8, displacement vs time at
+beam midpoint (using the runme method) (50 and 200 terms)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.FIG_DAF_envelope_vary_beta">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">FIG_DAF_envelope_vary_beta</code><span class="sig-paren">(</span><em>ax=None</em>, <em>betas=None</em>, <em>alphas=None</em>, <em>saveas=None</em>, <em>nx=200</em>, <em>nt=200</em>, <em>nterms=100</em>, <em>force_calc=True</em>, <em>t_extend=1</em>, <em>ylim=None</em>, <em>numerical_DAF=False</em>, <em>article_formatting=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#FIG_DAF_envelope_vary_beta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.FIG_DAF_envelope_vary_beta" title="Permalink to this definition">¶</a></dt>
+<dd><p>DAF envelope for whole beam with different alpha &amp; beta</p>
+<p>A plot will be produced of DAF vs normalised distance along beam, where
+the dynamic deflection in the DAF calculation is the maximum experienced
+each x/L point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Axes object, optional</span></dt>
+<dd><p class="first last">Axes object to plot on.  Default ax=None i.e. fig and axis will be
+created.</p>
+</dd>
+<dt><strong>betas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">list of damping ratios, Default betas=None which will use
+[0, 0.05, 0.1].</p>
+</dd>
+<dt><strong>alphas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">list of velocity ratios, Default alphas=None which will use
+[0.7].</p>
+</dd>
+<dt><strong>saveas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename stem (not including extension) to save figure to.
+Default saveas=None, i.e. figure won’t be saved to disk.</p>
+</dd>
+<dt><strong>nx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points between <cite>xlim[0]</cite> and <cite>xlim[1]</cite> at which to
+calculate deflection.  Default nx = 200.</p>
+</dd>
+<dt><strong>nt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of evaluation times from when load enters <cite>xlim[0]</cite> and
+leaves <cite>xlim[1]</cite>.  Default nt=200</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of series terms in approximation.  More terms  leads to higher
+accuracy but also longer computation times.  Start of with a
+small enough value to observe behaviour and then increase
+to confirm. Default nterms=100 .</p>
+</dd>
+<dt><strong>force_calc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[True, False], optional</span></dt>
+<dd><p class="first last">When True all calcuations will be done from scratch. When False
+Current working directory will be searched for a results file
+named according to “saveas” and
+if found it will be loaded.  Be careful as name of results file may
+not be unique to your analysis parameters.  Safest to use
+force_calc = True, but if you are simply regenerating graphs then
+consider force_calc=False.  Default force_calc=True.</p>
+</dd>
+<dt><strong>t_extend</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">factor to extend maximum evalutated time.  As per <cite>nt’ evaluation times
+are normally between first point entering `xlim[0]’ and leaving
+`xlim[1]</cite>.  However, with mulitple loads, loads can still be on the
+beam at that point. max eval time can be extended fby a factor.
+t_extend = 1 .</p>
+</dd>
+<dt><strong>ylim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Y axis limit. default ylim=None i.e. auto axis scale</p>
+</dd>
+<dt><strong>numerical_DAF</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">If True then the static deflection for use in Dynamic amplification
+factor calcuations (DAF = w/wstatic) willbe determined from a
+very slow moving load travelling over the beam/foundation.
+If False then the analytical expression for wstatic will be used.
+Default numerical_DAF=False.</p>
+</dd>
+<dt><strong>article_formatting</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">You should never need this.  It was a quick hack to do some
+custom formatting for a journal article.  Dont even try messing with
+it.  will ony work with 3 Lt_Lcs values values or less.  Default=False,
+i.e. no special formatting.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads">
+<em class="property">class </em><code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">MovingPointLoads</code><span class="sig-paren">(</span><em>x</em>, <em>p</em>, <em>offset=0</em>, <em>v=None</em>, <em>L=None</em>, <em>t0=0</em>, <em>x0=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Multi-axle vehicle represented by point loads in a line</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array or list</span></dt>
+<dd><p class="first last">x-coord of point loads.  Vehicle assumed to start at 0.</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array or list</span></dt>
+<dd><p class="first last">Magnitude of point loads at corresponding x value.</p>
+</dd>
+<dt><strong>offset</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">x-coords will be offset by this distance.  Positive values will move
+x to the right (i.e. increase in x).</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Velocity.  Default v = None, i.e. you’ll need to enter in various
+functions.</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Length of Beam.  Default L=None i.e. you’ll need to explicitly
+enter in various functions. You can use a psuedo L with x0 to have the
+loads begin and end midspan.</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Time the point loads begin at x0 on the beam. default t0=0 ie. you’ll
+have to explicitly enter in various functions.</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start position of loads on beam. Defualt x0=0.0 .</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">transformed x coords after mirror and offset are applied.</p>
+</dd>
+<dt><strong>start_time, end_time</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">start and end time for each point load traversing length L.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.animateme" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.animateme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">animateme</span></code></a>([x0,&nbsp;t0,&nbsp;tf,&nbsp;v0,&nbsp;xlim,&nbsp;ylim])</td>
+<td>Animate moving vehicle</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.axle_positions" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.axle_positions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">axle_positions</span></code></a>([t,&nbsp;v0,&nbsp;t0,&nbsp;x0])</td>
+<td>Positions of axles at given time</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.convert_to_specbeam" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.convert_to_specbeam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convert_to_specbeam</span></code></a>([v,&nbsp;L,&nbsp;t0,&nbsp;x0])</td>
+<td>Convert vehicle at velocity v into surcharge_vs_time and surcharge_omega_phase PolyLines for use with spectral method.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.plot_specbeam_PolyLines" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.plot_specbeam_PolyLines"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_specbeam_PolyLines</span></code></a>([ax,&nbsp;v,&nbsp;L,&nbsp;t0,&nbsp;x0])</td>
+<td>Plot load_vs_time for each vehicle axis.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.plotme" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.plotme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plotme</span></code></a>([ax,&nbsp;t,&nbsp;v0,&nbsp;t0,&nbsp;x0,&nbsp;xlim,&nbsp;ylim])</td>
+<td>Plot the load at time t</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.point_loads_on_beam" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.point_loads_on_beam"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point_loads_on_beam</span></code></a>(t)</td>
+<td>Position and magnitude of point loads between [0, L] at time t</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.setv" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.setv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setv</span></code></a>(v)</td>
+<td>Set the vehicle’s velocity, then calc start_time and end_time when vehicle’s axles enter and leave the beam</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_beam_point" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_beam_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_axles_pass_beam_point</span></code></a>(x)</td>
+<td>Time values when each axle passes a particular point on a beam</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_point" title="geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_point"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_axles_pass_point</span></code></a>(x[,&nbsp;v0,&nbsp;t0,&nbsp;x0])</td>
+<td>time values when each moving load passes a certain point</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>delv</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>getv</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.animateme">
+<code class="descname">animateme</code><span class="sig-paren">(</span><em>x0=0</em>, <em>t0=0</em>, <em>tf=1</em>, <em>v0=1</em>, <em>xlim=None</em>, <em>ylim=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.animateme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.animateme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animate moving vehicle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start position of vehicle, default=0.</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start time of animation. Default t0=0.</p>
+</dd>
+<dt><strong>tf</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">End time of animation. Default tf=1.</p>
+</dd>
+<dt><strong>v0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial velocity of vehicle.  Default v0=1.  If v0&lt;0 then
+positions will be multiplied by -1 before adjusting position.</p>
+</dd>
+<dt><strong>xlim, ylim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of size 2, default xlim=ylim=None.</span></dt>
+<dd><p class="first last">axes limits.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ani</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib animation</span></dt>
+<dd><p class="first last">Animation of moving vehicle</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.axle_positions">
+<code class="descname">axle_positions</code><span class="sig-paren">(</span><em>t=0</em>, <em>v0=0</em>, <em>t0=0</em>, <em>x0=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.axle_positions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.axle_positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Positions of axles at given time</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Time of interest</p>
+</dd>
+<dt><strong>v0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial speed of vehicle.  Default v0=0.
+If v0&lt;0 then axle coords will be multiplied by -1 before moving.</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Time when vehicle starts moving at velocity v0. Default t0=0</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start postion of vehicle</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xnew</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array</span></dt>
+<dd><p class="first last">xcoords of axles at time t.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.convert_to_specbeam">
+<code class="descname">convert_to_specbeam</code><span class="sig-paren">(</span><em>v=None</em>, <em>L=None</em>, <em>t0=None</em>, <em>x0=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.convert_to_specbeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.convert_to_specbeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert vehicle at velocity v into
+surcharge_vs_time and surcharge_omega_phase PolyLines for use with
+spectral method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Velocity of vehicle.  Default v=None in which case the v used
+during object initialization will be uses</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Length of beam.  Default L=None in which case the L used
+during object initialization will be uses</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">time when vehicle reference point begins entering the beam. Default t0=0.
+If v&gt;0 vehicle will enter from the right.  If v&lt;0 vehicle
+will enter from the right. v=0 will result in an error.</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Position where loads start.  Default x0=none, i.e. value used
+during initialization will be used.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>plines</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of PolyLine</span></dt>
+<dd></dd>
+<dt><strong>omega_phase</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of two element tuples</span></dt>
+<dd><p class="first last">frequency and phase angle for use in spec beam.  as per the notes
+above will need to multiply both omega and phase by M for use
+in specbeam.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Vehicle is made up of axles at a relative distance dxi from a
+reference point.  dxi should be negative.  If velocity v is positive
+then the reference point enters the beam (at x=x0) at time t0.  The
+position of the ith axle is:</p>
+<blockquote>
+<div>xi = x0 + dxi + v * (t - t0)</div></blockquote>
+<dl class="docutils">
+<dt>The ith axle enters the beam at position x0 at time</dt>
+<dd>tstarti = t0 - dxi / v</dd>
+<dt>and leaves the beam (x = x0 + L) at time</dt>
+<dd>tendi = t0+(L-dxi)/v</dd>
+</dl>
+<p>If v is negative then the reference point enters the beam from
+the right, then we first flip the vehicle by making dx_i=-dxi.  The
+positiion and times entering and leaving the beam are</p>
+<blockquote>
+<div>xi = x0 + L + dx_i + v * (t - t0)</div></blockquote>
+<dl class="docutils">
+<dt>and</dt>
+<dd>tstart = t0 - dx_i / v
+tend = t0 - (L + dx_i)/v</dd>
+</dl>
+<p>For use in spec beam we will need sin(M*xi) in a form
+sin(omega*t+phase).</p>
+<p>for v&gt;0
+xi = v * t + (x0 + dxi - v * t0)
+so omega/M = v and phase/M = x0 + dxi-v*t0</p>
+<p>for v&lt;0
+xi = v * t + (x0 + L + dx_i - v * t0)
+so omega/M = v and phase/M = x0 + L + dx_i - v*t0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.delv">
+<code class="descname">delv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.delv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.delv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.getv">
+<code class="descname">getv</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.getv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.getv" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.plot_specbeam_PolyLines">
+<code class="descname">plot_specbeam_PolyLines</code><span class="sig-paren">(</span><em>ax=None</em>, <em>v=1</em>, <em>L=1</em>, <em>t0=0</em>, <em>x0=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.plot_specbeam_PolyLines"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.plot_specbeam_PolyLines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot load_vs_time for each vehicle axis.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">Matplotlib.Axes, optional</span></dt>
+<dd><p class="first last">Axes to plot on.  Default ax=None i.e. a new fig and ax will be
+created.</p>
+</dd>
+<dt><strong>v</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">velocity, default v=1.</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Lenght of beam default L=1</p>
+</dd>
+<dt><strong>x0, t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Vehicle starts at positon x0 at time t0. Default x0=0, t0=0</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.plotme">
+<code class="descname">plotme</code><span class="sig-paren">(</span><em>ax=None</em>, <em>t=0</em>, <em>v0=0</em>, <em>t0=0</em>, <em>x0=0</em>, <em>xlim=None</em>, <em>ylim=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.plotme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.plotme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the load at time t</p>
+<p>Each axle load is represented by an arrow, with head at 0 and tail
+at the load magnitude.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">pyplot.Axes, optional</span></dt>
+<dd><p class="first last">Axes object to plot on.  Default ax=None i.e. new figure and
+axes will be created.</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Time at which to plot the vehicle positoin. Default t=0.</p>
+</dd>
+<dt><strong>v0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial velocity of vehicle.  default v0=0.  If v0&lt;0 then
+positions will be multiplied by -1 before adjusting position.</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Time the vehicle starts moving. Default t0=0.</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start position of vehicle</p>
+</dd>
+<dt><strong>xlim, ylim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of size 2, default xlim=ylim=None.</span></dt>
+<dd><p class="first last">axes limits.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">pyplot.Axes opbect</span></dt>
+<dd><p class="first last">Axes object with plotted vehicle position.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.point_loads_on_beam">
+<code class="descname">point_loads_on_beam</code><span class="sig-paren">(</span><em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.point_loads_on_beam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.point_loads_on_beam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position and magnitude of point loads between [0, L] at time t</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Current time.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">position of each load at time t.</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">Load at time t.  Will be set to zero if load is not beteen
+0 and L.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Position can be offset by self.x0</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.setv">
+<code class="descname">setv</code><span class="sig-paren">(</span><em>v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.setv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.setv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the vehicle’s velocity, then calc start_time and end_time when
+vehicle’s axles enter and leave the beam</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_beam_point">
+<code class="descname">time_axles_pass_beam_point</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.time_axles_pass_beam_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_beam_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time values when each axle passes a particular point on a beam</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x coord of interest</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>t_pass</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d aray of float</span></dt>
+<dd><p class="first last">time values when each axle passes the particualr point</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>If self.v &lt; 0 then loads enter beam from the left, i.e. at time
+t0 axles will be at L+x0+xt</p>
+<p>Not really sure if I’ve accountered for self.x0!=0 for the
+negative velocity.  Just make self.x0 =0 for simplicity</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_point">
+<code class="descname">time_axles_pass_point</code><span class="sig-paren">(</span><em>x</em>, <em>v0=0</em>, <em>t0=0</em>, <em>x0=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#MovingPointLoads.time_axles_pass_point"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.time_axles_pass_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>time values when each moving load passes a certain point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x-coord of interest</p>
+</dd>
+<dt><strong>v0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial speed of vehicle.  Default v0=0.
+If v0&lt;0 then axle coords will be multiplied by -1 before moving.</p>
+</dd>
+<dt><strong>t0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Time when vehicle starts moving at velocity v0. Default t0=0</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Start postion of vehicle</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Length of beam.  Default L=None in which case the L used
+during object initialization will be uses.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>t_pass</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">list of times corresponding to when each axle passes the given
+x value.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="geotecha.beam_on_foundation.specbeam.MovingPointLoads.v">
+<code class="descname">v</code><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.MovingPointLoads.v" title="Permalink to this definition">¶</a></dt>
+<dd><p>Velocity</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam">
+<em class="property">class </em><code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">SpecBeam</code><span class="sig-paren">(</span><em>BC='SS', nterms=50, E=None, I=None, rho=None, A=None, L=None, k1=None, k3=None, mu=None, moving_loads_x=None, moving_loads_Fz=None, moving_loads_v=None, moving_loads_offset=None, moving_loads_t0=None, moving_loads_x0=None, moving_loads_L=None, tvals=None, xvals=None, v_norm=None, moving_loads_x_norm=None, moving_loads_Fz_norm=None, moving_loads_v_norm=None, moving_loads_offset_norm=None, moving_loads_t0_norm=None, moving_loads_x0_norm=None, moving_loads_L_norm=None, tvals_norm=None, xvals_norm=None, stationary_loads_x=None, stationary_loads_vs_t=None, stationary_loads_omega_phase=None, stationary_loads_x_norm=None, stationary_loads_vs_t_norm=None, stationary_loads_omega_phase_norm=None, kf=None, mu_norm=None, k1_norm=None, k3_norm=None, nquad=30, Ebar=PolyLine(array([[0., 1.],        [1., 1.]])), rhobar=PolyLine(array([[0., 1.],        [1., 1.]])), Ibar=PolyLine(array([[0., 1.],        [1., 1.]])), Abar=PolyLine(array([[0., 1.],        [1., 1.]])), k1bar=PolyLine(array([[0., 1.],        [1., 1.]])), k3bar=PolyLine(array([[0., 1.],        [1., 1.]])), mubar=PolyLine(array([[0., 1.],        [1., 1.]])), implementation='vectorized', use_analytical=False, file_stem='specbeam_', force_calc=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="docutils">
+<dt>Finite elastic Euler-Bernoulli beam resting on</dt>
+<dd><p class="first">viscoelastic foundation subjected to a moving load, piecewise-linear
+properties.</p>
+<p>An extension of Ding et al. (2012) [Rb51e5289a983-1] with piecewise linear
+material properties and non-linear foundation stiffness k3=0 in k3*w**3.</p>
+<p>You don’t need all the parameters.  Basically if normalised values are
+‘None’ (i.e. default) then those properties will be calculated from
+the non normalised quantities.  All calculations are done in normalised
+space.  You only need the non-normalised variables if you want
+non-normalised output.</p>
+<p class="last">Note: some of the code is a relic of
+geotecha.beam_on_foundation.dingetal2012 which is a straight up
+implementation of [Rb51e5289a983-1] .  Sorry for any confusion.</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>BC</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[“SS”,”CC”,”FF”], optional</span></dt>
+<dd><blockquote class="first">
+<div><p>Boundary condition. Can only have Simply Supported (SS).
+Clamped Clamped (CC) and Free Free (FF) are a relic from a differnet
+program.  Default BC=”SS”.</p>
+</div></blockquote>
+<dl class="last docutils">
+<dt>nterms <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">Number of terms for Galerkin truncation. Default nterms=50</p>
+</dd>
+<dt>E <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Young’s modulus of beam.(E in [Rb51e5289a983-1]).</p>
+</dd>
+<dt>rho <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Mass density of beam.</p>
+</dd>
+<dt>I <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Second moment of area of beam (I in [Rb51e5289a983-1]).</p>
+</dd>
+<dt>A <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Cross sectional area of beam</p>
+</dd>
+<dt>L <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Length of beam. (L in [Rb51e5289a983-1]).</p>
+</dd>
+<dt>k1 <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Mean stiffness of foundation.</p>
+</dd>
+<dt>k3 <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Non linear stiffness of foundation.</p>
+</dd>
+<dt>mu <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Viscous damping of foundation.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>#    Fz</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd></dd>
+<dt><strong>#        Load.  This is a relic; loads now specified with moving_loads_…</strong></dt>
+<dd><dl class="first last docutils">
+<dt>v <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Velocity of each group of moving point loads.</p>
+</dd>
+<dt>moving_loads_x <span class="classifier-delimiter">:</span> <span class="classifier">list of lists of floats, optional</span></dt>
+<dd><p class="first last">Each sublist contains x-coords of each point load in the moving load
+group.  The coords are relative to a reference point which will
+enter the beam at the corresponding time value in <cite>moving_loads_t0</cite>.
+Coords are usually negative for vehicle facing left to right.</p>
+</dd>
+<dt>moving_loads_Fz <span class="classifier-delimiter">:</span> <span class="classifier">list of lists of floats, optional</span></dt>
+<dd><p class="first last">Each sublist contains magnitude of of each point load in moving load
+group.</p>
+</dd>
+<dt>moving_loads_v <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Velocity of each moving point load group.  When velocity is negative
+the x-coords in the corresponding member of <cite>moving_loads_x</cite> will
+be multiplied by -1 before the beam enters the beam from the right.</p>
+</dd>
+<dt>moving_loads_offset <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">An initial distance by which the corresponding <cite>moving_loads_x</cite> is
+offset. Will default to zero if not inputted.</p>
+</dd>
+<dt>moving_loads_t0 <span class="classifier-delimiter">:</span> <span class="classifier">list of lists, optional</span></dt>
+<dd><p class="first last">Time that moving load group enters the beam (strictyly speaking it
+is when the 0 coord in <cite>moving_loads_x</cite> enters the beam). If v&gt;0
+moving load group starts at x=0, t=0 and moves to the right.
+If v&lt;0 then moving load group starts at x=L,t=0 and moves to the
+left.  Defaults to 0.</p>
+</dd>
+<dt>moving_loads_x0 <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Position where moving load group appears on the beam.  Defaults to
+zero if ommited.</p>
+</dd>
+<dt>moving_loads_L <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Distance the load group travels on beam.  Defaults to L if omitted.
+Used in conjunction with moving loads_x0.</p>
+</dd>
+<dt>tvals <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float, optional</span></dt>
+<dd><p class="first last">Output times</p>
+</dd>
+<dt>xvals <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float, optional</span></dt>
+<dd><p class="first last">Output x-coord</p>
+</dd>
+<dt>v_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">normalised velocity = V * sqrt(rho / E) for each group of moving
+point loads. An example of a consistent
+set of units to get the correct v_norm is rho in kg/m^3, L in m, and
+E in Pa.</p>
+</dd>
+<dt>moving_loads_x_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of lists of floats, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_x</cite> but nomalised.
+x_norm = x / L</p>
+</dd>
+<dt>moving_loads_Fz_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of lists of floats, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_Fz</cite> but nomalised.
+Fz_norm = Fz / (E * A).</p>
+</dd>
+<dt>moving_loads_v_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_v</cite> but nomalised.
+v_norm= v * sqrt(rho / E) for each group of moving
+point loads. An example of a consistent
+set of units to get the correct v_norm is rho in kg/m^3, L in m, and
+E in Pa.</p>
+</dd>
+<dt>moving_loads_offset_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_offset</cite> but nomalised.
+offset_norm = offet / L</p>
+</dd>
+<dt>moving_loads_t0_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of lists, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_t0</cite> but nomalised.
+t0_norm = t0 / L * np.sqrt(E / rho)</p>
+</dd>
+<dt>moving_loads_x0_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_x0</cite>. x0_norm=x0/L.</p>
+</dd>
+<dt>moving_loads_L_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">As per <cite>moving_loads_L_norm</cite> but normalised.L_norm = L’ / L</p>
+</dd>
+<dt>tvals_norm <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float, optional</span></dt>
+<dd><p class="first last">Normalised output times.
+t_norm = t / L * np.sqrt(E / rho)</p>
+</dd>
+<dt>xvals_norm <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float, optional</span></dt>
+<dd><p class="first last">Normalised output coords.
+x_norm = x / L</p>
+</dd>
+<dt>stationary_loads_x <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Location of stationary point loads.</p>
+</dd>
+<dt>stationary_loads_vs_t <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">Stationary load magnitude variation with time. PolyLine(time, magnitude).</p>
+</dd>
+<dt>stationary_loads_omega_phase <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">(omega, phase) to define cyclic variation of stationary point loads. i.e.
+mag_vs_time * cos(omega*t + phase). If stationary_loads_omega_phase is None
+then cyclic component will be ignored.  If stationary_loads_omega_phase is a
+list then if any member is None then cyclic component will not be
+applied for that load combo.</p>
+</dd>
+<dt>stationary_loads_x_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">As per stationary_loads_x but normalised</p>
+</dd>
+<dt>stationary_loads_vs_t_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of Polyline, optional</span></dt>
+<dd><p class="first last">As per stationary_loads_vs_t but normalised</p>
+</dd>
+<dt>stationary_loads_omega_phase_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of 2 element tuples, optional</span></dt>
+<dd><p class="first last">As per stationary_loads_omega_phase but normalised.</p>
+</dd>
+<dt>kf <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised modulus of elasticity = 1 / L * sqrt(I / A).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>#    Fz_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd></dd>
+<dt><strong>#        Normalised load = Fz / (E * A). This is a relic; loads now specified</strong></dt>
+<dd></dd>
+<dt><strong>#        with moving_loads_…</strong></dt>
+<dd><dl class="first last docutils">
+<dt>mu_norm <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised damping = mu / A * sqrt(L**2 / (rho * E)).</p>
+</dd>
+<dt>k1_norm <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised mean stiffness = k1 * L**2 / (E * A).</p>
+</dd>
+<dt>k3_norm <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Normalised non-linear stiffness = k3 * L**4 / (E * A)</p>
+</dd>
+<dt>nquad <span class="classifier-delimiter">:</span> <span class="classifier">integer, optional</span></dt>
+<dd><p class="first last">Number of quadrature points for numerical integration of non-linear
+k3*w**3*w_ term.  Default nquad=30.  Note I’ve had errors when n&gt;35.
+For the special case of nquad=None then integration will be performed
+using scipy.integrate.quad; this is slower.</p>
+</dd>
+<dt>Ebar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear E/Eref vs x.
+Default Ebar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>rhobar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear rho/rhoref vs x.
+Default rhobar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>Ibar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear I/Iref vs x.
+Default Ibar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>Abar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear A/Aref vs x.
+Default Abar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>k1bar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear k1/k1ref vs x.
+Default k1bar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>k3bar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear k3/k3ref vs x.
+Default k3bar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>mubar <span class="classifier-delimiter">:</span> <span class="classifier">PolyLine, optional</span></dt>
+<dd><p class="first last">PolyLine object representing piecewise linear mu/muref vs x.
+Default mubar = PolyLine([0],[1],[1],[1]) i.e. uniform.</p>
+</dd>
+<dt>use_analytical <span class="classifier-delimiter">:</span> <span class="classifier">[False,true]</span></dt>
+<dd><p class="first last">If true then system of second order ode resulting from spectral
+galerkin method will be solved analytically.  If False then the
+ode system will be solved numerically (potentially very slow).
+analytical approach is only avaialble when BC=’SS’ and
+k3=0 (or k3_norm=0).</p>
+</dd>
+<dt>file_stem <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">File stem for saving deflection data.  Default file_stem=”<a class="reference internal" href="#specbeam">specbeam</a>”.</p>
+</dd>
+<dt>force_calc <span class="classifier-delimiter">:</span> <span class="classifier">[False, True]</span></dt>
+<dd><p class="first last">If True then calcualtion will happen regardless of presence of output
+file (file_stem)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>defl and def_norm will be 1d arrays if len(xvals)=1.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>phi</strong> <span class="classifier-delimiter">:</span> <span class="classifier">function</span></dt>
+<dd><blockquote class="first">
+<div><p>Relevant Galerkin trial function.  Depends on <cite>BC</cite>.  See [Rb51e5289a983-1] for
+details.</p>
+</div></blockquote>
+<dl class="last docutils">
+<dt>beta <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nterms</cite> float</span></dt>
+<dd><p class="first last">beta terms in Galerkin trial function.</p>
+</dd>
+<dt>xj <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nquad</cite> float</span></dt>
+<dd><p class="first last">Quadrature integration points.</p>
+</dd>
+<dt>Ij <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of <cite>nquad</cite> float</span></dt>
+<dd><p class="first last">Weighting coefficients for numerical integration.</p>
+</dd>
+<dt>BC_coeff <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd><p class="first last">I don’t think this is relevant anymore.
+Coefficent  to multiply the Fz and k3 terms in the ode.
+For <a href="#id7"><span class="problematic" id="id8">`</span></a>BC`=”SS” BC_coeff=2, for <a href="#id9"><span class="problematic" id="id10">`</span></a>BC`=”CC” or “FF” BC_coeff=2.
+See [Rb51e5289a983-1] Equation (31) and (32).</p>
+</dd>
+<dt>t <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of float</span></dt>
+<dd><p class="first last">Raw time values. Only valid after running calulate_qk.</p>
+</dd>
+<dt>t_norm <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of float</span></dt>
+<dd><p class="first last">Normlised time values = t / L * sqrt(E / rho).
+Only valid after running calulate_qk.</p>
+</dd>
+<dt>qsol <span class="classifier-delimiter">:</span> <span class="classifier">2d ndarray of shape(len(<cite>t</cite>), 2* <cite>nterms</cite>) float</span></dt>
+<dd><p class="first last">Values of Galerkin coefficients at each time i.e. qk(t) in [Rb51e5289a983-1].
+w(x) = sum(qk * phi_k(x)).
+Only valid after running calulate_qk.</p>
+</dd>
+<dt>lam_qdotdot <span class="classifier-delimiter">:</span> <span class="classifier">2d array of shape (nterms, nterms)</span></dt>
+<dd><p class="first last">spectral coefficeient matrix for qdotdot</p>
+</dd>
+<dt>psi_q <span class="classifier-delimiter">:</span> <span class="classifier">2d array of shape (nterms, nterms)</span></dt>
+<dd><p class="first last">spectral coefficeient matrix for q</p>
+</dd>
+<dt>psi_qdot <span class="classifier-delimiter">:</span> <span class="classifier">2d array of shape (nterms, nterms)</span></dt>
+<dd><p class="first last">spectral coefficeient matrix for qdot.</p>
+</dd>
+<dt>k3barj <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float with len(nquad)</span></dt>
+<dd><p class="first last">value of k3 interpolated from k3bar at the quadrature points. Used
+in the  k3*w**3 term.</p>
+</dd>
+<dt>L_norm <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Normalised length.  Always =1.</p>
+</dd>
+<dt>defl_norm <span class="classifier-delimiter">:</span> <span class="classifier">array of float, size (len(xvals_norm), len(tvals_norm))</span></dt>
+<dd><p class="first last">normalised defelction at xval,tval</p>
+</dd>
+<dt>defl <span class="classifier-delimiter">:</span> <span class="classifier">array of float, size (len(xvals_norm), len(tvals_norm))</span></dt>
+<dd><p class="first last">deflection at xval,tval.  ONly if self.L is not None.</p>
+</dd>
+<dt>beta_block <span class="classifier-delimiter">:</span> <span class="classifier">1d array float with size (2*nterms)</span></dt>
+<dd><p class="first last">Block column vector of repeated beta values.</p>
+</dd>
+<dt>has_moving_loads <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
+<dd><p class="first last">If True then there are moving point loads.</p>
+</dd>
+<dt>has_stationary_loads <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
+<dd><p class="first last">If True then there are stationary loads.</p>
+</dd>
+<dt>moving_load_w_norm <span class="classifier-delimiter">:</span> <span class="classifier">list of ndarray</span></dt>
+<dd><p class="first last">Normalised deflections under each moving load at each time value.
+Each element of the list corresponds to each moving load.  The array
+is of size (len(mvpl.x), len(tvals))  i.e. for each axle in the moving
+load group.</p>
+</dd>
+<dt>moving_load_w <span class="classifier-delimiter">:</span> <span class="classifier">list of ndarray</span></dt>
+<dd><p class="first last">Non normalised deflections under each moving load.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.animateme" title="geotecha.beam_on_foundation.specbeam.SpecBeam.animateme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">animateme</span></code></a>([xlim,&nbsp;ylim,&nbsp;norm,&nbsp;saveme,&nbsp;interval])</td>
+<td>Animate the deflection vs distance over time plot</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.calulate_qk" title="geotecha.beam_on_foundation.specbeam.SpecBeam.calulate_qk"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calulate_qk</span></code></a>([t,&nbsp;t_norm])</td>
+<td>Calculate the nterm Galerkin coefficients qk at each time value</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.defl_vs_time_under_loads" title="geotecha.beam_on_foundation.specbeam.SpecBeam.defl_vs_time_under_loads"><code class="xref py py-obj docutils literal notranslate"><span class="pre">defl_vs_time_under_loads</span></code></a>([xlim_norm])</td>
+<td>Deflection vs time under each moving load</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.load_defl" title="geotecha.beam_on_foundation.specbeam.SpecBeam.load_defl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_defl</span></code></a>()</td>
+<td>Loads defl_norm from txt file if it exists</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_E_Igamv_the" title="geotecha.beam_on_foundation.specbeam.SpecBeam.make_E_Igamv_the"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_E_Igamv_the</span></code></a>()</td>
+<td>sum contributions from all loads</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_output" title="geotecha.beam_on_foundation.specbeam.SpecBeam.make_output"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_output</span></code></a>()</td>
+<td>make all output</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_time_dependent_arrays" title="geotecha.beam_on_foundation.specbeam.SpecBeam.make_time_dependent_arrays"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_time_dependent_arrays</span></code></a>()</td>
+<td>make all time dependent arrays</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.plot_w_vs_x_overtime" title="geotecha.beam_on_foundation.specbeam.SpecBeam.plot_w_vs_x_overtime"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_w_vs_x_overtime</span></code></a>([ax,&nbsp;norm])</td>
+<td>Plot the normalised deflection vs distance for all times</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.saveme" title="geotecha.beam_on_foundation.specbeam.SpecBeam.saveme"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveme</span></code></a>()</td>
+<td>Save deflection vs time to file</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.time_independant_matrices" title="geotecha.beam_on_foundation.specbeam.SpecBeam.time_independant_matrices"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_independant_matrices</span></code></a>()</td>
+<td>Make all time independent matrices</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.vectorfield" title="geotecha.beam_on_foundation.specbeam.SpecBeam.vectorfield"><code class="xref py py-obj docutils literal notranslate"><span class="pre">vectorfield</span></code></a>(vsv,&nbsp;tnow[,&nbsp;p])</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.w" title="geotecha.beam_on_foundation.specbeam.SpecBeam.w"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w</span></code></a>(qk,&nbsp;x)</td>
+<td>Nomalised vertcal deformation at x.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.w_cubed_wi" title="geotecha.beam_on_foundation.specbeam.SpecBeam.w_cubed_wi"><code class="xref py py-obj docutils literal notranslate"><span class="pre">w_cubed_wi</span></code></a>(x,&nbsp;q,&nbsp;i)</td>
+<td>Non-linear cube term for numerical integration</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.wofx" title="geotecha.beam_on_foundation.specbeam.SpecBeam.wofx"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wofx</span></code></a>([x,&nbsp;x_norm,&nbsp;tslice,&nbsp;normalise_w])</td>
+<td>Deflection at distance x, and times t[tslice]</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>onClick</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>phiCC</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>phiFF</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><strong>phiSS</strong></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><strong>runme</strong></td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.animateme">
+<code class="descname">animateme</code><span class="sig-paren">(</span><em>xlim=None</em>, <em>ylim=None</em>, <em>norm=True</em>, <em>saveme=False</em>, <em>interval=50</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.animateme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.animateme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Animate the deflection vs distance over time plot</p>
+<p>Will display beam osciallations and evolving max and min deflection
+envelopes.  Position and magnitude of load will also be shown.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xlim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of 2 floats, optional</span></dt>
+<dd><p class="first last">Limits of x-axis , default xlim=None, i.e. use Beam ends</p>
+</dd>
+<dt><strong>ylim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple of 2 floats, optional</span></dt>
+<dd><p class="first last">Limits of y-axis , default ylim=None, i.e. limits will be
+calculated ylim=(1.5*defl_min,1.1*defl_max)</p>
+</dd>
+<dt><strong>norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If norm=True normalised values will be plotted. Default norm=True.</p>
+</dd>
+<dt><strong>saveme</strong> <span class="classifier-delimiter">:</span> <span class="classifier">False/True</span></dt>
+<dd><p class="first last">Whether to save the animation to disk. Default saveme=False.</p>
+</dd>
+<dt><strong>interval</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Number of miliseconds for each frame.  Default interval=50.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.calulate_qk">
+<code class="descname">calulate_qk</code><span class="sig-paren">(</span><em>t=None</em>, <em>t_norm=None</em>, <em>**odeint_kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.calulate_qk"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.calulate_qk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the nterm Galerkin coefficients qk at each time value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Raw time values.</p>
+</dd>
+<dt><strong>t_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Normalised time values. If t_norm==None then it will be
+calculated from raw t values and other params
+t_norm = t / L * sqrt(E / rho).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>This method determines initializes self.t and self.t_norm and
+calculates <cite>self.qsol</cite>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.defl_vs_time_under_loads">
+<code class="descname">defl_vs_time_under_loads</code><span class="sig-paren">(</span><em>xlim_norm=(0</em>, <em>1)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.defl_vs_time_under_loads"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.defl_vs_time_under_loads" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection vs time under each moving load</p>
+<p>i.e. What is deflection under each axle</p>
+<p>Creates and populates self.moving_load_w_norm .
+Normalised deflections under each moving load at each time value.
+Each element of the list corresponds to each moving load.  The array
+is of size (len(mvpl.x), len(tvals))  i.e. for each axle in the moving
+load group.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>xlim_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple, optional</span></dt>
+<dd><p class="first last">won’t show defelction untill within these normalised bounds
+Default xlim_norm=(0,1)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.load_defl">
+<code class="descname">load_defl</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.load_defl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.load_defl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads defl_norm from txt file if it exists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Loaded</strong> <span class="classifier-delimiter">:</span> <span class="classifier">boolean</span></dt>
+<dd><p class="first last">If True then self.defl either already exists or has been
+successfully loaded.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.make_E_Igamv_the">
+<code class="descname">make_E_Igamv_the</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.make_E_Igamv_the"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_E_Igamv_the" title="Permalink to this definition">¶</a></dt>
+<dd><p>sum contributions from all loads</p>
+<p>Calculates all contributions to E*inverse(gam*v)*theta part of solution
+defl=phi*vE*inverse(gam*v)*theta. i.e. surcharge, vacuum, top and bottom
+pore pressure boundary conditions. <cite>make_E_Igamv_the</cite> will create
+<cite>self.E_Igamv_the</cite>.  <cite>self.E_Igamv_the</cite>  is an array
+of size (nterms, len(tvals)). So the columns are the column array
+E*inverse(gam*v)*theta calculated at each output time.  This will allow
+us later to do defl = phi*v*self.E_Igamv_the</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">_make_E_Igamv_the_mvl</span></code></dt>
+<dd>moiving point load contribution</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.make_output">
+<code class="descname">make_output</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.make_output"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>make all output</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.make_time_dependent_arrays">
+<code class="descname">make_time_dependent_arrays</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.make_time_dependent_arrays"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.make_time_dependent_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>make all time dependent arrays</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-obj docutils literal notranslate"><span class="pre">self.make_E_Igamv_the</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.onClick">
+<code class="descname">onClick</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.onClick"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.onClick" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.phiCC">
+<code class="descname">phiCC</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.phiCC"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.phiCC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.phiFF">
+<code class="descname">phiFF</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.phiFF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.phiFF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.phiSS">
+<code class="descname">phiSS</code><span class="sig-paren">(</span><em>x</em>, <em>beta</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.phiSS"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.phiSS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.plot_w_vs_x_overtime">
+<code class="descname">plot_w_vs_x_overtime</code><span class="sig-paren">(</span><em>ax=None</em>, <em>norm=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.plot_w_vs_x_overtime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.plot_w_vs_x_overtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the normalised deflection vs distance for all times</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.runme">
+<code class="descname">runme</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.runme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.runme" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.saveme">
+<code class="descname">saveme</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.saveme"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.saveme" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save deflection vs time to file</p>
+<p>Deflection will be saved to :
+‘self.file_stem + “_defl.csv’
+Normalised deflection will be saved to:
+‘self.file_stem + “_defl_norm.csv”</p>
+<p>Might not handle singel x value and single t vlue.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.time_independant_matrices">
+<code class="descname">time_independant_matrices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.time_independant_matrices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.time_independant_matrices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make all time independent matrices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.vectorfield">
+<code class="descname">vectorfield</code><span class="sig-paren">(</span><em>vsv</em>, <em>tnow</em>, <em>p=()</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.vectorfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.vectorfield" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>vsv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Vector of the state variables.
+vsv = [q1, q2, …qk, q1dot, q2dot, …, qkdot]
+where qk is the kth galerkin coefficient and qkdot is the time
+derivative of the kth Galerkin coefficient.</p>
+</dd>
+<dt><strong>tnow</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Current time.</p>
+</dd>
+<dt><strong>p</strong> <span class="classifier-delimiter">:</span> <span class="classifier">various</span></dt>
+<dd><p class="first last">Vector of parameters</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>vsvdot</strong> <span class="classifier-delimiter">:</span> <span class="classifier">vector of state variables first derivatives</span></dt>
+<dd><p class="first last">vsvdot = [q1dot, q2dot, …qkdot, q1dotdot, q2dotdot, …, qkdotdot]</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.w">
+<code class="descname">w</code><span class="sig-paren">(</span><em>qk</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.w"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.w" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nomalised vertcal deformation at x.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>qk</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray of nterm floats</span></dt>
+<dd><p class="first last">Galerkin coefficients.</p>
+</dd>
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">nomalised distances to calculate deflection at.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">vertical deformation at x value.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.w_cubed_wi">
+<code class="descname">w_cubed_wi</code><span class="sig-paren">(</span><em>x</em>, <em>q</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.w_cubed_wi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.w_cubed_wi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-linear cube term for numerical integration</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam.wofx">
+<code class="descname">wofx</code><span class="sig-paren">(</span><em>x=None</em>, <em>x_norm=None</em>, <em>tslice=slice(None</em>, <em>None</em>, <em>None)</em>, <em>normalise_w=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam.wofx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam.wofx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection at distance x, and times t[tslice]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or ndarray of float, optional</span></dt>
+<dd><p class="first last">Raw values of x to calculate deflection at. Default x=None.</p>
+</dd>
+<dt><strong>x_norm</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or array of float, optional</span></dt>
+<dd><p class="first last">Normalised x values to calc deflection at.  If x_norm==None then
+it will be calculated frm <cite>x</cite> and other properties : x_norm = x / L.
+Default x_norm=None.</p>
+</dd>
+<dt><strong>tslice</strong> <span class="classifier-delimiter">:</span> <span class="classifier">slice object, optional</span></dt>
+<dd><p class="first last">slice to select subset of time values.  Default
+tslice=slice(None, None, None) i.e. all time values.
+Note the array of time values is already in the object (it was
+used to calc the qk galerkin coefficients).</p>
+</dd>
+<dt><strong>normalise_w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">True/False, optional</span></dt>
+<dd><p class="first last">If True then output is normalised deflection.  Default nomalise_w=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array of float, shape(len(x),len(t))</span></dt>
+<dd><p class="first last">Deflections at x and self.t_norm[tslice]</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam_const_mat_midpoint_defl_runme_analytical_play">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">SpecBeam_const_mat_midpoint_defl_runme_analytical_play</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam_const_mat_midpoint_defl_runme_analytical_play"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam_const_mat_midpoint_defl_runme_analytical_play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test SpecBeam for constant mat: close to Ding et al Figure 8, displacement vs time at
+beam midpoint (using the runme method) but with k3=0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.SpecBeam_stationary_load_const_mat_midpoint_defl_runme_analytical_play" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test SpecBeam for constant mat: close to Ding et al Figure 8, displacement vs time at
+beam midpoint (using the runme method) but with k3=0</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.align_yaxis">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">align_yaxis</code><span class="sig-paren">(</span><em>ax1</em>, <em>ax2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#align_yaxis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.align_yaxis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjust y-axis limits so zeros of the two axes align, zooming them out
+by same ratio.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>ax1, ax2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matpolotlib.Axes</span></dt>
+<dd><p class="first last">Axes to align.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_01">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_01</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_01"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_01" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 1 Mid point deflection comparison with Ding et al 2012, figure
+from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r9467256b0e5d-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id13">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_02">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_02</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_02"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_02" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 2 Deflection amplification factor compared with analytical
+infinite beam solution, figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="raba21967b3d7-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id14">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_03">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_03</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_03"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_03" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 3 Low damping DAF for velocity ratio  alp=0p5,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r0203f6714141-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id15">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_04">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_04</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_04"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_04" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 4 Relative DAF for various stiffness ratios,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rdd6f54b22837-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id16">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_05a_05b_05c_07">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_05a_05b_05c_07</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_05a_05b_05c_07"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_05a_05b_05c_07" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 5 a),b),&amp;c) Max deflection envelope for  bet=0p1  k2_k1=10,
+and Figure 7 Deflection vs time at point which experiences maximum
+deflection  alp=0p8,  bet=0p1,  k2_k1=10, soft to stiff=forward,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rf206a13339f3-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id17">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_06">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_06</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_06"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_06" title="Permalink to this definition">¶</a></dt>
+<dd><p>Additional deflection for transition effects,  bet=0p1,  alp=10, (dashed=stiff to soft, solid=soft to stiff),
+figure from Walker and Indraratna (in press).</p>
+<p>This takes forever to run.</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r490700432e97-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id18">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_08">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_08</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_08"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_08" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 8 Deflection vs time under four moving loads alp=0p8,  bet=0p1,  k2/k1=10, soft to stiff,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r98d5659c1d58-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id19">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_09">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_09</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_09"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_09" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 9 is  drawing in a word file,  this routine is just a marker
+to indicated that figure 9 has not been forgotten,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r91d4dbb71bd8-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id20">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_10_11">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_10_11</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_10_11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_10_11" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 10 Measured vs modelled deflections at various locations in the
+transition zone, Figure 11 Peak displacement and stiffness distribution,
+figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="rbf1f7ff87443-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id21">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.article_figure_12">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">article_figure_12</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#article_figure_12"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.article_figure_12" title="Permalink to this definition">¶</a></dt>
+<dd><p>Figure 12 python code for relative dynamic amplification factor
+calculation, figure from Walker and Indraratna (in press).</p>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r0aa874d975ed-1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id22">[1]</a></td><td>Walker, R.T.R. and Indraratna, B, (in press) “Moving loads on a
+viscoelastic foundation with special reference to railway
+transition zones”. International Journal of Geomechanics.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.case_study_PaixaoEtAl2014">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">case_study_PaixaoEtAl2014</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>nterms=100</em>, <em>force_calc=True</em>, <em>nx=100</em>, <em>nt=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#case_study_PaixaoEtAl2014"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.case_study_PaixaoEtAl2014" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try and replicate Paixao et al 2014 for 6 rail cars going over
+transition using specbeam.</p>
+<p>Some eplots will be produced.</p>
+<p>You’ll have to read the source code for this one.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>saveas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename stem (not including extension) to save figure to.
+Default saveas=None, i.e. figure won’t be saved to disk.</p>
+</dd>
+<dt><strong>nx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points between <cite>xlim[0]</cite> and <cite>xlim[1]</cite> at which to
+calculate deflection.  Default nx = 100.</p>
+</dd>
+<dt><strong>nt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of evaluation times from when load enters <cite>xlim[0]</cite> and
+leaves <cite>xlim[1]</cite>.  Default nt=100</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of series terms in approximation.  More terms  leads to higher
+accuracy but also longer computation times.  Start of with a
+small enough value to observe behaviour and then increase
+to confirm. Default nterms=100 .</p>
+</dd>
+<dt><strong>force_calc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[True, False], optional</span></dt>
+<dd><p class="first last">When True all calcuations will be done from scratch. When False
+Current working directory will be searched for a results file
+named according to “saveas” and
+if found it will be loaded.  Be careful as name of results file may
+not be unique to your analysis parameters.  Safest to use
+force_calc = True, but if you are simply regenerating graphs then
+consider force_calc=False.  Default force_calc=True.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.dingetal_figure_8">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">dingetal_figure_8</code><span class="sig-paren">(</span><em>v_nterms=(50</em>, <em>75</em>, <em>150</em>, <em>200)</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#dingetal_figure_8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.dingetal_figure_8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reproduce Ding Et Al 2012 Figure 8 (might take a while).</p>
+<p>Note that a plot will be be saved to disk in current working directory
+as well as a timing file.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.esveld_fig6p17">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">esveld_fig6p17</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#esveld_fig6p17"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.esveld_fig6p17" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displacement shapes before and after a moving
+point load on infinite beam on elastic foundation for
+a sub crtical , critical, super critcal velocity ratio (alpha) and
+damping ratios (beta) , Esveld Figure 6p17.</p>
+<p>Esveld, C. (2001). Modern railway track. MRT-productions Zaltbommel, The Netherlands, Netherlands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib figure</span></dt>
+<dd><p class="first last">the deflection shape plot.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.esveld_fig6p18">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">esveld_fig6p18</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#esveld_fig6p18"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.esveld_fig6p18" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic Amplification Factor vs
+velocity ratio (alpha) for variuos damping ratios (beta) for moving
+point load on infinite beam on elastic foundation, Esveld Figure 6p18.</p>
+<p>Esveld, C. (2001). Modern railway track. MRT-productions Zaltbommel, The Netherlands, Netherlands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib figure</span></dt>
+<dd><p class="first last">the Dynamic amplification plotplot of</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.moving_load_on_beam_on_elastic_foundation">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">moving_load_on_beam_on_elastic_foundation</code><span class="sig-paren">(</span><em>alp</em>, <em>bet</em>, <em>slim=(-6</em>, <em>6)</em>, <em>npts=1001</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#moving_load_on_beam_on_elastic_foundation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.moving_load_on_beam_on_elastic_foundation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displacement vs distance from moving point load on infinite beam on
+elastic foundation.</p>
+<p>This is to generate data for a a single subplot of  esveld Figure 6.17</p>
+<p>Esveld, C. (2001). Modern railway track. MRT-productions Zaltbommel, The Netherlands, Netherlands.0</p>
+<p>s is in multiples of lambda.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>alp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">velocity ratio.</p>
+</dd>
+<dt><strong>bet</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">damping ratio</p>
+</dd>
+<dt><strong>slim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">two element tuple of float, optional</span></dt>
+<dd><p class="first last">Distance, in multiples of characteristic length,  on either side
+of moving load to assess deflection at Default slim = (-6,6).</p>
+</dd>
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">number of points witin slim to evaluate deflection.  Use an odd
+value to capture the mid point directly under the mmoving load.
+Default npts=1001.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>s</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1D numpy array of float</span></dt>
+<dd><p class="first last">Distances, in multiples of characteristic length,
+from moving point load.
+w.r.t. normalised by characteristic lengths</p>
+</dd>
+<dt><strong>disp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1D numpy array of float</span></dt>
+<dd><p class="first last">Displacements at s.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.multi_static">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">multi_static</code><span class="sig-paren">(</span><em>xc</em>, <em>frel</em>, <em>wsingle=1</em>, <em>xlim=(-10</em>, <em>10)</em>, <em>n=500</em>, <em>L=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#multi_static"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.multi_static" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection shape for multiple static point loads</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>xc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x-coord of each point load</p>
+</dd>
+<dt><strong>frel</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">relative magnitude of each point load</p>
+</dd>
+<dt><strong>wsingle</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">maximum deflection under unit load</p>
+</dd>
+<dt><strong>xlim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">tuple with two values</span></dt>
+<dd><p class="first last">xmin, xmax of evaluation</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Characterisic length</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>x,w</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d ndarray</span></dt>
+<dd><p class="first last">x coords, and static deflection</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function" title="geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function"><code class="xref py py-obj docutils literal notranslate"><span class="pre">point_load_static_defl_shape_function</span></code></a></dt>
+<dd>single load function</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">point_load_static_defl_shape_function</code><span class="sig-paren">(</span><em>x</em>, <em>L</em>, <em>xc=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#point_load_static_defl_shape_function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.point_load_static_defl_shape_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection shape function for static point load on beam on foundation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x value</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Characteristc length (1/lam)</p>
+</dd>
+<dt><strong>x0</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">position of load.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>nu</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">shape function at x</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.reverse_curve_transition">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">reverse_curve_transition</code><span class="sig-paren">(</span><em>x</em>, <em>x1</em>, <em>y1</em>, <em>x2</em>, <em>y2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#reverse_curve_transition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.reverse_curve_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transition curve between (x1, y1) and (x2, y2)</p>
+<p>Connects two parallel horizontal lines by two circular arcs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">array of float</span></dt>
+<dd><p class="first last">value(s) at which to caluclate transition curve</p>
+</dd>
+<dt><strong>x1, y1</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">start point of transition</p>
+</dd>
+<dt><strong>x2, y2</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">end point of transition</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">value of transition curve at x.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>Two circular curves transition in a rectangle h high by L wide.  Each
+curve has radius R and traces out a curve of delta radians.
+h=2*R*(1-cos(delta))
+&amp;
+L=2*R*(sin(delta))</p>
+<p>Solve these in wolfram alpha for delta :Solve[(1-Cos[x])/Sin[x]-h/L,x]
+to get : delta = 2*arctan(h/L)
+Then use equation of circle in particualr quadrant to get points on curve.
+adjust for x1,y1 and x2,y2 starting points.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.specbeam_vs_analytical_single_static_load">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">specbeam_vs_analytical_single_static_load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#specbeam_vs_analytical_single_static_load"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.specbeam_vs_analytical_single_static_load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare specbeam vs analytical solution for single static load
+at mid point of ‘long’ beam.</p>
+<p>Will produce a plot and an animation.</p>
+<p>Note that you can’t really have a static load in specbeam.  You can
+have a slowly applied load that then remains constant.  Thus depending
+on the beam properties e.g. damping, you can get a maximum displacement
+envelope that is higher than the static case in that the momentum of the
+beam carries the deflection past the ‘analytical” maximum and then
+oscillations are created untill they are damped out.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.static_point_load_shape">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">static_point_load_shape</code><span class="sig-paren">(</span><em>x</em>, <em>L</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#static_point_load_shape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.static_point_load_shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deflection shape parameter for point load at x=0 on infinite beam on
+elastic foundation  with characteristic length L.</p>
+<p>Deflection is relative to the maximum value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x coordinate(s)</p>
+</dd>
+<dt><strong>L</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Beam characteristic Length.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>out</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Relative deflection at x.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<dl class="docutils">
+<dt>FYI the defelctions are relative to w_max which is :</dt>
+<dd>L = Characteristic length = k1 / ((4 * E * I)**0.25)
+Q = Point load
+w_max = static = Q * lam / (2 * k1)</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.tanhtran">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">tanhtran</code><span class="sig-paren">(</span><em>x</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#tanhtran"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.tanhtran" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transition between two functions using tanh</p>
+<p>t(x) Smoothly transitions between 0 and 1;</p>
+<dl class="docutils">
+<dt>Used with:</dt>
+<dd>[transition f(x) to g(x)](x) = g(x)*t(x) + (1-t(x))*f(x)</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x values to evaluate at</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Position of tranistion.  Often a=0.</p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float,</span></dt>
+<dd><p class="first last">b close to zero gives a sharp change.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>tfunc: float</strong></dt>
+<dd><p class="first last">0.5 + 0.5 * tanh((x-a)/b)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtrani" title="geotecha.beam_on_foundation.specbeam.tanhtrani"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtrani</span></code></a></dt>
+<dd>inverse of tanhtran</dd>
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtranib" title="geotecha.beam_on_foundation.specbeam.tanhtranib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtranib</span></code></a></dt>
+<dd>get smoothing factor from speccific x,y</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.tanhtrani">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">tanhtrani</code><span class="sig-paren">(</span><em>y</em>, <em>a</em>, <em>b</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#tanhtrani"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.tanhtrani" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inverse of Transition between two functions using tanh</p>
+<p>x value that matches y</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">y value to evaluate at</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Position of tranistion.  Often a=0.</p>
+</dd>
+<dt><strong>b</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float,</span></dt>
+<dd><p class="first last">b close to zero gives a sharp change.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>tfunc: float</strong></dt>
+<dd><p class="first last">b * arctanh((y - 0.5) / 0.5) + a</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtran" title="geotecha.beam_on_foundation.specbeam.tanhtran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtran</span></code></a></dt>
+<dd>inverse of tanhtrani</dd>
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtranib" title="geotecha.beam_on_foundation.specbeam.tanhtranib"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtranib</span></code></a></dt>
+<dd>get smoothing factor from specific point.</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.tanhtranib">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">tanhtranib</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>a</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#tanhtranib"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.tanhtranib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Smoothing factor of tansition curve to get known (x,y)</p>
+<p>b value such that t(x) goes through (x,y)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>x,y</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">x values to evaluate at</p>
+</dd>
+<dt><strong>a</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float</span></dt>
+<dd><p class="first last">Position of tranistion.  Often a=0.</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>tfunc: float</strong></dt>
+<dd><p class="first last">(x-a) / arctanh((y - 0.5) / 0.5)</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtran" title="geotecha.beam_on_foundation.specbeam.tanhtran"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtran</span></code></a></dt>
+<dd>transition function</dd>
+<dt><a class="reference internal" href="#geotecha.beam_on_foundation.specbeam.tanhtrani" title="geotecha.beam_on_foundation.specbeam.tanhtrani"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tanhtrani</span></code></a></dt>
+<dd>inverse of tanhtran</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.transition_DAF1">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">transition_DAF1</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>ax=None</em>, <em>kratios=None</em>, <em>alpmax=3</em>, <em>npts=500</em>, <em>betas=None</em>, <em>article_formatting=False</em>, <em>DAFmax=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#transition_DAF1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.transition_DAF1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot of Dynamic Amplification Factor (DAF) vs velocity ratio
+for different stiffness and damping values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>saveas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename (not including extension) to save figure to.
+Default saveas=None, i.e. figure won’t be saved to disk.</p>
+</dd>
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Axes object, optional</span></dt>
+<dd><p class="first last">Axes object to plot on. Default ax=None, i.e. figure and axis
+will be created.  Nb this might return an error if used as the function
+will try and return then figure.</p>
+</dd>
+<dt><strong>kratios</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">striffness ratio values. Default kratios=None which will
+mean kratios=[1,2].</p>
+</dd>
+<dt><strong>alpmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">maximum velocit ratio considered (i.e x-axis max).  Default alpmax=3</p>
+</dd>
+<dt><strong>npts</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">velocity ratios (i.e x-axis values) will be npts between
+0 and alpmax. Default npts=500.</p>
+</dd>
+<dt><strong>betas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">list of damping ratios to consider.  Default betas=None which will
+mean betas=[0,0.05, 0.1, 0.3, 1.1, 2.0]</p>
+</dd>
+<dt><strong>article_formatting</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">You should never need this.  It was a quick hack to do some
+custom formatting for a journal article.  Dont even try messing with
+it.  will ony work with 6 beta values or less.  Default=False,
+i.e. no special formatting.</p>
+</dd>
+<dt><strong>DAFmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Y-axis max.  Default DAFmax=4</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib figure</span></dt>
+<dd><p class="first last">the figure</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.transition_DAF1_at_specific_alp">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">transition_DAF1_at_specific_alp</code><span class="sig-paren">(</span><em>saveas=None</em>, <em>ax=None</em>, <em>alphas=None</em>, <em>kratios=None</em>, <em>betas=None</em>, <em>DAFmax=4</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#transition_DAF1_at_specific_alp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.transition_DAF1_at_specific_alp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot of Dynamic Amplification Factor (DAF) vs stiffness ratio
+for different velocity ratios and damping values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>saveas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename (not including extension) to save figure to.
+Default saveas=None, i.e. figure won’t be saved to disk.</p>
+</dd>
+<dt><strong>ax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib.Axes object, optional</span></dt>
+<dd><p class="first last">Axes object to plot on. Default ax=None, i.e. figure and axis
+will be created.  Nb this might return an error if used as the function
+will try and return then figure.</p>
+</dd>
+<dt><strong>alphas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float,optional</span></dt>
+<dd><p class="first last">Specific velocity ratios to calc at.  Default alphas=None which will
+use [0.1, 0.5, 0.8].</p>
+</dd>
+<dt><strong>kratios</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">striffness ratio values. Default kratios=None which will
+mean kratios=np.logspace(np.log10(0.1), np.log10(100), 100), i.e
+100 points logspaced between 0.1 and 100.</p>
+</dd>
+<dt><strong>betas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">list of damping ratios to consider.  Default betas=None which will</p>
+</dd>
+<dt><strong>DAFmax</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Y-axis max.  Default DAFmax=4</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>fig</strong> <span class="classifier-delimiter">:</span> <span class="classifier">matplotlib figure</span></dt>
+<dd><p class="first last">the figure</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.transition_zones1">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">transition_zones1</code><span class="sig-paren">(</span><em>Lt_Lcs=[0.1, 4], alphas=[0.8], reverses=[False, True], xi_Lc=None, kratio=50, beta=0.2, alpha_design=0.8, ntrans=50, DAF_distribution='linear', tanhend=0.01, xlim=(-8, 8), nx=100, nt=100, t_extend=1.2, nterms=150, ninterp=15, nloads=1, load_spacing=0.03, animateme=False, saveas=None, force_calc=True, article_formatting=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#transition_zones1"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.transition_zones1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exploration of deflection envelopes caused by point loads travelling
+through a stiffness transition zone on beam on visco-elastic foundation
+using Specbeam.</p>
+<ul class="simple">
+<li>Transition between reference beam/foundation with stiffness k to beam on</li>
+</ul>
+<p>foundation with stiffness k*`kratio`.
+- Transition zone length Lt is a multiple of the characteristic length
+Lc of the reference beam/foundation. Lt = <cite>Lt_Lc`*Lc
+- Transition zone divided into ntrans points.
+- Change in stiffness over transition zone is a calculated value based on
+a goal displacement profile.  The shape of the goal displacement profile
+is controlled be `DAF_distribution</cite> which is usually linear.
+- At each evaluation point in transition zone the stiffness needed to
+achieve the desired  displacement value is back calcualted based on
+infinite beam theory with a point load travelling at velocity ratio
+of <cite>alpha_design</cite> with damping ratio <cite>beta</cite> (<cite>alpha_design</cite> and <cite>beta</cite>
+are w.r.t. the reference beam/foundation).
+- for input into specbeam the design stiffness profile piecewise linear
+interpolated at <cite>ninterp</cite> points to produce piecewise linear analysis
+profile.  <cite>ninterp</cite> should be less thatn or equal to <cite>ntrans</cite>
+- Moving load will then traverse the design stiffness profile and
+depending on dynamic effects the moving load displacement may or may not
+match the design displacements.  You can only design for one speed so
+deflection response might be differnt when actual speed is different
+to design speed.
+- Note only the stiffness changes.  We assume that damping determined
+by <cite>beta</cite> of the reference beam/foundation does not change in the
+transition zone.  Perhaps not realistic but simply an assumption to
+enable exploration.</p>
+<p>3 plots will be produced:
+- Line will be plotted based on permututions of <cite>Lt_Lcs</cite>, <cite>alphas</cite>,
+<cite>reverses</cite>.  So number of lines can quickly get out of hand.  Usually
+interested in varyin one of the parameters at a time.
+- Plot 1a) shows the design transtion stiffness profile
+Plot 1b) shows max deflection experienced at each point
+- Plot 2) is deflection vs time at the point which experiences the</p>
+<blockquote>
+<div>maximum deflection.  also plots a marker at the time when
+load passes the point.</div></blockquote>
+<ul class="simple">
+<li>Plot 3) is the deflection vs time curve under the moving point load.</li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>Lt_Lcs</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Transtion zone lengths as a mulitple of characteristic length.
+Default Lt_Lcs = [0.1,4].</p>
+</dd>
+<dt><strong>alphas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of float, optional</span></dt>
+<dd><p class="first last">Velocity ratios to analyze.   Velocity rations are
+with respect to the reference beam/foundation.  Default alphas = [0.8]</p>
+</dd>
+<dt><strong>reverses</strong> <span class="classifier-delimiter">:</span> <span class="classifier">list of Bool, optional</span></dt>
+<dd><p class="first last">Directions of travel.  False means left to right from reference
+beam/foundation to other beam/foundation.  True means the reverse
+direction from right to left from the other beam/foundation to the
+reference beam foundation. Default reverses=[False,True].</p>
+</dd>
+<dt><strong>xi_Lc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">If True then deflection vs time will be plotted at the point where
+the maximum deflection was experienced. Default xi_Lc=None i.e. False
+and no plot will be created. Also plots a marker at the time when
+load passes the point.</p>
+</dd>
+<dt><strong>kratio</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float optional</span></dt>
+<dd><p class="first last">stiffness ratio k2/k1 where k1 is the stiffness of the reference
+beam/foundation. Default kratio = 50.</p>
+</dd>
+<dt><strong>beta</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Reference value of damping ratio. Default beta = 0.2</p>
+</dd>
+<dt><strong>alpha_design</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Design velocity ratio used to back calculate the design stiffness
+ratio. Default alpha_design = 0.8.</p>
+</dd>
+<dt><strong>ntrans</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points to approximate the desired displacement
+transition profile into, to then back calculate the stiffness
+profile used for analysis. Default ntrans = 50 .</p>
+</dd>
+<dt><strong>DAF_distribution</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[“linear”, “tanh”, “reverse”], optional</span></dt>
+<dd><p class="first last">Shape of goal transition deflection distrribution.
+“linear” isself explanatory and simplest.
+“tanh” is a hyperbolic tangent, with steepness of transtion
+controlled by <cite>tanend</cite>. Not well tested.
+“reverse” is a compund reverse curve of two curclar arcs tangent to
+the end points and tangent at the arc join. Not well tested
+Default DAF_distribution = “linear”.</p>
+</dd>
+<dt><strong>tanend</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">value controling the steepness of a “tanh” <cite>DAF_distribution</cite>.
+Say transitioning between points (-0.5, -1) and (0.5, 1).  Tanh
+curve will never actually hit valus of -1 and +1, it will approach
+those values as x goes to += infinity. Using tanend=0.01 will control
+transtion such that the tanh curve evalutes to y=1+0.01 and y=1-0.01
+at the start/end points.  This evaluated value is vever actually used
+because we have given start and end points but it does control the
+position of points just inside the start/end points and hence the
+steepness of transition.</p>
+</dd>
+<dt><strong>xlim</strong> <span class="classifier-delimiter">:</span> <span class="classifier">two element tuple of float, optional</span></dt>
+<dd><p class="first last">Distances on either side of the transtion zone midpoint to evaluate
+deflection at.  The mid point of the transition would be at 0.
+For example default xlim=(-8,8) which would be
+8 characteristic lenghts on either side of the transition zone
+midpoint.   Note: Characteristic lenth Lc is with respect to the
+reference beam/foundation. Default xlim=(-8, 8).</p>
+</dd>
+<dt><strong>nx</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of points between <cite>xlim[0]</cite> and <cite>xlim[1]</cite> at which to
+calculate deflection.  Default nx = 100.</p>
+</dd>
+<dt><strong>nt</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of evaluation times from when load enters <cite>xlim[0]</cite> and
+leaves <cite>xlim[1]</cite>.  Default nt=100</p>
+</dd>
+<dt><strong>t_extend</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">factor to extend maximum evalutated time.  As per <cite>nt’ evaluation times
+are normally between first point entering `xlim[0]’ and leaving
+`xlim[1]</cite>.  However, with mulitple loads, loads can still be on the
+beam at that point. max eval time can be extended fby a factor.
+t_extend = 1.2 .</p>
+</dd>
+<dt><strong>ninterp</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">For use in specbeam the back calculated stiffness and damping
+transitions profiles are interpoalted at <cite>ninterp</cite> points.  A coarser
+discretization will improve computation times but might no capture
+the changing properties approraitely.
+Note: <cite>ninterp</cite> should be less thatn or equal to <cite>ntrans</cite>.
+Default ninterp = 15 .</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of series terms in approximation.  More terms  leads to higher
+accuracy but also longer computation times.  Start of with a
+small enough value to observe behaviour and then increase
+to confirm. Default nterms=150 .</p>
+</dd>
+<dt><strong>nloads</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Number of eqully spaced moving point loads.  Default nloads = 1 .</p>
+</dd>
+<dt><strong>load_spacing</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Spacing between the multiple points loads.  Units are multiples of
+Lc characteristic length.  Default load_spacing = 0.03 .</p>
+</dd>
+<dt><strong>animateme</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">If True the deflectons and moving loads will be animated.
+Default anmateme=False.</p>
+</dd>
+<dt><strong>saveas</strong> <span class="classifier-delimiter">:</span> <span class="classifier">string, optional</span></dt>
+<dd><p class="first last">Filename stem (not including extension) to save figure to.
+Default saveas=None, i.e. figure won’t be saved to disk.</p>
+</dd>
+<dt><strong>force_calc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[True, False], optional</span></dt>
+<dd><p class="first last">When True all calcuations will be done from scratch. When False
+Current working directory will be searched for a results file
+named according to “saveas” and
+if found it will be loaded.  Be careful as name of results file may
+not be unique to your analysis parameters.  Safest to use
+force_calc = True, but if you are simply regenerating graphs then
+consider force_calc=False.  Default force_calc=True.</p>
+</dd>
+<dt><strong>article_formatting</strong> <span class="classifier-delimiter">:</span> <span class="classifier">[False, True], optional</span></dt>
+<dd><p class="first last">You should never need this.  It was a quick hack to do some
+custom formatting for a journal article.  Dont even try messing with
+it.  will ony work with 3 Lt_Lcs values values or less.  Default=False,
+i.e. no special formatting.</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>While all parameters are normalised the raw properties that all others
+are based on are:
+- E = 6.998*1e9, #Pa
+- rho = 2373, #kg/m3
+- L = 160, #m
+- A = 0.3*0.1, # m^2
+- I = 0.00022477900799999998,
+- k1 = 800002.6125,</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.beam_on_foundation.specbeam.transition_zones2">
+<code class="descclassname">geotecha.beam_on_foundation.specbeam.</code><code class="descname">transition_zones2</code><span class="sig-paren">(</span><em>animateme=False, saveas=None, xlim=(-8, 8), ntrans=50, kratio=50, beta=0.2, alphas=[0.8], nx=100, nt=100, nterms=150, force_calc=True, ninterp=15, nloads=1, load_spacing=0.03, alpha_design=0.8, Lt_Lcs=[0.1, 4], t_extend=1.1, DAF_distribution='linear', tanhend=0.01, reverses=[False, True], xi_Lc=None, prefix='', article_formatting=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/beam_on_foundation/specbeam.html#transition_zones2"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.beam_on_foundation.specbeam.transition_zones2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Essentially a duplicate of transition_zones1 to get a DAF* vs Lt/Lc
+plot for forward and reverse plots</p>
+<p>Be warned that this can produce hundreds of plots and take hours to run
+when all you are interested is the single resulting plot.</p>
+<p>Basically a transtion_zones1 analysis will be run.  The maximum
+defelction (w.r.t. to the infinite beam deflection at same speed
+and damping) for that run will be recorded.  That will be one point for
+one alpha value for one Lt/Lc value.  Points will be joined to form
+a line for for each alphas and reverses combination.</p>
+<p>I used this once for a journal article figure.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.beam_on_foundation.specbeam.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

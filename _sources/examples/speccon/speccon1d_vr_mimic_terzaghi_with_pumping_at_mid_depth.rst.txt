@@ -1,0 +1,11 @@
+.. _speccon-speccon1d_vr_mimic_terzaghi_with_pumping_at_mid_depth:
+
+speccon example code: speccon1d_vr_mimic_terzaghi_with_pumping_at_mid_depth.py
+==============================================================================
+
+
+
+.. plot:: geotecha_examples\\speccon\\speccon1d_vr_mimic_terzaghi_with_pumping_at_mid_depth.py
+   :include-source:
+
+

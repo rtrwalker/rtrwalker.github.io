@@ -1,0 +1,261 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>terzahi &#8212; geotecha 0.2.1 documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="xieandleo2004" href="geotecha.consolidation.xieandleo2004.html" />
+    <link rel="prev" title="tangandonitsuka2000" href="geotecha.consolidation.tangandonitsuka2000.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+
+<div style="background-color: white; text-align: left; padding: 10px 10px 15px 15px">
+<a href="../index.html"><img src="../_static/logo.png" border="0" alt="py4sci"/></a>
+</div>
+
+
+
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">terzahi</a><ul>
+<li><a class="reference internal" href="#function-summary">Function summary</a></li>
+<li><a class="reference internal" href="#module-geotecha.consolidation.terzahi">Module listing</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="geotecha.html">geotecha</a><ul>
+  <li><a href="geotecha.consolidation.html">consolidation</a><ul>
+      <li>Previous: <a href="geotecha.consolidation.tangandonitsuka2000.html" title="previous chapter">tangandonitsuka2000</a></li>
+      <li>Next: <a href="geotecha.consolidation.xieandleo2004.html" title="next chapter">xieandleo2004</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/geotecha.consolidation.terzahi.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="terzahi">
+<h1>terzahi<a class="headerlink" href="#terzahi" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="function-summary">
+<h2>Function summary<a class="headerlink" href="#function-summary" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.terzahi.plot_one_dim_consol" title="geotecha.consolidation.terzahi.plot_one_dim_consol"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_one_dim_consol</span></code></a>(z,&nbsp;t[,&nbsp;por,&nbsp;doc])</td>
+<td>rough plotting</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#geotecha.consolidation.terzahi.terzaghi_1d" title="geotecha.consolidation.terzahi.terzaghi_1d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terzaghi_1d</span></code></a>(z,&nbsp;t[,&nbsp;H,&nbsp;kv,&nbsp;mv,&nbsp;gamw,&nbsp;ui,&nbsp;nterms])</td>
+<td>Terzaghi 1d consolidation</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#geotecha.consolidation.terzahi.terzaghi_1d_flowrate" title="geotecha.consolidation.terzahi.terzaghi_1d_flowrate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">terzaghi_1d_flowrate</span></code></a>(z,&nbsp;t[,&nbsp;H,&nbsp;kv,&nbsp;mv,&nbsp;…])</td>
+<td>Terzaghi 1d consolidation, flowrate at depth</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="module-geotecha.consolidation.terzahi">
+<span id="module-listing"></span><h2>Module listing<a class="headerlink" href="#module-geotecha.consolidation.terzahi" title="Permalink to this headline">¶</a></h2>
+<p>Terzaghi one-dimensional consolidation</p>
+<dl class="function">
+<dt id="geotecha.consolidation.terzahi.plot_one_dim_consol">
+<code class="descclassname">geotecha.consolidation.terzahi.</code><code class="descname">plot_one_dim_consol</code><span class="sig-paren">(</span><em>z</em>, <em>t</em>, <em>por=None</em>, <em>doc=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/terzahi.html#plot_one_dim_consol"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.terzahi.plot_one_dim_consol" title="Permalink to this definition">¶</a></dt>
+<dd><p>rough plotting</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.terzahi.terzaghi_1d">
+<code class="descclassname">geotecha.consolidation.terzahi.</code><code class="descname">terzaghi_1d</code><span class="sig-paren">(</span><em>z</em>, <em>t</em>, <em>H=1</em>, <em>kv=1</em>, <em>mv=0.1</em>, <em>gamw=10</em>, <em>ui=1</em>, <em>nterms=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/terzahi.html#terzaghi_1d"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.terzahi.terzaghi_1d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terzaghi 1d consolidation</p>
+<p>Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Single layer.</li>
+<li>Vertical flow.</li>
+<li>Instant load uniform with depth.</li>
+<li>Soil properties constant with time.</li>
+<li>Pore pressure vs depth.</li>
+<li>Degree of consolidation vs time.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Depth to calc pore pressure at.</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Time to calc pore degree of consolidation at.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Drainage path length.  Default H=1</p>
+</dd>
+<dt><strong>kv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Vertical coefficient of permeability.  Default kv=1.</p>
+</dd>
+<dt><strong>mv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Volume compressibility.  Default mv=0.1.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Unit weight of water.  Default gamw=10.</p>
+</dd>
+<dt><strong>ui</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial uniform pore water pressure.  Default ui = 1.</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Maximum number of series terms. Default nterms=100</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>por</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array of float</span></dt>
+<dd><p class="first last">Pore pressure at depth and time.  ppress is an array of size
+(len(z), len(t)).</p>
+</dd>
+<dt><strong>doc</strong> <span class="classifier-delimiter">:</span> <span class="classifier">1d array of float</span></dt>
+<dd><p class="first last">degree of consolidation at time <a href="#id1"><span class="problematic" id="id2">`</span></a>t’</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="geotecha.consolidation.terzahi.terzaghi_1d_flowrate">
+<code class="descclassname">geotecha.consolidation.terzahi.</code><code class="descname">terzaghi_1d_flowrate</code><span class="sig-paren">(</span><em>z</em>, <em>t</em>, <em>H=1</em>, <em>kv=1</em>, <em>mv=0.1</em>, <em>gamw=10</em>, <em>ui=1</em>, <em>nterms=100</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/geotecha/consolidation/terzahi.html#terzaghi_1d_flowrate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#geotecha.consolidation.terzahi.terzaghi_1d_flowrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Terzaghi 1d consolidation, flowrate at depth</p>
+<p>Features:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Single layer.</li>
+<li>Vertical flow.</li>
+<li>Instant load uniform with depth.</li>
+<li>Soil properties constant with time.</li>
+<li>flowrate at depth vs time.</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><dl class="first docutils">
+<dt><strong>z</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Depth to calc pore pressure at.</p>
+</dd>
+<dt><strong>t</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float or 1d array/list of float</span></dt>
+<dd><p class="first last">Time to calc pore degree of consolidation at.</p>
+</dd>
+<dt><strong>H</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Drainage path length.  Default H=1</p>
+</dd>
+<dt><strong>kv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Vertical coefficient of permeability.  Default kv=1.</p>
+</dd>
+<dt><strong>mv</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Volume compressibility.  Default mv=0.1.</p>
+</dd>
+<dt><strong>gamw</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Unit weight of water.  Default gamw=10.</p>
+</dd>
+<dt><strong>ui</strong> <span class="classifier-delimiter">:</span> <span class="classifier">float, optional</span></dt>
+<dd><p class="first last">Initial uniform pore water pressure.  Default ui = 1.</p>
+</dd>
+<dt><strong>nterms</strong> <span class="classifier-delimiter">:</span> <span class="classifier">int, optional</span></dt>
+<dd><p class="first last">Maximum number of series terms. Default nterms=100</p>
+</dd>
+</dl>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><dl class="first last docutils">
+<dt><strong>flowrate</strong> <span class="classifier-delimiter">:</span> <span class="classifier">2d array of float</span></dt>
+<dd><p class="first last">flowrate depth and time.  flowrate is an array of size
+(len(z), len(t)).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014, Rohan Walker.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/api/geotecha.consolidation.terzahi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
